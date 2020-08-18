@@ -1,2 +1,0 @@
-# FoodFighter
-Food Review site
