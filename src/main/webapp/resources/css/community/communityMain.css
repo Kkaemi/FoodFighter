@@ -1,0 +1,39 @@
+@charset "UTF-8";
+/* 본문 */
+.page-body{
+	min-height : 100%;
+	position:relative;
+	padding: 0px 400px;
+}
+
+.section {
+       top: 0;
+       width: 100%;
+       z-index: 999;
+       background-color: #111111;
+       color: #ccc;
+       border-top: solid 3px #1E97E3;
+       height: 50px;
+   }
+.boxWrap {
+    margin-bottom: 20px;
+    background-color: #fff;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 7px 14px 0 rgba(65,69,88,.1), 0 3px 6px 0 rgba(0,0,0,.07);
+    box-shadow: 0 7px 14px 0 rgba(65,69,88,.1), 0 3px 6px 0 rgba(0,0,0,.07);
+}
+
+.box-header {
+    padding: 1rem 1.25rem;
+    margin-bottom: 5px;
+    background-color: #e3e2e8;
+    border-bottom: 0 solid #edf2f9;
+}
+
+.ranker {
+	padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: middle;
+    font-size: 16px;
+    text-align: center;
+}

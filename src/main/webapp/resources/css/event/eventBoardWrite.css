@@ -1,0 +1,141 @@
+@charset "UTF-8";
+/* 본문 */
+.container {
+  padding: 5px 120px 10px 120px;
+}
+div {
+    display: block;
+}
+.plain-btn { /* 버튼 */
+    border: 1px solid #d4d4d4;
+    display: inline-block;
+    padding: 10px;
+    width : auto;
+    line-height: 9px;
+    font-size: inherit;
+    text-align: center;
+    color: black;
+    cursor: pointer;
+    vertical-align: baseline;
+}
+.clear{
+	clear: both !important;
+}
+.page-header {
+    padding-bottom: 9px;
+    margin: 40px 0 0px;
+}
+.page-body{
+	min-height : 100%;
+	position:relative;
+	padding: 0px 460px;
+}
+.writeTable {
+    margin-top: 10px;
+    margin: 0 auto;
+}
+
+fieldset {
+    display: block;
+    margin-inline-start: 2px;
+    margin-inline-end: 2px;
+    padding-block-start: 0.35em;
+    padding-inline-start: 0.75em;
+    padding-inline-end: 0.75em;
+    padding-block-end: 0.625em;
+    min-inline-size: min-content;
+    border-width: 2px;
+    border-style: groove;
+    border-color: threedface;
+    border-image: initial;
+}
+
+table {
+	width : 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    table-layout: fixed;
+    word-wrap: break-word;
+    word-break: keep-all;
+}
+tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+.writeTable th, .writeTable td {
+    padding: 6px 0;
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+    color: #000000;
+    font-weight: normal;
+    font-size: 11px;
+}
+
+.writeTable .btn_file {
+    display: inline-block;
+    margin-left: -1px;
+    padding: 0 5px;
+    height: 31px;
+    font-size: 11px;
+    font-family: dotum;
+    line-height: 31px;
+    border: 1px solid #e4e4e5;
+    background: #f5f5f5;
+}
+colgroup {
+    display: table-column-group;
+}
+
+.writeTable .title {
+    line-height: 25px;
+}
+
+.writeTable .subject {	
+	width: 685px;
+	margin-right: 5px;
+    padding: 0 0 0 5px;
+    height: 31px;
+    line-height: 31px;
+    border: 1px solid #ddd;
+    background: #fff;
+}
+.title_select {
+    padding-top: 5px;
+}
+
+.writeTable .fileSelect {	
+	width: 626px;
+	margin-right: 5px;
+    padding: 0 0 0 5px;
+    height: 31px;
+    line-height: 31px;
+    border: 1px solid #ddd;
+    background: #fff;
+}
+
+.writeTable .btn_area {
+	margin-top : 20px;
+	padding : 10px 0px;
+	border-bottom: 1px solid #efefef;
+    text-align: center;
+} 
+
+.btn-o{
+	border: 1px solid #d4d4d4;
+    display: inline-block;
+    padding: 10px;
+    width : 75px;
+    line-height: 9px;
+    font-size: inherit;
+    text-align: center;
+    color: black;
+    cursor: pointer;
+    vertical-align: baseline;
+    margin: 2.5px;
+}

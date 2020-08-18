@@ -1,0 +1,75 @@
+/* The side navigation menu */
+.sidenav {
+    height: 50%; /* 100% -> 50% 변경, footer를 가려서 크기 조정 */
+    /* 100% Full-height */
+    width: 0;
+    /* 0 width - change this with JavaScript */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Stay on top */
+    top: 20;
+    /* Stay at the top */
+    left: 0;
+    background-color: #FFFFFF; /* 배경색 하얀색으로 변경 */
+    /* Black*/
+    overflow-x: hidden;
+    /* Disable horizontal scroll */
+    padding-top: 2.5%; /* 2% -> 2.5%로 변경 */
+    /* Place content 60px from the top */
+    transition: 0.5s;
+    /* 0.5 second transition effect to slide in the sidenav */
+}
+
+/* The navigation menu links */
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+   	margin: 0px 0px 20px 26px;
+    text-decoration: none;
+    font-size: 23px;
+    color: #FF6A4D;
+    display: block;
+    transition: 0.3s;
+    width: 200px; /* width 속성 추가해서 글씨 찌부되지 않음 */
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+    color: #f16a51;  
+    text-decoration: none;
+}
+
+.sidenav a:active {
+    color: #f16a51;
+    text-decoration: none;
+    outline: none;
+}
+
+.hamberger {
+	margin-left: 30px;
+	margin-top: 20px;
+	display: inline-block;
+	cursor: pointer;
+}
+  
+.bar1, .bar2, .bar3 {
+	width: 35px;
+	height: 5px;
+	background-color: #333;
+	margin: 6px 0;
+	transition: 0.4s;
+}
+  
+.change .bar1 {
+	-webkit-transform: rotate(-45deg) translate(-9px, 6px);
+	transform: rotate(-45deg) translate(-9px, 6px);
+}
+  
+.change .bar2 {
+	opacity: 0;
+}
+  
+.change .bar3 {
+	-webkit-transform: rotate(45deg) translate(-8px, -8px);
+	transform: rotate(45deg) translate(-8px, -8px);
+}

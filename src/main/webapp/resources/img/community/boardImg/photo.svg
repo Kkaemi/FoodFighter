@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>w/icon/18_photo</title>
+    <desc>Created with Sketch.</desc>
+    <g id="w/icon/18_photo" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M11.8747969,6.75 C12.3580877,6.75 12.75,6.35840297 12.75,5.875 C12.75,5.39200325 12.3580877,5 11.8747969,5 C11.3919123,5 11,5.39200325 11,5.875 C11,6.35840297 11.3919123,6.75 11.8747969,6.75 Z" id="Fill-2" fill="#666666"></path>
+        <path d="M14.3,10.2 L12.870407,11.7003575 C12.4132296,12.1801651 11.6536531,12.1985105 11.1738455,11.741333 C11.1593141,11.727487 11.1451323,11.7132785 11.1313136,11.6987211 L8.85775302,9.30361052 C8.40147935,8.82294338 7.64193875,8.80316857 7.16127161,9.25944224 C7.15038553,9.26977586 7.13969429,9.28031282 7.12920353,9.29104755 L3.7,12.8 L3.7,12.8" id="Stroke-4" stroke="#666666" stroke-linecap="round"></path>
+        <rect id="Rectangle" stroke="#666666" x="1.5" y="1.5" width="15" height="15" rx="2"></rect>
+    </g>
+</svg>
