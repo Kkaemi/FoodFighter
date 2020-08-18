@@ -1,0 +1,518 @@
+*{
+    box-sizing: border-box;
+    top: 0;
+    bottom : 0;
+}
+
+html, body {
+    height: 100%;
+    max-width: 100%;
+    bottom : 0;
+
+}
+
+body {
+    margin: 0;
+    height: 100%;
+}
+
+/* 상단 내비 */
+
+/* 상단 내비- 메뉴 */
+#mainNav{
+	text-align:center;
+	width:100%;
+	height:80px;
+	position:fixed;
+	z-index: 1030;
+    background-color: #ffc34d;
+   	padding:15px 16px;
+  	padding-top:15px;
+	padding-bottom:15px;
+	box-shadow:0px 6px 9px 0px rgba(0,0,0,0.06);
+}
+.nav-container{
+	width:100%;
+	padding-top: 15px;
+    padding-bottom: 15px;
+	padding:15px 16px;
+}
+.navbar-brand js-scroll{
+    display: inline-block;
+    padding-top: .3125rem;
+    padding-bottom: .3125rem;
+    margin-right: 1rem;
+    font-size: 1.25rem;
+    line-height: inherit;
+    white-space: nowrap;
+}
+.header_searchInput{
+	height: 50px;
+	width: 340px;
+	border:0px;
+	opacity: 0.4;
+	border-radius:25px;
+}
+.header_searchInput:focus {
+	outline: none;
+}
+.header_searchInput:click {
+	outline: none;
+}
+.navbar{
+	display:flex;
+	align-items:center;
+}
+.nav-search{
+	margin-right:100px;
+}
+.navbar-b.navbar-trans .nav-item, .navbar-b.navbar-reduce .nav-item {
+    padding-left: 10px;
+}
+#navbar-nav li {
+	list-style:none; 
+	display:inline;
+	margin:80px auto;
+}
+
+.navbar-b .navbar-brand {
+    color: #fff;
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+.navbar-b.navbar-reduce {
+    transition: all .5s ease-in-out;
+    background-color: #fff;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+#navbarDefault a:-webkit-any-link {
+	color: #fff;
+    font-weight:bold;
+    font-size:16px;
+    padding:0px 10px;
+}
+#navbarDefault a:hover {
+	color: #FF6A4D;
+    font-weight:bold;
+    font-size:16px;
+    padding:0px 10px;
+    text-decoration: underline;
+	text-decoration: none;
+}
+#navbarDefault{
+    margin-right: -33px;
+    margin-left: -33px;
+}
+.header_searchIcon:active{
+	decoration: none;
+	
+}
+
+/*리뷰페이지*/
+.reviewView-container {
+    width: 90%;
+    margin-left: 3px;
+    position: relative;
+  
+}
+
+/*리뷰페이지 타이틀*/
+.title {
+    margin-left: 410px;
+    margin-top: 170px;
+
+}
+
+#title {
+    font-size: 40px;
+
+}
+.review-score {
+    font-size: 38px;
+    color: tomato;
+}
+
+#bookmark{
+    margin-top: 40px;
+    margin-left: 550px;
+    font-size: 45px;
+    color :#cccccc;
+
+}
+#bookmark-name {
+    margin-top: 2px;
+    margin-left: 817px;
+    font-size: 16px;
+    margin-bottom: 3px;
+    margin-right: 30px;
+    color :#cccccc;
+}
+
+#bookmark-group:hover {
+    cursor: pointer;  
+    color : #ffa64d;
+    
+}
+
+
+/*가게 정보 태그*/
+
+.tag-item{
+    background-color: white;
+    border : 1px solid #ffa64d;
+    color : black;
+    padding : 5px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 5px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 40px;
+}
+
+.tag-item:hover {
+    color: white;
+    background-color:#ffa64d ;
+}
+
+/*리뷰페이지 리뷰 정보*/
+.review-info {
+    margin-left: 416px;
+    margin-top: 5px;
+    color :#cccccc;
+
+}
+
+#eye-icon, #pencil-icon, #star-icon {
+    z-index: -1;
+}
+
+.watch-count {
+    margin-left: 5px;
+    margin-right: 13px;
+}
+
+.write-count {
+    margin-right: 13px;
+}
+
+.line {
+    margin-left: 400px;
+    width: 60%;
+    margin-top: 400px;
+    border: 0.001px solid #e6e6e6;
+}
+
+
+.line2 {
+    margin-left: 400px;
+    width: 50%;
+    margin-top: 90%;
+    border: 0.001px solid #e6e6e6;
+}
+
+/*가게 정보*/
+table {
+    display: table;
+    border-collapse: separate;
+    box-sizing: border-box;
+    border-spacing: 2px;
+   
+}
+
+tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-collapse: inherit; 
+
+}
+th {
+    display: table-cell;
+    vertical-align: inherit;
+    font-weight: bold;
+}
+
+td {
+    display: table-cell;
+    vertical-align: inherit;
+}
+.restaurant-info {
+    margin-top: 30px;
+    margin-left : 410px;
+}
+
+/*가게 정보 메뉴 사진*/
+.menu-image {
+    width: 50px;
+    height: 60px;
+    max-width: 600px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.menu-image:hover{
+    opacity: 0.7;
+}
+
+/*가게 정보 - 지도*/
+.table-div {
+    float : left;
+}
+.table {
+  box-sizing: border-box;
+    
+}
+
+
+#map {
+    z-index: 1;
+    float: left;
+    width : 350px;
+    height: 328px;
+    padding: 50px;
+    margin-left: 150px;
+}
+
+/*가게 정보 메뉴 사진 - 모달*/
+.modal {
+    display: none;
+    margin-left: 30px;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.9); 
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+
+}
+
+.modal-content, #caption {
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: 0.6s;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+
+@-webkit-keyframes zoom {
+    from {-webkit-transform:scale(0)} 
+    to {-webkit-transform:scale(1)}
+}
+  
+  @keyframes zoom {
+    from {transform:scale(0)} 
+    to {transform:scale(1)}
+}
+  
+/* The Close Button */
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+ 
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+    .modal-content {
+      width: 100%;
+    }
+}
+
+
+/*리뷰*/
+
+/*리뷰 버튼*/
+.review-list {
+    width: 54%;
+    float: left;
+    margin-top: 20px;
+    margin-left: 410px;
+}
+
+.review-count-text {
+    margin-right: 300px;
+}
+.review-count-btn-selected {
+    padding-right: 6px;
+    font-size: 16px;
+    color: #ff834c; 
+    
+}
+.review-count-btn-selected:hover {
+    color : #ddd;
+}
+
+
+.review-count-btn {
+    
+    padding-right: 6px;
+    font-size: 16px;
+    color: #b9b9bb; 
+}
+
+
+.review-count-btn:hover {
+    color : #ff834c;
+}
+button {
+    appearance: none;
+    cursor: pointer;
+    border: 0px;
+    border-radius: 0;
+    background-color: transparent;
+}
+
+
+/*가게 사진들*/
+#direc-icon-left, #direc-icon-right {
+    padding: 10px;
+}
+.restaurant-images {
+    margin-left: 0px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    
+}
+
+.restaurant-image {
+    margin-right: 20px;
+    width : 100px;
+    height: 100px;
+    cursor: pointer;
+}
+
+.restaurant-image:hover {
+    filter : brightness(80%);
+}
+
+/*리뷰*/
+
+.review-div {
+    padding: 10px;
+    margin-top: 30px;
+
+}
+.review1 {
+    height: 250px;
+}
+
+.user-info {
+    float : left;
+    margin-right: 10px;
+}
+.user-image {
+    margin-top: 30px;
+    font-weight: 80px;
+    height : 60px;
+    margin-left: 10px;
+    margin-right: 30px;
+    border-radius: 80%;
+}
+
+.user-name {
+    margin-left: 13px;
+}
+.review-text {
+    margin-top: 10px;
+}
+
+.review-date {
+    padding-top: 30px;
+    margin-bottom: 40px;
+}
+
+.review-images {
+    margin-top: 30px;
+    margin-left: 3px;
+    float: left;
+}
+.review-image1{
+    margin-right: 10px;
+    width : 120px;
+    height: 120px;
+}
+
+.review-image2{
+    width : 120px;
+    height: 120px;
+}
+/*각 리뷰 마우스 올렸을 때*/
+.review1:hover {
+    background:  #d9d9d9;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+/* footer 공통css */
+footer {
+    z-index: -1;
+    text-align:center;
+    color: lightgray;
+    margin-bottom: 0;
+    left : 0;
+    bottom : 0;
+    width : 100%;
+    background: #ffc34d;
+    margin-top: 83%;
+}
+
+#footer-container p {
+    padding-top: 30px;
+    margin: 0px 134px 10px;
+    color: #fff;
+    height: 20%;
+}
+.back-to-top {
+  background: rgba(0,0,0,0);
+  opacity: 0.6;
+  position: fixed;
+  display: none;
+  background: #fec34d;
+  color: #fff;
+  width: 44px;
+  height: 44px;
+  text-align: center;
+  line-height: 1;
+  font-size: 16px;
+  border-radius: 50%;
+  right: 15px;
+  bottom: 15px;
+  transition: background 0.5s;
+}

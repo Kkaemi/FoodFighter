@@ -1,0 +1,104 @@
+@charset "UTF-8";
+body {
+	color: #999;
+	background: #ffffff;
+	font-family: 'Roboto', sans-serif;
+}
+.form-control {
+	border-color: #eee;
+	min-height: 41px;
+	box-shadow: none !important;
+}
+.form-control:focus {
+	border-color: #ffc34d;
+}
+.form-control, .btn {        
+	border-radius: 3px;
+}
+.signup-form {
+	width: 500px;
+	margin: 0 auto;
+	padding: 30px 0;
+}
+.signup-form h2 {
+	color: #333;
+	margin: 0 0 30px 0;
+	display: inline-block;
+	padding: 0 30px 10px 0;
+	border-bottom: 3px solid #ffc34d;
+}
+.signup-form form {
+	color: #999;
+	border-radius: 3px;
+	margin-bottom: 15px;
+	background: #fff;
+	padding: 30px;
+}
+.signup-form .form-group row {
+	margin-bottom: 20px;
+}
+
+.signup-form .btn {
+	font-size: 16px;
+	font-weight: bold;
+	background: #ffc34d;
+	border: none;
+}
+.img-responsive {
+	max-width: 100%;
+	height: auto;
+	display: block;
+}
+.signup-form .btn:hover, .signup-form .btn:focus {
+	background: #E4BB42;
+	outline: none !important;
+}
+.signup-form a {
+	color:  #ffc34d;
+	text-decoration: underline;
+}
+.signup-form a:hover {
+	text-decoration: none;
+}
+.signup-form form a {
+	color: #ffc34d;
+	text-decoration: none;
+}	
+.signup-form form a:hover {
+	text-decoration: underline;
+}
+
+#genSignupBtn {
+	margin: 20px 0;
+}
+
+#sepDiv {
+	margin: 20px 0px;
+}
+
+#kakaoBtn {
+	background:rgba(0,0,0,0);
+	border: none;
+	border-radius: 3px;
+}
+
+
+#sendEmailBtn{
+	 margin-top: 15px;
+	 min-width: 100px;
+}
+
+#email,#emailCode {
+	display: inline-block;
+	margin-top: 10px;
+}
+#emailCheckBtn{
+	margin-left: 10px;
+}
+
+.modal-body {
+	font: 18px;
+	font-weight: bold;
+	text-align: center;
+}
+

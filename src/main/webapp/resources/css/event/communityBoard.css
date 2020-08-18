@@ -1,0 +1,281 @@
+@charset "UTF-8";
+.container-fluid {
+	background-color: #1abc9c;
+  	padding-top: 18px;
+  	padding-bottom: 18px;
+}
+.container {
+  padding: 5px 120px 10px 120px;
+}
+.page-body{
+	position:relative;
+	padding: 0px 175px;
+}
+div {
+    display: block;
+}
+colgroup {
+    display: table-column-group;
+}
+th {
+    display: table-cell;
+    vertical-align: inherit;
+    font-weight: bold;
+    text-align: -internal-center;
+}
+.tb-center {
+    text-align: center;
+}
+.tb-left {
+    text-align: left;
+}
+.content-wrapper { /* 처음목록/글쓰기 버튼 div*/ 
+    padding: 5px 0 5px 0 !important;
+}
+.content-wrapper .paging {
+    padding-top: 10px;
+    height: 17px;
+    width : auto;
+    text-align: center;
+    line-height: 0;
+    vertical-align: top;
+    display: inline-block;
+}
+.paging a {
+    border: 1px solid #d4d4d4;
+    display: inline-block;
+    width: 26px;
+    height: 29px;
+    font-size: inherit;
+    text-align: center;
+    line-height: 26px;
+    color: black;
+}
+.paging a.now, .paging a:hover{
+    border: 1px solid #343434;
+    background: #666;
+    color: #fff;
+    letter-spacing: -1px;
+}
+
+.listBtnBox { /* 처음목록/글쓰기 버튼 */
+	width : auto;
+	float : right;
+    text-align: right;
+}
+.plain-btn { /* 버튼 */
+    border: 1px solid #d4d4d4;
+    display: inline-block;
+    padding: 10px;
+    width : auto;
+    line-height: 9px;
+    font-size: inherit;
+    text-align: center;
+    color: black;
+    cursor: pointer;
+    vertical-align: baseline;
+}
+.list-search{ /* 글 검색 div */
+    margin-top: 30px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+fieldset {
+    display: block;
+    padding-block-start: 0.35em;
+    padding-inline-start: 0.75em;
+    padding-inline-end: 0.75em;
+    padding-block-end: 0.625em;
+    min-inline-size: min-content;
+}
+select{
+	border: 1px solid #dddddd;
+	width : 70px;
+    height: 30px;
+    margin : 3px 0;
+}
+.inp{
+	border: 1px solid #dddddd;
+    padding: 10px;
+    height: 30px;
+    margin: 3px 5px;
+}
+
+<!-- 게시글 뷰 -->
+.view-body {
+    position:relative;
+	padding: 0px 175px;
+}
+
+.view-upper {
+	padding : 10px 0px;
+	border-bottom: 1px solid #efefef;
+}
+
+.view-upper .area_l {
+    float: left;
+}
+.view-upper .area_r {
+    float: right;
+
+}
+.read_tit {
+   	position: relative;
+    margin-top: 30px;
+    padding-right: 110px;
+}
+.read_tit .tit_info {
+    display: block;
+    margin-top: 4px;
+    font-weight: 400;
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: 1.4;
+}
+
+.view_stat {
+    border: 1px solid #ddd;
+    position: relative;
+}
+
+div.view_stat div.info {
+    margin-left: 91px;
+    position: relative;
+    border-left: 1px solid #ddd;
+}
+
+div.view_stat div.mphoto {
+    width: 91px;
+    height: 103px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    text-align: center;
+}
+
+div.view_stat div.mphoto img {
+    display: inline;
+    height: 100%;
+    max-width: 91px;
+    vertical-align: bottom;
+}
+
+div.view_stat div.info h1 {
+    display: block;
+    line-height: 0px;
+    margin : 15px 0px 7px 0px;
+    padding: 15px 20px 30px 20px ;
+    height: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+div.view_stat div.info h1 .subject {
+    font-weight: bold;
+    font-size: 20px;
+    color: #000;
+    float: left;
+    display: block;
+}
+
+div.view_stat div.info p {
+	margin : 0px 0px 4px 4px;
+    padding: 16px 17px;
+    height: 12px;
+    line-height: 0px;
+    color: #b2b2b2;
+    position: relative;
+}
+
+div.view_stat div.info p span {
+    float: left;
+    height: 12px;
+    font-size: 14px;
+}
+
+div.view_stat div.info p .name {
+    font-weight: bold;
+    color: #000;
+}
+
+div.view_stat div.info p span.date {
+    padding-left: 8px;
+}
+/* 게시글 컨텐츠 div */
+.viewbox {
+    border-top: 0;
+    display: inline-block;
+    zoom: 1;
+    *display: inline;
+    width: 100%;
+}
+.viewbox div.content {
+    padding: 20px;
+    line-height: 20px;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+.viewbox div.content p {
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+.viewbox div.content .attach {
+	margin-top: 10px;
+    margin-bottom: 10px;
+}
+/* 댓글 */
+.cont_recommendation {
+    margin: 27px 0 20px;
+}
+
+.cont_comment {
+    background-color: #f8f8f8;
+    border : 1px solid #ddd;
+    padding-top: 10px;
+}
+.cont_comment .comment_post {
+    position: relative;
+    font-family: auto;
+    padding: 25px 0 20px 68px;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.comment_post .pic {
+    width: 48px;
+    height: 48px;
+    position: absolute;
+    left: 0;
+    top: 25px;
+    overflow: hidden;
+    border-radius: 24px;
+    background: url(//image.musinsa.com/mfile_outsrc/img/simbol.png) no-repeat center;
+    background-size: 48px auto;
+}
+
+.comment_post .info {
+    position: relative;
+}
+
+.comment_post .info .data {
+    display: inline-block;
+    vertical-align: top;
+    float: left;
+}
+
+.comment_post .info .txt_name {
+    font-size: 16px;
+    font-weight: bold;
+    float: left;
+    line-height: 21px;
+    display: inline-block;
+}
+
+.comment_post .info .txt_date {
+    font-size: 14px;
+    color: #ccc;
+    float: left;
+    margin-left: 10px;
+    line-height: 21px;
+}
