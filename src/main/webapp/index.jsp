@@ -32,7 +32,7 @@
   <nav class="navbar navbar-b navbar-trans navbar-expand-md fixed-top" id="mainNav">
     <div class="container">
        <!-- 로고 -->
-      <a id="logo" class="navbar-brand js-scroll" href="/FoodFighter/main/index"><img id="logo-img" src="/FoodFighter/resources/img/streetfighter.gif"></a>
+      <a id="logo" class="navbar-brand js-scroll" href="/"><img id="logo-img" src="/FoodFighter/resources/img/streetfighter.gif"></a>
       <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarDefault" aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span></span>
         <span></span>

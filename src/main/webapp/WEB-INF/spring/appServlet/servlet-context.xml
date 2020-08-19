@@ -44,7 +44,6 @@
 	
 	<!-- controller -->
 	<context:component-scan base-package="mypage.controller" />
-	<context:component-scan base-package="login.controller" />
 	<context:component-scan base-package="review.controller" />
 	<context:component-scan base-package="community.controller" />
 	<context:component-scan base-package="main.controller" />
