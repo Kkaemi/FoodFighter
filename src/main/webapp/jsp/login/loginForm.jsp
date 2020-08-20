@@ -2,14 +2,21 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" href="/FoodFighter/resources/css/login/login.css">
+<head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta id="_csrf" name="_csrf" content="${_csrf.token}" />
+<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
+
+<link rel="stylesheet" href="/FoodFighter/resources/css/login/login.css">
+<title>로그인</title>
+</head>
+
 <header>
 
-	<title>로그인</title>
+	
 <!--================ Header ================-->
 	<div id="header-container">
-	  <a class="header-logo" href="/FoodFighter/">로고 자리</a>
+	  <a class="header-logo" href="#page-top">로고 자리</a>
 	      <ul id="header-menu">
 		      <li class="header-items">
 		  		<img src="/FoodFighter/resources/img/search.png" class="header_searchIcon" width="30" height="30" align="center"> 
@@ -40,7 +47,7 @@
 		<h1>Login</h1>
 			<form action="">
 				<div class="int-area">
-					아이디<input type="text" name="id" id="id" >
+					아이디<input type="text" name="email" id="email" >
 					<label for="id"></label>					
 				</div>
 				<div id="idDiv"></div>
@@ -55,26 +62,42 @@
 				
 				<div class="btn-area">
 					<button id="loginbtn" type="button">login</button>
-				</div>
-				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-				<div class="cacaobtn-area">
+				<%-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> --%> 
+				</div> 
+					
+				<!-- div class="cacaobtn-area">
 					<a id="kakao-login-btn"></a>
 					<a href="http://developers.kakao.com/logout"></a>
-				</div>
+				</div> -->
 				<div class="caption">
-					<a href="forgotIdForm.jsp">아이디찾기</a>&emsp;
-					<a href="forgotPwd.jsp">비밀번호찾기</a>		
+					<a href="/FoodFighter/login/forgotIdForm">아이디찾기</a>&emsp;
+					<a href="/FoodFighter/login/forgotPwdForm">비밀번호찾기</a>&emsp;<br><br>
+					회원이 아니신가요? <a href="/FoodFighter/member/signupChoice"> 회원가입</a>
 					</div>
 			</form>
 	</section>
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
+$(document).ready(function(){
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+    $(document).ajaxSend(function(e, xhr, options) {
+        xhr.setRequestHeader(header, token);
+    });
+});
+
+//header부분 키워드 입력 시, 검색 버튼 나타는 기능
+$('.header_searchInput').click(function(){
+	$('#header_searchBtn').addClass('show');
+});
+
+
 $('#loginbtn').click(function(){ 
 	 $('#idDiv').empty();
 	 $('#pwdDiv').empty(); 
 	 
-	 if($('#id').val() == ''){ 
+	 if($('#email').val() == ''){ 
 		 	$('#idDiv').text('아이디를 입력하세요.')
 			$('#idDiv').css('color','red')
 			$('#idDiv').css('font-size','8pt')
@@ -82,6 +105,7 @@ $('#loginbtn').click(function(){
 			$('#idDiv').focus();	 
 			 
 	 }else if($('#pwd').val() == ''){
+
 		 $('#pwdDiv').text('비밀번호를 입력하세요.')
 		 $('#pwdDiv').css('color','red')
 		 $('#pwdDiv').css('font-size','8pt')
@@ -91,13 +115,14 @@ $('#loginbtn').click(function(){
 	}else{
     	$.ajax({
     		type : 'post',
-    		url : '/foodfighter/member/login',
-    		data : {'id' : $('#id').val(),
+    		url : '/FoodFighter/login/login',
+    		data : {'email' : $('#email').val(),
     				'pwd' : $('#pwd').val()},
+    				
     		dataType : 'text',
     		success : function(data){
     			if(data == 'success'){
-    				location.href = '/foodfighter/main/index';
+    				location.href = '/FoodFighter/';
     				
     		}else if(data == 'fail'){		
     				 $('#loginResultDiv').text('가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.');
@@ -112,9 +137,10 @@ $('#loginbtn').click(function(){
     	});
     }
 });//로그인
-</script>
 
-<script src = "//developers.kakao.com/sdk/js/kakao.min.js"></script>
+
+</script>
+<!-- <script src = "//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type='text/javascript'>
  
 Kakao.init(''); //아까 카카오개발자홈페이지에서 발급받은 자바스크립트 키를 입력함
@@ -149,6 +175,6 @@ Kakao.Auth.createLoginButton({
                  alert(JSON.stringify(error));
                }
              });
-</script>
+</script>  -->
 </body>
 </html>

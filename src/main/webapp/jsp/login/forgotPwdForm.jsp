@@ -2,13 +2,19 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+<head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="/FoodFighter/sources/css/logincss/login.css">
+<meta id="_csrf" name="_csrf" content="${_csrf.token}" />
+<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
+
+<link rel="stylesheet" href="/FoodFighter/resources/css/login/login.css">
 <title>비밀번호찾기</title>
+</head>
+
 <header>
 <!--================ Header ================-->
 	<div id="header-container">
-	  <a class="header-logo" href="/FoodFighter/">로고 자리</a>
+	  <a class="header-logo" href="#page-top">로고 자리</a>
 	      <ul id="header-menu">
 		      <li class="header-items">
 		  		<img src="/FoodFighter/resources/img/search.png" class="header_searchIcon" width="30" height="30" align="center"> 
@@ -38,22 +44,17 @@
 		<h1>비밀번호</h1><br><br>
 			<form action="">
 				<div class="int-area">
-					이름<input type="text" name="name" id="name" >
-					<label for="name"></label>					
+					닉네임<input type="text" name="nickName" id="nickName" >
+					<label for="nickName"></label>					
 				</div>
-				<div id="nameDiv" style="border: 1px red solid;"></div>
+				<div id="nickNameDiv"></div>
+				
 				
 				<div class="int-area">
 					이메일<input type="text" name="email" id="email" >
-					<label for="email"></label>
-					<div id="emailDiv" style="border: 1px red solid;"></div>
+					<label for="email"></label>					
 				</div>
-				
-				<div class="int-area">
-					아이디<input type="text" name="id" id="id" >
-					<label for="id"></label>					
-				</div>
-				<div id="idDiv"></div>
+				<div id="emailDiv"></div>
 				
 				<div id="ResultDiv"></div>
 				
@@ -64,58 +65,56 @@
 	</section>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
+$(document).ready(function(){
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+    $(document).ajaxSend(function(e, xhr, options) {
+        xhr.setRequestHeader(header, token);
+    });
+});
 $('#searchbtn2').click(function(){ 
-	 $('#nameDiv').empty();
+	 $('#nickNameDiv').empty();
 	 $('#emailDiv').empty(); 
-	 $('#idDiv').empty(); 
 	 
-	 if($('#name').val() == ''){ 
-		 	$('#nameDiv').text('이름을 입력하세요.')
-			$('#nameDiv').css('color','red')
-			$('#nameDiv').css('font-size','8pt')
-			$('#nameDiv').css('font-weight','bold')
-			$('#nameDiv').focus();	 
-			 
+	 if($('#nickName').val() == ''){ 
+		 	$('#nickNameDiv').text('닉네임을 입력하세요.')
+			$('#nickNameDiv').css('color','red')
+			$('#nickNameDiv').css('font-size','8pt')
+			$('#nickNameDiv').css('font-weight','bold')
+			$('#nickNameDiv').focus();	 
+	
 	 }else if($('#email').val() == ''){
-		 $('#emailDiv').text('이메일 입력하세요.')
+		 $('#emailDiv').text('이메일을 입력하세요.')
 		 $('#emailDiv').css('color','red')
 		 $('#emailDiv').css('font-size','8pt')
 		 $('#emailDiv').css('font-weight','bold')
 		 $('#emailDiv').focus();
-	
-	 }else if($('#id').val() == ''){
-		 $('#idDiv').text('아이디를 입력하세요.')
-		 $('#idDiv').css('color','red')
-		 $('#idDiv').css('font-size','8pt')
-		 $('#idDiv').css('font-weight','bold')
-		 $('#idDiv').focus();
 		
-	}else{
-   	/* $.ajax({
-   		type : 'post',
-   		url : '/foodfighter/member/forgotId',
-   		data : {'name' : $('#name').val(),
-   				'pwd' : $('#email').val(),
-   				'id' : $('id').val()},
-   		dataType : 'text',
-   		success : function(data){
-   			if(data == 'success'){
-   				location.href = '/foodfighter/login/login';
-   				
-   		}else if(data == 'fail'){		
-   				 $('#ResultDiv').text('입력하신 정보가 존재하지 않습니다.');
-   				$('#ResultDiv').css('color', 'red')
-			        $('#ResultDiv').css('font-size', '10pt')
-			        //$('#ResultDiv').css('font-weight', 'bold') 
-   			}
-   		},
-   		error : function(e){
-				console.log(e); 
-			}
-   		});
-   	*/
-   }
-});
+	 }else{
+		   $.ajax({
+		   		type : 'post',
+		   		url : '/FoodFighter/login/getforgotpwd',
+		   		data : {'nickName' : $('#nickName').val(),
+		   				'email' : $('#email').val()},
+		   		dataType : 'text',
+		   		success : function(data){
+		   			if(data == 'success'){
+		   				alert(data);
+		   				
+		   		}else if(data == 'fail'){		
+		   				 $('#ResultDiv').text('입력하신 정보가 존재하지 않습니다.');
+		   				$('#ResultDiv').css('color', 'red')
+					        $('#ResultDiv').css('font-size', '10pt')
+					        //$('#ResultDiv').css('font-weight', 'bold') 
+		   			}
+		   		},
+		   		error : function(e){
+						console.log(e); 
+					}
+		   		});
+		   	
+		   }
+		});
 </script>
 </body>
 </html>
