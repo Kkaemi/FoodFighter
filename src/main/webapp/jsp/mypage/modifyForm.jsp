@@ -38,7 +38,7 @@
            		<img id="profilePrev" src="/FoodFighter/resources/img/basic.png" class="profileImg-part">
 			  </c:when>
 			  <c:otherwise>	
-		  		<img id="profilePrev" src="/FoodFighter/resources/storage/profile/${memberDTO.profile}" class="profileImg-part">
+		  		<img id="profilePrev" src="/FoodFighter/storage/profile/${memberDTO.profile}" class="profileImg-part">
 		  	  </c:otherwise>	
 		  	</c:choose>
 			

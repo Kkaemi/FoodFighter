@@ -117,7 +117,7 @@ public class MyPageController {
 	public void modify(@ModelAttribute MemberDTO memberDTO,@RequestParam MultipartFile profileFile) {
 		System.out.println("빈값 넘어올 때= "+profileFile);
 		if(profileFile != null) {
-			String filePath="D:\\reallysong\\FoodFighter\\src\\main\\webapp\\resources\\storage\\profile";
+			String filePath="D:\\reallysong\\FoodFighter\\src\\main\\webapp\\storage\\profile";
 		
 			String fileName = profileFile.getOriginalFilename();
 			File file = new File(filePath,fileName);

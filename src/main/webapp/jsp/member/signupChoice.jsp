@@ -39,7 +39,7 @@
 			</div>
 		</div>		      
     </form>
-	<div class="text-center">이미 계정이 있으신가요? <a href="#"> 로그인</a></div>
+	<div class="text-center">이미 계정이 있으신가요? <a href="/FoodFighter/login/loginForm"> 로그인</a></div>
 </div>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
