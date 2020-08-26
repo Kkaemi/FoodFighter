@@ -1,5 +1,8 @@
 package review.service;
 
-public interface ReviewService {
+import java.util.Map;
 
+public interface ReviewService {
+	
+	public void writeReview(Map<String, String> map);
 }
