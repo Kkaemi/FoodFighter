@@ -1,5 +1,8 @@
 package review.dao;
 
-public interface ReviewDAO {
+import java.util.Map;
 
+public interface ReviewDAO {
+	
+	public void writeReview(Map<String, String> map);
 }
