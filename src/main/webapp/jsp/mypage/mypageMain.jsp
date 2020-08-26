@@ -57,7 +57,7 @@
            		<img id="profileImg" src="/FoodFighter/resources/img/mypage/basic.png">	
 			  </c:when>
 			  <c:otherwise>	
-		  		<img id="profileImg" src="/FoodFighter/resources/storage/profile/${memberDTO.profile}">
+		  		<img id="profileImg" src="/FoodFighter/storage/profile/${memberDTO.profile}">
 		  	  </c:otherwise>	
 		  	</c:choose>
 		  </div>
