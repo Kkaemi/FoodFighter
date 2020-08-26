@@ -59,9 +59,9 @@
         
         <div class="form-group row">
 			<div class="col-8 offset-2">
-                <input type="text" id="username" class="form-control"  name="username" placeholder="이름">
+                <input type="text" id="name" class="form-control"  name="name" placeholder="이름">
             </div>
-            <div id="usernameDiv" class="col-8 offset-2"></div>        	
+            <div id="nameDiv" class="col-8 offset-2"></div>        	
         </div>	
         
         <div class="form-group row">
@@ -165,20 +165,20 @@ $('#emailCheckBtn').click(function(){
 //회원가입 버튼을 눌렀을 때
 $('#signupBtn').click(function() {
 	$('#emailDiv').empty();
-	$('#usernameDiv').empty();
+	$('#nameDiv').empty();
 
 	if ($('#emailCheckSw').val() == '0') {
 		$('#emailDiv').text('이메일인증을 해주세요.');
 		$('#emailDiv').css('color', 'red');
 
-	}  else if ($('#username').val() == '') {
-		$('#usernameDiv').text('이름을 입력해주세요.');
-		$('#usernameDiv').css('color', 'red');
+	}  else if ($('#name').val() == '') {
+		$('#nameDiv').text('이름을 입력해주세요.');
+		$('#nameDiv').css('color', 'red');
 
-	}else if(/^[가-힣a-zA-Z]{3,16}$/.test($('#username').val())){
+	}else if(/^[가-힣a-zA-Z]{3,16}$/.test($('#name').val())){
 
-		$('#usernameDiv').text('이름은 2글자 이상 영문자와 한글만 입력해주세요');
-		$('#usernameDiv').css('color', 'red');
+		$('#nameDiv').text('이름은 2글자 이상 영문자와 한글만 입력해주세요');
+		$('#nameDiv').css('color', 'red');
 
 	}  else if ($('#nickname').val() == '') {
 		$('#nicknameDiv').text('닉네임을 입력해주세요.');

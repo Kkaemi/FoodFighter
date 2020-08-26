@@ -170,7 +170,7 @@ $('#nickname').focusout(function(){
 	$('#nicknameDiv').empty();
 	let nickname = $('#nickname').val();
 	if(nickname == ""){
-		$('#nicknameDiv').text("먼저 아이디를 입력하세요");
+		$('#nicknameDiv').text("먼저 닉네임을 입력하세요");
 		$('#nickname').focus();
 		$('#nicknameDiv').css('color','blue');
 		$('#nicknameDiv').css('font-weight','bold');
