@@ -3,4 +3,16 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace ="reviewSQL">
+
+	<!-- 가게찾기  -->
+	<!-- 
+	<select id="resSearch" parameterType="String" resultType="restaurant">
+		select * from restaurant-test
+		where resName like '%'||#{resName}||'%'
+		and resAddress like '%'||#{resAddress}||'%'
+		and resTheme like '%'||#{resTheme}||'%'
+		and resMenu like '%'||#{resMenu}||'%'
+	</select>
+	 -->
+	
 </mapper>

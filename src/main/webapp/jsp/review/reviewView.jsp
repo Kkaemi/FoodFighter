@@ -5,8 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel= "stylesheet" type="text/css" href="/FoodFighter/resources/css/bootstrap.css">
-    <link rel= "stylesheet" type="text/css" href="/FoodFighter/resources/css/reviewView.css">
+    <link rel= "stylesheet" type="text/css" href="/FoodFighter/resources/css/review/bootstrap.css">
+    <link rel= "stylesheet" type="text/css" href="/FoodFighter/resources/css/review/reviewView.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -181,12 +181,12 @@
 
         <div class="restaurant-images">
             <div id="direc-icon-left" class="glyphicon glyphicon-chevron-left"></div>
-                <img id="myImg" class="restaurant-image" src="/FoodFighter/resources/img/review/category-list/냉면2.jpg">
-                <img class="restaurant-image" src="/FoodFighter/resources/img/review/category-list/냉면3.jpg">
-                <img class="restaurant-image" src="/FoodFighter/resources/img/review/category-list/냉면4.jpg">
-                <img class="restaurant-image" src="/FoodFighter/resources/img/review/category-list/냉면5.jpg">
-                <img class="restaurant-image" src="/FoodFighter/resources/img/review/category-list/냉면6.jpg">
-                <img class="restaurant-image" src="/FoodFighter/resources/img/review/category-list/냉면7.jpg">
+                <img id="myImg" class="restaurant-image" src="/FoodFighter/resources/img/review/list-img/냉면2.jpg">
+                <img class="restaurant-image" src="/FoodFighter/resources/img/review/list-img/냉면3.jpg">
+                <img class="restaurant-image" src="/FoodFighter/resources/img/review/list-img/냉면4.jpg">
+                <img class="restaurant-image" src="/FoodFighter/resources/img/review/list-img/냉면5.jpg">
+                <img class="restaurant-image" src="/FoodFighter/resources/img/review/list-img/냉면6.jpg">
+                <img class="restaurant-image" src="/FoodFighter/resources/img/review/list-img/냉면7.jpg">
             
             <div id="direc-icon-right" class="glyphicon glyphicon-chevron-right"></div>
 
@@ -213,8 +213,8 @@
                         또 가고 싶어요!!
                     </div>
                     <div class="review-images">
-                        <img class="review-image1" src="/FoodFighter/resources/img/review/category-list/냉면1.jpg">
-                        <img class="review-image2" src="/FoodFighter/resources/img/review/category-list/냉면2.jpg">
+                        <img class="review-image1" src="/FoodFighter/resources/img/review/list-img/냉면1.jpg">
+                        <img class="review-image2" src="/FoodFighter/resources/img/review/list-img/냉면2.jpg">
                     </div>
                 </div>
             </div>

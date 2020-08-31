@@ -1,10 +1,15 @@
 package review.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
+import admin.bean.RestaurantDTO;
 import review.service.ReviewService;
 
 @Controller
@@ -38,4 +43,28 @@ public class ReviewController {
 	public String reviewView() {
 		return "/jsp/review/reviewView";
 	}
+	
+	// 가게 찾기 
+	/*
+	@RequestMapping(value = "checkRes", method = RequestMethod.GET)
+	public String checkRes() {
+		return "/review/checkRes";
+	
+	}
+	*/
+	/*
+	@RequestMapping(value = "resSearch", method = RequestMethod.POST)
+	public ModelAndView resSearch(@RequestParam String resSearchIcon) {
+		// 검색 아이콘(resSearchIcon 가져가기)
+		System.out.println(resSearchIcon);
+		List<RestaurantDTO> list = reviewService.resSearch(resSearchIcon);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	*/
+
+	
 }

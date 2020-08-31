@@ -9,22 +9,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class MemberController {
 
 	// 회원가입 폼
-	@RequestMapping(value = "singupForm", method = RequestMethod.GET)
+	@RequestMapping(value = "signupForm", method = RequestMethod.GET)
 	public String singupForm() {
-		return "/jsp/member/singupForm";
+		return "/jsp/member/signupForm";
 
 	}
 	
 	// singup Choice
-	@RequestMapping(value = "singupChoice", method = RequestMethod.GET)
+	@RequestMapping(value = "signupChoice", method = RequestMethod.GET)
 	public String singupChoice() {
-		return "/jsp/member/singupChoice";
+		return "/jsp/member/signupChoice";
 	}
 	
 	// 소셜 로그인 폼
-	@RequestMapping(value = "socialSingupForm", method = RequestMethod.GET)
+	@RequestMapping(value = "socialSignupForm", method = RequestMethod.GET)
 	public String socialSingupForm() {
-		return "/jsp/member/socialSingupForm";
+		return "/jsp/member/socialSignupForm";
 	}
 	
 }

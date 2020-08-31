@@ -49,4 +49,5 @@
 	<context:component-scan base-package="main.controller" />
 	<context:component-scan base-package="member.controller" />
 	<context:component-scan base-package="event.controller" />
+	<context:component-scan base-package="admin.controller" />
 </beans:beans>

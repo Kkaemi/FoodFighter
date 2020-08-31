@@ -1,5 +1,28 @@
 package review.dao;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+@Repository
+@Transactional
 public class ReviewDAOMybatis implements ReviewDAO {
+	@Autowired
+	private SqlSession sqlSession;
+	
+	/*
+	@Override
+	public RestaurantDTO checkRes() {
+		
+		return sqlSession.selectOne("restaurantSQL.checkRes");
+	}
+
+	@Override
+	public List<RestaurantDTO> resSearch(String resSearchIcon) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("restaurantSQL.resSearch", resSearchIcon);
+	}
+	*/
 
 }
