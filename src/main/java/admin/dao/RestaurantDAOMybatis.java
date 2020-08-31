@@ -14,7 +14,7 @@ import admin.bean.ZipcodeDTO;
 public class RestaurantDAOMybatis implements RestaurantDAO{
 	@Autowired
 	private SqlSession sqlSession;
-
+	/*
 	@Override
 	public void resWrite(RestaurantDTO restaurantDTO) {
 		sqlSession.insert("restaurantSQL.resWrite", restaurantDTO);
@@ -25,6 +25,6 @@ public class RestaurantDAOMybatis implements RestaurantDAO{
 	public List<ZipcodeDTO> postSearch(Map<String, String> map) {
 				return null;
 	}
-	
+	*/
 	
 }

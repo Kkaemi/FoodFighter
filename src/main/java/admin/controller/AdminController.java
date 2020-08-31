@@ -28,12 +28,17 @@ public class AdminController {
 	private AdminService adminService;
 	
 	// 가게정보 입력 페이지
+	/*
 	@RequestMapping(value="resWriteForm", method=RequestMethod.GET)
 	public String resWriteForm() {
 		return "/jsp/admin/resWriteForm";
 	}
 	
+	*/
+	
+	
 	// 가게정보 입력
+	/*
 	@ResponseBody
 	@RequestMapping(value="resWrite", method=RequestMethod.POST)
 	public void resWrite(@ModelAttribute RestaurantDTO restaurantDTO, @RequestParam MultipartFile[] img){
@@ -79,8 +84,10 @@ public class AdminController {
 		
 
 	}
+	*/
 	
 	// 가게 데이터 주소 입력 checkPost
+	/*
 	@RequestMapping(value="checkPost", method = RequestMethod.GET)
 	public String checkPost() {
 		return "/jsp/admin/checkPost";
@@ -96,5 +103,6 @@ public class AdminController {
 		mav.setViewName("jsonView");
 		return mav;
 	}
+	*/
 	
 }

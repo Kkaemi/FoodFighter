@@ -15,7 +15,7 @@ public class AdminServiceImpl implements AdminService{
 	@Autowired
 	private RestaurantDAO restaurantDAO;
 	
-	
+	/*
 	@Override
 	public void resWrite(RestaurantDTO restaurantDTO) {
 		restaurantDAO.resWrite(restaurantDTO);
@@ -28,5 +28,6 @@ public class AdminServiceImpl implements AdminService{
 		
 		return restaurantDAO.postSearch(map);
 	}
+	*/
 
 }
