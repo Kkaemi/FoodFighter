@@ -8,11 +8,17 @@
     background-color: #fff;
 	box-shadow:0px 6px 9px 0px rgba(0,0,0,0.06);
 }	
-.header-logo{
-	margin-left:150px;
+#header-menu{
+	margin-top:13px;
+	margin-left:560px;
+}
+#header-menu a:hover{
+	color: #FF6A4D;
+    text-decoration: none;
 }
 #header-menu li{
 	padding-left:40px;
+	/* padding-left:20px; */
 	list-style:none; 
 	font-color: #ffc34d;
 	display:inline;
@@ -29,22 +35,6 @@
     font-size:16px;
 	
 }
-#header-menu li{
-	padding-left:20px;
-	color: #FF6A4D;
-	list-style:none; 
-	display:inline;
-    font-weight:bold;
-    font-size:16px;
-}
-#header-menu a:hover{
-	color: #FF6A4D;
-    text-decoration: none;
-}
-#header-menu{
-	margin-top:-10px;
-	margin-left:560px;
-}
 .header_searchInput{
 	height: 50px;
 	width: 340px;
@@ -57,6 +47,28 @@
 }
 .header_searchInput:click {
 	outline: none;
+}
+
+.header_searchInput{
+	height: 50px;
+	width: 340px;
+	border-radius:25px;
+  	border:3px solid #ffc34d;
+  	background: rgba(0,0,0,0);
+}
+#header_searchBtn{
+	color: #feffff;
+    background: rgba(0,0,0,0);
+    border-color:rgba(0,0,0,0);
+	outline: none;
+	opacity: 0.7;
+}
+#header_searchBtn.show{
+   color: #FF6A4D;
+   	display:inline !important;
+   background: rgba(0,0,0,0);
+   border-color:rgba(0,0,0,0);
+   outline: none;
 }
 
 /* Footer */
@@ -113,13 +125,12 @@
     background-color:#FF6A4D; 
 }
 
-.card-img-top{
-	width:200px;
-	height:200px;
-	border-radius:200px;
-	margin:20 auto;
+.card-img-top {
+    width: 200px;
+    height: 200px;
+    border-radius: 200px;
+    margin: 30px auto;
 }
-
 div.card-body {
 	width:300px; 
  	height:100px;
@@ -139,7 +150,7 @@ div.card-body {
 	height:30px;
 }
 .starR1{
-    background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat -52px 0;
+    background: url('../../img/star.png') no-repeat -52px 0;
     background-size: auto 100%;
     width: 15px;
     height: 30px;
@@ -148,7 +159,7 @@ div.card-body {
     cursor: pointer;
 }
 .starR2{
-    background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
+    background: url('../../img/star.png') no-repeat right 0;
     background-size: auto 100%;
     width: 15px;
     height: 30px;
@@ -254,5 +265,3 @@ div.card-body {
 	font-size:13px;
 	font-color:white;
 }
-
-\

@@ -1,36 +1,44 @@
 package review.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import admin.bean.RestaurantDTO;
+// ps) 가게 검색은 앞선 springProject에서 했던 postSearch와 거의 비슷함
+
+import manager.bean.StoreDTO;
 import review.dao.ReviewDAO;
 
-
-// ps) 가게 검색은 앞선 springProject에서 했던 postSearch와 거의 비슷함
 @Service
 public class ReviewServiceImpl implements ReviewService {
 	@Autowired
 	private ReviewDAO reviewDAO;
-	
-	// 가게 체크
-	/*
+
 	@Override
-	public RestaurantDTO checkRes() {
-		// TODO Auto-generated method stub
-		return reviewDAO.checkRes();
+	public void writeReview(Map<String, Object> map) {
+		reviewDAO.writeReview(map);
 	}
-	*/
-	// 가게 찾기 
-	/*
+
 	@Override
-	public List<RestaurantDTO> resSearch(String resSearchIcon) {
-	
-		return reviewDAO.resSearch(resSearchIcon);
+	public List<StoreDTO> getSearchList(String pg, String keyword) {
+
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("pg", pg);
+		map.put("keyword", keyword);
+
+		// 1페이지당 5개씩
+		int endNum = (Integer.parseInt(pg)) * 5;
+		int startNum = endNum - 4;
+
+		map.put("startNum", startNum + "");
+		map.put("endNum", endNum + "");
+
+		return reviewDAO.getSearchList(map);
 	}
-	*/
-	
-	
+
+
+
 }

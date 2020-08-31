@@ -1,10 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta id="_csrf" name="_csrf" content="${_csrf.token}" />
+<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
+
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
@@ -43,17 +47,25 @@
 <!-- ============main ============== -->
 <div class="container">
   <div id="row1" class="row">
+  	<input type="hidden" id="memId" value=${sessionScope.memId }>
 	<div class="col-12">
 	   <div id="top">
 	   
 		  <div id="profileImgBox" class="offset-1" >
-		  	<img id="profileImg" src="/FoodFighter/resources/img/mypage/lee.jpg">
+		  	<c:choose>
+		  	  <c:when test="${memberDTO.profile == null}">
+           		<img id="profileImg" src="/FoodFighter/resources/img/mypage/basic.png">	
+			  </c:when>
+			  <c:otherwise>	
+		  		<img id="profileImg" src="/FoodFighter/storage/profile/${memberDTO.profile}">
+		  	  </c:otherwise>	
+		  	</c:choose>
 		  </div>
 		  
 		  <div id="profileInfoBox" class="col-7 offset-2">
 		  	<div id="info">
-		  		<div id="name">린다</div>
-		  		<button type="button" id="modifyBtn" class="btn btn-primary" >정보수정</button>
+		  		<div id="name">${memberDTO.name }</div>
+		  		<button type="button" id="modifyBtn" class="btn btn-primary" onclick="location.href='/FoodFighter/mypage/modifyCheckPwd'">정보수정</button>
 		  	</div>
 		  	
 		  	<div id="alramBox">
@@ -133,6 +145,13 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" ></script>
 
 <script type="text/javascript">
+$(document).ready(function(){
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+    $(document).ajaxSend(function(e, xhr, options) {
+        xhr.setRequestHeader(header, token);
+    });
+});
 
 //header부분 키워드 입력 시, 검색 버튼 나타는 기능
 $('.header_searchInput').click(function(){
@@ -145,6 +164,7 @@ $('#menuTextBox a').click(function(){
 	$('#menuTextBox a').removeClass('now');
 	$(this).addClass('now');
 });
+
 
 $('#myReview').click(function(){
 	

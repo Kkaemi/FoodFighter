@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
-<title>Bootstrap Sign up Form Horizontal</title>
+<title>회원가입</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="/FoodFighter/resources/css/member/memberStyle.css">
 </head>
@@ -20,7 +20,7 @@
       	</div>
 		<div class="form-group row">
 			<div class="col-8 offset-2">
-				<button type="button"  id="genSignupBtn" class="btn btn-primary btn-block" onclick="location.href='/FoodFighter/member/singupForm'">일반 회원가입</button>
+				<button type="button"  id="genSignupBtn" class="btn btn-primary btn-block" onclick="location.href='/FoodFighter/member/signupForm'">일반 회원가입</button>
 			</div>  
 		</div>
 		
@@ -39,7 +39,7 @@
 			</div>
 		</div>		      
     </form>
-	<div class="text-center">이미 계정이 있으신가요? <a href="#"> 로그인</a></div>
+	<div class="text-center">이미 계정이 있으신가요? <a href="/FoodFighter/login/loginForm"> 로그인</a></div>
 </div>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>

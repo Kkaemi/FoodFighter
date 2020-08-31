@@ -5,6 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ <meta id="_csrf" name="_csrf" content="${_csrf.token}" />
+ <meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
+ 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
 <title>Bootstrap Sign up Form Horizontal</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -12,7 +15,7 @@
 </head>
 <body>
 <div class="signup-form">
-    <form id="socialSingupForm" action="" method="post">
+    <form id="socialSignupForm" action="" method="post">
       	<div class="row">
         	<div class="col-8 offset-4">
 				<h2>회원가입</h2>
@@ -55,10 +58,10 @@
       	
         
         <div class="form-group row">
-			<div class="col-8 offset-2">9
-                <input type="text" id="username" class="form-control"  name="username" placeholder="이름">
+			<div class="col-8 offset-2">
+                <input type="text" id="name" class="form-control"  name="name" placeholder="이름">
             </div>
-            <div id="usernameDiv" class="col-8 offset-2"></div>        	
+            <div id="nameDiv" class="col-8 offset-2"></div>        	
         </div>	
         
         <div class="form-group row">
@@ -77,15 +80,20 @@
 		
 		<div><button type="button" id="logout">로그아웃</button></div>	<!-- ★★나중에 지울것★★ -->      
     </form>
-	<div class="text-center">이미 계정이 있으신가요? <a href="#"> 로그인</a></div>
+	<div class="text-center">이미 계정이 있으신가요? <a href="/FoodFighter/login/loginForm"> 로그인</a></div>
 </div>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
-
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" ></script>
-
 <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript">
+$(document).ready(function(){
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+    $(document).ajaxSend(function(e, xhr, options) {
+        xhr.setRequestHeader(header, token);
+    });
+});
 
 //인증 부분 숨김처리
 $(document).ready(function() {
@@ -97,7 +105,7 @@ $('#sendEmailBtn').click(function() {
 
 $('#emailDiv').empty();
 	if ($('#email').val() == '') {
-		$('#emailDiv').text('이메일을 먼저 입력해주세요.');
+		$('#emailDiv').text('이메일은 반드시 동의를 해주셔야 가입이 가능합니다.');
 		$('#emailDiv').css('color', 'red');
 
 	} else {
@@ -117,7 +125,7 @@ $('#emailDiv').empty();
 				dataType:'text',
 				success : function(data) {
 					sessionStorage.setItem("authCode", data ); //히든으로 하면 보안때문에 session으로 변경
-					alert(data);//임시
+					alert(sessionStorage.getItem("authCode")); //임시
 				},
 				error : function(e) {
 					console.log(e);
@@ -157,20 +165,20 @@ $('#emailCheckBtn').click(function(){
 //회원가입 버튼을 눌렀을 때
 $('#signupBtn').click(function() {
 	$('#emailDiv').empty();
-	$('#usernameDiv').empty();
+	$('#nameDiv').empty();
 
 	if ($('#emailCheckSw').val() == '0') {
 		$('#emailDiv').text('이메일인증을 해주세요.');
 		$('#emailDiv').css('color', 'red');
 
-	}  else if ($('#username').val() == '') {
-		$('#usernameDiv').text('이름을 입력해주세요.');
-		$('#usernameDiv').css('color', 'red');
+	}  else if ($('#name').val() == '') {
+		$('#nameDiv').text('이름을 입력해주세요.');
+		$('#nameDiv').css('color', 'red');
 
-	}else if(/^[가-힣a-zA-Z]{3,16}$/.test($('#username').val())){
+	}else if(/^[가-힣a-zA-Z]{3,16}$/.test($('#name').val())){
 
-		$('#usernameDiv').text('이름은 2글자 이상 영문자와 한글만 입력해주세요');
-		$('#usernameDiv').css('color', 'red');
+		$('#nameDiv').text('이름은 2글자 이상 영문자와 한글만 입력해주세요');
+		$('#nameDiv').css('color', 'red');
 
 	}  else if ($('#nickname').val() == '') {
 		$('#nicknameDiv').text('닉네임을 입력해주세요.');
@@ -179,8 +187,8 @@ $('#signupBtn').click(function() {
 	} else {
 		$.ajax({
 			type : 'post',
-			url : '/finalProject/member/socialSignup',
-			data : $('#socialSingupForm').serialize(),
+			url : '/FoodFighter/member/socialSignup',
+			data : $('#socialSignupForm').serialize(),
 			success : function() {
 				
 				location.href = '/FoodFighter/member/signupChoice';

@@ -1,9 +1,14 @@
 package review.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import manager.bean.StoreDTO;
 
 @Repository
 @Transactional
@@ -24,5 +29,17 @@ public class ReviewDAOMybatis implements ReviewDAO {
 		return sqlSession.selectList("restaurantSQL.resSearch", resSearchIcon);
 	}
 	*/
+
+
+	@Override
+	public void writeReview(Map<String, Object> map) {
+		sqlSession.insert("reviewSQL.writeReview", map);
+	}
+
+	@Override
+	public List<StoreDTO> getSearchList(Map<String, String > map) {
+		return sqlSession.selectList("reviewSQL.getSearchList", map);
+	}
+
 
 }

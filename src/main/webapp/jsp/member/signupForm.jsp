@@ -5,6 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta id="_csrf" name="_csrf" content="${_csrf.token}" />
+<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
+
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
 <title>Bootstrap Sign up Form Horizontal</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -12,7 +15,7 @@
 </head>
 <body>
 <div class="signup-form">
-    <form id="singupForm" action="" method="post">
+    <form id="signupForm" action="" method="post">
       	<div class="row">
         	<div class="col-8 offset-4">
 				<h2>회원가입</h2>
@@ -29,7 +32,7 @@
 	                <button type="button" id="emailCheckBtn" class="btn btn-primary btn-lg col-3">인증</button>
 	                <input type="hidden" id="authCheck" value=""><input type="hidden" id="emailCheckSw" value="0">
                 </div>
-	 		<div id="emailDiv"></div>         
+	 		<div id="emailDiv"></div> <input type="hidden" id="checkEmail" value="">        
             </div> 
             
             <button type="button" id="sendEmailBtn"  class="btn btn-primary btn-lg offset-4">인증 메일 발송</button>    	
@@ -60,9 +63,9 @@
         
         <div class="form-group row">
 			<div class="col-8 offset-2">
-                <input type="text" id="username" class="form-control"  name="username" placeholder="이름">
+                <input type="text" id="name" class="form-control"  name="name" placeholder="이름">
             </div>
-            <div id="usernameDiv" class="col-8 offset-2"></div>        	
+            <div id="nameDiv" class="col-8 offset-2"></div>        	
         </div>
         
         
@@ -70,7 +73,7 @@
 			<div class="col-8 offset-2">
                 <input type="text" id="nickname" class="form-control"  name="nickname" placeholder="닉네임">
             </div>
-            <div id="nicknameDiv" class="col-8 offset-2"></div>        	
+            <div id="nicknameDiv" class="col-8 offset-2"></div><input type="hidden" id="checkNickname" value="">         	
         </div>
 		
 		
@@ -100,19 +103,109 @@
 			</div>  
 		</div>		      
     </form>
-	<div class="text-center">이미 계정이 있으신가요? <a href="#"> 로그인</a></div>
+	<div class="text-center">이미 계정이 있으신가요? <a href="/FoodFighter/login/loginForm"> 로그인</a></div>
 </div>
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" ></script>
 
-<script type="text/javascript" src="../js/signupJs.js"></script>
 <script type="text/javascript">
+$(document).ready(function(){
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+    $(document).ajaxSend(function(e, xhr, options) {
+        xhr.setRequestHeader(header, token);
+    });
+});
+
 	$(document).ready(function() {
 		$('#emailCode').hide();
 		$('#emailCheckBtn').hide();
 	});
+	
+//이메일 중복확인
+$('#email').focusout(function(){
+		$('#emailDiv').empty();
+		let email = $('#email').val();
+		if(email == ""){
+			$('#emailDiv').text("먼저 아이디를 입력하세요");
+			$('#email').focus();
+			$('#emailDiv').css('color','blue');
+			$('#emailDiv').css('font-weight','bold');
+			$('#emailDiv').css('font-size','8pt');
+		}else{
+			$.ajax({
+				type: 'post',
+		 		url: '/FoodFighter/member/checkEmail',
+		 		data: 'email='+email,
+		 		dataType: 'text',
+		 		success : function(data){
+		 			if(data == 'exist'){
+						$('#emailDiv').text('사용 불가능')
+						$('#emailDiv').css('color','magenta')
+						$('#emailDiv').css('font-size','8pt')
+						$('#emailDiv').css('font-weight','bold')
+						
+					}else if(data=='non_exist'){
+						$('#checkEmail').val($('#email').val());
+						
+						$('#emailDiv').text('사용 가능')
+						$('#emailDiv').css('color','blue')
+						$('#emailDiv').css('font-size','8pt')
+						$('#emailDiv').css('font-weight','bold')
+					}
+				},
+				error:function(e){
+					console.log(e);
+				}
+			});	
+		}
+			
+		
+	});
+	
+//닉네임 중복확인
+$('#nickname').focusout(function(){
+	$('#nicknameDiv').empty();
+	let nickname = $('#nickname').val();
+	if(nickname == ""){
+		$('#nicknameDiv').text("먼저 닉네임을 입력하세요");
+		$('#nickname').focus();
+		$('#nicknameDiv').css('color','blue');
+		$('#nicknameDiv').css('font-weight','bold');
+		$('#nicknameDiv').css('font-size','8pt');
+	}else{
+		$.ajax({
+			type: 'post',
+	 		url: '/FoodFighter/member/checkNickname',
+	 		data: 'nickname='+nickname,
+	 		dataType: 'text',
+	 		success : function(data){
+	 			if(data == 'exist'){
+					$('#nicknameDiv').text('사용 불가능')
+					$('#nicknameDiv').css('color','magenta')
+					$('#nicknameDiv').css('font-size','8pt')
+					$('#nicknameDiv').css('font-weight','bold')
+					
+				}else if(data=='non_exist'){
+					$('#checkNickname').val($('#nickname').val());
+					
+					$('#nicknameDiv').text('사용 가능')
+					$('#nicknameDiv').css('color','blue')
+					$('#nicknameDiv').css('font-size','8pt')
+					$('#nicknameDiv').css('font-weight','bold')
+				}
+			},
+			error:function(e){
+				console.log(e);
+			}
+		});	
+	}
+		
+	
+});
+
 $('#sendEmailBtn').click(function() {
 	$('#emailCheckBtn').prop('disabled', false);
 	$('#emailCode').prop('readonly', false);
@@ -134,11 +227,12 @@ $('#sendEmailBtn').click(function() {
 				
 			$.ajax({
 				type:'post',
-				url : '/finalProject/member/signupSendMail',
+				url : '/FoodFighter/member/signupSendMail',
 				data : 'email='+$('#email').val(),
 				dataType:'text',
 				success : function(data) {
-					sessionStorage.setItem("authCode", data ); 
+					sessionStorage.setItem("authCode", data );
+					alert(sessionStorage.getItem("authCode"));
 				},
 				error : function(e) {
 					console.log(e);
@@ -179,7 +273,8 @@ $('#emailCheckBtn').click(function(){
 
 	$('#signupBtn').click(function() {
 		$('#emailDiv').empty();
-		$('#usernameDiv').empty();
+		$('#nameDiv').empty();
+		$('#nicknameDiv').empty();
 		$('#pwdDiv').empty();
 		$('#confirm_pwdDiv').empty();
 
@@ -191,9 +286,9 @@ $('#emailCheckBtn').click(function(){
 			$('#emailDiv').text('이메일인증을 해주세요.');
 			$('#emailDiv').css('color', 'red');
 
-		}  else if ($('#username').val() == '') {
-			$('#usernameDiv').text('이름을 입력해주세요.');
-			$('#usernameDiv').css('color', 'red');
+		}  else if ($('#name').val() == '') {
+			$('#nameDiv').text('이름을 입력해주세요.');
+			$('#nameDiv').css('color', 'red');
 
 		} else if ($('#nickname').val() == '') {
 			$('#nicknameDiv').text('닉네임을 입력해주세요.');
@@ -219,11 +314,16 @@ $('#emailCheckBtn').click(function(){
 			$('#emailCode').prop('readonly', false);
 			$('#emailCheckBtn').prop('disabled', false);
 
-		}  else {
+		}else if($('#checkNickname').val() != $('#nickname').val()){
+	    	$('#nicknameDiv').text('닉네임 중복체크를 해주세요.')
+	        $('#nicknameDiv').css('color', 'magenta')
+	        $('#nicknameDiv').css('font-size', '8pt')
+	        $('#nicknameDiv').css('font-weight', 'bold')
+	    }   else {
 			$.ajax({
 				type : 'post',
-				url : '/finalProject/member/signup',
-				data : $('#singupForm').serialize(),
+				url : '/FoodFighter/member/signup',
+				data : $('#signupForm').serialize(),
 				success : function() {
 					location.href = '/FoodFighter/member/signupChoice';
 
