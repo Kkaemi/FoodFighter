@@ -36,21 +36,23 @@ String keyword = request.getParameter("keyword");
 		   		<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword" autocomplete="on" maxlength="50" >
 		   		<button size="10" id="header_searchBtn">검색</button>
 		      </li>
-		      <li class="header-items">
-		         <a class="header-link" href="index">Home</a>
-		      </li>
-		      <li class="header-items">
-		         <a class="header-link" href="review_nonSearchList">리뷰 리스트</a>
-		      </li>
-		      <li class="header-items">
-		        <a class="header-link" href="communityMain">커뮤니티</a>
-		      </li>
-		      <li class="header-items">
-		        <a class="header-link" href="eventList">이벤트</a>
-		      </li>
-		      <li class="header-items">
-		       <a class="header-link" href="communityMain.jsp"><img src="../resources/img/member.png" class="header_searchIcon" width="30" height="30" align="center"></a>
-	    	 </li>
+		       <li class="nav-item">
+		           <a class="nav-link js-scroll active" href="/FoodFighter">Home</a>
+		       </li>
+		       <li class="nav-item">
+	         	  <a class="nav-link js-scroll" href="/FoodFighter/review/reviewNonSearchList">리뷰 리스트</a>
+	          </li>
+	          <li class="nav-item">
+	           <a class="nav-link js-scroll" href="/FoodFighter/community/communityMain">커뮤니티</a>
+	          </li>
+	          <li class="nav-item">
+	            <a class="nav-link js-scroll" href="/FoodFighter/event/eventList">이벤트</a>
+	          </li>
+	          <li class="nav-item">
+	            <a class="nav-link js-scroll">
+	            <img src="/FoodFighter/resources/img/member.png" class="header_searchIcon" width="30" height="30" align="center">
+	            </a>
+     	     </li>
 	   	</ul>
 	</div>
  </form>
@@ -118,20 +120,21 @@ String keyword = request.getParameter("keyword");
 			</center>
 		</div>
 </c:if>
+
 <c:if test="${!empty list}">
-		<c:forEach var="storeDTO" items="${list}">
+		<c:forEach var="restaurantDTO" items="${list}">
 			<div class="row">
-    				  <div class="col-sm-3"><a href="" ><img src="${storeDTO.storeImage}" class="row_StoreImg"></a></div>
+    				  <div class="col-sm-3"><a href="" ><img src="${restaurantDTO.resImage1}" class="row_StoreImg"></a></div>
 	   		  <div class="col-sm-9">	
 		       	<ul class="storeMain">
-					<li><span class="storeName">${storeDTO.storeName} &emsp;&emsp;&emsp;&emsp;</span></li>
-					<li><span class="storeAvg">${storeDTO.starAvg}</span></li>
+					<li><span class="resName">${restaurantDTO.resName} &emsp;&emsp;&emsp;&emsp;</span></li>
+					<li><span class="resScore">${restaurantDTO.resScore}</span></li>
 					<li><img src="../resources/img/bookmark.png" id="bookmark" align="right" onclick="bookmarkEvent()"></li>
 				</ul><br><br>
 				<ul class="storeDetail" align="left">
-		  			<li>주소:&emsp;&emsp;&emsp; ${storeDTO.storeAddress}</li>
-		  			<li>카테고리:&emsp; ${storeDTO.storeCategory}</li>
-		  			<li>가격대:&emsp;&emsp;${storeDTO.storePrice}</li>
+		  			<li>주소:&emsp;&emsp;&emsp; ${restaurantDTO.resAddress}</li>
+		  			<li>카테고리:&emsp; ${restaurantDTO.resTheme}</li>
+		  			<li>가격대:&emsp;&emsp;${restaurantDTO.resPrice}</li>
 		  		</ul>
 	  		<div class="storeMore"><a class="reviewList_detailPage" href="#" style="color: #ffc34d;">가게이름 상세보기 ></a></div>
    		</div><!-- col-sm-9 -->
@@ -143,8 +146,7 @@ String keyword = request.getParameter("keyword");
   <div class="contentMore">
   	<button type="button" class="moreBtn"><font style="color: #ffc34d;">더보기</font></button>
   </div>    
-</div><!-- container -->      
-
+</div><!-- container -->  
 
  <!--================  Footer ================-->
  <div id="footer-container">
