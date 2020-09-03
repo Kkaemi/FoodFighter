@@ -34,21 +34,23 @@
 		   		<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword" autocomplete="on" maxlength="50" >
 		   		<button size="10" id="header_searchBtn">검색</button>
 		      </li>
-	      <li class="header-items">
-	         <a class="header-link" href="/FoodFighter/index">Home</a>
-	      </li>
-	      <li class="header-items">
-	         <a class="header-link" href="reviewNonSearchList">리뷰 리스트</a>
-	      </li>
-	      <li class="header-items">
-	        <a class="header-link" href="communityMain">커뮤니티</a>
-	      </li>
-	      <li class="header-items">
-	        <a class="header-link" href="eventList">이벤트</a>
-	      </li>
-	      <li class="header-items">
-	       <a class="header-link" href="communityMain.jsp"><img src="../resources/img/member.png" class="header_searchIcon" width="30" height="30" align="center"></a>
-    	 </li>
+	       <li class="nav-item">
+	           <a class="nav-link js-scroll active" href="/FoodFighter">Home</a>
+	       </li>
+	       <li class="nav-item">
+	        	  <a class="nav-link js-scroll" href="/FoodFighter/review/reviewNonSearchList">리뷰 리스트</a>
+	          </li>
+	       <li class="nav-item">
+	         <a class="nav-link js-scroll" href="/FoodFighter/community/communityMain">커뮤니티</a>
+	       </li>
+	       <li class="nav-item">
+	         <a class="nav-link js-scroll" href="/FoodFighter/event/eventList">이벤트</a>
+	       </li>
+	       <li class="nav-item">
+	         <a class="nav-link js-scroll">
+	         <img src="/FoodFighter/resources/img/member.png" class="header_searchIcon" width="30" height="30" align="center">
+	         </a>
+	    	</li>
    	</ul>
 </div>
 </form>
@@ -58,7 +60,7 @@
 		  <div class="title" align="left">
 			  <font class="storeName"><strong>코스믹커피</strong></font>&emsp;<strong>에 대한 솔직한 리뷰를 작성해주세요.</strong> &emsp;&emsp;&emsp;&emsp;&emsp;
 				 <div class="starRev">
-				 	<input type="hidden" id="starAvg" name="starAvg">
+				 	<input type="hidden" id="resScore" name="resScore">
 				     <span class="starR1 on" id = star1_Left data-value="0.5" >별1_왼쪽</span>
 				     <span class="starR2" id = star1_Right data-value ="1.0">별1_오른쪽</span>
 				     <span class="starR1" id = star2_Left data-value ="1.5">별2_왼쪽</span>

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import manager.bean.StoreDTO;
+import admin.bean.RestaurantDTO;
 import member.bean.MemberDTO;
 import review.service.ReviewService;
 
@@ -86,7 +86,7 @@ public class ReviewController {
 			
 			map.put("nickname", memberDTO.getNickname());
 			map.put("member_seq",memberDTO.getMember_seq());
-			map.put("storename","");
+			map.put("resName","카페");
 //			map.put("storename",storeDTO.getStoreName());
 		//DB
 		reviewService.writeReview(map);
@@ -117,7 +117,6 @@ public class ReviewController {
 	}
 	*/
 
-
 	//검색어를 통한 리스트
 	@RequestMapping(value="getSearchList", method=RequestMethod.GET)
 	@ResponseBody
@@ -125,7 +124,7 @@ public class ReviewController {
 									  @RequestParam(required=false, defaultValue="1") String pg) {
 
 		//5개씩 보여지는 리스트
-		List<StoreDTO> list = reviewService.getSearchList(pg,(String)map.get("keyword"));
+		List<RestaurantDTO> list = reviewService.getSearchList(pg,(String)map.get("keyword"));
 
 		map.put("list",list);
 		
@@ -135,8 +134,7 @@ public class ReviewController {
 		mav.addObject("keyword", map.get("keyword"));
 		mav.setViewName("/jsp/review/review_searchList");
 		
-		System.out.println(list);
-		
+		System.out.println("map = "+map.get("keyword"));
 		return mav;
 	}
 

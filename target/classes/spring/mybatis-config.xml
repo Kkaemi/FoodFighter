@@ -7,7 +7,5 @@
 		<typeAlias type="member.bean.MemberDTO" alias="member"/>
 		<typeAlias type="review.bean.ReviewDTO" alias="review"/>
 		<typeAlias type="admin.bean.RestaurantDTO" alias="restaurant"/>
-		<typeAlias type="manager.bean.StoreDTO" alias="store"/>
-
 	</typeAliases>
 </configuration>

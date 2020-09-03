@@ -51,8 +51,8 @@ $('#resetBtn').click(function(){
 $('.starRev>span').click(function(){
    $(this).parent().children('span.on').removeClass('on');
    $(this).addClass('on').prevAll('span').addClass('on');
-   let starAvg = $(this).attr('data-value');
-	$('#starAvg').val(starAvg);
+   let resScore = $(this).attr('data-value');
+	$('#resScore').val(resScore);
    
    return false;
 });

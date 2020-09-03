@@ -225,13 +225,13 @@
 	margin:0 auto;
 	padding:0;
 }
-.storeName{
+.resName{
 	font-weight:bold;
 	font-size:33px;
 	align:left;
 	margin-left:0px;
 }
-.storeAvg{
+.resScore{
 	font-size:45px;
 	color:#ffc34d;
 }
