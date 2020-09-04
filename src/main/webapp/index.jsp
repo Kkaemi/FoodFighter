@@ -47,7 +47,7 @@
 		   	<button size="10" id="header_searchBtn">검색</button>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll active" href="/">Home</a>
+            <a class="nav-link js-scroll active" href="/FoodFighter">Home</a>
           </li>
           <li class="nav-item">
            <a class="nav-link js-scroll" href="/FoodFighter/review/reviewNonSearchList">리뷰 리스트</a>

@@ -86,7 +86,7 @@ public class ReviewController {
 			
 			map.put("nickname", memberDTO.getNickname());
 			map.put("member_seq",memberDTO.getMember_seq());
-			map.put("storename","");
+			map.put("resName","카페");
 //			map.put("storename",storeDTO.getStoreName());
 		//DB
 		reviewService.writeReview(map);
@@ -95,6 +95,30 @@ public class ReviewController {
 	}
 	
 
+<<<<<<< HEAD
+=======
+	// 가게 찾기 
+	/*
+	@RequestMapping(value = "checkRes", method = RequestMethod.GET)
+	public String checkRes() {
+		return "/review/checkRes";
+	
+	}
+	*/
+	/*
+	@RequestMapping(value = "resSearch", method = RequestMethod.POST)
+	public ModelAndView resSearch(@RequestParam String resSearchIcon) {
+		// 검색 아이콘(resSearchIcon 가져가기)
+		System.out.println(resSearchIcon);
+		List<RestaurantDTO> list = reviewService.resSearch(resSearchIcon);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	*/
+>>>>>>> b2a724c37a7e00294f55671f6d505ca0666c2cd4
 
 	//검색어를 통한 리스트
 	@RequestMapping(value="getSearchList", method=RequestMethod.GET)
@@ -113,8 +137,7 @@ public class ReviewController {
 		mav.addObject("keyword", map.get("keyword"));
 		mav.setViewName("/jsp/review/review_searchList");
 		
-		System.out.println(list);
-		
+		System.out.println("map = "+map.get("keyword"));
 		return mav;
 	}
 
