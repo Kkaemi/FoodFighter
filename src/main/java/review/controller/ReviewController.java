@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import manager.bean.StoreDTO;
+import admin.bean.RestaurantDTO;
 import member.bean.MemberDTO;
 import review.service.ReviewService;
 
@@ -95,28 +95,6 @@ public class ReviewController {
 	}
 	
 
-	// 가게 찾기 
-	/*
-	@RequestMapping(value = "checkRes", method = RequestMethod.GET)
-	public String checkRes() {
-		return "/review/checkRes";
-	
-	}
-	*/
-	/*
-	@RequestMapping(value = "resSearch", method = RequestMethod.POST)
-	public ModelAndView resSearch(@RequestParam String resSearchIcon) {
-		// 검색 아이콘(resSearchIcon 가져가기)
-		System.out.println(resSearchIcon);
-		List<RestaurantDTO> list = reviewService.resSearch(resSearchIcon);
-		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("list", list);
-		mav.setViewName("jsonView");
-		return mav;
-	}
-	*/
-
 
 	//검색어를 통한 리스트
 	@RequestMapping(value="getSearchList", method=RequestMethod.GET)
@@ -125,7 +103,7 @@ public class ReviewController {
 									  @RequestParam(required=false, defaultValue="1") String pg) {
 
 		//5개씩 보여지는 리스트
-		List<StoreDTO> list = reviewService.getSearchList(pg,(String)map.get("keyword"));
+		List<RestaurantDTO> list = reviewService.getSearchList(pg,(String)map.get("keyword"));
 
 		map.put("list",list);
 		

@@ -8,27 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import manager.bean.StoreDTO;
+import admin.bean.RestaurantDTO;
 
 @Repository
 @Transactional
 public class ReviewDAOMybatis implements ReviewDAO {
 	@Autowired
 	private SqlSession sqlSession;
-	
-	/*
-	@Override
-	public RestaurantDTO checkRes() {
-		
-		return sqlSession.selectOne("restaurantSQL.checkRes");
-	}
-
-	@Override
-	public List<RestaurantDTO> resSearch(String resSearchIcon) {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("restaurantSQL.resSearch", resSearchIcon);
-	}
-	*/
 
 
 	@Override
@@ -37,7 +23,7 @@ public class ReviewDAOMybatis implements ReviewDAO {
 	}
 
 	@Override
-	public List<StoreDTO> getSearchList(Map<String, String > map) {
+	public List<RestaurantDTO> getSearchList(Map<String, String > map) {
 		return sqlSession.selectList("reviewSQL.getSearchList", map);
 	}
 

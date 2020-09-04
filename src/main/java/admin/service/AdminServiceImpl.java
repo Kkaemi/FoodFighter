@@ -15,7 +15,7 @@ public class AdminServiceImpl implements AdminService{
 	@Autowired
 	private RestaurantDAO restaurantDAO;
 	
-	/*
+	
 	@Override
 	public void resWrite(RestaurantDTO restaurantDTO) {
 		restaurantDAO.resWrite(restaurantDTO);
@@ -23,11 +23,6 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 
-	@Override
-	public List<ZipcodeDTO> postSearch(Map<String, String> map) {
-		
-		return restaurantDAO.postSearch(map);
-	}
-	*/
+	
 
 }

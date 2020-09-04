@@ -6,14 +6,15 @@
 		http://www.springframework.org/schema/security https://www.springframework.org/schema/security/spring-security-5.2.xsd">
 
 	<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
-	<security:http> 
+	<security:http use-expressions="true"> 
 		<security:intercept-url pattern="/storage/**" access="permitAll" />
 		
 		<security:intercept-url pattern="/main/index" access="permitAll"/>
 		
+		
 		<security:form-login login-page="/login/login" />
 		
-		<security:csrf disabled="false"/>
+		<security:csrf disabled="true"/>
 		
 		
 	</security:http>

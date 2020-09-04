@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 키워드 검색 -->
 	<select id="getSearchList" parameterType="java.util.Map"
-		resultType="store">
+		resultType="restaurant">
 	   <![CDATA[
 		select * from viewList where storeName like '%'||#{keyword}||'%' and rownum >= #{startNum} and rownum <= #{endNum}
 	  	]]>

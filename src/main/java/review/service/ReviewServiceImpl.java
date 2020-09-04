@@ -7,9 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-// ps) 가게 검색은 앞선 springProject에서 했던 postSearch와 거의 비슷함
-
-import manager.bean.StoreDTO;
+import admin.bean.RestaurantDTO;
 import review.dao.ReviewDAO;
 
 @Service
@@ -23,7 +21,7 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public List<StoreDTO> getSearchList(String pg, String keyword) {
+	public List<RestaurantDTO> getSearchList(String pg, String keyword) {
 
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("pg", pg);
