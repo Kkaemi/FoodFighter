@@ -14,15 +14,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import community.bean.BoardPaging;
-import community.bean.QnAboardDTO;
-import community.service.CommunityBoardService;
+import community.bean.QnaBoardPaging;
+import community.bean.QnaBoardDTO;
+import community.service.CommunityCSService;
 
 @Controller
 @RequestMapping(value = "community")
 public class CommunityBoardController {
 	@Autowired
-	private CommunityBoardService communityBoardService;
+	private CommunityCSService communityBoardService;
 
 	// 커뮤니티 게시판 목록
 	@RequestMapping(value = "communityBoard", method = RequestMethod.GET)
