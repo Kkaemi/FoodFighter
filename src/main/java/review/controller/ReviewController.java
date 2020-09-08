@@ -81,17 +81,27 @@ public class ReviewController {
 		}
 		
 			MemberDTO memberDTO =(MemberDTO)session.getAttribute("memberDTO");
+<<<<<<< HEAD
 			
 			map.put("nickname", memberDTO.getNickname());
 			map.put("member_seq",memberDTO.getMember_seq());
 			map.put("resName","");
 			
+=======
+
+			
+			map.put("nickname", memberDTO.getNickname());
+			map.put("member_seq",memberDTO.getMember_seq());
+			map.put("resName","카페");
+
+>>>>>>> upstream/master
 		//DB
 		reviewService.writeReview(map);
 		
 		return "/jsp/review/reviewView";
 	}
 
+<<<<<<< HEAD
 	//리뷰 리스트(review_searchList)
 	@RequestMapping(value="getSearchList", method=RequestMethod.POST)
 	public String getSearchList(@RequestParam Map<String, Object> map, Model model,
@@ -99,6 +109,9 @@ public class ReviewController {
 		
 	//5개씩 보여지는 리스트
 	List<RestaurantDTO> list = reviewService.getSearchList(pg,(String)map.get("keyword"));
+=======
+
+>>>>>>> upstream/master
 
 	map.put("list",list);
 

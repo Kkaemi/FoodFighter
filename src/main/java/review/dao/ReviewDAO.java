@@ -4,6 +4,10 @@ import java.util.List;
 import java.util.Map;
 
 import admin.bean.RestaurantDTO;
+<<<<<<< HEAD
+=======
+
+>>>>>>> upstream/master
 
 public interface ReviewDAO {
 
