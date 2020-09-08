@@ -3,8 +3,6 @@ package community.service;
 import java.util.List;
 import java.util.Map;
 
-import community.bean.QnaBoardDTO;
-import community.bean.QnaBoardPaging;
 
 public interface CommunityCSService {
 	

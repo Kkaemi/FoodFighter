@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="kor">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -61,8 +62,8 @@
 <div class="reviewView-container">
     <!--타이틀 및 점수-->
     <div class="title">
-        <span id="title">서울음식점<span>
-        <span class="review-score">4.3</span>   
+        <span id="title"><span>
+        <span class="review-score"></span>   
         <!--북마크-->
         <span id="bookmark-group"  onclick="bookmarkChange()">
             <span class="fa fa-bookmark-o" id="bookmark"></span>
@@ -96,35 +97,35 @@
               
                     <tr class="table">
                         <th>주소</th>
-                        <td>서울 강남구 어쩌고 저쩌고 </td>
+                        <td><span id="resAddress"></span></td>
                     </tr>
                     <tr>
                         <th>전화번호</th>
-                        <td>02-725-1557</td>
+                        <td><span id="resTel"></span></td>
                     
                     </tr>
                     <tr>
                         <th>음식 종류</th>
-                        <td>한정식 / 백반/ 정통 한식</td>
+                        <td><span id="resTheme"></span></td>
                     </tr>
                     <tr>
                         <th>가격대</th>
-                        <td>만원 - 2만원</td>
+                        <td><span id="resPrice"></span></td>
                     </tr>
                     <tr>
                         <th>영업시간</th>
-                        <td>10:00 - 18:00</td>
+                        <td><span id="resHours"></span></td>
                     </tr>
                     <tr>
                         <th>휴일</th>
-                        <td>월</td>
+                        <td><span id="resClosing"></span></td>
                     </tr>
                   
                     <tr>
                         <th>메뉴</th>
                         <td>
                             <div class="menu">
-                                <span id="menu-text">서울앞바다 멍게 비빔밥 </span>
+                                <span id="menu-text"></span>
                             </div>
                         </td>
                     </tr>
@@ -181,12 +182,10 @@
 
         <div class="restaurant-images">
             <div id="direc-icon-left" class="glyphicon glyphicon-chevron-left"></div>
-                <img id="myImg" class="restaurant-image" src="/FoodFighter/resources/img/review/list-img/냉면2.jpg">
-                <img class="restaurant-image" src="/FoodFighter/resources/img/review/list-img/냉면3.jpg">
-                <img class="restaurant-image" src="/FoodFighter/resources/img/review/list-img/냉면4.jpg">
-                <img class="restaurant-image" src="/FoodFighter/resources/img/review/list-img/냉면5.jpg">
-                <img class="restaurant-image" src="/FoodFighter/resources/img/review/list-img/냉면6.jpg">
-                <img class="restaurant-image" src="/FoodFighter/resources/img/review/list-img/냉면7.jpg">
+                <img class="restaurant-image" id="restaurant-image">
+                <img class="restaurant-image">
+                <img class="restaurant-image">
+
             
             <div id="direc-icon-right" class="glyphicon glyphicon-chevron-right"></div>
 
@@ -243,10 +242,11 @@
 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
 <!--모달 script-->
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">    
 var modal = document.getElementById('myModal');
 
-var img = document.getElementById('myImg');
+var img = document.getElementById('restaurant-image');
 
 var modalImg = document.getElementById("img01");
 var captionText = document.getElementById("caption");
@@ -274,4 +274,31 @@ function bookmarkChange() {
 
 </script>
 
+<!-- db데이터가져오기 -->
+<script type="text/javascript">
+$(document).ready(function(){
+	$.ajax({
+		type : 'post',
+		url : '/FoodFighter/review/getReviewView',
+		data : 'resSeq=${resSeq}',
+		dataType : 'json',
+		success : function(data){
+			//alert(JSON.stringify(data));
+			$('#restaurant-image').attr('src', '/FoodFighter/src/webapp/storage/restaurant/'+data.restaurantDTO.resImage1);
+			$('#title').text(data.restaurantDTO.resName);
+			$('#resAddress').text(data.restaurantDTO.resAddress);
+			$('#resTel').text(data.restaurantDTO.resTel);
+			$('#resTheme').text(data.restaurantDTO.resTheme);
+			$('#resPrice').text(data.restaurantDTO.resPrice);
+			$('#resHours').text(data.restaurantDTO.resHours);
+			$('#resClosing').text(data.restaurantDTO.resClosing);
+			$('#menu-text').text(data.restaurantDTO.resMenu);
+			
+		}, error : function(err){
+			console.log(err);
+		}
+	});
+
+});
+</script>
 </html>

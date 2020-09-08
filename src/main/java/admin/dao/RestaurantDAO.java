@@ -6,4 +6,5 @@ public interface RestaurantDAO {
 	
 	public void resWrite(RestaurantDTO restaurantDTO);
 
+
 }

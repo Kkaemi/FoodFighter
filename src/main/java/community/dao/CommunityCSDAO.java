@@ -3,7 +3,7 @@ package community.dao;
 import java.util.List;
 import java.util.Map;
 
-import community.bean.QnaBoardDTO;
+//import community.bean.QnaBoardDTO;
 
 public interface CommunityCSDAO {
 	

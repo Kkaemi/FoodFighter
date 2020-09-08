@@ -12,4 +12,8 @@ public interface ReviewService {
 
 	public List<RestaurantDTO> getSearchList(String pg, String keyword);
 
+	public RestaurantDTO getReviewView(String resSeq);
+
+
+
 }

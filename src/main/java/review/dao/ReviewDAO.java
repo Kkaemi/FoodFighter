@@ -11,4 +11,8 @@ public interface ReviewDAO {
 	
 	public List<RestaurantDTO> getSearchList(Map<String, String> map);
 
+	public RestaurantDTO getReviewView(String resSeq);
+
+
+
 }

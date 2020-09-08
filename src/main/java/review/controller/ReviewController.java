@@ -45,11 +45,8 @@ public class ReviewController {
 		return "/jsp/review/review_writeForm";
 	}
 		
-	//리뷰 페이지(searchView)
-	@RequestMapping(value="reviewView", method=RequestMethod.GET)
-	public String reviewView() {
-		return "/jsp/review/reviewView";
-	}
+
+
 	
 	//리뷰 DB저장 
 	@RequestMapping(value="writeReview", method=RequestMethod.POST)
@@ -122,4 +119,28 @@ public class ReviewController {
 		
 		return list;
 	}
+
+	//리뷰 페이지(reviewView)
+	@RequestMapping(value="reviewView", method=RequestMethod.GET)
+	public String reviewView(@RequestParam String resSeq, Model model) {
+		model.addAttribute("resSeq", resSeq);
+		
+		return "/jsp/review/reviewView";
+	}
+	
+	
+	// 가게데이터 끌어오기 
+	//리뷰(reviewView)
+	@ResponseBody
+	@RequestMapping(value="getReviewView", method=RequestMethod.POST)
+	public ModelAndView getReviewView(@RequestParam String resSeq) {
+		RestaurantDTO restaurantDTO = reviewService.getReviewView(resSeq);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("restaurantDTO", restaurantDTO);
+		mav.setViewName("jsonView");
+		
+		return mav;
+	}
+
 }

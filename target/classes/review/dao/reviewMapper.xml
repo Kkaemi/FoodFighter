@@ -23,4 +23,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where rownum between #{startNum} and #{endNum}
 	]]> 
 	</select>
+	
+	<!-- 가게데이터 끌어오기 -->
+	<select id="getReviewView" parameterType="String" resultType="restaurant">
+		select * from restaurant where resSeq=#{resSeq}
+	</select>
 </mapper>
