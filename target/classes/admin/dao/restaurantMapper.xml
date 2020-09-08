@@ -5,9 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="restaurantSQL">
 	<!-- 가게 등록 -->
 	<insert id="resWrite" parameterType="restaurant">
-		insert into restaurantTest values(seq, #{resName}
-										,#{resMapX}
-										,#{resMapY}
+		insert into restaurant values(nextval(resSeq), #{resName}
 										,#{resScore}
 										,#{resAddress}
 										,#{resTel}

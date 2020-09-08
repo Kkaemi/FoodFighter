@@ -61,27 +61,6 @@
 	</bean>
 
 
-<!-- 	<bean id="dataSource"
-		class="org.apache.commons.dbcp2.BasicDataSource">
-		<property name="driverClassName"
-<<<<<<< HEAD
-			value="com.mysql.jdbc.Driver" />
-		<property name="url"
-			value="jdbc:mysql://localhost/mysql-testuseSSL=false" />
-		<property name="username" value="yangchoi" />
-		<property name="password" value="didgywjd1/" />
-=======
-			value="oracle.jdbc.driver.OracleDriver" />
-		<property name="url"
-			value="jdbc:oracle:thin:@localhost:1521:xe" />
-		<property name="username" value="c##java" />
-		<property name="password" value="bit" />
->>>>>>> ea03c1fddeb4f8e986a1aed5463b4bd7addfeef6
-		<property name="maxTotal" value="20" />
-		<property name="maxIdle" value="3" />
-	</bean> -->
-	
-	
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
       <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
       <property name="url" value="jdbc:mysql://foodfighter.ci7ykwrhuqgy.ap-northeast-2.rds.amazonaws.com/FoodFighter?useSSL=false&amp;"/>
@@ -89,7 +68,17 @@
       <property name="password" value="admin123"/>
       <property name="maxTotal" value="20"/>
       <property name="maxIdle" value="3"/>
-   </bean> 
+   </bean>
+	
+	
+<!-- 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+      <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+      <property name="url" value="jdbc:mysql://foodfighter.ci7ykwrhuqgy.ap-northeast-2.rds.amazonaws.com/FoodFighter?useSSL=false&amp;"/>
+      <property name="username" value="admin"/>
+      <property name="password" value="admin123"/>
+      <property name="maxTotal" value="20"/>
+      <property name="maxIdle" value="3"/>
+   </bean>  -->
 
 	<bean id="sqlSessionFactory"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
