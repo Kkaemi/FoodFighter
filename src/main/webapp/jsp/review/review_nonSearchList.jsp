@@ -29,6 +29,7 @@
 	        <li class="header-items">
 	  			<img src="/FoodFighter/resources/img/community/mainImg/search.png" class="header_searchIcon" width="30" height="30" align="center"> 
 	   			<input type="text" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" value="" autocomplete="on" maxlength="50" >
+	   			<input type="button" id="reviewSearchBtn" value="검색">
 	      	</li>
 	      	<li class="header-items">
 	         	<a class="header-link" href="/FoodFighter/">Home</a>
@@ -126,9 +127,11 @@
               <p>Designed by foodFighter</p>
           </div>
     </div>
-</footer><!-- End  Footer -->
+</footer>
+<!-- End  Footer -->
 
 </body>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script type="text/javascript" src="/FoodFigher/resourcesjs/review/bootstrap.js"></script>
+<script type="text/javascript" src="/FoodFigher/resources/js/review/bootstrap.js"></script>
+<script type="text/javascript" src="/FoodFighter/resources/js/review/reviewSearch.js"></script>
 </html>

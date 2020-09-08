@@ -25,15 +25,15 @@
   <link href="/FoodFighter/resources/assets/css/style.css" rel="stylesheet">
   <link href="/FoodFighter/resources/css/main.css" rel = "stylesheet">
 
+  <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 
 <body id="page-top">
-
+<form id="headerForm" name="headerForm" method="get" action="./review/getSearchList">
   <!-- ======= Header/ Navbar ======= -->
   <nav class="navbar navbar-b navbar-trans navbar-expand-md fixed-top" id="mainNav">
     <div class="container">
-       <!-- 로고 -->
-      <a id="logo" class="navbar-brand js-scroll" href="/"><img id="logo-img" src="/FoodFighter/resources/img/streetfighter.gif"></a>
+      <a id="logo" class="navbar-brand js-scroll" href="/FoodFighter/"><img id="logo-img" src="/FoodFighter/resources/img/logo.png" width="200px;" height="55px;" ></a>
       <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarDefault" aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span></span>
         <span></span>
@@ -42,14 +42,13 @@
       
       <div class="navbar-collapse collapse justify-content-end" id="navbarDefault">
         <ul class="navbar-nav">
-        	
          <li class="nav-search">
-    		   	<img src="/FoodFighter/resources/img/search.png" class="header_searchIcon" width="30" height="30" align="center"> 
-	    	<input type="text" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" value="" autocomplete="on" maxlength="50" >
+	   		<img src="./resources/img/search.png" class="header_searchIcon" width="30" height="30" align="center"> 
+		   	<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword" value = "${keyword}" autocomplete="on" maxlength="50" >
+		   	<button size="10" id="header_searchBtn">검색</button>
           </li>
-        	
           <li class="nav-item">
-            <a class="nav-link js-scroll active" href="/">Home</a>
+            <a class="nav-link js-scroll active" href="/FoodFighter">Home</a>
           </li>
           <li class="nav-item">
            <a class="nav-link js-scroll" href="/FoodFighter/review/reviewNonSearchList">리뷰 리스트</a>
@@ -88,7 +87,7 @@
       </div>
     </div>
   </nav>
-
+</form>
   <!-- ======= Intro Section ======= -->
   <div id="home" class="intro route bg-image" style="background-image: url(/FoodFighter/resources/assets/img/ah.jpg)">
     <div class="overlay-itro"></div>
@@ -481,7 +480,7 @@
   <div id="preloader"></div>
 
   <!-- Vendor JS Files -->
-  <script src="/FoodFighter/resources/assets/vendor/jquery/jquery.min.js"></script>
+  <script src="/FoodFighter/resources/assets/vendor/jquery/jquery.min.js"></script>  
   <script src="/FoodFighter/resources/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="/FoodFighter/resources/assets/vendor/jquery.easing/jquery.easing.min.js"></script>
   <script src="/FoodFighter/resources/assets/vendor/php-email-form/validate.js"></script>
@@ -493,7 +492,7 @@
 
   <!-- Template Main JS File -->
   <script src="/FoodFighter/resources/assets/js/main.js"></script>
-
+  <script src="/FoodFighter/resources/js/review/keyword.js"></script>
 </body>
 
 </html>
