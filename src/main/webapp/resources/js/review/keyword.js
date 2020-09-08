@@ -13,4 +13,8 @@ $('#header_searchBtn').click(function(){
 	}
 });
 
-  
+//메인 검색
+$('#Intro_searchBtn').click(function(){
+		document.searchForm.submit(); 
+});
+

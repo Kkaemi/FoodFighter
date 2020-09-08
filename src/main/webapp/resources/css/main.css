@@ -132,7 +132,7 @@ b.navbar-trans .nav-link.active {
 .Intro_searchInput:focus {
 	outline: none;
 }
-.Intro_searchBtn{
+#Intro_searchBtn{
 	width:70px;
 	height:70px;
     color: white;
@@ -140,7 +140,7 @@ b.navbar-trans .nav-link.active {
     border-color:rgba(0,0,0,0);
 }
 
-.Intro_searchBtn:focus {
+#Intro_searchBtn:focus {
 	border-color:#ffc34d;
 	outline: none;
 }

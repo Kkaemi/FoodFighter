@@ -28,7 +28,7 @@
 </head>
 
 <body id="page-top">
-<form id="headerForm" name="headerForm" method="get" action="./review/getSearchList">
+<form id="headerForm" name="headerForm" method="post" action="./review/getSearchList">
   <!-- ======= Header/ Navbar ======= -->
   <nav class="navbar navbar-b navbar-trans navbar-expand-md fixed-top" id="mainNav">
     <div class="container">
@@ -43,7 +43,7 @@
         <ul class="navbar-nav">
          <li class="nav-search">
 	   		<img src="./resources/img/search.png" class="header_searchIcon" width="30" height="30" align="center"> 
-		   	<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword" value = "${keyword}" autocomplete="on" maxlength="50" >
+		   	<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword" autocomplete="on" maxlength="50" >
 		   	<button size="10" id="header_searchBtn">검색</button>
           </li>
           <li class="nav-item">
@@ -71,6 +71,7 @@
     </div>
   </nav>
 </form>
+<form id="searchForm" name="searchForm" method="post" action="./review/getSearchList">
   <!-- ======= Intro Section ======= -->
   <div id="home" class="intro route bg-image" style="background-image: url(/FoodFighter/resources/assets/img/ah.jpg)">
     <div class="overlay-itro"></div>
@@ -79,18 +80,14 @@
         <div class="container">
           <!--<p class="display-6 color-d">Hello, world!</p>-->
           <h1 class="intro-title mb-4">푸드파이터</h1>
-          		 <input type="text" class="Intro_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" value="" autocomplete="on" maxlength="20" size="80">
-         		 <button type="submit" class="Intro_searchBtn"><font class="searchBtn">검색</font></button>
-         		 <!-- <p class="intro-subtitle"><span class="text-slider-items">오늘은,무엇에,도전해볼까?</span><strong class="text-slider"></strong></p> -->
-         	 	<!-- <p class="pt-3"><a class="btn btn-primary btn js-scroll px-4" href="#about" role="button">Learn More</a></p> -->
-        
+       		 <input type="text" class="Intro_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" class="keyword" id ="keyword" name="keyword" value = "${keyword}" autocomplete="on" maxlength="20" size="80">
+      		 <button id="Intro_searchBtn"><font class="searchBtn">검색</font></button>
         </div>
       </div>
     </div>
   </div><!-- End Intro Section -->
-
   <main id="main">
-
+</form>
 
     <!-- ======= 카테고리 ======= -->
     <section id="service" class="services-mf pt-5 route">

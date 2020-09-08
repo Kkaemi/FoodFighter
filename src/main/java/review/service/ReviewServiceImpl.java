@@ -8,12 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import admin.bean.RestaurantDTO;
-<<<<<<< HEAD
-=======
 
 // ps) 가게 검색은 앞선 springProject에서 했던 postSearch와 거의 비슷함
 
->>>>>>> b2a724c37a7e00294f55671f6d505ca0666c2cd4
 import review.dao.ReviewDAO;
 
 @Service
@@ -40,9 +37,6 @@ public class ReviewServiceImpl implements ReviewService {
 		map.put("startNum", startNum + "");
 		map.put("endNum", endNum + "");
 		
-		System.out.println(keyword);
-		System.out.println(startNum);
-		System.out.println(endNum);
 		return reviewDAO.getSearchList(map);
 	}
 

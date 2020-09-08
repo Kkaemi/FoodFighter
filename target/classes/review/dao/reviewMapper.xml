@@ -4,12 +4,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="reviewSQL">
 
-	<!-- 가게찾기 -->
-	<!-- <select id="resSearch" parameterType="String" resultType="restaurant"> 
-		select * from restaurant-test where resName like '%'||#{resName}||'%' and 
-		resAddress like '%'||#{resAddress}||'%' and resTheme like '%'||#{resTheme}||'%' 
-		and resMenu like '%'||#{resMenu}||'%' </select> -->
-
 	<!-- 리뷰 작성 -->
 	<insert id="writeReview" parameterType="java.util.Map">
 		insert into view_test values(Nextval(seq_review),#{nickname},#{resName},#{resScore},#{content},#{image1},#{image2},#{image3},#{image4},#{image5},now())
@@ -19,14 +13,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 키워드 검색 -->
 	<select id="getSearchList" parameterType="java.util.Map" resultType="restaurant">
 	<!-- select * from searchList where resName like '%'||#{keyword}||'%' and rownum >= #{startNum} and rownum <= #{endNum} -->
-	<!-- select * from searchList where resName like CONCAT('%',#{keyword},'%') limit #{endNum} -->
-	<!-- select * from searchList where resName like CONCAT('%',#{keyword},'%') order by seq asc limit 5 -->
 	<![CDATA[
 		SELECT *
 		FROM (
-		    SELECT @ROWNUM := @ROWNUM + 1 as rownum, seq, resImage1, resName, resScore, resAddress, resTheme, resPrice
-		    FROM searchList, (SELECT @ROWNUM :=0) A
-		    where resName like CONCAT('%',#{keyword},'%') order by seq asc
+		    SELECT @ROWNUM := @ROWNUM + 1 as rownum, resSeq, resImage1, resName, resScore, resAddress, resTheme, resPrice
+		    FROM restaurant, (SELECT @ROWNUM :=0) A
+		    where resName like CONCAT('%',#{keyword},'%') order by resSeq asc
 		    ) RESULT
 		where rownum between #{startNum} and #{endNum}
 	]]>

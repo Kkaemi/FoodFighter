@@ -24,7 +24,7 @@
 <head>
 
 </head>
-<form id="headerForm" name="headerForm" method="get" action="../review/getSearchList">
+<form id="headerForm" name="headerForm" method="post" action="../review/getSearchList">
 <!--================ Header ================-->
 <div id="header-container">
   <a class="header-logo" href="/FoodFighter"><img src="../resources/img/logo.png" width="250px;" height="55px;" align="left" style="margin-top: 10px; margin-left: 200px;"></a>
@@ -127,7 +127,9 @@
  
 </form> 
 </body>
-
+<script type="text/javascript">
+let id = '${memberDTO.nickname}';
+</script>
 <!-- Vendor JS Files -->
 <!-- <script src="../../assets/vendor/jquery/jquery.min.js"></script>  -->
  <script src="../resources/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

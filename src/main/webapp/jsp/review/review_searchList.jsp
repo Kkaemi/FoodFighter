@@ -25,15 +25,15 @@ String keyword = request.getParameter("keyword");
 <title>List 화면</title>
 </head>
 <body>
-<input type="hidden" value="1" id="pg" name="pg">
-<form id="headerForm" name="headerForm" method="get" action="../review/getSearchList">
+
+<form id="headerForm" name="headerForm" method="post" action="../review/getSearchList">
 	<!--================ Header ================-->
 	<div id="header-container">
 	  <a class="header-logo" href="/FoodFighter"><img src="../resources/img/logo.png" width="250px;" height="55px;" align="left" style="margin-top: 10px; margin-left: 200px;"></a>
 	      <ul id="header-menu">
 		      <li class="header-items">
 		  		<img src="../resources/img/search.png" class="header_searchIcon" width="30" height="30" align="center"> 
-		   		<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword" autocomplete="on" maxlength="50" >
+		   		<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword" value="<%=keyword%>" autocomplete="on" maxlength="50" >
 		   		<button size="10" id="header_searchBtn">검색</button>
 		      </li>
 		       <li class="nav-item">
@@ -55,8 +55,7 @@ String keyword = request.getParameter("keyword");
      	     </li>
 	   	</ul>
 	</div>
- </form>
- <form method="post" id="searchListForm" name="searchListForm"> 	
+ </form>	
 	<!--================ Container ================-->
     <div class="container">
     <!-- Page Keyword -->
@@ -120,16 +119,16 @@ String keyword = request.getParameter("keyword");
 			</center>
 		</div>
 </c:if>
-
+<br>
+<div class="containerRow">
 <c:if test="${!empty list}">
 		<c:forEach var="restaurantDTO" items="${list}">
 			<div class="row">
-    				  <div class="col-sm-3"><a href="" ><img src="${restaurantDTO.resImage1}" class="row_StoreImg"></a></div>
+    			<div class="col-sm-3"><img src="/FoodFighter/storage/restaurant/${restaurantDTO.resImage1}" class="row_StoreImg"></div>
 	   		  <div class="col-sm-9">	
 		       	<ul class="storeMain">
 					<li><span class="resName">${restaurantDTO.resName} &emsp;&emsp;&emsp;&emsp;</span></li>
 					<li><span class="resScore">${restaurantDTO.resScore}</span></li>
-					<li><img src="../resources/img/bookmark.png" id="bookmark" align="right" onclick="bookmarkEvent()"></li>
 				</ul><br><br>
 				<ul class="storeDetail" align="left">
 		  			<li>주소:&emsp;&emsp;&emsp; ${restaurantDTO.resAddress}</li>
@@ -137,19 +136,21 @@ String keyword = request.getParameter("keyword");
 		  			<li>가격대:&emsp;&emsp;${restaurantDTO.resPrice}</li>
 		  		</ul>
 	  		<div class="storeMore"><a class="reviewList_detailPage" href="#" style="color: #ffc34d;">가게이름 상세보기 ></a></div>
-   		</div><!-- col-sm-9 -->
-   </div><hr><!-- row -->
+   			</div><!-- col-sm-9 -->
+  		 </div><hr><!-- row -->
 	</c:forEach>
-</c:if> 
+</c:if>
+</div>
 
     <!--================ 더보기 버튼 ================-->    
-  <div class="contentMore">
-  	<button type="button" class="moreBtn"><font style="color: #ffc34d;">더보기</font></button>
+<div class="contentMore">
+ 	<input type="hidden" value="2" id="pg" name="pg">
+  	<button type="button" class="moreBtn" id="moreBtn"><font style="color: #ffc34d;">더보기</font></button>
   </div>    
 </div><!-- container -->  
 
  <!--================  Footer ================-->
- <div id="footer-container">
+<div id="footer-container">
 	 <p class="copyright" style="text-align:left;">
 	     ㈜ 푸드파이터<br>서울 서초구 강남대로 459(백암빌딩) 202호<br>대표이사: FOODFIGHTER<br>사업자 등록번호: 2020-020-22222 
 	       <br>고객센터: 0507-1414-9601<br><br>
@@ -162,7 +163,7 @@ String keyword = request.getParameter("keyword");
   <!--================ Up ================-->
   <a href="#" class="back-to-top"><i class="fa fa-chevron-up"> <img src="../resources/img/back-up.png" width="32px;" height="32px;"></i></a>
   <div id="preloader"></div>
-</form>
+
 
 <!-- Vendor JS Files -->
 <!-- <script src="../../assets/vendor/jquery/jquery.min.js"></script>  -->

@@ -3,14 +3,19 @@ package review.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,12 +43,6 @@ public class ReviewController {
 	@RequestMapping(value="review_writeForm", method=RequestMethod.GET)
 	public String review_writeForm() {
 		return "/jsp/review/review_writeForm";
-	}
-	
-	//리뷰 리스트(review_searchList)
-	@RequestMapping(value="review_searchList", method=RequestMethod.GET)
-	public String review_searchList() {
-		return "/jsp/review/review_searchList";
 	}
 		
 	//리뷰 페이지(searchView)
@@ -82,66 +81,48 @@ public class ReviewController {
 		}
 		
 			MemberDTO memberDTO =(MemberDTO)session.getAttribute("memberDTO");
-//			StoreDTO storeDTO =(StoreDTO)session.getAttribute("storeDTO");
 			
 			map.put("nickname", memberDTO.getNickname());
 			map.put("member_seq",memberDTO.getMember_seq());
-			map.put("resName","카페");
-//			map.put("storename",storeDTO.getStoreName());
+			map.put("resName","");
+			
 		//DB
 		reviewService.writeReview(map);
 		
 		return "/jsp/review/reviewView";
 	}
-	
 
-<<<<<<< HEAD
-=======
-	// 가게 찾기 
-	/*
-	@RequestMapping(value = "checkRes", method = RequestMethod.GET)
-	public String checkRes() {
-		return "/review/checkRes";
-	
-	}
-	*/
-	/*
-	@RequestMapping(value = "resSearch", method = RequestMethod.POST)
-	public ModelAndView resSearch(@RequestParam String resSearchIcon) {
-		// 검색 아이콘(resSearchIcon 가져가기)
-		System.out.println(resSearchIcon);
-		List<RestaurantDTO> list = reviewService.resSearch(resSearchIcon);
-		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("list", list);
-		mav.setViewName("jsonView");
-		return mav;
-	}
-	*/
->>>>>>> b2a724c37a7e00294f55671f6d505ca0666c2cd4
-
-	//검색어를 통한 리스트
-	@RequestMapping(value="getSearchList", method=RequestMethod.GET)
-	@ResponseBody
-	public ModelAndView getSearchList(@RequestParam Map<String, Object> map,
+	//리뷰 리스트(review_searchList)
+	@RequestMapping(value="getSearchList", method=RequestMethod.POST)
+	public String getSearchList(@RequestParam Map<String, Object> map, Model model,
 									  @RequestParam(required=false, defaultValue="1") String pg) {
-
-		//5개씩 보여지는 리스트
-		List<RestaurantDTO> list = reviewService.getSearchList(pg,(String)map.get("keyword"));
-
-		map.put("list",list);
 		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("list", list);
-		mav.addObject("pg", pg);
-		mav.addObject("keyword", map.get("keyword"));
-		mav.setViewName("/jsp/review/review_searchList");
-		
-		System.out.println("map = "+map.get("keyword"));
-		return mav;
-	}
+	//5개씩 보여지는 리스트
+	List<RestaurantDTO> list = reviewService.getSearchList(pg,(String)map.get("keyword"));
 
+	map.put("list",list);
+
+	model.addAttribute("list",list);
+	model.addAttribute("pg", pg);
+	model.addAttribute("keyword", map.get("keyword"));
 	
+	return "/jsp/review/review_searchList";
+	}
+	
+	//더보기 기능구현
+	@RequestMapping(value="moreSearchList", method=RequestMethod.POST, produces={"application/json"})
+	@ResponseBody
+	public List<RestaurantDTO> moreSearchList(@RequestBody HashMap<String, Object> map,HttpServletRequest requeest) {
+		System.out.println(map.get("pg"));
+		System.out.println(map.get("keyword"));
+		
+		//5개씩 보여지는 리스트
+		List<RestaurantDTO> list = reviewService.getSearchList(map.get("pg")+"",(String)map.get("keyword"));
+		
+		System.out.println(list.toString());
+		
+		return list;
+	}
 }
 
 

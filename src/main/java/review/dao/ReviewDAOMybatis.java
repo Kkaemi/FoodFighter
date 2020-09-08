@@ -16,7 +16,6 @@ public class ReviewDAOMybatis implements ReviewDAO {
 	@Autowired
 	private SqlSession sqlSession;
 
-
 	@Override
 	public void writeReview(Map<String, Object> map) {
 		sqlSession.insert("reviewSQL.writeReview", map);
