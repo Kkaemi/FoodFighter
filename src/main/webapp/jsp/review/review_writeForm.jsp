@@ -94,8 +94,8 @@
 					
 		 		
 			 <div class="button-group">
+			 	<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
 		 			<button type="button" class="btn btn-outline-light text-dark" id="reviewBtn">리뷰 작성</button>
-		 			<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"> 
 		  			<button type="reset" class="btn btn-outline-light text-dark" id="resetBtn">다시 작성</button>
 		 		 	<div id="reviewDiv"></div>
 			</div>

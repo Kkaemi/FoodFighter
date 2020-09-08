@@ -18,10 +18,5 @@ public class AdminServiceImpl implements AdminService{
 		
 	}
 
-<<<<<<< HEAD
-
-=======
->>>>>>> upstream/master
-	
 
 }

@@ -6,9 +6,4 @@ public interface RestaurantDAO {
 	
 	public void resWrite(RestaurantDTO restaurantDTO);
 
-<<<<<<< HEAD
 }
-=======
-
-}
->>>>>>> upstream/master

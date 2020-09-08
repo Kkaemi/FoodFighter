@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
@@ -57,25 +56,9 @@
           <li class="nav-item">
            <a class="nav-link js-scroll" href="/FoodFighter/community/communityMain">커뮤니티</a>
           </li>
-           <li class="nav-item">
-            <a class="nav-link js-scroll" href="/FoodFighter/event/eventList">이벤트</a>
-            <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
-          </li>
-          
           <li class="nav-item">
-           <c:if test="${sessionScope.memId == null}">
-            <a class="nav-link js-scroll" href="/FoodFighter/login/loginForm">로그인</a> 
-            </c:if>	       
-          <!--   <img src="/FoodFighter/resources/img/member.png" class="header_searchIcon" width="30" height="30" align="center"> -->
-         
-         	<c:if test="${memId != null}">
-			 <a class="nav-link js-scroll" href="/FoodFighter/login/logout">로그아웃</a>	
-			</c:if>    
+            <a class="nav-link js-scroll" href="/FoodFighter/event/eventList">이벤트</a>
           </li>
-          
-          <li>
-           <a class="nav-link js-scroll" href="/FoodFighter/member/signupChoice">회원가입</a>
-           </li>
           <li class="nav-item">
             <a class="nav-link js-scroll">
             <img src="/FoodFighter/resources/img/member.png" class="header_searchIcon" width="30" height="30" align="center">
