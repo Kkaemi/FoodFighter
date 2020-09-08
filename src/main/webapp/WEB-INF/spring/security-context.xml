@@ -6,7 +6,7 @@
 		http://www.springframework.org/schema/security https://www.springframework.org/schema/security/spring-security-5.2.xsd">
 
 	<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
-<<<<<<< HEAD
+
 	
 	<security:http auto-config="true" use-expressions="true"> 	
 	
@@ -20,21 +20,19 @@
 		
 		
 		<security:form-login login-page="/login/loginForm"/>
-=======
+
 	<security:http use-expressions="true"> 
 		<security:intercept-url pattern="/storage/**" access="permitAll" />
->>>>>>> upstream/master
+
 		
 		
-<<<<<<< HEAD
+
 		<security:logout logout-url="/login/logout" invalidate-session="true" delete-cookies="JSESSIONID"/>
 		
-=======
 		
 		<security:form-login login-page="/login/login" />
 		
 		<security:csrf disabled="true"/>
->>>>>>> upstream/master
 		
 		
 	</security:http>
@@ -49,5 +47,4 @@
 			
 		</security:authentication-provider>
 	</security:authentication-manager>
-
 </beans>

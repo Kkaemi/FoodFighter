@@ -73,10 +73,9 @@
 	</bean> --> 
 
 
-<<<<<<< HEAD
-=======
+
 	<!-- DB Connetion -->
->>>>>>> upstream/master
+
 	<bean id="dataSource"
 		class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="driverClassName"
@@ -88,8 +87,7 @@
 		<property name="maxTotal" value="20" />
 		<property name="maxIdle" value="3" />
 	</bean> 
-<<<<<<< HEAD
-=======
+
 
 	<!--
 	 <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
@@ -101,7 +99,7 @@
 	      <property name="maxIdle" value="3"/>
    	</bean>
 	-->
->>>>>>> upstream/master
+
 
 	<bean id="sqlSessionFactory"
 		class="org.mybatis.spring.SqlSessionFactoryBean">

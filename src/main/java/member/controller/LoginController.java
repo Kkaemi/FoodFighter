@@ -32,7 +32,7 @@ public class LoginController {
 	@Autowired 
 	private JavaMailSender mailSender;
 	
-	
+	///////////////////////////////////////////////////
 	// 로그인 폼
 	@RequestMapping(value="loginForm", method=RequestMethod.GET)
 	public String loginForm() {
