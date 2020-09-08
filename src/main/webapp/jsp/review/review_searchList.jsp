@@ -136,7 +136,7 @@ String keyword = request.getParameter("keyword");
 		  			<li>카테고리:&emsp; ${restaurantDTO.resTheme}</li>
 		  			<li>가격대:&emsp;&emsp;${restaurantDTO.resPrice}</li>
 		  		</ul>
-	  		<div class="storeMore"><a class="reviewList_detailPage" href="#" style="color: #ffc34d;">가게이름 상세보기 ></a></div>
+	  		<div class="storeMore"><a class="reviewList_detailPage" href="/FoodFighter/review/reviewView?resSeq="+${resSeq}; style="color: #ffc34d;">가게이름 상세보기 ></a></div>
    		</div><!-- col-sm-9 -->
    </div><hr><!-- row -->
 	</c:forEach>
@@ -179,4 +179,7 @@ String keyword = request.getParameter("keyword");
  <script src="../resources/assets/js/main.js"></script> 
  <script src="/FoodFighter/resources/js/review/keyword.js"></script>
  <script src="/FoodFighter/resources/js/review/review_searchList.js"></script>	
+ 
+
+ </script>
 </html>

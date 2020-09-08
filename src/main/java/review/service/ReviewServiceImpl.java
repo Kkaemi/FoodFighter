@@ -40,6 +40,13 @@ public class ReviewServiceImpl implements ReviewService {
 		return reviewDAO.getSearchList(map);
 	}
 
+	@Override
+	public RestaurantDTO getReviewView(String resSeq) {
+		
+		return reviewDAO.getReviewView(resSeq);
+	}
+
+
 
 
 }

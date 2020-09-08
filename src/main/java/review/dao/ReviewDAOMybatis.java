@@ -27,5 +27,12 @@ public class ReviewDAOMybatis implements ReviewDAO {
 		return sqlSession.selectList("reviewSQL.getSearchList", map);
 	}
 
+	@Override
+	public RestaurantDTO getReviewView(String resSeq) {
+		
+		return sqlSession.selectOne("reviewSQL.getReviewView", resSeq);
+	}
+
+
 
 }

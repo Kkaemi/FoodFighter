@@ -26,13 +26,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<![CDATA[
 		SELECT *
 		FROM (
-		    SELECT @ROWNUM := @ROWNUM + 1 as rownum, seq, resImage1, resName, resScore, resAddress, resTheme, resPrice
-		    FROM searchList, (SELECT @ROWNUM :=0) A
-		    where resName like CONCAT('%',#{keyword},'%') order by seq asc
+		    SELECT @ROWNUM := @ROWNUM + 1 as rownum, resSeq, resImage1, resName, resScore, resAddress, resTheme, resPrice
+		    FROM restaurant, (SELECT @ROWNUM :=0) A
+		    where resName like CONCAT('%',#{keyword},'%') order by resSeq asc
 		    ) RESULT
 		where rownum between #{startNum} and #{endNum}
 	]]>
 
+	</select>
+	
+	<!-- 가게데이터 끌어오기 -->
+	<select id="getReviewView" parameterType="String" resultType="restaurant">
+		select * from restaurant where resSeq=#{resSeq}
 	</select>
 </mapper>
 
