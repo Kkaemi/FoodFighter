@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @Component // 객체 생성 (다른 곳에서도 써야하니까) >> 어노테이션 선언 : root-context 안에도 알려줌
-public class QnaBoardPaging {
+public class BoardPaging {
 	private int currentPage; // 현재 페이지 
 	private int pageBlock; // [이전][1][2][3][다음]
 	private int pageSize; // 1페이지당 5개씩
@@ -31,19 +31,19 @@ public class QnaBoardPaging {
 			endPage = totalP; // endpage=9 이고 totalP=8일때 처리하기위한 공식
 
 		if (startPage > pageBlock) {
-			pagingHTML.append("<a href='#'><span id='paging' onclick='boardPaging(" + (startPage - 1) + ")'><</span></a>");
+			pagingHTML.append("[<span id='paging' onclick='boardPaging(" + (startPage - 1) + ")'>이전]</span>");
 		}
 
 		for (int i = startPage; i <= endPage; i++) {
 			if (i == currentPage) {
-				pagingHTML.append("<a href='javascript:void(0);' onclick='boardPaging(" + i + ")' class='now'><span id='currentPaging'>" + i + "</span></a>");
+				pagingHTML.append("[<span id='currentPaging' onclick='boardPaging(" + i + ")'>" + i + "</span>]");
 			} else {
-				pagingHTML.append("<a href='javascript:void(0);' onclick='boardPaging(" + i + ")'><span id='paging' onclick='boardPaging(" + i + ")'>" + i + "</span></a>");
+				pagingHTML.append("[<span id='paging' onclick='boardPaging(" + i + ")'>" + i + "</span>]");
 			}
 		}
 
 		if (endPage < totalP) {
-			pagingHTML.append("<a href='#'><span id='paging' onclick='boardPaging(" + (endPage + 1) + ")'>></span></a>");
+			pagingHTML.append("[<span id='paging' onclick='boardPaging(" + (endPage + 1) + ")'>다음</span>]");
 		}
 	}
 }
