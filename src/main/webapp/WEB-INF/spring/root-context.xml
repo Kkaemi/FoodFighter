@@ -38,7 +38,10 @@
 	<context:component-scan base-package="event.bean" />
 	<context:component-scan base-package="event.service" />
 	<context:component-scan base-package="event.dao" />
+<<<<<<< HEAD
+=======
 	
+>>>>>>> upstream/master
 
 	<!-- admin -->
 	<context:component-scan base-package="admin.bean" />
@@ -59,9 +62,20 @@
 			</props>
 		</property>
 	</bean>
+	
+	<!-- <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+		<property name="username" value="c##food"/>
+		<property name="password" value="bit"/>
+		<property name="maxTotal" value="20"/>
+		<property name="maxIdle" value="3"/>
+	</bean> --> 
+
 
 
 	<!-- DB Connetion -->
+
 	<bean id="dataSource"
 		class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="driverClassName"
@@ -74,6 +88,7 @@
 		<property name="maxIdle" value="3" />
 	</bean> 
 
+
 	<!--
 	 <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
 	      <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
@@ -84,6 +99,7 @@
 	      <property name="maxIdle" value="3"/>
    	</bean>
 	-->
+
 
 	<bean id="sqlSessionFactory"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
