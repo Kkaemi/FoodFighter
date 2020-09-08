@@ -5,9 +5,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="memberSQL">
 
    <insert id="write" parameterType="member">
-   insert into testmember (member_seq,email, pwd, name, nickname,roleId,socialLogin,signupDate) values (Nextval(member_seq),#{email},#{pwd},#{name},#{nickname},'ROLE_ADMIN',0,now())
+   insert into testmember (member_seq,email, pwd, name, nickname,roleId,socialLogin,signupDate) values (Nextval(member_seq),#{email},#{pwd},#{name},#{nickname},'ROLE_USER',0,now())
 	
-<!--  insert into testmember (seq,email, pwd, name, nickname,authority,enabled,socialLogin,signupDate) values (seq_member.nextval,#{email},#{pwd},#{name},#{nickname},'ROLE_USER', 1,0,SYSDATE)
+<!--  insert into testmember (seq,email, pwd, name, nickname,roleId,socialLogin,signupDate) values (seq_member.nextval,#{email},#{pwd},#{name},#{nickname},'ROLE_USER', 1,SYSDATE)
  -->	</insert>
 
   <select id="checkEmail" parameterType="String" resultType="member">
