@@ -6,11 +6,7 @@
 	<typeAliases>
 		<typeAlias type="member.bean.MemberDTO" alias="member"/>
 		<typeAlias type="review.bean.ReviewDTO" alias="review"/>
-<<<<<<< HEAD
 		<typeAlias type="event.bean.EventDTO" alias="event"/>
-=======
 		<typeAlias type="admin.bean.RestaurantDTO" alias="restaurant"/>
->>>>>>> upstream/master
-
 	</typeAliases>
 </configuration>

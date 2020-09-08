@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import admin.bean.RestaurantDTO;
 import admin.service.AdminService;
@@ -72,7 +71,5 @@ public class AdminController {
 		
 
 	}
-	
-
 	
 }
