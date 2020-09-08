@@ -44,12 +44,6 @@ public class ReviewController {
 	public String review_writeForm() {
 		return "/jsp/review/review_writeForm";
 	}
-		
-	//리뷰 페이지(searchView)
-	@RequestMapping(value="reviewView", method=RequestMethod.GET)
-	public String reviewView() {
-		return "/jsp/review/reviewView";
-	}
 	
 	//리뷰 DB저장 
 	@RequestMapping(value="writeReview", method=RequestMethod.POST)
