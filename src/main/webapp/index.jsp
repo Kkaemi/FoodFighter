@@ -29,6 +29,7 @@
 
 <body id="page-top">
 <form id="headerForm" name="headerForm" method="post" action="./review/getSearchList">
+<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"> 
   <!-- ======= Header/ Navbar ======= -->
   <nav class="navbar navbar-b navbar-trans navbar-expand-md fixed-top" id="mainNav">
     <div class="container">
@@ -71,8 +72,9 @@
     </div>
   </nav>
 </form>
-<form id="searchForm" name="searchForm" method="post" action="./review/getSearchList">
   <!-- ======= Intro Section ======= -->
+<form id="searchMainForm" name="searchMainForm" method="post" action="./review/getSearchList">
+<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"> 
   <div id="home" class="intro route bg-image" style="background-image: url(/FoodFighter/resources/assets/img/ah.jpg)">
     <div class="overlay-itro"></div>
     <div class="intro-content display-table">
@@ -86,8 +88,9 @@
       </div>
     </div>
   </div><!-- End Intro Section -->
-  <main id="main">
 </form>
+  <main id="main">
+
 
     <!-- ======= 카테고리 ======= -->
     <section id="service" class="services-mf pt-5 route">

@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="qnaBoardSQL">
 	<!-- QnA 게시판 글 쓰기 -->
-	<insert id="qnaWrite" parameterType="java.util.Map">
+	<!-- <insert id="qnaWrite" parameterType="java.util.Map">
 		insert into qna_board(seq
 						, id
 						, nickname
@@ -20,10 +20,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 									, #{content}
 									, #{password}
 									, lastval(seq_qnaboard))
-	</insert>
+	</insert> -->
 	
 	<!-- QnA 게시글 리스트 불러오기 -->
-	<select id="getQnaBoardList" parameterType="java.util.Map" resultType="qnaBoard">
+	<!-- <select id="getQnaBoardList" parameterType="java.util.Map" resultType="qnaBoard">
 		<![CDATA[
 			select * from
 			(select @ROWNUM := @ROWNUM + 1 as rn, tt.* from
@@ -32,10 +32,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			order by ref desc, step asc)tt)PAGING
 			where rn >= #{startNum} and rn <= #{endNum};
 		]]>
-	</select>
+	</select> -->
 	
 	<!-- QnA 게시글 검색 리스트 불러오기 -->
-	<select id="getQnaBoardSearchList" parameterType="java.util.Map" resultType="qnaBoard">
+	<!-- <select id="getQnaBoardSearchList" parameterType="java.util.Map" resultType="qnaBoard">
 		<![CDATA[
 			select * from
 			(select @ROWNUM := @ROWNUM + 1 as rn, tt.* from
@@ -45,25 +45,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			order by ref desc, step asc)tt)PAGING
 			where rn >= #{startNum} and rn <= #{endNum};
 		]]>
-	</select>
+	</select> -->
 	
 	<!-- 총 게시글 수 -->
-	<select id="getTotalA" resultType="int">
+	<!-- <select id="getTotalA" resultType="int">
 		select count(*) from qna_board
-	</select>
+	</select> -->
 	
 	<!-- 검색된 총 게시글 수 -->
-	<select id="getTotalSearchA" parameterType="java.util.Map" resultType="int">
+	<!-- <select id="getTotalSearchA" parameterType="java.util.Map" resultType="int">
 		select count(*) from qna_board where ${search_type} like CONCAT('%',#{search_keyword},'%')
-	</select>
+	</select> -->
 	
 	<!-- 게시글 비밀번호 불러오기 -->
-	<select id="password_loading" parameterType="java.util.Map" resultType="String">
+	<!-- <select id="password_loading" parameterType="java.util.Map" resultType="String">
 		select password from qna_board where seq = #{seq}
-	</select>
+	</select> -->
 	
 	<!-- 게시글 정보 불러오기 -->
-	<select id="getBoard" parameterType="String" resultType="qnaBoard">
+	<!-- <select id="getBoard" parameterType="String" resultType="qnaBoard">
 		select * from qna_board where seq = #{seq}
-	</select>
+	</select> -->
 </mapper>

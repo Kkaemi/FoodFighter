@@ -13,11 +13,6 @@
 		
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<context:component-scan base-package="spring.conf" />
-<<<<<<< HEAD
-	
-=======
-
->>>>>>> upstream/master
 	<!-- 리뷰리스트 파트 -->
 	<context:component-scan base-package="review.bean" />
 	<context:component-scan base-package="review.service" />
@@ -64,28 +59,6 @@
 		</property>
 	</bean>
 
-
-<!-- 	<bean id="dataSource"
-		class="org.apache.commons.dbcp2.BasicDataSource">
-		<property name="driverClassName"
-<<<<<<< HEAD
-			value="com.mysql.jdbc.Driver" />
-		<property name="url"
-			value="jdbc:mysql://localhost/mysql-testuseSSL=false" />
-		<property name="username" value="yangchoi" />
-		<property name="password" value="didgywjd1/" />
-=======
-			value="oracle.jdbc.driver.OracleDriver" />
-		<property name="url"
-			value="jdbc:oracle:thin:@localhost:1521:xe" />
-		<property name="username" value="c##java" />
-		<property name="password" value="bit" />
->>>>>>> ea03c1fddeb4f8e986a1aed5463b4bd7addfeef6
-		<property name="maxTotal" value="20" />
-		<property name="maxIdle" value="3" />
-<<<<<<< HEAD
-	</bean> -->
-	
 	
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
       <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
@@ -95,8 +68,6 @@
       <property name="maxTotal" value="20"/>
       <property name="maxIdle" value="3"/>
    </bean> 
-=======
-	</bean> 
 
 	<!--
 	 <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
@@ -108,7 +79,6 @@
 	      <property name="maxIdle" value="3"/>
    	</bean>
 	-->
->>>>>>> upstream/master
 
 	<bean id="sqlSessionFactory"
 		class="org.mybatis.spring.SqlSessionFactoryBean">

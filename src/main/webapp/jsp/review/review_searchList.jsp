@@ -27,6 +27,7 @@ String keyword = request.getParameter("keyword");
 <body>
 
 <form id="headerForm" name="headerForm" method="post" action="../review/getSearchList">
+<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
 	<!--================ Header ================-->
 	<div id="header-container">
 	  <a class="header-logo" href="/FoodFighter"><img src="../resources/img/logo.png" width="250px;" height="55px;" align="left" style="margin-top: 10px; margin-left: 200px;"></a>
@@ -124,7 +125,7 @@ String keyword = request.getParameter("keyword");
 <c:if test="${!empty list}">
 		<c:forEach var="restaurantDTO" items="${list}">
 			<div class="row">
-    			<div class="col-sm-3"><img src="/FoodFighter/storage/restaurant/${restaurantDTO.resImage1}" class="row_StoreImg"></div>
+    			<div class="col-sm-3"><img src="${restaurantDTO.resImage1}" class="row_StoreImg"></div>
 	   		  <div class="col-sm-9">	
 		       	<ul class="storeMain">
 					<li><span class="resName">${restaurantDTO.resName} &emsp;&emsp;&emsp;&emsp;</span></li>
