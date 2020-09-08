@@ -26,13 +26,13 @@ th {
     text-align: -internal-center;
 }
 
-thead #admin {
+thead .admin {
 	background: #efefef;
 	border-top-color : 3px solid #d4d4d4;
 	border-bottom-color: 1px solid #d4d4d4;
 }
 
-#admin #allCheck {
+.admin #allCheck {
 	vertical-align: middle;
 	text-align: center;
 }
@@ -50,7 +50,7 @@ thead #admin {
     padding-top: 10px;
     height: 17px;
     width : auto;
-    text-align: center;
+    text-align: left;
     line-height: 0;
     vertical-align: top;
     display: inline-block;
@@ -64,6 +64,7 @@ thead #admin {
     text-align: center;
     line-height: 26px;
     color: black;
+    margin: 0px 3px;
 }
 .paging a.now, .paging a:hover{
     border: 1px solid #343434;

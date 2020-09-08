@@ -45,6 +45,18 @@ public class ReviewController {
 		return "/jsp/review/review_writeForm";
 	}
 	
+<<<<<<< HEAD
+=======
+	//리뷰 리스트(review_searchList)
+	@RequestMapping(value="review_searchList", method=RequestMethod.GET)
+	public String review_searchList() {
+		return "/jsp/review/review_searchList";
+	}
+		
+
+
+	
+>>>>>>> upstream/master
 	//리뷰 DB저장 
 	@RequestMapping(value="writeReview", method=RequestMethod.POST)
 	public String writeReview(@RequestParam Map<String, Object> map,
@@ -75,16 +87,31 @@ public class ReviewController {
 		}
 		
 			MemberDTO memberDTO =(MemberDTO)session.getAttribute("memberDTO");
+<<<<<<< HEAD
 			
 			map.put("nickname", memberDTO.getNickname());
 			map.put("member_seq",memberDTO.getMember_seq());
 			map.put("resName","");
 			
+=======
+
+			
+			map.put("nickname", memberDTO.getNickname());
+			map.put("member_seq",memberDTO.getMember_seq());
+			map.put("resName","카페");
+
+>>>>>>> upstream/master
 		//DB
 		reviewService.writeReview(map);
 		
 		return "/jsp/review/reviewView";
 	}
+<<<<<<< HEAD
+=======
+	
+
+
+>>>>>>> upstream/master
 
 	//리뷰 리스트(review_searchList)
 	@RequestMapping(value="getSearchList", method=RequestMethod.POST)
@@ -116,6 +143,33 @@ public class ReviewController {
 		
 		return list;
 	}
+<<<<<<< HEAD
+=======
+
+	//리뷰 페이지(reviewView)
+	@RequestMapping(value="reviewView", method=RequestMethod.GET)
+	public String reviewView(@RequestParam String resSeq, Model model) {
+		model.addAttribute("resSeq", resSeq);
+		
+		return "/jsp/review/reviewView";
+	}
+	
+	
+	// 가게데이터 끌어오기 
+	//리뷰(reviewView)
+	@ResponseBody
+	@RequestMapping(value="getReviewView", method=RequestMethod.POST)
+	public ModelAndView getReviewView(@RequestParam String resSeq) {
+		RestaurantDTO restaurantDTO = reviewService.getReviewView(resSeq);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("restaurantDTO", restaurantDTO);
+		mav.setViewName("jsonView");
+		
+		return mav;
+	}
+
+>>>>>>> upstream/master
 }
 
 

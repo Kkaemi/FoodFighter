@@ -10,6 +10,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,7 +32,7 @@ public class LoginController {
 	@Autowired 
 	private JavaMailSender mailSender;
 	
-	
+	///////////////////////////////////////////////////
 	// 로그인 폼
 	@RequestMapping(value="loginForm", method=RequestMethod.GET)
 	public String loginForm() {
@@ -61,11 +62,32 @@ public class LoginController {
 			//System.out.println(pwd+", "+enCodePwd);
 					
 			MemberDTO memberDTO = memberService.login(map);
-			System.out.println(memberDTO);
+			//System.out.println(memberDTO.getAuthority());
 			
 			if(passEncoder.matches(map.get("pwd"), memberDTO.getPwd())) {
 				session.setAttribute("memId", memberDTO.getEmail());
 				session.setAttribute("memberDTO", memberDTO);
+
+				
+					return "success";
+					
+				} else {
+					
+					return "fail";
+				}
+			}
+		
+		//카카오로그인
+		@RequestMapping(value="kakaologin", method=RequestMethod.POST)
+		public @ResponseBody String kakaologin(@RequestParam String email,
+										  HttpSession session) {
+				
+			MemberDTO memberDTO = memberService.kakaologin(email);
+			//System.out.println(memberDTO);
+			
+			if(memberDTO != null) {
+			session.setAttribute("memId", memberDTO.getEmail());
+			session.setAttribute("memberDTO", memberDTO);
 
 				
 					return "success";
@@ -75,13 +97,10 @@ public class LoginController {
 			}
 		
 		//로그아웃
-		@RequestMapping(value="logout", method=RequestMethod.GET)
-		public String logout(HttpSession session) {
-			System.out.println("세션="+session.getAttribute("memId"));
-//			session.removeAttribute("memId");
+		@RequestMapping(value="/logout", method=RequestMethod.GET)
+		public ModelAndView logout(HttpSession session) {
 			session.invalidate();
-			System.out.println("세션="+session.getAttribute("memId"));
-			return "/index";
+			return new ModelAndView("redirect:/");
 		}
 		
 		//비밀번호 찾기
@@ -120,7 +139,7 @@ public class LoginController {
 
 		        String setfrom = "foodfighter@gmail.com";
 		        String tomail = map.get("email"); // 받는 사람 이메일
-		        String title = "foodfighter 임시비밀번호 발송 메일 입니다.."; 
+		        String title = "FoodFighter 임시비밀번호 발송 메일 입니다.."; 
 		        String content =
 		                
 		        "안녕하세요 회원님 저희 홈페이지를 찾아주셔서 감사합니다."+

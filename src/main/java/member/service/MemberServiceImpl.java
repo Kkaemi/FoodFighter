@@ -59,6 +59,11 @@ public class MemberServiceImpl implements MemberService{
 	public MemberDTO userInfo(Map<String, String> map) {
 		return memberDAO.userInfo(map);
 	}
+
+	@Override
+	public MemberDTO kakaologin(String email) {
+		return memberDAO.kakaologin(email);
+	}
 	
 	
 }

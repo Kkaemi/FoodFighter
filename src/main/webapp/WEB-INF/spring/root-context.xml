@@ -13,7 +13,7 @@
 		
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<context:component-scan base-package="spring.conf" />
-	
+
 	<!-- 리뷰리스트 파트 -->
 	<context:component-scan base-package="review.bean" />
 	<context:component-scan base-package="review.service" />
@@ -38,7 +38,10 @@
 	<context:component-scan base-package="event.bean" />
 	<context:component-scan base-package="event.service" />
 	<context:component-scan base-package="event.dao" />
+<<<<<<< HEAD
+=======
 	
+>>>>>>> upstream/master
 
 	<!-- admin -->
 	<context:component-scan base-package="admin.bean" />
@@ -59,8 +62,19 @@
 			</props>
 		</property>
 	</bean>
+	
+	<!-- <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+		<property name="username" value="c##food"/>
+		<property name="password" value="bit"/>
+		<property name="maxTotal" value="20"/>
+		<property name="maxIdle" value="3"/>
+	</bean> --> 
 
 
+
+<<<<<<< HEAD
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
       <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
       <property name="url" value="jdbc:mysql://foodfighter.ci7ykwrhuqgy.ap-northeast-2.rds.amazonaws.com/FoodFighter?useSSL=false&amp;"/>
@@ -79,6 +93,34 @@
       <property name="maxTotal" value="20"/>
       <property name="maxIdle" value="3"/>
    </bean>  -->
+=======
+	<!-- DB Connetion -->
+
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="driverClassName"
+			value="com.mysql.cj.jdbc.Driver" />
+		<property name="url"
+			value="jdbc:mysql://foodfighter.ci7ykwrhuqgy.ap-northeast-2.rds.amazonaws.com/FoodFighter?useSSL=false&amp;" />
+		<property name="username" value="admin" />
+		<property name="password" value="admin123" />
+		<property name="maxTotal" value="20" />
+		<property name="maxIdle" value="3" />
+	</bean> 
+
+
+	<!--
+	 <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+	      <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+	      <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+	      <property name="username" value="c##java"/>
+	      <property name="password" value="bit"/>
+	      <property name="maxTotal" value="20"/>
+	      <property name="maxIdle" value="3"/>
+   	</bean>
+	-->
+
+>>>>>>> upstream/master
 
 	<bean id="sqlSessionFactory"
 		class="org.mybatis.spring.SqlSessionFactoryBean">

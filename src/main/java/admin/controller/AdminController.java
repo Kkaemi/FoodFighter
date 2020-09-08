@@ -71,6 +71,10 @@ public class AdminController {
 		
 
 	}
+<<<<<<< HEAD
+=======
+	
+>>>>>>> upstream/master
 
 	
 }

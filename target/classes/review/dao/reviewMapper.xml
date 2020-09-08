@@ -11,6 +11,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 
 	<!-- 키워드 검색 -->
+	<!-- 
+	<select id="getSearchList" parameterType="java.util.Map"
+		resultType="restaurant">
+	   <![CDATA[
+		select * from viewList where storeName like '%'||#{keyword}||'%' and rownum >= #{startNum} and rownum <= #{endNum}
+	  	]]>
+	 -->
+	 
 	<select id="getSearchList" parameterType="java.util.Map" resultType="restaurant">
 	<!-- select * from searchList where resName like '%'||#{keyword}||'%' and rownum >= #{startNum} and rownum <= #{endNum} -->
 	<![CDATA[
@@ -21,7 +29,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		    where resName like CONCAT('%',#{keyword},'%') order by resSeq asc
 		    ) RESULT
 		where rownum between #{startNum} and #{endNum}
+<<<<<<< HEAD
 	]]> 
+=======
+	]]>
+
+	</select>
+	
+	<!-- 가게데이터 끌어오기 -->
+	<select id="getReviewView" parameterType="String" resultType="restaurant">
+		select * from restaurant where resSeq=#{resSeq}
+>>>>>>> upstream/master
 	</select>
 </mapper>
 

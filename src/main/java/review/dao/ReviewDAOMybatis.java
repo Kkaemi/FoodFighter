@@ -15,6 +15,10 @@ import admin.bean.RestaurantDTO;
 public class ReviewDAOMybatis implements ReviewDAO {
 	@Autowired
 	private SqlSession sqlSession;
+<<<<<<< HEAD
+=======
+
+>>>>>>> upstream/master
 
 	@Override
 	public void writeReview(Map<String, Object> map) {
@@ -25,6 +29,13 @@ public class ReviewDAOMybatis implements ReviewDAO {
 	public List<RestaurantDTO> getSearchList(Map<String, String > map) {
 		return sqlSession.selectList("reviewSQL.getSearchList", map);
 	}
+
+	@Override
+	public RestaurantDTO getReviewView(String resSeq) {
+		
+		return sqlSession.selectOne("reviewSQL.getReviewView", resSeq);
+	}
+
 
 
 }
