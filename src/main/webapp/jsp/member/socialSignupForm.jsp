@@ -70,7 +70,7 @@
             </div>
             <div id="nicknameDiv" class="col-8 offset-2"></div>        	
         </div>	
-        
+        0
         
 		<div class="form-group row">
 			<div class="col-8 offset-2">
