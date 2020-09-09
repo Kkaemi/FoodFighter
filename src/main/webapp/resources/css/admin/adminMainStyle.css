@@ -1,0 +1,60 @@
+@charset "UTF-8";
+
+.displayDiv{
+	padding:0;
+	height: 100vh;
+}
+
+.adminMain {
+	display: flex;
+}
+
+.menu span {
+	color: #fff;
+	font-size: 14pt;
+	font-weight: bold;
+}
+
+.sideMenu-part {
+	background-color: #ffc34d;
+	height: 100vh;
+	
+}
+
+.sideMenu-part .menu {
+	margin: 35px auto;
+	padding: 0 27%;
+}
+
+.sideMenu-part div a:hover,.sideMenu-part div a:visited,.sideMenu-part div a:focus {
+	text-decoration: none;
+	
+}
+.menuDefualtDiv{
+	width: 100%;
+	height: 500px;
+}
+
+#adminProfile{
+	margin: 10% 0 70%;
+}
+#adminProfile span{
+	font-weight: bold;
+	font-size: 12pt;
+}
+#adminProfile img{
+	margin-right: 5%;
+	border-radius: 50%;
+	width: 25%;
+}
+
+#insertShopBtn {
+	width: 100px;
+    height: 30px;
+    border: 2px solid #ffc34d;
+    border-radius: 50px;
+    font-size: 16px;
+    color: #ffc34d;
+    background-color: #fff;
+    margin: 10px 5px;
+}

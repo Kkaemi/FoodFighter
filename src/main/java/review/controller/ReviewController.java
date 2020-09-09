@@ -52,11 +52,12 @@ public class ReviewController {
 	
 	//리뷰 DB저장 
 	@RequestMapping(value="writeReview", method=RequestMethod.POST)
-	public String writeReview(@RequestParam Map<String, Object> map,
-							  @RequestParam("img[]") List<MultipartFile> list,
-							  HttpSession session){
+	public String writeReview(HttpSession session,@RequestParam Map<String, Object> map,
+							  @RequestParam("img[]") List<MultipartFile> list){
 		
-		String filePath = "/Users/jiyelin/Documents/GitHub/FoodFighter/src/main/webapp/storage/review";
+		
+		String filePath = "D:\\reallysong\\FoodFighter\\src\\main\\webapp\\storage\\review";
+
 		
 		int i=1;
 		for(MultipartFile img : list) {

@@ -25,7 +25,7 @@
 	<context:component-scan base-package="community.dao" />
 
 
-	<!-- 회원관리 파트 -->
+	<!-- 회원가입 파트 -->
 	<context:component-scan base-package="member.bean" />
 	<context:component-scan base-package="member.service" />
 	<context:component-scan base-package="member.dao" />
@@ -38,11 +38,14 @@
 	<context:component-scan base-package="event.bean" />
 	<context:component-scan base-package="event.service" />
 	<context:component-scan base-package="event.dao" />
-
-	<!-- admin -->
+	
+	<!-- 관리자 -->
 	<context:component-scan base-package="admin.bean" />
 	<context:component-scan base-package="admin.service" />
 	<context:component-scan base-package="admin.dao" />
+	
+	
+
 
 	<!-- Gmail -->
 	<bean id="mailSender"
@@ -59,6 +62,7 @@
 		</property>
 	</bean>
 
+
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
       <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
       <property name="url" value="jdbc:mysql://foodfighter.ci7ykwrhuqgy.ap-northeast-2.rds.amazonaws.com/FoodFighter?useSSL=false&amp;"/>
@@ -67,6 +71,7 @@
       <property name="maxTotal" value="20"/>
       <property name="maxIdle" value="3"/>
    </bean>
+
 
 	<bean id="sqlSessionFactory"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
