@@ -5,6 +5,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
@@ -12,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
+import member.bean.MemberDTO;
 import review.service.ReviewService;
 
 @Controller
@@ -47,9 +52,12 @@ public class ReviewController {
 	
 	//리뷰 DB저장 
 	@RequestMapping(value="writeReview", method=RequestMethod.POST)
-	public String writeReview(@RequestParam Map<String, String> map,
+	public String writeReview(HttpSession session,@RequestParam Map<String, Object> map,
 							  @RequestParam("img[]") List<MultipartFile> list){
-		String filePath = "/Users/jiyelin/Documents/GitHub/FoodFighter/src/main/webapp/storage/review";
+		
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("memberDTO");
+		
+		String filePath = "D:\\reallysong\\FoodFighter\\src\\main\\webapp\\storage\\review";
 		
 		int i=1;
 		for(MultipartFile img : list) {
@@ -71,8 +79,8 @@ public class ReviewController {
 		for(; i<=5; i++) {
 			map.put("image"+i, "");
 		}
-			map.put("member_seq","");
-			map.put("nickname","");
+			map.put("member_seq",memberDTO.getMember_seq());
+			map.put("nickname",memberDTO.getNickname());
 			map.put("storename","");
 		//DB
 		reviewService.writeReview(map);

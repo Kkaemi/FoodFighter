@@ -13,7 +13,7 @@ public class ReviewServiceImpl implements ReviewService {
 	private ReviewDAO reviewDAO;
 
 	@Override
-	public void writeReview(Map<String, String> map) {
+	public void writeReview(Map<String, Object> map) {
 		reviewDAO.writeReview(map);
 	}
 

@@ -78,9 +78,7 @@ public class LoginController {
 		@RequestMapping(value="logout", method=RequestMethod.GET)
 		public String logout(HttpSession session) {
 			System.out.println("세션="+session.getAttribute("memId"));
-//			session.removeAttribute("memId");
 			session.invalidate();
-			System.out.println("세션="+session.getAttribute("memId"));
 			return "/index";
 		}
 		

@@ -103,7 +103,7 @@ a.now,a.now:visited {
 	justify-content: space-around;
 }
 
-/*row3 */
+/*row3 review */
 .row {
 	margin: 15px 0;
 	justify-content: space-around;
@@ -121,6 +121,10 @@ a.now,a.now:visited {
 	margin-bottom: 10px;
 	
 }
+.review-part img{
+	margin-top: 10px;
+	
+}
 
 .modalView-part {
 	text-align: center;
@@ -130,6 +134,12 @@ a.now,a.now:visited {
  	display: inline-block;
  	
 }
+  .swiper-button-prev {
+	background-image: url(../../img/leftBtn.png);
+} 
+ .swiper-button-next{
+	background-image: url(../../img/rightBtn.png);
+}  
 #inner-row{
 	display: flex;
 }
@@ -154,6 +164,13 @@ a.now,a.now:visited {
     -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
 
+}
+
+#addReviewList{
+	width: 100%;
+	color: #fff;
+	font-size: 12pt;
+	font-weight: bold;
 }
 
 

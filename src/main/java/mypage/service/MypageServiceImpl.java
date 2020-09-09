@@ -1,6 +1,8 @@
 package mypage.service;
 
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import member.bean.MemberDTO;
 import mypage.dao.MypageDAO;
+import review.bean.ReviewDTO;
 
 @Service
 public class MypageServiceImpl implements MypageService {
@@ -36,6 +39,19 @@ public class MypageServiceImpl implements MypageService {
 	public void modifyPwd(Map<String, String> map) {
 		mypageDAO.modifyPwd(map);
 		
+	}
+
+	@Override
+	public List<ReviewDTO> myreviewGetList(Map<String,Object> map) {
+		
+		return mypageDAO.myreviewGetList(map);
+	}
+
+
+	@Override
+	public ReviewDTO getModalView(String seq_review) {
+
+		return mypageDAO.getModalView(seq_review);
 	}
 
 }

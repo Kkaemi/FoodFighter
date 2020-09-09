@@ -3,6 +3,8 @@ package mypage.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -18,9 +20,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import member.bean.MemberDTO;
 import mypage.service.MypageService;
+import review.bean.ReviewDTO;
 
 @Controller
 @RequestMapping(value="mypage")
@@ -44,8 +48,62 @@ public class MyPageController {
 	
 	// 마이리뷰 페이지 
 	@RequestMapping(value = "myReview")
-	public String myReview() {
-		return "/jsp/mypage/myReview";
+	public String myReview(Model model) {
+		
+		model.addAttribute("display","/jsp/mypage/myReview.jsp");
+		return "/jsp/mypage/mypageMain";
+	}
+	//북마크
+	@RequestMapping(value = "myShop")
+	public String myShop(Model model) {
+		
+		model.addAttribute("display","/jsp/mypage/myShop.jsp");
+		return "/jsp/mypage/mypageMain";
+	}
+	//작성글
+	@RequestMapping(value = "myPost")
+	public String myPost(Model model) {
+		
+		model.addAttribute("display","/jsp/mypage/myPost.jsp");
+		return "/jsp/mypage/mypageMain";
+	}
+	//문의
+	@RequestMapping(value = "myAsk")
+	public String myAsk(Model model) {
+		
+		model.addAttribute("display","/jsp/mypage/myAsk.jsp");
+		return "/jsp/mypage/mypageMain";
+	}
+	//리뷰 갖고오기
+	@RequestMapping(value = "myreviewGetList", method = RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView myreviewGetList(@RequestParam String pg,HttpSession session) {
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberDTO");
+		
+		int endNum = Integer.parseInt(pg)*6;
+		int startNum = endNum-5;
+		
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("startNum",startNum);
+		map.put("endNum",endNum);
+		map.put("member_seq",memberDTO.getMember_seq());
+		
+		List<ReviewDTO> list = mypageService.myreviewGetList(map);
+
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	//리뷰보는 모달
+	@RequestMapping(value = "getModalView", method = RequestMethod.POST)
+	@ResponseBody
+	public ReviewDTO getModalView(@RequestParam String seq_review) {
+		ReviewDTO reviewDTO = mypageService.getModalView(seq_review);
+		
+		
+		return reviewDTO;
+		
 	}
 	
 	//정보수정 전 비밀번호 입력
