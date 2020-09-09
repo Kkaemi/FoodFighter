@@ -29,7 +29,6 @@ public class MemberDAOMybatis implements MemberDAO {
 
 	@Override
 	public MemberDTO checkNickname(String nickname) {
-		// TODO Auto-generated method stub
 		return sqlSession.selectOne("memberSQL.checkNickname",nickname);
 	}
 	
@@ -54,6 +53,11 @@ public class MemberDAOMybatis implements MemberDAO {
 	@Override
 	public MemberDTO userInfo(Map<String, String> map) {
 		return sqlSession.selectOne("memberSQL.userInfo", map);
+	}
+
+	@Override
+	public MemberDTO kakaologin(String email) {
+		return sqlSession.selectOne("memberSQL.kakaologin", email);
 	}
 	
 }

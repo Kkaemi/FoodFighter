@@ -32,20 +32,24 @@ public class MemberController {
 	
 	// 회원가입 폼
 	@RequestMapping(value = "signupForm", method = RequestMethod.GET)
+
 	public String signupForm() {
+
 		return "/jsp/member/signupForm";
 
 	}
-	
+
 	// signup Choice
 	@RequestMapping(value = "signupChoice", method = RequestMethod.GET)
 	public String signupChoice() {
+
 		return "/jsp/member/signupChoice";
 	}
 	
 	// 소셜 로그인 폼
 	@RequestMapping(value = "socialSignupForm", method = RequestMethod.GET)
 	public String socialSignupForm() {
+
 		return "/jsp/member/socialSignupForm";
 	}
 	

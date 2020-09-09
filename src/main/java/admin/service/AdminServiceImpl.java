@@ -12,6 +12,9 @@ import admin.bean.AdminShopPaging;
 import admin.dao.AdminDAO;
 import member.bean.MemberDTO;
 
+import admin.bean.RestaurantDTO;
+import admin.dao.RestaurantDAO;
+
 @Service
 public class AdminServiceImpl implements AdminService {
 	@Autowired
@@ -20,6 +23,8 @@ public class AdminServiceImpl implements AdminService {
 	private AdminMemberPaging adminPaging;
 	@Autowired
 	private AdminShopPaging adminShopPaging;
+	@Autowired
+	private RestaurantDAO restaurantDAO;
 
 	@Override
 	public List<MemberDTO> getMemberList(Map<String,Object> map) {
@@ -94,4 +99,12 @@ public class AdminServiceImpl implements AdminService {
 		adminDAO.adminShopDelete(resSeq);
 		
 	}
+	@Override
+	public void resWrite(RestaurantDTO restaurantDTO) {
+		restaurantDAO.resWrite(restaurantDTO);
+		
+	}
 }
+
+
+

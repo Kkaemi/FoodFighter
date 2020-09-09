@@ -25,15 +25,16 @@
   <link href="/FoodFighter/resources/assets/css/style.css" rel="stylesheet">
   <link href="/FoodFighter/resources/css/main.css" rel = "stylesheet">
 
+  <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 
 <body id="page-top">
-
+<form id="headerForm" name="headerForm" method="post" action="./review/getSearchList">
+<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"> 
   <!-- ======= Header/ Navbar ======= -->
   <nav class="navbar navbar-b navbar-trans navbar-expand-md fixed-top" id="mainNav">
     <div class="container">
-       <!-- 로고 -->
-      <a id="logo" class="navbar-brand js-scroll" href="/"><img id="logo-img" src="/FoodFighter/resources/img/streetfighter.gif"></a>
+      <a id="logo" class="navbar-brand js-scroll" href="/FoodFighter/"><img id="logo-img" src="/FoodFighter/resources/img/logo.png" width="200px;" height="55px;" ></a>
       <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarDefault" aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span></span>
         <span></span>
@@ -42,14 +43,13 @@
       
       <div class="navbar-collapse collapse justify-content-end" id="navbarDefault">
         <ul class="navbar-nav">
-        	
          <li class="nav-search">
-    		   	<img src="/FoodFighter/resources/img/search.png" class="header_searchIcon" width="30" height="30" align="center"> 
-	    	<input type="text" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" value="" autocomplete="on" maxlength="50" >
+	   		<img src="./resources/img/search.png" class="header_searchIcon" width="30" height="30" align="center"> 
+		   	<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword" autocomplete="on" maxlength="50" >
+		   	<button size="10" id="header_searchBtn">검색</button>
           </li>
-        	
           <li class="nav-item">
-            <a class="nav-link js-scroll active" href="/">Home</a>
+            <a class="nav-link js-scroll active" href="/FoodFighter">Home</a>
           </li>
           <li class="nav-item">
            <a class="nav-link js-scroll" href="/FoodFighter/review/reviewNonSearchList">리뷰 리스트</a>
@@ -88,8 +88,11 @@
 	  	<button type="button" id="logoutBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/login/logout'">로그아웃</button>
   	</c:if>
   </div>
+</form>
 
   <!-- ======= Intro Section ======= -->
+<form id="searchMainForm" name="searchMainForm" method="post" action="./review/getSearchList">
+<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"> 
   <div id="home" class="intro route bg-image" style="background-image: url(/FoodFighter/resources/assets/img/ah.jpg)">
     <div class="overlay-itro"></div>
     <div class="intro-content display-table">
@@ -97,16 +100,13 @@
         <div class="container">
           <!--<p class="display-6 color-d">Hello, world!</p>-->
           <h1 class="intro-title mb-4">푸드파이터</h1>
-          		 <input type="text" class="Intro_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" value="" autocomplete="on" maxlength="20" size="80">
-         		 <button type="submit" class="Intro_searchBtn"><font class="searchBtn">검색</font></button>
-         		 <!-- <p class="intro-subtitle"><span class="text-slider-items">오늘은,무엇에,도전해볼까?</span><strong class="text-slider"></strong></p> -->
-         	 	<!-- <p class="pt-3"><a class="btn btn-primary btn js-scroll px-4" href="#about" role="button">Learn More</a></p> -->
-        
+       		 <input type="text" class="Intro_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" class="keyword" id ="keyword" name="keyword" value = "${keyword}" autocomplete="on" maxlength="20" size="80">
+      		 <button id="Intro_searchBtn"><font class="searchBtn">검색</font></button>
         </div>
       </div>
     </div>
   </div><!-- End Intro Section -->
-
+</form>
   <main id="main">
 
 
@@ -481,7 +481,7 @@
   <div id="preloader"></div>
 
   <!-- Vendor JS Files -->
-  <script src="/FoodFighter/resources/assets/vendor/jquery/jquery.min.js"></script>
+  <script src="/FoodFighter/resources/assets/vendor/jquery/jquery.min.js"></script>  
   <script src="/FoodFighter/resources/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="/FoodFighter/resources/assets/vendor/jquery.easing/jquery.easing.min.js"></script>
   <script src="/FoodFighter/resources/assets/vendor/php-email-form/validate.js"></script>
@@ -493,6 +493,8 @@
 	
   <!-- Template Main JS File -->
   <script src="/FoodFighter/resources/assets/js/main.js"></script>
+  <script src="/FoodFighter/resources/js/review/keyword.js"></script>
+
 <script type="text/javascript">
 $('#headerUser').click(function(){
 	$('#headUser-menu').modal();

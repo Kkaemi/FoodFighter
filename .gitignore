@@ -1,6 +1,16 @@
-#ds store 커밋방지
+#OS Files
 .DS_Store
-.class
-root-context.xml
+
+*.class
+
+
+# Eclipse 
+
+
+
+
+/src/main/webapp/WEB-INF/spring/root-context.xml
+
+
 
 

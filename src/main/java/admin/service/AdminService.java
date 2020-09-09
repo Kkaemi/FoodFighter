@@ -7,6 +7,8 @@ import admin.bean.AdminMemberPaging;
 import admin.bean.AdminShopPaging;
 import member.bean.MemberDTO;
 
+import admin.bean.RestaurantDTO;
+
 public interface AdminService {
 
 	public List<MemberDTO> getMemberList(Map<String,Object> map);
@@ -24,5 +26,6 @@ public interface AdminService {
 	public List<MemberDTO> getResList(Map<String, Object> map);
 
 	public void adminShopDelete(String resSeq);
-
+	
+	public void resWrite(RestaurantDTO restaurantDTO);
 }

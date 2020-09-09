@@ -1,56 +1,67 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
- <link rel = "stylesheet" href="../resources/css/review/reviewList.css">
- 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%
+request.setCharacterEncoding("utf-8");
+String keyword = request.getParameter("keyword");
+%>  
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
+<!-- bootstraps -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<!-- css -->
+ <link rel = "stylesheet" href="../resources/css/review/reviewList.css">
+<!-- jquery -->
+ 	<script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+<!-- security -->
+	<meta id="_csrf" name="_csrf" content="${_csrf.token}" />
+	<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
 <title>List 화면</title>
 </head>
 <body>
-<form method="get" >
+
+<form id="headerForm" name="headerForm" method="post" action="../review/getSearchList">
+<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
 	<!--================ Header ================-->
 	<div id="header-container">
-	  <a class="header-logo" href=""><img src="../resources/img/logo.jpeg" width="250px;" height="55px;" align="left" style="margin-top: 10px; margin-left: 200px;"></a>
+	  <a class="header-logo" href="/FoodFighter"><img src="../resources/img/logo.png" width="250px;" height="55px;" align="left" style="margin-top: 10px; margin-left: 200px;"></a>
 	      <ul id="header-menu">
 		      <li class="header-items">
 		  		<img src="../resources/img/search.png" class="header_searchIcon" width="30" height="30" align="center"> 
-		   		<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" autocomplete="on" maxlength="50" >
-		   		<button size="10" id="header_searchBtn" >검색</button>
-		   		<input type="hidden" name="keyword">
+		   		<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword" value="<%=keyword%>" autocomplete="on" maxlength="50" >
+		   		<button size="10" id="header_searchBtn">검색</button>
 		      </li>
-		      <li class="header-items">
-		         <a class="header-link" href="index">Home</a>
-		      </li>
-		      <li class="header-items">
-		         <a class="header-link" href="review_nonSearchList">리뷰 리스트</a>
-		      </li>
-		      <li class="header-items">
-		        <a class="header-link" href="communityMain">커뮤니티</a>
-		      </li>
-		      <li class="header-items">
-		        <a class="header-link" href="eventList">이벤트</a>
-		      </li>
-		      <li class="header-items">
-		       <a class="header-link" href="communityMain.jsp"><img src="../resources/img/member.png" class="header_searchIcon" width="30" height="30" align="center"></a>
-	    	 </li>
+		       <li class="nav-item">
+		           <a class="nav-link js-scroll active" href="/FoodFighter">Home</a>
+		       </li>
+		       <li class="nav-item">
+	         	  <a class="nav-link js-scroll" href="/FoodFighter/review/reviewNonSearchList">리뷰 리스트</a>
+	          </li>
+	          <li class="nav-item">
+	           <a class="nav-link js-scroll" href="/FoodFighter/community/communityMain">커뮤니티</a>
+	          </li>
+	          <li class="nav-item">
+	            <a class="nav-link js-scroll" href="/FoodFighter/event/eventList">이벤트</a>
+	          </li>
+	          <li class="nav-item">
+	            <a class="nav-link js-scroll">
+	            <img src="/FoodFighter/resources/img/member.png" class="header_searchIcon" width="30" height="30" align="center">
+	            </a>
+     	     </li>
 	   	</ul>
 	</div>
-  	
+ </form>	
 	<!--================ Container ================-->
     <div class="container">
-    
     <!-- Page Keyword -->
       <div class="keywordZone">
-		<div id="keyword_name" align="center" style="width: 100%; font-size:60px; text-align:center; font-weight:bold;"></div><br>
+		<div id="keyword_name" name="keyword_name" align="center" style="width: 100%; font-size:60px; text-align:center; font-weight:bold;"><%=keyword%></div><br>
 			<ul class="keword_issue" align="center">
   				<li>#여름</li>
   				<li>#아이스크림</li>
@@ -98,105 +109,49 @@
   				</li>
 			</ul>
  	 </div><br> <!-- keywordZone -->
-
-  	
-    <!--================ List(5개씩) ================-->
-  	<div class="row">
-      <div class="col-sm-3"><a href="" ><img src="../resources/img/store1.jpeg" class="row_StoreImg"></a></div>
-	     <div class="col-sm-9">
+ 	 
+ <!--================ List(5개씩) ================--> 
+ <c:if test="${empty list}">
+ 		<div id="emptyDiv">
+			<center>
+				<br><br>
+				<img src="../resources/img/logo.png" width="250px;" height="55px;">
+				<h4 style="color:#ffc34d;">찾고자 하시는 검색어의 결과가 없습니다</h4>
+			</center>
+		</div>
+</c:if>
+<br>
+<div class="containerRow">
+<c:if test="${!empty list}">
+		<c:forEach var="restaurantDTO" items="${list}">
+			<div class="row">
+    			<div class="col-sm-3"><img src="${restaurantDTO.resImage1}" class="row_StoreImg"></div>
+	   		  <div class="col-sm-9">	
 		       	<ul class="storeMain">
-					<li><span class="storeName">1. 코스믹커피 &emsp;&emsp;&emsp;&emsp;</span></li>
-					<li><span class="storeAvg">4.3</span></li>
-					<li><img src="../resources/img/bookmark.png" id="bookmark" align="right" onclick="bookmarkEvent()"></li>
+					<li><span class="resName">${restaurantDTO.resName} &emsp;&emsp;&emsp;&emsp;</span></li>
+					<li><span class="resScore">${restaurantDTO.resScore}</span></li>
 				</ul><br><br>
 				<ul class="storeDetail" align="left">
-		  			<li>주소:&emsp;&emsp;&emsp; 경기 오산시 오산대역로132번길 36 1층 코스믹커피</li>
-		  			<li>카테고리:&emsp; 카페/디저트</li>
-		  			<li>가격대:&emsp;&emsp;  5천원-1만원대</li>
+		  			<li>주소:&emsp;&emsp;&emsp; ${restaurantDTO.resAddress}</li>
+		  			<li>카테고리:&emsp; ${restaurantDTO.resTheme}</li>
+		  			<li>가격대:&emsp;&emsp;${restaurantDTO.resPrice}</li>
 		  		</ul>
-	  		<div class="storeMore"><a class="reviewList_detailPage" href="#" style="color: #ffc34d;">가게이름 상세보기 ></a></div>
-   		</div><!-- col-sm-9 -->
-   </div><hr><!-- row -->
-      
-   <div class="row">
-     <div class="col-sm-3"><a href="" ><img src="../resources/img/store2.jpeg" width="220px;" height="200px;"></a></div>
-       	<div class="col-sm-9">
-	           <ul class="storeMain">
-					<li><span class="storeName">2. 코뮨 &emsp;&emsp;&emsp;&emsp;</span></li>
-	 				<li><span class="storeAvg">3.0</span></li>
- 					<li><img src="../resources/img/bookmark.png" id="bookmark" align="right"></li>
-				</ul><br><br>
-				<ul class="storeDetail" align="left">
-	    			<li>주소:&emsp;&emsp;&emsp; 서울특별시 용산구 한남동 743-32 1층</li>
-	    			<li>카테고리:&emsp; 카페/디저트</li>
-	    			<li>가격대:&emsp;&emsp;  7천원-1만원대</li>
-	    		</ul>
-    		<div class="storeMore"><a class="reviewList_detailPage" href="#" style="color: #ffc34d;">가게이름 상세보기 > </a></div>
-      </div>
-   </div><hr>
-      
-   <div class="row">
-     <div class="col-sm-3"><a href="" ><img src="../resources/img/store3.jpeg" width="220px;" height="200px;"></a></div>
-        <div class="col-sm-9">
-           <ul class="storeMain">
-				<li><span class="storeName">3. 코뮨 &emsp;&emsp;&emsp;&emsp;</span></li>
-  				<li><span class="storeAvg">3.0</span></li>
-				<li><img src="../resources/img/bookmark.png" id="bookmark" align="right" ></li>
-			</ul><br><br>
-			<ul class="storeDetail" align="left">
-    			<li>주소:&emsp;&emsp;&emsp; 서울특별시 용산구 한남동 743-32 1층</li>
-    			<li>카테고리:&emsp; 카페/디저트</li>
-    			<li>가격대:&emsp;&emsp;  7천원-1만원대</li>
-    		</ul>
-    	<div class="storeMore"><a class="reviewList_detailPage" href="#" style="color: #ffc34d;">가게이름 상세보기 > </a></div>
-     </div>
-  </div><hr>
-      
-  <div class="row">
-    <div class="col-sm-3"><a href="" ><img src="../resources/img/store4.jpeg" width="220px;" height="200px;"></a></div>
-       <div class="col-sm-9">
-           <ul class="storeMain">
-				<li><span class="storeName">4. 코뮨 &emsp;&emsp;&emsp;&emsp;</span></li>
-  				<li><span class="storeAvg">3.0</span></li>
-				<li><img src="../resources/img/bookmark.png" id="bookmark" align="right"></li>
-			</ul><br><br>
-			<ul class="storeDetail" align="left">
-    			<li>주소:&emsp;&emsp;&emsp; 서울특별시 용산구 한남동 743-32 1층</li>
-    			<li>카테고리:&emsp; 카페/디저트</li>
-    			<li>가격대:&emsp;&emsp;  7천원-1만원대</li>
-    		</ul>
-    	<div class="storeMore"><a class="reviewList_detailPage" href="#" style="color: #ffc34d;">가게이름 상세보기 > </a></div>
-     </div>
- </div><hr>
-   
- <div class="row">
-   <div class="col-sm-3"><a href="" ><img src="../resources/img/store5.jpeg" width="220px;" height="200px;"></a></div>
-      <div class="col-sm-9">
-         <ul class="storeMain">
-			<li><span class="storeName">4. 코뮨 &emsp;&emsp;&emsp;&emsp;</span></li>
-			<li><span class="storeAvg">3.0</span></li>
-			<li><img src="../resources/img/bookmark.png" id="bookmark" align="right"></li>
-			</ul><br><br>
-			<ul class="storeDetail">
-    			<li>주소:&emsp;&emsp;&emsp; 서울특별시 용산구 한남동 743-32 1층</li>
-    			<li>카테고리:&emsp; 카페/디저트</li>
-    			<li>가격대:&emsp;&emsp;  7천원-1만원대</li>
-    		</ul>
-    	<div class="storeMore"><a class="reviewList_detailPage" href="#" style="color: #ffc34d;">가게이름 상세보기 > </a></div>
-     </div>
-  </div><hr>
- 
-    
-    
-    <!--================ 더보기 버튼 ================-->    
-  <div class="contentMore">
-  	<button type="button" class="moreBtn"><font style="color: #ffc34d;">더보기</font></button>
-  </div>    
-</div><!-- container -->      
+	  		<div class="storeMore"><a class="reviewList_detailPage" href="/FoodFighter/review/reviewView?resSeq="+${resSeq}; style="color: #ffc34d;">가게이름 상세보기 ></a></div>
+   			</div><!-- col-sm-9 -->
+  		 </div><hr><!-- row -->
+	</c:forEach>
+</c:if>
+</div>
 
+    <!--================ 더보기 버튼 ================-->    
+<div class="contentMore">
+ 	<input type="hidden" value="2" id="pg" name="pg">
+  	<button type="button" class="moreBtn" id="moreBtn"><font style="color: #ffc34d;">더보기</font></button>
+  </div>    
+</div><!-- container -->  
 
  <!--================  Footer ================-->
- <div id="footer-container">
+<div id="footer-container">
 	 <p class="copyright" style="text-align:left;">
 	     ㈜ 푸드파이터<br>서울 서초구 강남대로 459(백암빌딩) 202호<br>대표이사: FOODFIGHTER<br>사업자 등록번호: 2020-020-22222 
 	       <br>고객센터: 0507-1414-9601<br><br>
@@ -209,60 +164,7 @@
   <!--================ Up ================-->
   <a href="#" class="back-to-top"><i class="fa fa-chevron-up"> <img src="../resources/img/back-up.png" width="32px;" height="32px;"></i></a>
   <div id="preloader"></div>
-</form>
 
-<script type="text/javascript">
-//header부분 키워드 입력 시, 검색 버튼 나타는 기능
-$('.header_searchInput').click(function(){
-	if($('#header_searchBtn').hasClass("show") == true) {
-		$('#header_searchBtn').removeClass('show'); 
-	}else {
-		$('#header_searchBtn').addClass('show');
-	}
-});
-
-//검색 클릭 시, 키워드전송
-$('#header_searchBtn').click(function(){
-	let keyword = document.getElementById("keyword").value;
-		document.getElementById("keyword_name").innerHTML = keyword;
-		
-		
-		/* alert(keyword); */
-		 if(keyword == ""){
-				alert('rrr');
-			location.href="review_nonSearchList?pg="+pg;
-		}else{
-			return false;
-		} 
-
-});
-	
-//검색필터 중복 및 선택해제
-$('.modal-body button').click(function(){
-	if($(this).hasClass("check") == true) {
-		 $(this).removeClass('check'); 
-	}else {
-		$(this).addClass('check');
-	}
-});
-
-//북마크이미지 변경
-function bookmarkEvent() {
-    if (document.getElementById("bookmark").src.match("../resources/img/bookmark.png")) {
-        document.getElementById("bookmark").src = "../resources/img/bookmarked.png";
-    } else {
-        document.getElementById("bookmark").src = "../resources/img/bookmark.png";
-    }   
-}
-
-
-$('.filter').click(function(){
-	   var filter = $(this).attr('value');
-	   alert(filter);
-});
-
-
-</script>
 
 <!-- Vendor JS Files -->
 <!-- <script src="../../assets/vendor/jquery/jquery.min.js"></script>  -->
@@ -277,4 +179,6 @@ $('.filter').click(function(){
 
 <!--  Template Main JS File -->
  <script src="../resources/assets/js/main.js"></script> 
+ <script src="/FoodFighter/resources/js/review/keyword.js"></script>
+ <script src="/FoodFighter/resources/js/review/review_searchList.js"></script>	
 </html>
