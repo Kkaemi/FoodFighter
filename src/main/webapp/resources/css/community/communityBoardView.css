@@ -14,6 +14,7 @@ div {
     line-height: 9px;
     font-size: inherit;
     text-align: center;
+    background-color : white;
     color: black;
     cursor: pointer;
     vertical-align: baseline;
@@ -26,7 +27,7 @@ div {
 .page-body{
 	min-height : 100%;
 	position:relative;
-	padding: 0px 460px;
+	padding: 0px 400px;
 }
 
 .view-upper {
@@ -76,11 +77,20 @@ div.view_stat div.mphoto {
     text-align: center;
 }
 
-div.view_stat div.mphoto img {
+div.view_stat div.mphoto {
     display: inline;
     height: 100%;
     max-width: 100%;
     vertical-align: bottom;
+    background: url( "/FoodFighter/resources/img/community/boardImg/simbol.png" ) no-repeat center;
+}
+
+div.view_stat div.mphoto img{
+    display: inline;
+    height: 100%;
+    max-width: 100%;
+    vertical-align: bottom;
+    background: url( "/FoodFighter/resources/img/community/boardImg/simbol.png" ) no-repeat center;
 }
 
 div.view_stat div.info h1 {
@@ -123,6 +133,12 @@ div.view_stat div.info p .name {
 div.view_stat div.info p span.date {
     padding-left: 8px;
 }
+div.view_stat div.info p span.hit {
+    padding-left: 8px;
+}
+div.view_stat div.info p span.comment {
+    padding-left: 8px;
+}
 /* 게시글 컨텐츠 div */
 .clear{
 	clear: both !important;
@@ -146,6 +162,7 @@ div.view_stat div.info p span.date {
     display: block;
     margin: 0;
     padding: 0;
+    line-height: 1.6;
 }
 .viewbox div.content .attach {
 	margin-top: 10px;
@@ -154,10 +171,17 @@ div.view_stat div.info p span.date {
 
 /* 댓글 */
 .cont_recommendation {
-    margin: 27px 0 20px;
+    margin: 27px 0 0px;
     clear :both;
 }
-
+.cmt_num {
+	margin-left : 6px;
+	color : #FF6A4D;
+}
+.cmt_num:hover {
+	color : #FF6A4D;
+	text-decoration: none;
+}
 .cont_comment {
     background-color: #f8f8f8;
     border : 1px solid #ddd;
@@ -172,7 +196,7 @@ div.view_stat div.info p span.date {
     margin-block-end: 1em;
     margin-inline-start: 0px;
     margin-inline-end: 0px;
-    padding-inline-start: 20px;
+    padding-inline-start: 35px;
     clear : both;
 }
 
@@ -180,7 +204,7 @@ div.view_stat div.info p span.date {
     position: relative;
     padding: 20px 0 20px 68px;
     border-bottom: 1px solid #f1f1f1;
-    padding-right: 45px;
+    padding-right: 35px;
 }
 
 .pic {
@@ -191,7 +215,7 @@ div.view_stat div.info p span.date {
     top: 25px;
     overflow: hidden;
     border-radius: 24px;
-    background: url( "../../community/boardImg/simbol.png" ) no-repeat center;
+    background: url( "/FoodFighter/resources/img/community/boardImg/simbol.png" ) no-repeat center;
     background-size: 48px auto;
 }
 .pic img {
@@ -201,7 +225,7 @@ div.view_stat div.info p span.date {
 
 .comment_section .info {
     display: table-cell;
-    width: 100%;
+    width: 92.64%;
     margin-top: -2px;
     box-sizing: border-box;
     vertical-align: top;
@@ -246,14 +270,47 @@ div.view_stat div.info p span.date {
 }
 
 .comment_reply {
-    position: absolute;
+	float: right;
     top: 18px;
     right: 50px;
     color: #666;
 }
 .comment_reply a {
     color: #666;
+    margin-right: 15px;
+    vertical-align: top;
 }
+
+.option {
+	display: table-cell;
+}
+.dropdown {
+	float: right;
+	border-color: none;
+}
+.dropdown-toggle {
+	border : 0;
+	background-color: #f8f8f8;
+}
+.open>.dropdown-menu {
+    display: table !important;
+}
+.dropdown-menu {
+	text-align : center;
+    min-width : 20px !important;
+    height: 56px !important;
+    cursor: pointer !important;
+}
+.dropdown-menu .a {
+	margin: 20px;
+	font-size : 20px;
+}
+.ico_more {
+	width: 20px;
+    height: 20px;
+    background: url( "/FoodFighter/resources/img/community/boardImg/more.svg" ) no-repeat center;
+}
+
 /* 댓글 페이징 */
 .simple_paging {
     position: relative;
@@ -270,6 +327,7 @@ div.view_stat div.info p span.date {
     text-align: center;
     line-height: 26px;
     color: black;
+    margin: 0px 3px;
 }
 .simple_paging a.now, .simple_paging a:hover{
     border: 1px solid #343434;
@@ -340,13 +398,8 @@ div.view_stat div.info p span.date {
     vertical-align: top;
     text-indent: -9999px;
 }
-.ico_photo {
-	width: 18px;
-    height: 18px;
-    background: url( "../../community/boardImg/photo.svg" ) no-repeat center;
-}
 
-.sr_only {
+.sr_only { /* 글자수 */
     position: absolute;
     width: 1px;
     height: 1px;
@@ -373,7 +426,12 @@ div.view_stat div.info p span.date {
 .ico_lock {
 	width: 18px;
     height: 21px;
-    background: url( "../../community/boardImg/lock.svg" ) no-repeat center;
+    background: url( "/FoodFighter/resources/img/community/boardImg/lock.svg" ) no-repeat center;
+}
+.ico_lock_on {
+	width: 18px;
+    height: 21px;
+    background: url( "/FoodFighter/resources/img/community/boardImg/lock_on.svg" ) no-repeat center;
 }
 
 .btn_group {
@@ -382,6 +440,19 @@ div.view_stat div.info p span.date {
 }
 
 /* 대댓 작성 */
+.reply_section {
+    position: relative;
+    padding: 25px 0 20px 68px;
+    margin-top: 10px;
+}
+.reply_section .info {
+    display: table-cell;
+    width: 92%;
+    margin-top: -2px;
+    box-sizing: border-box;
+    vertical-align: top;
+}
+
 .comment_replyWrite{
     padding-top: 23px;
 }

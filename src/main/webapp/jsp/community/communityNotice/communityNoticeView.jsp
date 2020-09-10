@@ -1,8 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+
 <!DOCTYPE html>
 <html>
 <head>
+<meta id="_csrf" name="_csrf" content="${_csrf.token}" />
+<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
 <meta charset="UTF-8">
 <title>커뮤니티 | 공지사항</title>
 <style type="text/css">
@@ -11,158 +17,184 @@ body, html {
 }
 </style>
 <!-- CSS 파일 -->
-<link rel="stylesheet" href="/FoodFighter/sources/css/community/normalize.css">
-<link rel="stylesheet" href="/FoodFighter/sources/css/community/sidebarCss.css">
-<link rel="stylesheet" href="/FoodFighter/sources/css/community/communityHeader.css">
-<link rel="stylesheet" href="/FoodFighter/sources/css/community/communityBoardView.css">
+<link rel="stylesheet" href="/FoodFighter/resources/css/community/normalize.css">
+<link rel="stylesheet" href="/FoodFighter/resources/css/community/sidenav.css">
+<link rel="stylesheet" href="/FoodFighter/resources/css/community/communityHeader.css">
+<link rel="stylesheet" href="/FoodFighter/resources/css/community/communityBoardView.css">
+
 <!-- JS 파일 -->
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> <!-- 부트스트랩 CSS  -->
+<script type="text/javascript" src= "/FoodFighter/resources/js/community/communitySidenavJS.js"></script> <!-- 사이드바 JS -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript" src="../communityMainJs/sidebarJs.js"></script> <!-- 사이드바JS -->
-<script src="https://kit.fontawesome.com/a076d05399.js"></script> <!-- 사이드바 아이콘 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> <!-- 부트스트랩 JS -->
 </head>
 <body>
 <!-- 헤더 -->
 <!--================ Header ================-->
-<div id="header-container">
-  <a class="header-logo" href="/FoodFighter/">로고 자리</a>
-      <ul id="header-menu">
-	      <li class="header-items">
-	  		<img src="/FoodFighter/resources/img/community/mainImg/search.png" class="header_searchIcon" width="30" height="30" align="center"> 
-	   		<input type="text" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" value="" autocomplete="on" maxlength="50" >
-	      </li>
-	      <li class="header-items">
-	         <a class="header-link" href="/FoodFighter/">Home</a>
-	      </li>
-	      <li class="header-items">
-	         <a class="header-link" href="/FoodFighter/review/reviewNonSearchList">리뷰 리스트</a>
-	      </li>
-	      <li class="header-items">
-	        <a class="header-link" href="/FoodFighter/community/communityMain">커뮤니티</a>
-	      </li>
-	      <li class="header-items">
-	        <a class="header-link" href="/FoodFighter/event/eventList">이벤트</a>
-	      </li>
-	      <li class="header-items">
-	       <a class="header-link" href="communityMain.jsp"><img src="../mainImg/user.png" class="header_searchIcon" width="30" height="30" align="center"></a>
-    	 </li>
-   	</ul>
-</div>
+<form id="headerForm" name="headerForm" method="post" action="../review/getSearchList">
+<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+	<div id="header-container">
+	<div class="hamberger pull-left" onclick="myFunction(this)">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+    </div>
+	   <a class="header-logo" href="/FoodFighter"><img src="../resources/img/logo.png" width="250px;" height="55px;" align="left" style="margin-top: 10px; margin-left: 200px;"></a>
+	      <ul id="header-menu">
+		      <li class="header-items">
+		  		<img src="../resources/img/search.png" class="header_searchIcon" width="30" height="30" align="center"> 
+		   		<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword" autocomplete="on" maxlength="50" >
+		   		<button size="10" id="header_searchBtn">검색</button>
+		      </li>
+		       <li class="nav-item">
+		           <a class="nav-link js-scroll active" href="/FoodFighter">Home</a>
+		       </li>
+		       <li class="nav-item">
+	         	  <a class="nav-link js-scroll" href="/FoodFighter/review/reviewNonSearchList">리뷰 리스트</a>
+	          </li>
+	          <li class="nav-item">
+	           <a class="nav-link js-scroll" href="/FoodFighter/community/communityMain">커뮤니티</a>
+	          </li>
+	          <li class="nav-item">
+	            <a class="nav-link js-scroll" href="/FoodFighter/event/eventList">이벤트</a>
+	          </li>
+	          <li class="nav-item">
+	            <a class="nav-link js-scroll">
+	            <img src="/FoodFighter/resources/img/member.png" class="header_searchIcon" width="30" height="30" align="center">
+	            </a>
+     	     </li>
+	   	</ul>
+	</div>
+ </form>
 <!-- 사이드바 -->
-<input type="checkbox" id="sidebarCheck">
-<label for="sidebarCheck">
-  <i class="fas fa-bars" id="sideOpenBtn"></i>
-  <i class="fas fa-times" id="sideCloseBtn"></i>
-</label>
-<div class="sidebar" style = "z-index : 2;">
-  <header>커뮤니티</header>
-  <a href="#">
-    <i class="far fa-comments"></i>
-    <span>게시판</span>
-  </a>
-  <a href="#">
-    <i class="fas fa-link"></i>
-    <span>랭킹</span>
-  </a>
-  <a href="#">
-    <i class="far fa-question-circle"></i>
-    <span>고객센터</span>
-  </a>
+<div id="mySidenav" class="sidenav">
+	<a href="communityNotice"><span class="glyphicon glyphicon-exclamation-sign"></span>&emsp;공지사항</a>
+    <a href="communityBoard"><span class="glyphicon glyphicon-list"></span>&emsp;게시판</a>
+    <a href="communityRank"><span class="glyphicon glyphicon-star"></span>&emsp;랭킹</a>
+    <a href=""><span class="glyphicon glyphicon-question-sign"></span>&emsp;고객센터</a>
 </div>
 <!-- 본문 -->
-<div class="container" style="margin-top : 65px;">
-	<div class="page-header">
+<div class="container" style="margin-top : 95px; margin-bottom: 10px;">
+	<div class="page-header" style="border-bottom: none !important;">
     	<h2 class="text-center">커뮤니티 공지사항</h2>      
    	</div>
 </div>
-<div class="page-body" style = "z-index : 1;">
+<div class="page-body">
 	<div class = "view-upper clearfix">
 		<div class = "area_l">
-			<a href = "#">
-				<span class = "plain-btn">목록</span></a>
-			<a href = "#">
-				<span class = "plain-btn">이전글</span></a>
+			<c:choose>
+				<c:when test="${nSrchOption != null and nKeyword != null }">
+					<a href = "communityNoticeSearch?nSrchOption=${nSrchOption}&nKeyword=${nKeyword}">
+						<span class = "plain-btn">목록</span></a>
+				</c:when>
+				<c:otherwise>
+					<a href = "communityNotice">
+							<span class = "plain-btn">목록</span></a>
+				</c:otherwise>
+			</c:choose>
+			<c:if test="${cNPrev.seq != null}">
+				<c:choose>
+					<c:when test="${nSrchOption != null and nKeyword != null}">
+						<a href = "communityNoticeView?seq=${cNPrev.seq}&nSrchOption=${nSrchOption}&nKeyword=${nKeyword}">
+							<span class = "plain-btn">이전글</span></a>
+					</c:when>
+					<c:otherwise>
+						<a href = "communityNoticeView?seq=${cNPrev.seq}">
+							<span class = "plain-btn">이전글</span></a>
+					</c:otherwise>
+				</c:choose>
+			</c:if>
+			<c:if test="${cNNext.seq != null}">
+				<c:choose>
+					<c:when test="${nSrchOption != null and nKeyword != null}">
+						<a href = "communityNoticeView?seq=${cNNext.seq}&nSrchOption=${nSrchOption}&nKeyword=${nKeyword}">
+							<span class = "plain-btn">다음글</span></a>
+					</c:when>
+					<c:otherwise>
+						<a href = "communityNoticeView?seq=${cNNext.seq}">
+						<span class = "plain-btn">다음글</span></a>
+					</c:otherwise>
+				</c:choose>
+			</c:if>
 		</div>
 		<div class = "area_r">
-			<a href = "#">
-				<span class = "plain-btn">수정</span></a>
-			<a href = "#">
-				<span class = "plain-btn" style = "color : red;">삭제</span></a>
+			<button class = "plain-btn adminModify">수정</button>
+			<button class = "plain-btn adminDelete" style = "color : red;">삭제</button>
 		</div>
 	</div>
 	<div class = "view_stat">
 		<div class ="mphoto">
-			<img src = "../boardImg/d.jpg">
 		</div>
 		<div class = "info">
 			<h1>
-				<span class = "subject">[공지사항] 커뮤니티 가이드라인</span>
+				<span class = "subject">${cNDTO.subject }</span>
 			</h1>
 			<p>
-				<span class = "name">관리자</span>
-				<span class = "date">2020.08.03</span>
+				<span class = "nickname" style="color: black">${cNDTO.nickname }</span>
+				<fmt:formatDate var = "date" value="${cNDTO.logtime }" pattern="yyyy.MM.dd HH:mm"/>
+					<span class = "date">${date }</span>
+				<span class = "hit">조회 ${cNDTO.hit }</span>
+				<span class = "comment">댓글<a class = "cmt_num">0</a></span>
 			</p>
 		</div>
 	</div>
 	<div class = "viewbox">
 		<div class = "content">
-			<p>커뮤티니 가이드라인 입니다.</p>
-			<p>욕설 금지</p>
-			<p>비방 금지</p>
-			<div class ="attach"><img src = "../boardImg/antman.png"></div>
+			${cNDTO.content }
 		</div>
+	</div>
+	<div class ="cont_recommendation">
+		<div class = "area_l">
+			<button class = "plain-btn" style = "background-color: white" id = "comment_info">댓글<span class = "cmt_num">0</span></button>
 		</div>
-		<div class ="cont_recommendation clearfix">
-			<div class = "area_l">
-				<a href = "#"><span class = "plain-btn">댓글</span></a>
-		</div>
-		<!-- 댓글 -->
-		<div class = "cont_comment">
-			<div class ="comment_write">
-				<div class ="inner_text_write">
-					<div class ="box_textarea">
-						<textarea placeholder="댓글쓰기 기능이 지원되지 않는 곳입니다."	
-								readonly="readonly" style ="height : 86px;"></textarea>
+	</div>
+	<!-- 댓글 -->
+	<div class = "cont_comment">
+		<div class ="comment_write">
+			<div class ="inner_text_write">
+				<div class ="box_textarea">
+					<textarea id = "reply" placeholder="댓글쓰기 기능이 제한된 게시판입니다."	
+							readonly="readonly" style ="height : 86px;"></textarea>
+				</div>
+				<div class = "wrap_menu">
+					<div class = "area_l">
+						<button class = "btnTab">
+							<span class ="ico_bbs ico_lock">비밀글</span>
+						</button>
 					</div>
-					<div class = "wrap_menu">
-						<div class = "area_l">
-							<button class = "btnTab">
-								<span class ="ico_bbs ico_photo">이미지업로드</span>
-							</button>
-						</div>
-						<div class = "area_r">
-							<span class ="num_text">
-								<span class ="sr_only">글자수</span>
-								<span class ="num_count">0</span> / <span class ="sr_only">총 글자 개수</span> 600
-							</span>
-							<button class = "btnTab btn_item">
-								<span class ="ico_bbs ico_lock">비밀글</span>
-							</button>
-							<div class ="btn_group">
-								<a href = "#">
-								<span class = "plain-btn" style ="background-color: red; color: white;">등록</span></a>
-							</div>
+					<div class = "area_r">
+						<span class ="num_text">
+							<span class ="sr_only">글자수</span>
+							<span class ="num_count">0</span> / <span class ="sr_only">총 글자 개수</span> 600
+						</span>
+						<div class ="btn_group">
+							<a href = "#">
+							<span class = "plain-btn" id = "commentWrite" style ="background-color: red; color: white;">등록</span></a>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class ="clear"></div>
 		</div>
+		<div class ="clear"></div>
 	</div>
-	<div class = "view-upper clearfix">
+	<div class = "view-upper clearfix" style = "margin-bottom : 30px;">
 		<div class = "area_l">
-			<a href = "#">
-				<span class = "plain-btn">최신목록</span></a>
-			<a href = "#">
-				<span class = "plain-btn" style = "color : red;">글쓰기</span></a>
+			<c:choose>
+				<c:when test="${nSrchOption != null and nKeyword != null }">
+					<a href = "communityNoticeSearch?nSrchOption=${nSrchOption}&nKeyword=${nKeyword}">
+						<span class = "plain-btn">목록</span></a>
+				</c:when>
+				<c:otherwise>
+					<a href = "communityNotice">
+							<span class = "plain-btn">목록</span></a>
+				</c:otherwise>
+			</c:choose>
+			<button class = "plain-btn" id = "adminWrite">글쓰기</button>
 		</div>
 		<div class = "area_r">
-			<a href = "#">
-				<span class = "plain-btn">수정</span></a>
-			<a href = "#">
-				<span class = "plain-btn" style = "color : red;">삭제</span></a>
+			<button class = "plain-btn adminModify">수정</button>
+			<button class = "plain-btn adminDelete" style = "color : red;">삭제</button>
 		</div>
 	</div>
 </div>
@@ -172,9 +204,17 @@ body, html {
      ㈜ 푸드파이터<br>서울 서초구 강남대로 459(백암빌딩) 202호<br>대표이사: FOODFIGHTER<br>사업자 등록번호: 2020-020-22222 
        <br>고객센터: 0507-1414-9601<br><br>
         <strong>HOME | 리뷰리스트 | 커뮤니티 | 이벤트</strong><br><br>
-       &copy; Copyright <strong>foodFighter</strong>. All Rights Reserved
-             Designed by foodFighter
+       &copy; Copyright <strong>FoodFighter</strong>. All Rights Reserved
+             Designed by FoodFighter
  </p>
 </div>
 </body>
+<script type="text/javascript" src= "/FoodFighter/resources/js/review/keyword.js"></script> <!-- 헤더 JS -->
+<script type="text/javascript">
+let id = '${memberDTO.nickname}';
+let seq = '${seq}';
+let nSrchOption = '${nSrchOption}';
+let nKeyword = '${nKeyword}';
+</script>
+<script type="text/javascript" src ="/FoodFighter/resources/js/community/communityNoticeViewJS.js"></script>
 </html>

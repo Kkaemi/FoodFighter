@@ -10,7 +10,7 @@
 .page-body{
 	min-height : 100%;
 	position:relative;
-	padding: 0px 460px;
+	padding: 0px 400px;
 }
 div {
     display: block;
@@ -36,6 +36,11 @@ thead #admin {
 	vertical-align: middle;
 	text-align: center;
 }
+#subjectA{color: black; cursor: pointer; font-weight: bold; text-decoration: none;}
+#subjectA:link{color: black; text-decoration: none;}
+#subjectA:visited {color: black; text-decoration: none;}
+#subjectA:hover {color: #ffc34d; text-decoration: none;}
+#subjectA:active {color: black; text-decoration: none;}
 
 .tb-center {
     text-align: center;
@@ -46,7 +51,7 @@ thead #admin {
 .content-wrapper { /* 처음목록/글쓰기 버튼 div*/ 
     padding: 5px 0 5px 0 !important;
 }
-.content-wrapper .paging {
+.content-wrapper .pagingBox {
     padding-top: 10px;
     height: 17px;
     width : auto;
@@ -55,7 +60,7 @@ thead #admin {
     vertical-align: top;
     display: inline-block;
 }
-.paging a {
+.pagingBox a {
     border: 1px solid #d4d4d4;
     display: inline-block;
     width: 26px;
@@ -64,8 +69,9 @@ thead #admin {
     text-align: center;
     line-height: 26px;
     color: black;
+    margin: 0px 3px;
 }
-.paging a.now, .paging a:hover{
+.pagingBox a.now, .pagingBox a:hover{
     border: 1px solid #343434;
     background: #666;
     color: #fff;
@@ -108,7 +114,15 @@ select{
     height: 30px;
     margin : 3px 0;
 }
-#inp{
+
+#bKeyword{
+	border: 1px solid #dddddd;
+    padding: 10px;
+    height: 30px;
+    margin: 3px 5px;
+}
+
+#nKeyword{
 	border: 1px solid #dddddd;
     padding: 10px;
     height: 30px;

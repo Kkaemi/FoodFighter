@@ -73,6 +73,7 @@
 						<img src="/FoodFighter/resources/img/kakao_login.png">
 					</a>
 				</div>
+
 				<div class="caption">
 					<a href="/FoodFighter/login/forgotIdForm">아이디찾기</a>&emsp;
 					<a href="/FoodFighter/login/forgotPwdForm">비밀번호찾기</a>&emsp;<br><br>
@@ -80,6 +81,44 @@
 					</div>
 			</form>
 	</section>
+
+   <section class="login-form" >
+      <h1>Login</h1>
+         <!-- <form action="/FoodFighter/login/loginForm-processing" id="loginForm" method="post"> -->
+             <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+            <div class="int-area">
+               아이디<input type="text" name="email" id="email" >
+               <label for="id"></label>               
+            </div>
+            <div id="idDiv"></div>
+            
+            <div class="int-area">
+               비밀번호<input type="password" name="pwd" id="pwd" >
+               <div id="pwdDiv"> </div>
+               <label for="pwd" ></label>
+            </div>
+            
+            <div id="loginResultDiv"></div>
+            
+            <div class="btn-area">
+               <button id="loginbtn" type="button">login</button>
+            <%-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> --%> 
+            </div> 
+               
+             <div class="cacaobtn-area">
+               <a id="kakao-login-btn" class="btn-face m-b-20" style="cursor: pointer;">
+                  <img src="/FoodFighter/resources/img/kakao_login.png">
+               </a>
+            </div>
+            <div class="caption">
+               <a href="/FoodFighter/login/forgotIdForm">아이디찾기</a>&emsp;
+               <a href="/FoodFighter/login/forgotPwdForm">비밀번호찾기</a>&emsp;<br><br>
+               회원이 아니신가요? <a href="/FoodFighter/member/signupChoice"> 회원가입</a>
+               </div>
+   </section>
+>>>>>>> upstream/master
+=======
+>>>>>>> 34051883a6e7ddfb7dc6d8a5e2bfd2318fc15196
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="/FoodFighter/resources/js/review/keyword.js"></script>
