@@ -189,9 +189,6 @@
 }
 .col-sm-9{
 	background-color:white; 
-	width:912.66px;
-	height:205px;
-	padding:0px 15px;
 }
 .well{
 	width:100%;
@@ -242,6 +239,13 @@
 	font-size:45px;
 	color:#ffc34d;
 }
+#bookmark{
+	padding:10px;
+	margin-left: 10px;
+	margin-bottom: 10px;
+	width:55px;
+	height:55px;
+}
 .storeDetail li{
 	list-style: none;
 	font-size:15px;
@@ -275,5 +279,3 @@
 #emptyDiv{
 	height:300px;
 }
-  
-  

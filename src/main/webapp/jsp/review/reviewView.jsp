@@ -168,7 +168,6 @@ String keyword = request.getParameter("keyword");
                     center: new naver.maps.LatLng(37.3595704, 127.105399),
                     zoom: 15
                 });
-
                 var marker = new naver.maps.Marker({
                     position: new naver.maps.LatLng(37.3595704, 127.105399),
                     map: map
@@ -257,9 +256,7 @@ String keyword = request.getParameter("keyword");
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">    
 var modal = document.getElementById('myModal');
-
 var img = document.getElementById('restaurant-image');
-
 var modalImg = document.getElementById("img01");
 var captionText = document.getElementById("caption");
 img.onclick = function(){
@@ -267,13 +264,10 @@ img.onclick = function(){
   modalImg.src = this.src;
   captionText.innerHTML = this.alt;
 }
-
 var span = document.getElementsByClassName("close")[0];
-
 span.onclick = function() { 
   modal.style.display = "none";
 }
-
 </script>
 
 <!-- 북마크 클릭 시 색깔 바꾸기 -->
@@ -283,7 +277,6 @@ function bookmarkChange() {
     document.getElementById("bookmark").style.cssText ="color :#ffa64d; font-size : 40px; margin-left:543px;";
     document.getElementById("bookmark-name").style.cssText ="color :#ffa64d;";
 }
-
 </script>
 
 <!-- db데이터가져오기 -->
@@ -310,7 +303,6 @@ $(document).ready(function(){
 			console.log(err);
 		}
 	});
-
 });
 </script>
 </html>

@@ -13,5 +13,5 @@ public interface ReviewDAO {
 
 	public RestaurantDTO getReviewView(String resSeq);
 
-
+	public List<RestaurantDTO> modalSearchList(Map<String, String> map);
 }

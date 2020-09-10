@@ -15,10 +15,6 @@ $('#header_searchBtn').click(function(){
 
 //메인 검색
 $('#Intro_searchBtn').click(function(){
-<<<<<<< HEAD
-		document.searchForm.submit(); 
-=======
-		document.searchMainForm.submit(); 
->>>>>>> upstream/master
+	document.searchMainForm.submit(); 
 });
 
