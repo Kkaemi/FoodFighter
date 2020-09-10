@@ -93,8 +93,9 @@ public class CommunityCSServiceImpl implements CommunityCSService {
 	@Override
 	public boolean passwordCheck(Map<String, String> map) {
 		
+		String seq = map.get("seq");
 		String password1 = map.get("password");
-		String password2 = communityCSDAO.password_loading(map);
+		String password2 = communityCSDAO.password_loading(seq);
 		
 		if (password1.equals(password2)) return true;
 		
@@ -104,6 +105,32 @@ public class CommunityCSServiceImpl implements CommunityCSService {
 	@Override
 	public QnaBoardDTO getBoard(String seq) {
 		return communityCSDAO.getBoard(seq);
+	}
+
+	@Override
+	public void qnaReply(Map<String, String> map) {
+		
+		String pseq = map.get("pseq");
+		
+		// 원글
+		QnaBoardDTO pDTO = communityCSDAO.getBoard(pseq);
+		
+		map.put("id", pDTO.getId());
+		map.put("nickname", pDTO.getNickname());
+		map.put("email", pDTO.getEmail());
+		map.put("password", pDTO.getPassword());
+		
+		map.put("ref", pDTO.getRef()+""); // 원글의 그룹번호
+		map.put("lev", pDTO.getLev()+""); // 원글의 lev
+		map.put("step", pDTO.getStep()+""); // 원글의 step
+		
+		communityCSDAO.qnaReply(map);
+		
+	}
+
+	@Override
+	public void qnaDelete(String seq) {
+		communityCSDAO.qnaDelete(seq);
 	}
 
 }

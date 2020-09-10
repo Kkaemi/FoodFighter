@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%
+request.setCharacterEncoding("utf-8");
+String keyword = request.getParameter("keyword");
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -8,8 +13,8 @@
     <title>QnA비밀번호</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/FoodFighter/resources/css/community/communityHeader.css">
-    <link rel="stylesheet" href="/FoodFighter/resources/css/community/communityBoard.css">
+    <link rel="stylesheet" href="/FoodFighter/resources/css/community/communityCSHeader.css">
+    <link rel="stylesheet" href="/FoodFighter/resources/css/community/communityCSBoard.css">
     <link rel="stylesheet" href="/FoodFighter/resources/css/community/sidenav.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -43,38 +48,42 @@
 </head>
 <body>
     <!--================ Header ================-->
-    <div id="header-container">
-        <!-- 햄버거버튼 -->
+	<form id="headerForm" name="headerForm" method="post" action="../review/getSearchList">
+	<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+		<div id="header-container">
+		<!-- 햄버거버튼 -->
         <div class="hamberger pull-left" onclick="myFunction(this)">
             <div class="bar1"></div>
             <div class="bar2"></div>
             <div class="bar3"></div>
         </div>
-        <a class="header-logo" href="#page-top">로고 자리</a>
-        <ul id="header-menu">
-            <li class="header-items">
-                <img src="/FoodFighter/resources/img/community/search.png" class="header_searchIcon" width="30" height="30" align="center">
-                <input type="text" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" value=""
-                    autocomplete="on" maxlength="50">
-            </li>
-            <li class="header-items">
-                <a class="header-link" href="/FoodFighter/index">Home</a>
-            </li>
-            <li class="header-items">
-                <a class="header-link" href="/FoodFighter/review/reviewNonSearchList">리뷰 리스트</a>
-            </li>
-            <li class="header-items">
-                <a class="header-link" href="/FoodFighter/community/communityMain">커뮤니티</a>
-            </li>
-            <li class="header-items">
-                <a class="header-link" href="/FoodFighter/event/eventList">이벤트</a>
-            </li>
-            <li class="header-items">
-                <a class="header-link" href="communityMain.jsp"><img src="/FoodFighter/resources/img/member.png" class="header_searchIcon"
-                        width="30" height="30" align="center"></a>
-            </li>
-        </ul>
-    </div>
+		  <a class="header-logo" href="/FoodFighter"><img src="../resources/img/logo.png" width="250px;" height="55px;" align="left" style="margin-top: 10px; margin-left: 200px;"></a>
+		      <ul id="header-menu">
+			      <li class="header-items">
+			  		<img src="../resources/img/search.png" class="header_searchIcon" width="30" height="30" align="center"> 
+			   		<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword" value="<%=keyword%>" autocomplete="on" maxlength="50" >
+			   		<button size="10" id="header_searchBtn">검색</button>
+			      </li>
+			       <li class="nav-item">
+			           <a class="nav-link js-scroll active" href="/FoodFighter">Home</a>
+			       </li>
+			       <li class="nav-item">
+		         	  <a class="nav-link js-scroll" href="/FoodFighter/review/reviewNonSearchList">리뷰 리스트</a>
+		          </li>
+		          <li class="nav-item">
+		           <a class="nav-link js-scroll" href="/FoodFighter/community/communityMain">커뮤니티</a>
+		          </li>
+		          <li class="nav-item">
+		            <a class="nav-link js-scroll" href="/FoodFighter/event/eventList">이벤트</a>
+		          </li>
+		          <li class="nav-item">
+		            <a class="nav-link js-scroll">
+		            <img src="/FoodFighter/resources/img/member.png" class="header_searchIcon" width="30" height="30" align="center">
+		            </a>
+	     	     </li>
+		   	</ul>
+		</div>
+	</form>
     
     <!-- 왼쪽 메뉴바 -->
     <div id="mySidenav" class="sidenav">
@@ -127,6 +136,7 @@
     </div>
 </body>
 <script type="text/javascript" src="/FoodFighter/resources/js/community/sidenav.js"></script>
+<script src="/FoodFighter/resources/js/review/keyword.js"></script>
 <script type="text/javascript">
 	$('#passwordCheckBtn').click(function() {
 		
@@ -140,6 +150,7 @@
 				
 				if ($.isEmptyObject(data)) {
 					alert('올바른 비밀번호를 입력해 주세요!!!');
+					location.reload();
 					return;
 				}
 				

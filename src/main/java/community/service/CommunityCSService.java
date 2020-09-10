@@ -21,5 +21,9 @@ public interface CommunityCSService {
 	public boolean passwordCheck(Map<String, String> map);
 
 	public QnaBoardDTO getBoard(String seq);
+
+	public void qnaReply(Map<String, String> map);
+
+	public void qnaDelete(String seq);
 	
 }

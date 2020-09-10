@@ -17,8 +17,12 @@ public interface CommunityCSDAO {
 
 	public int getTotalSearchA(Map<String, String> map);
 	
-	public String password_loading(Map<String, String> map);
+	public String password_loading(String seq);
 
 	public QnaBoardDTO getBoard(String seq);
+
+	public void qnaReply(Map<String, String> map);
+
+	public void qnaDelete(String seq);
 	
 }

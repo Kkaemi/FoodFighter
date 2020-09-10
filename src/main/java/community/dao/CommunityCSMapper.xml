@@ -58,7 +58,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 게시글 비밀번호 불러오기 -->
-	<select id="password_loading" parameterType="java.util.Map" resultType="String">
+	<select id="password_loading" parameterType="String" resultType="String">
 		select password from qna_board where seq = #{seq}
 	</select>
 	
@@ -66,4 +66,52 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getBoard" parameterType="String" resultType="qnaBoard">
 		select * from qna_board where seq = #{seq}
 	</select>
+	
+	<!-- 답글 달기 -->
+	<update id="qnaReply1" parameterType="java.util.Map">
+		update qna_board set step = step + 1 where ref = #{ref} and step &gt; #{step}
+	</update>
+	<insert id="qnaReply2" parameterType="java.util.Map">
+			insert into qna_board values(nextval(seq_qnaboard)
+									,#{id}
+									,#{nickname}
+									,#{email}
+									,#{subject}
+									,#{content}
+									,#{password}
+									,#{ref}
+									,#{lev}+1
+									,#{step}+1
+									,#{pseq}
+									,0
+									,0
+									,default)
+	</insert>
+	<update id="qnaReply3" parameterType="java.util.Map">
+		update qna_board set reply = reply + 1 where seq = #{pseq}
+	</update>
+	
+	<!-- 글 수정 -->
+	<update id="qnaModify" parameterType="java.util.Map">
+		update qna_board set subject = #{subject}
+					, content = #{content}
+					, logtime = now() where seq = #{seq}
+	</update>
+	
+	<!-- 글 삭제 -->
+	<update id="qnaDelete1" parameterType="String">
+		UPDATE qna_board SET REPLY = REPLY - 1 
+		WHERE SEQ = (SELECT PSEQ FROM qna_board WHERE SEQ = #{seq})
+	</update>
+	<update id="qnaDelete2" parameterType="String">
+		UPDATE qna_board SET SUBJECT = CONCAT('[원글이 삭제된 답글] ', SUBJECT) WHERE PSEQ = #{seq}
+	</update>
+	<delete id="qnaDelete3" parameterType="String">
+		DELETE FROM qna_board WHERE SEQ = #{seq}
+	</delete>
+	
+	<!-- 조회수 증가 -->
+	<update id="qnaHit" parameterType="String">
+		update qna_board set hit = hit + 1 where seq = #{seq}
+	</update>
 </mapper>

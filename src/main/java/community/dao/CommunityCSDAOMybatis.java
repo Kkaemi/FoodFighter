@@ -43,13 +43,27 @@ public class CommunityCSDAOMybatis implements CommunityCSDAO {
 	}
 	
 	@Override
-	public String password_loading(Map<String, String> map) {
-		return sqlSession.selectOne("qnaBoardSQL.password_loading", map);
+	public String password_loading(String seq) {
+		return sqlSession.selectOne("qnaBoardSQL.password_loading", seq);
 	}
 
 	@Override
 	public QnaBoardDTO getBoard(String seq) {
 		return sqlSession.selectOne("qnaBoardSQL.getBoard", seq);
+	}
+
+	@Override
+	public void qnaReply(Map<String, String> map) {
+		sqlSession.update("qnaBoardSQL.qnaReply1", map);
+		sqlSession.insert("qnaBoardSQL.qnaReply2", map);
+		sqlSession.update("qnaBoardSQL.qnaReply3", map);
+	}
+
+	@Override
+	public void qnaDelete(String seq) {
+		sqlSession.update("qnaBoardSQL.qnaDelete1", seq);
+		sqlSession.update("qnaBoardSQL.qnaDelete2", seq);
+		sqlSession.delete("qnaBoardSQL.qnaDelete3", seq);
 	}
 
 }

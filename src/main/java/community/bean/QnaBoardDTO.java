@@ -16,13 +16,15 @@ public class QnaBoardDTO {
 
     private String id;
 
-    private String name;
+    private String nickname;
 
     private String email;
 
     private String subject;
 
     private String content;
+    
+    private String password;
 
     private int ref;
 

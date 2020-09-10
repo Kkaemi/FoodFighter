@@ -26,11 +26,11 @@ public class CommunityCSCenterController {
 	@Autowired
 	private CommunityCSService communityCSService;
 
-//	// cs center
-//	@RequestMapping(value = "csCenter", method = RequestMethod.GET)
-//	public String csCenter() {
-//		return "/jsp/community/communityCS/csCenter";
-//	}
+	// cs center
+	@RequestMapping(value = "csCenter", method = RequestMethod.GET)
+	public String csCenter() {
+		return "/jsp/community/communityCS/csCenter";
+	}
 
 	// qna
 	@RequestMapping(value = "qna", method = RequestMethod.GET)
@@ -96,7 +96,7 @@ public class CommunityCSCenterController {
 	
 	// qna password page
 	@RequestMapping(value = "passwordPage", method = RequestMethod.GET)
-	public String qnaView(@RequestParam String seq,
+	public String passwordPage(@RequestParam String seq,
 						@RequestParam String pg, 
 						Model model) {
 		
@@ -108,10 +108,9 @@ public class CommunityCSCenterController {
 	
 	@RequestMapping(value = "passwordCheck", method = RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView qnaPassword(@RequestParam Map<String, String> map) {
+	public ModelAndView passwordCheck(@RequestParam Map<String, String> map) {
 		
 		boolean true_or_false = communityCSService.passwordCheck(map);
-		
 		
 		String pg = map.get("pg");
 		String seq = map.get("seq");
@@ -157,6 +156,34 @@ public class CommunityCSCenterController {
 		mav.setViewName("jsonView");
 		
 		return mav;
+	}
+	
+	// qna 게시판 관리자 답글달기
+	@RequestMapping(value = "qnaReplyForm", method = RequestMethod.POST)
+	public String qnaReplyForm(@RequestParam String seq,
+								 @RequestParam String pg, 
+								 Model model) {
+		
+		model.addAttribute("pseq", seq); // 원글번호
+		model.addAttribute("pg", pg); // 원글이 있는 페이지번호
+		
+		return "/jsp/community/communityCS/qnaReply";
+	}
+	
+	@RequestMapping(value = "qnaReply", method = RequestMethod.POST)
+	@ResponseBody
+	public void qnaReply(@RequestParam Map<String, String> map) {
+		
+		communityCSService.qnaReply(map);
+	}
+	
+	// qna 게시판 글 삭제
+	@RequestMapping(value = "qnaDelete", method = RequestMethod.POST)
+	public String qnaDelete(@RequestParam String seq) {
+		
+		communityCSService.qnaDelete(seq);
+		
+		return "/jsp/community/communityCS/qnaDelete";
 	}
 
 	// faq
