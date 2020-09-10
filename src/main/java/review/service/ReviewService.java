@@ -9,7 +9,7 @@ public interface ReviewService {
 
 	public void writeReview(Map<String, Object> map);
 
-	public List<RestaurantDTO> getSearchList(String pg, String keyword);
+	public List<RestaurantDTO> getSearchList(String pg, String keyword, String resSeq);
 
 	public RestaurantDTO getReviewView(String resSeq);
 

@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 @Getter
 public class RestaurantDTO {
-	private int seq;
+	private String resSeq;
 	private String resName; // 음식점 이름
 	private String resScore; // 평점
 	private String resAddress; // 주소
