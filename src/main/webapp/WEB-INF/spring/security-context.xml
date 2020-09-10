@@ -11,10 +11,11 @@
 		
 		<security:intercept-url pattern="/main/index" access="permitAll"/>
 		
-		<security:form-login login-page="/login/login" />
+		<security:form-login login-page="/login/loginForm" />
+		
+		<!-- <security:intercept-url pattern="/community/communityNotice" access="hasRole('ROLE_ADMIN')"/> -->
 		
 		<security:csrf disabled="false"/>
-		
 		
 	</security:http>
 	

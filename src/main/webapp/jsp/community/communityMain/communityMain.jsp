@@ -20,48 +20,54 @@ body, html {
 <!-- JS 파일 -->
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> <!-- 부트스트랩 CSS  -->
+<script type="text/javascript" src= "/FoodFighter/resources/js/community/communitySidenavJS.js"></script> <!-- 사이드바 JS -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> <!-- 부트스트랩 JS -->
 </head>
 <body>
 <!-- 헤더 -->
 <!--================ Header ================-->
-<div id="header-container">
+<form id="headerForm" name="headerForm" method="post" action="../review/getSearchList">
+<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+	<div id="header-container">
 	<div class="hamberger pull-left" onclick="myFunction(this)">
         <div class="bar1"></div>
         <div class="bar2"></div>
         <div class="bar3"></div>
     </div>
- 	<!-- 로고 -->
- 	<a id="logo" class="navbar-brand js-scroll" href="/FoodFighter/"><img id="logo-img" src="/FoodFighter/resources/img/streetfighter.gif"></a>
-      <ul id="header-menu">
-	      <li class="header-items">
-	  		<img src="/FoodFighter/resources/img/community/mainImg/search.png" class="header_searchIcon" width="30" height="30" align="center"> 
-	   		<input type="text" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" value="" autocomplete="on" maxlength="50" >
-	      </li>
-	      <li class="header-items">
-	         <a class="header-link" href="/FoodFighter/">Home</a>
-	      </li>
-	      <li class="header-items">
-	         <a class="header-link" href="/FoodFighter/review/reviewNonSearchList">리뷰 리스트</a>
-	      </li>
-	      <li class="header-items">
-	        <a class="header-link" href="/FoodFighter/community/communityMain">커뮤니티</a>
-	      </li>
-	      <li class="header-items">
-	        <a class="header-link" href="/FoodFighter/event/eventList">이벤트</a>
-	      </li>
-	      <li class="header-items">
-	      	<a class="header-link" href=""><img src="/FoodFighter/resources/img/community/mainImg/user.png" class="header_searchIcon" width="30" height="30" align="center"></a>
-    	 </li>
-   	</ul>
-</div>
+	   <a class="header-logo" href="/FoodFighter"><img src="../resources/img/logo.png" width="250px;" height="55px;" align="left" style="margin-top: 10px; margin-left: 200px;"></a>
+	      <ul id="header-menu">
+		      <li class="header-items">
+		  		<img src="../resources/img/search.png" class="header_searchIcon" width="30" height="30" align="center"> 
+		   		<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword" autocomplete="on" maxlength="50" >
+		   		<button size="10" id="header_searchBtn">검색</button>
+		      </li>
+		       <li class="nav-item">
+		           <a class="nav-link js-scroll active" href="/FoodFighter">Home</a>
+		       </li>
+		       <li class="nav-item">
+	         	  <a class="nav-link js-scroll" href="/FoodFighter/review/reviewNonSearchList">리뷰 리스트</a>
+	          </li>
+	          <li class="nav-item">
+	           <a class="nav-link js-scroll" href="/FoodFighter/community/communityMain">커뮤니티</a>
+	          </li>
+	          <li class="nav-item">
+	            <a class="nav-link js-scroll" href="/FoodFighter/event/eventList">이벤트</a>
+	          </li>
+	          <li class="nav-item">
+	            <a class="nav-link js-scroll">
+	            <img src="/FoodFighter/resources/img/member.png" class="header_searchIcon" width="30" height="30" align="center">
+	            </a>
+     	     </li>
+	   	</ul>
+	</div>
+ </form>
 <!-- 사이드바 -->
 <div id="mySidenav" class="sidenav">
-	<a href="/FoodFighter/community/communityNotice"><span class="glyphicon glyphicon-exclamation-sign"></span>&emsp;공지사항</a>
-    <a href="/FoodFighter/community/communityBoard"><span class="glyphicon glyphicon-list"></span>&emsp;게시판</a>
-    <a href="/FoodFighter/community/communityRank"><span class="glyphicon glyphicon-star"></span>&emsp;랭킹</a>
-    <a href="/FoodFighter/community/csCenter"><span class="glyphicon glyphicon-question-sign"></span>&emsp;고객센터</a>
+	<a href="communityNotice"><span class="glyphicon glyphicon-exclamation-sign"></span>&emsp;공지사항</a>
+    <a href="communityBoard"><span class="glyphicon glyphicon-list"></span>&emsp;게시판</a>
+    <a href="communityRank"><span class="glyphicon glyphicon-star"></span>&emsp;랭킹</a>
+    <a href=""><span class="glyphicon glyphicon-question-sign"></span>&emsp;고객센터</a>
 </div>
 <!-- 본문 -->
 <div class ="page-body" style="margin-top : 95px;">
@@ -165,7 +171,7 @@ body, html {
 			                  </div>
 			              </td>
 			              <td>
-			                  <div class="ranker">곽아무개</div>
+			                 <div class="ranker"><a>곽아무개</a></div>
 			              </td>
 			            </tr>
 			  
@@ -245,26 +251,16 @@ body, html {
     </div>
 </div>
 </div>
-	<!--================  Footer ================-->
-	<div id="footer-container">
-	 <p class="copyright" style="text-align:left;">
-	     ㈜ 푸드파이터<br>서울 서초구 강남대로 459(백암빌딩) 202호<br>대표이사: FOODFIGHTER<br>사업자 등록번호: 2020-020-22222 
-	       <br>고객센터: 0507-1414-9601<br><br>
-	        <strong>HOME | 리뷰리스트 | 커뮤니티 | 이벤트</strong><br><br>
-	       &copy; Copyright <strong>foodFighter</strong>. All Rights Reserved
-	             Designed by foodFighter
-	 </p>
-	</div>
+<!--================  Footer ================-->
+<div id="footer-container">
+ <p class="copyright" style="text-align:left;">
+     ㈜ 푸드파이터<br>서울 서초구 강남대로 459(백암빌딩) 202호<br>대표이사: FOODFIGHTER<br>사업자 등록번호: 2020-020-22222 
+       <br>고객센터: 0507-1414-9601<br><br>
+        <strong>HOME | 리뷰리스트 | 커뮤니티 | 이벤트</strong><br><br>
+       &copy; Copyright <strong>FoodFighter</strong>. All Rights Reserved
+             Designed by FoodFighter
+ </p>
 </div>
-<script type="text/javascript">
-function myFunction(x) {
-    x.classList.toggle("change");
-    if (document.getElementById("mySidenav").style.width == '250px') {
-        document.getElementById("mySidenav").style.width = "0";
-        return;
-    }
-    document.getElementById("mySidenav").style.width = "250px";
-}
-</script>
+<script type="text/javascript" src= "/FoodFighter/resources/js/review/keyword.js"></script> <!-- 헤더 JS -->
 </body>
 </html>

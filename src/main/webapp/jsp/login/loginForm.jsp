@@ -45,7 +45,7 @@
 
 	<section class="login-form" >
 		<h1>Login</h1>
-			<form action="">
+			<form action="/FoodFighter/login" mehtod="post">
 				<div class="int-area">
 					아이디<input type="text" name="email" id="email" >
 					<label for="id"></label>					

@@ -61,7 +61,7 @@ public class LoginController {
 			//System.out.println(pwd+", "+enCodePwd);
 					
 			MemberDTO memberDTO = memberService.login(map);
-			System.out.println(memberDTO);
+			//System.out.println(memberDTO);
 			
 			if(passEncoder.matches(map.get("pwd"), memberDTO.getPwd())) {
 				session.setAttribute("memId", memberDTO.getEmail());
@@ -75,14 +75,11 @@ public class LoginController {
 			}
 		
 		//로그아웃
-		@RequestMapping(value="logout", method=RequestMethod.GET)
-		public String logout(HttpSession session) {
-			System.out.println("세션="+session.getAttribute("memId"));
-//			session.removeAttribute("memId");
-			session.invalidate();
-			System.out.println("세션="+session.getAttribute("memId"));
-			return "/index";
-		}
+	      @RequestMapping(value="/logout", method=RequestMethod.GET)
+	      public ModelAndView logout(HttpSession session) {
+	         session.invalidate();
+	         return new ModelAndView("redirect:/");
+	      }
 		
 		//비밀번호 찾기
 		@RequestMapping(value="/getforgotId", method=RequestMethod.POST)
