@@ -22,7 +22,7 @@ String keyword = request.getParameter("keyword");
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=x4xnbzhxl0"></script>
-    <script src="/FoodFighter/resources/js/review/keyword.js"></script>
+  
     <title>리뷰보기</title>
 
 </head>
@@ -30,6 +30,7 @@ String keyword = request.getParameter("keyword");
 #reviewWriteBtn {
 	margin : 50px;
 }
+
 </style>
 <body> 
 
@@ -251,6 +252,7 @@ String keyword = request.getParameter("keyword");
 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
 <!--모달 script-->
+<script src="/FoodFighter/resources/js/review/keyword.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">    
 var modal = document.getElementById('myModal');
