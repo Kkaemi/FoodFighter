@@ -67,8 +67,6 @@ String keyword = request.getParameter("keyword");
  </form>
 
 
-
-<input type="hidden" value="${resSeq}" id="resSeq" name="resSeq">
 <!--리뷰 페이지-->
 <div class="reviewView-container">
 	<!--타이틀 및 점수-->
