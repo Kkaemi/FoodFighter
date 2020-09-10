@@ -1,3 +1,4 @@
+//유효성검사 
 $(document).ready(function(){
     var token = $("meta[name='_csrf']").attr("content");
     var header = $("meta[name='_csrf_header']").attr("content");
@@ -8,6 +9,7 @@ $(document).ready(function(){
 
 //유효성검사 
 $(document).ready(function(){
+
 	if(id == ''){
 		alert("로그인 후 리뷰작성이 가능합니다");
 		location.href="/FoodFighter/login/loginForm";

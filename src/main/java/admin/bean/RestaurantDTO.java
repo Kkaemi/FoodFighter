@@ -19,7 +19,6 @@ public class RestaurantDTO {
 	private String resMenu; // 대표메뉴
 	private String resImage1; // 가게 이미지 
 	private String resImage2;
-
 	
 	@Override
 	public String toString() {

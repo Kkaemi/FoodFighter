@@ -11,7 +11,8 @@ $(document).ready(function(){
 $(".moreBtn").click(function(){
 	let keyword = document.getElementById("keyword").value;
 	let pg = document.getElementById("pg").value;
-
+	
+	alert(pg);
 	var obj = {"keyword":keyword,"pg":pg};
     
 	$.ajax({
@@ -36,7 +37,7 @@ $(".moreBtn").click(function(){
 						let resTh = $('<li>카테고리:&emsp;'+ items.resTheme+'</li>');
 						let resPr = $('<li>가격대:&emsp;&emsp;'+items.resPrice+'</li>');
 					let storeMore = $('<div class = "storeMore"/>');
-						let detailPage = $('<a class = "reviewList_detailPage" href = "#" style ="color : #ffc34d;">가게이름 상세보기 ></a>');
+						let detailPage = $('<a id="gotoReviewView" class = "reviewList_detailPage" href = "/FoodFighter/review/reviewView?resSeq='+items.resSeq+'" style ="color : #ffc34d;">가게이름 상세보기 ></a>');
 
 			col3.append(img).appendTo(row);
 			storeMain.append(resN).append(resS);

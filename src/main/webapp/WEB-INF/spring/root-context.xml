@@ -13,7 +13,6 @@
 		
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<context:component-scan base-package="spring.conf" />
-
 	<!-- 리뷰리스트 파트 -->
 	<context:component-scan base-package="review.bean" />
 	<context:component-scan base-package="review.service" />
@@ -61,7 +60,6 @@
 			</props>
 		</property>
 	</bean>
-
 
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
       <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
