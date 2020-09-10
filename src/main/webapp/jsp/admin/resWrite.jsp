@@ -4,8 +4,10 @@
 <meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
 <script type="text/javascript">
 window.onload=function(){
-	
+	alert("가게데이터 입력 완료");
+	location.href="/FoodFighter";
 }
+
 $(document).ready(function(){
     var token = $("meta[name='_csrf']").attr("content");
     var header = $("meta[name='_csrf_header']").attr("content");

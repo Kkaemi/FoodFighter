@@ -5,7 +5,6 @@ import java.util.Map;
 
 import admin.bean.RestaurantDTO;
 
-
 public interface ReviewDAO {
 	
 	public void writeReview(Map<String, Object> map);
@@ -14,5 +13,5 @@ public interface ReviewDAO {
 
 	public RestaurantDTO getReviewView(String resSeq);
 
-
+	public List<RestaurantDTO> modalSearchList(Map<String, String> map);
 }
