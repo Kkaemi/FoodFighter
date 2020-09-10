@@ -25,10 +25,17 @@ String keyword = request.getParameter("keyword");
 <title>List 화면</title>
 </head>
 <body>
+<<<<<<< HEAD
 <input type="hidden" value="${resSeq}" id="resSeq" name="resSeq">
 
 <form id="headerForm" name="headerForm" method="post" action="./review/getSearchList">
 <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"> 
+=======
+<input type="hidden" value="${restaurantDTO.resSeq}" id="resSeq" name="resSeq">
+
+<form id="headerForm" name="headerForm" method="post" action="../review/getSearchList">
+<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+>>>>>>> upstream/master
 
 	<!--================ Header ================-->
 	<div id="header-container">
@@ -142,9 +149,17 @@ String keyword = request.getParameter("keyword");
 		  			<li>카테고리:&emsp; ${restaurantDTO.resTheme}</li>
 		  			<li>가격대:&emsp;&emsp;${restaurantDTO.resPrice}</li>
 		  		</ul>
+<<<<<<< HEAD
 		  		<div class="storeMore"><a id="gotoReviewView" class="reviewList_detailPage" href="/FoodFighter/review/reviewView?resSeq=${restaurantDTO.resSeq}" style="color: #ffc34d;">가게이름 상세보기 ></a></div>
 	   		</div><!-- col-sm-9 -->
 	   </div><hr><!-- row -->
+=======
+
+	  		<div class="storeMore"><a id="gotoReviewView" class="reviewList_detailPage" href="/FoodFighter/review/reviewView?resSeq=${restaurantDTO.resSeq}" style="color: #ffc34d;">가게이름 상세보기 ></a></div>
+   		</div><!-- col-sm-9 -->
+   </div><hr><!-- row -->
+
+>>>>>>> upstream/master
 	</c:forEach>
 </c:if>
 </div>
@@ -188,7 +203,12 @@ String keyword = request.getParameter("keyword");
  <script src="/FoodFighter/resources/js/review/keyword.js"></script>
  <script src="/FoodFighter/resources/js/review/review_searchList.js"></script>	
  
+<<<<<<< HEAD
 <script>
 let resSeq = "${restaurantDTO.resSeq}";
 </script>
+=======
+
+
+>>>>>>> upstream/master
 </html>

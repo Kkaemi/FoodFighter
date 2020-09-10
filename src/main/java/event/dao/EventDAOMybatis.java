@@ -63,4 +63,13 @@ public class EventDAOMybatis implements EventDAO {
 		return sqlSession.selectOne("eventSQL.geteventSearchTotalA", map);
 	}
 
+	@Override
+	public void eventBoardListDelete(List<String> list) {
+		for (int i = 0; i < list.size(); i++) {
+			String temp = list.get(i);
+			System.out.println(temp);
+			sqlSession.update("eventSQL.eventBoardListDelete",temp);
+		}
+	}
+
 }

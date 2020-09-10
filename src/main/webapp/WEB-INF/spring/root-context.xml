@@ -60,6 +60,15 @@
 			</props>
 		</property>
 	</bean>
+	
+	<!--  <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+	      <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+	      <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+	      <property name="username" value="c##java"/>
+	      <property name="password" value="bit"/>
+	      <property name="maxTotal" value="20"/>
+	      <property name="maxIdle" value="3"/>
+   	</bean>  -->
 
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
       <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>

@@ -32,7 +32,6 @@ public class LoginController {
 	@Autowired 
 	private JavaMailSender mailSender;
 	
-	///////////////////////////////////////////////////
 	// 로그인 폼
 	@RequestMapping(value="loginForm", method=RequestMethod.GET)
 	public String loginForm() {
@@ -62,19 +61,24 @@ public class LoginController {
 			//System.out.println(pwd+", "+enCodePwd);
 					
 			MemberDTO memberDTO = memberService.login(map);
-			//System.out.println(memberDTO.getAuthority());
 			
 			if(passEncoder.matches(map.get("pwd"), memberDTO.getPwd())) {
 				session.setAttribute("memId", memberDTO.getEmail());
 				session.setAttribute("memberDTO", memberDTO);
-
 				
-					return "success";
-					
+				if (memberDTO.getNickname().equals("관리자")) {
+					return "admin";
+
 				} else {
 					
-					return "fail";
+					 return "success";
 				}
+			
+			}else {
+				
+				return "fail";
+			}
+		
 			}
 		
 		//카카오로그인
@@ -91,17 +95,39 @@ public class LoginController {
 
 				
 					return "success";
+
 				} else {
+					
 					return "fail";
 				}
 			}
 		
+		//카카오로그인
+//		@RequestMapping(value="kakaologin", method=RequestMethod.POST)
+//		public @ResponseBody String kakaologin(@RequestParam String email,
+//										  HttpSession session) {
+//				
+//			MemberDTO memberDTO = memberService.kakaologin(email);
+//			//System.out.println(memberDTO);
+//			
+//			if(memberDTO != null) {
+//			session.setAttribute("memId", memberDTO.getEmail());
+//			session.setAttribute("memberDTO", memberDTO);
+//
+//				
+//					return "success";
+//				} else {
+//					return "fail";
+//				}
+//			}
+		
 		//로그아웃
-		@RequestMapping(value="/logout", method=RequestMethod.GET)
-		public ModelAndView logout(HttpSession session) {
-			session.invalidate();
-			return new ModelAndView("redirect:/");
-		}
+	      @RequestMapping(value="/logout", method=RequestMethod.GET)
+	      public ModelAndView logout(HttpSession session) {
+	         session.invalidate();
+	         return new ModelAndView("redirect:/");
+	      }
+
 		
 		//비밀번호 찾기
 		@RequestMapping(value="/getforgotId", method=RequestMethod.POST)

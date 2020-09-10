@@ -205,7 +205,6 @@ public class EventController {
 		//페이징 처리
 		EventPaging eventPaging = eventService.eventPaging(map);
 		
-		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("pg", map.get("pg"));
 		mav.addObject("list",list);
@@ -213,6 +212,12 @@ public class EventController {
 		mav.setViewName("jsonView");
 		return mav;
 		
+	}
+	
+	@RequestMapping(value = "eventBoardListDelete", method = RequestMethod.POST)
+	@ResponseBody
+	public void eventBoardListDelete(@RequestParam(value="deleteSelect[]")List<String> list) {
+		eventService.eventBoardListDelete(list);	
 	}
 	
 }

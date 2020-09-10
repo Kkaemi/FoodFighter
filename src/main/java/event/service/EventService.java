@@ -26,5 +26,7 @@ public interface EventService {
 
 	public EventPaging eventPaging(Map<String, String> map);
 
+	public void eventBoardListDelete(List<String> list);
+
 
 }

@@ -13,11 +13,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   </delete>
   
   <update id="modify" parameterType="member">
-  	update testmember set name=#{name}, where email=#{email}
-  </update>	 
+  	update testmember set name=#{name} where email=#{email}
+  </update>	  
   
   <update id="modifyP" parameterType="member">
-  	update testmember set name=#{name},profile=#{profile} where email=#{email}
+  	update testmember set name=#{name},profile=#{profile,jdbcType=VARCHAR} where email=#{email}
   </update>	 
   
   <update id="modifyPwd" parameterType="java.util.Map">
