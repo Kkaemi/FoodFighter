@@ -22,4 +22,6 @@ public interface MemberDAO {
 	public MemberDTO userInfo(Map<String, String> map);
 
 	public MemberDTO kakaologin(String email);
+
+	public void socialWrite(MemberDTO memberDTO);
 }

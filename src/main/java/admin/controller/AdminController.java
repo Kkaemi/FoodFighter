@@ -17,6 +17,7 @@ import java.io.IOException;
 
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -88,11 +89,11 @@ public class AdminController {
 			map.put("endNum",endNum);
 			
 			
-			//List<MemberDTO> list = adminService.getResList(map); 
+			List<MemberDTO> list = adminService.getResList(map); 
 			
 			model.addAttribute("pg", pg);
 			model.addAttribute("adminShopPaging", adminShopPaging);
-			//model.addAttribute("list", list); 
+			model.addAttribute("list", list); 
 			model.addAttribute("display","/jsp/admin/adminShopManagement.jsp");
 			return "/jsp/admin/adminMain";
 
@@ -106,19 +107,20 @@ public class AdminController {
 		}
 	//회원검색	
 		@RequestMapping(value = "getMemberSearch", method = RequestMethod.POST)
-		public String getMemberSearch(Model model,@RequestParam Map<String, Object> map) {
+		public @ResponseBody ModelAndView getMemberSearch(Model model,@RequestParam Map<String, Object> map) {
 			System.out.println("키워드= "+map.get("memSearchKeyword"));
 			
 			AdminMemberPaging adminMemberPaging = adminService.getSearchPaging(map);
 			
 			
 			List<MemberDTO> list = adminService.getMemberSearch(map);
-			System.out.println(list.size());
-			model.addAttribute("pg", map.get("pg"));
-			model.addAttribute("adminMemberPaging", adminMemberPaging);
-			model.addAttribute("list", list);
-			
-			return "/jsp/admin/adminMemberManagement";
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("list", list);
+			mav.addObject("pg", map.get("pg"));
+			mav.addObject("adminMemberPaging", adminMemberPaging);
+			mav.setViewName("jsonView");
+
+			return mav;
 
 		}
 		//가게 삭제

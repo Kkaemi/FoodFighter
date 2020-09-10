@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ <meta id="_csrf" name="_csrf" content="${_csrf.token}" />
+ <meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
 <title>회원가입</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -44,6 +46,50 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript">
+$(document).ready(function(){
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+    $(document).ajaxSend(function(e, xhr, options) {
+        xhr.setRequestHeader(header, token);
+    });
+});
+
+$('#kakaoBtn').click(function(){
+	Kakao.init('2b37811e9fe31f7968899e4c31119899');
+	Kakao.Auth.loginForm({
+	    success: function(authObj) {
+
+		   Kakao.API.request({
+		      url:'/v2/user/me',
+		      success: function(res){
+				
+	           	let email = res.kakao_account.email;
+
+				$.ajax({
+						type : 'post',
+						url : '/FoodFighter/member/kakaoSignup',
+						data : 'email=' + email,
+						dataType : 'text',
+						success : function() {
+							location.href = '/FoodFighter/member/socialSignupForm';
+						},
+						error : function(err) {
+							console.log(err);
+						}
+					});	
+		      	  }
+	           	
+		   		});
+		     console.log(authObj);
+		    let token = authObj.access_token;
+		
+		  },
+		  fail: function(err) {
+		     alert(JSON.stringify(err));
+		  }
+		  
+	});
+});
 </script>
 </body>
 

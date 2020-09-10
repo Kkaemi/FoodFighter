@@ -59,5 +59,11 @@ public class MemberDAOMybatis implements MemberDAO {
 	public MemberDTO kakaologin(String email) {
 		return sqlSession.selectOne("memberSQL.kakaologin", email);
 	}
+
+	@Override
+	public void socialWrite(MemberDTO memberDTO) {
+		sqlSession.insert("memberSQL.socialWrite", memberDTO);
+		
+	}
 	
 }

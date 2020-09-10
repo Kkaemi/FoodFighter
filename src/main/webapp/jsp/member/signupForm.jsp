@@ -325,7 +325,8 @@ $('#emailCheckBtn').click(function(){
 				url : '/FoodFighter/member/signup',
 				data : $('#signupForm').serialize(),
 				success : function() {
-					location.href = '/FoodFighter/member/signupChoice';
+					alert("회원가입 완료!");
+					location.href = '/FoodFighter/';
 
 				},
 				error : function(e) {
