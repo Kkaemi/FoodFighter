@@ -8,8 +8,17 @@
     background-color: #fff;
 	box-shadow:0px 6px 9px 0px rgba(0,0,0,0.06);
 }	
+#header-menu{
+	margin-top:13px;
+	margin-left:560px;
+}
+#header-menu a:hover{
+	color: #FF6A4D;
+    text-decoration: none;
+}
 #header-menu li{
 	padding-left:40px;
+	/* padding-left:20px; */
 	list-style:none; 
 	font-color: #ffc34d;
 	display:inline;
@@ -25,26 +34,6 @@
 	font-weight:bold;
     font-size:16px;
 	
-}
-#header-menu li{
-	padding-left:20px;
-	color: #FF6A4D;
-	list-style:none; 
-	display:inline;
-    font-weight:bold;
-    font-size:16px;
-}
-#header-menu a:hover{
-	color: #FF6A4D;
-    text-decoration: none;
-}
-#header-menu{
-	margin-top:13px;
-	margin-left:560px;
-}
-#header-menu a:hover{
-	color: #FF6A4D;
-    text-decoration: none;
 }
 .header_searchInput{
 	height: 50px;
@@ -82,7 +71,6 @@
    outline: none;
 }
 
-
 /* Footer */
 #footer-container{
     width:100%;
@@ -103,6 +91,7 @@
 .back-to-top {
   background: rgba(0,0,0,0);
   opacity: 0.6;
+  z-index: 100;
   position: fixed;
   display: none;
   background: #fec34d;
@@ -190,6 +179,10 @@
 	height:32px;
 	opacity: 0.6;	
 }
+.row{
+	list-style:none; 
+	display:inline;
+}
 .row_StoreImg{
 	width:220px;
 	height:200px;
@@ -236,13 +229,13 @@
 	margin:0 auto;
 	padding:0;
 }
-.storeName{
+.resName{
 	font-weight:bold;
 	font-size:33px;
 	align:left;
 	margin-left:0px;
 }
-.storeAvg{
+.resScore{
 	font-size:45px;
 	color:#ffc34d;
 }
@@ -283,5 +276,6 @@
 	border-shadow:none;
   	border:2px solid #ffc34d;
 }
-  
-  
+#emptyDiv{
+	height:300px;
+}

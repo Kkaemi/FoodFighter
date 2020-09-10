@@ -1,12 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%
+request.setCharacterEncoding("utf-8");
+String keyword = request.getParameter("keyword");
+%> 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="kor">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel= "stylesheet" type="text/css" href="/FoodFighter/resources/css/bootstrap.css">
-    <link rel= "stylesheet" type="text/css" href="/FoodFighter/resources/css/reviewView.css">
+    <link rel= "stylesheet" type="text/css" href="/FoodFighter/resources/css/review/bootstrap.css">
+    <link rel= "stylesheet" type="text/css" href="/FoodFighter/resources/css/review/reviewView.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -17,52 +22,58 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=x4xnbzhxl0"></script>
-    <title>Document</title>
+  
+    <title>리뷰보기</title>
 
 </head>
+<style>
+#reviewWriteBtn {
+	margin : 50px;
+}
 
+</style>
 <body> 
 
-<nav class="navbar navbar-b navbar-trans navbar-expand-md fixed-top" id="mainNav">
-    <div class="nav-container">
-      <a class="navbar-brand js-scroll" href="/FoodFighter/">로고 자리</a>
-      
-      <div class="navbar-collapse collapse justify-content-end" id="navbarDefault">
-        <ul id="navbar-nav">
-	        <li class="nav-search">
-	    		<img src="/FoodFighter/resources/img/search.png" class="header_searchIcon" width="30" height="30" align="center"> 
-		    	<input type="text" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" value="" autocomplete="on" maxlength="50" >
-	        </li>
-	        <li class="nav-item">
-	           <a class="nav-link js-scroll active" href="/FoodFighter/">Home</a>
-	        </li>
-	        <li class="nav-item">
-	           <a class="nav-link js-scroll" href="/FoodFighter/review/reviewNonSearch">리뷰 리스트</a>
-	        </li>
-	        <li class="nav-item">
-	          <a class="nav-link js-scroll" href="/FoodFighter/community/communityMain">커뮤니티</a>
-	        </li>
-	        <li class="nav-item">
-	          <a class="nav-link js-scroll" href="/FoodFighter/event/eventList">이벤트</a>
-	        </li>
-	        <li class="nav-item">
-	          <a class="nav-link js-scroll">
+
+<!--================ Header ================-->
+<form id="headerForm" name="headerForm" method="post" action="../review/getSearchList">
+<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+	<div id="header-container">
+	  <a class="header-logo" href="/FoodFighter"><img src="../resources/img/logo.png" width="250px;" height="55px;" align="left" style="margin-top: 10px; margin-left: 200px;"></a>
+	      <ul id="header-menu">
+		      <li class="header-items">
+		  		<img src="../resources/img/search.png" class="header_searchIcon" width="30" height="30" align="center"> 
+		   		<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword" value="<%=keyword%>" autocomplete="on" maxlength="50" >
+		   		<button size="10" id="header_searchBtn">검색</button>
+		      </li>
+		       <li class="nav-item">
+		           <a class="nav-link js-scroll active" href="/FoodFighter">Home</a>
+		       </li>
+		       <li class="nav-item">
+	         	  <a class="nav-link js-scroll" href="/FoodFighter/review/reviewNonSearchList">리뷰 리스트</a>
+	          </li>
+	          <li class="nav-item">
+	           <a class="nav-link js-scroll" href="/FoodFighter/community/communityMain">커뮤니티</a>
+	          </li>
+	          <li class="nav-item">
+	            <a class="nav-link js-scroll" href="/FoodFighter/event/eventList">이벤트</a>
+	          </li>
+	          <li class="nav-item">
+	            <a class="nav-link js-scroll">
 	            <img src="/FoodFighter/resources/img/member.png" class="header_searchIcon" width="30" height="30" align="center">
 	            </a>
-	        </li>
-       	 </ul>
-      </div>
-    </div>
-  </nav>
+     	     </li>
+	   	</ul>
+	</div>
+ </form>
 
 
-</header>
 <!--리뷰 페이지-->
 <div class="reviewView-container">
-    <!--타이틀 및 점수-->
+	<!--타이틀 및 점수-->
     <div class="title">
-        <span id="title">서울음식점<span>
-        <span class="review-score">4.3</span>   
+        <span id="title"><span>
+        <span class="review-score"></span>   
         <!--북마크-->
         <span id="bookmark-group"  onclick="bookmarkChange()">
             <span class="fa fa-bookmark-o" id="bookmark"></span>
@@ -89,42 +100,42 @@
 
     <!--가게 정보-->
     <div class="restaurant-info">
-   
+   		
         <div class="table-div">
             <table class="table">
                 <tbody>
               
                     <tr class="table">
                         <th>주소</th>
-                        <td>서울 강남구 어쩌고 저쩌고 </td>
+                        <td><span id="resAddress"></span></td>
                     </tr>
                     <tr>
                         <th>전화번호</th>
-                        <td>02-725-1557</td>
+                        <td><span id="resTel"></span></td>
                     
                     </tr>
                     <tr>
                         <th>음식 종류</th>
-                        <td>한정식 / 백반/ 정통 한식</td>
+                        <td><span id="resTheme"></span></td>
                     </tr>
                     <tr>
                         <th>가격대</th>
-                        <td>만원 - 2만원</td>
+                        <td><span id="resPrice"></span></td>
                     </tr>
                     <tr>
                         <th>영업시간</th>
-                        <td>10:00 - 18:00</td>
+                        <td><span id="resHours"></span></td>
                     </tr>
                     <tr>
                         <th>휴일</th>
-                        <td>월</td>
+                        <td><span id="resClosing"></span></td>
                     </tr>
                   
                     <tr>
                         <th>메뉴</th>
                         <td>
                             <div class="menu">
-                                <span id="menu-text">서울앞바다 멍게 비빔밥 </span>
+                                <span id="menu-text"></span>
                             </div>
                         </td>
                     </tr>
@@ -156,7 +167,6 @@
                     center: new naver.maps.LatLng(37.3595704, 127.105399),
                     zoom: 15
                 });
-
                 var marker = new naver.maps.Marker({
                     position: new naver.maps.LatLng(37.3595704, 127.105399),
                     map: map
@@ -169,6 +179,7 @@
 
     <!--리뷰-->
     <div class="review-list">
+    
         <div class="review-count">
             <button class="review-count-btn-selected">전체(72)</button>
             |
@@ -181,12 +192,10 @@
 
         <div class="restaurant-images">
             <div id="direc-icon-left" class="glyphicon glyphicon-chevron-left"></div>
-                <img id="myImg" class="restaurant-image" src="/FoodFighter/resources/img/review/category-list/냉면2.jpg">
-                <img class="restaurant-image" src="/FoodFighter/resources/img/review/category-list/냉면3.jpg">
-                <img class="restaurant-image" src="/FoodFighter/resources/img/review/category-list/냉면4.jpg">
-                <img class="restaurant-image" src="/FoodFighter/resources/img/review/category-list/냉면5.jpg">
-                <img class="restaurant-image" src="/FoodFighter/resources/img/review/category-list/냉면6.jpg">
-                <img class="restaurant-image" src="/FoodFighter/resources/img/review/category-list/냉면7.jpg">
+                <img class="restaurant-image" id="restaurant-image">
+                <img class="restaurant-image">
+                <img class="restaurant-image">
+
             
             <div id="direc-icon-right" class="glyphicon glyphicon-chevron-right"></div>
 
@@ -213,8 +222,8 @@
                         또 가고 싶어요!!
                     </div>
                     <div class="review-images">
-                        <img class="review-image1" src="/FoodFighter/resources/img/review/category-list/냉면1.jpg">
-                        <img class="review-image2" src="/FoodFighter/resources/img/review/category-list/냉면2.jpg">
+                        <img class="review-image1" src="/FoodFighter/resources/img/review/list-img/냉면1.jpg">
+                        <img class="review-image2" src="/FoodFighter/resources/img/review/list-img/냉면2.jpg">
                     </div>
                 </div>
             </div>
@@ -243,11 +252,11 @@
 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
 <!--모달 script-->
+<script src="/FoodFighter/resources/js/review/keyword.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">    
 var modal = document.getElementById('myModal');
-
-var img = document.getElementById('myImg');
-
+var img = document.getElementById('restaurant-image');
 var modalImg = document.getElementById("img01");
 var captionText = document.getElementById("caption");
 img.onclick = function(){
@@ -255,13 +264,10 @@ img.onclick = function(){
   modalImg.src = this.src;
   captionText.innerHTML = this.alt;
 }
-
 var span = document.getElementsByClassName("close")[0];
-
 span.onclick = function() { 
   modal.style.display = "none";
 }
-
 </script>
 
 <!-- 북마크 클릭 시 색깔 바꾸기 -->
@@ -271,7 +277,32 @@ function bookmarkChange() {
     document.getElementById("bookmark").style.cssText ="color :#ffa64d; font-size : 40px; margin-left:543px;";
     document.getElementById("bookmark-name").style.cssText ="color :#ffa64d;";
 }
-
 </script>
 
+<!-- db데이터가져오기 -->
+<script type="text/javascript">
+$(document).ready(function(){
+	$.ajax({
+		type : 'post',
+		url : '/FoodFighter/review/getReviewView',
+		data : 'resSeq=${resSeq}',
+		dataType : 'json',
+		success : function(data){
+			//alert(JSON.stringify(data));
+			$('#restaurant-image').attr('src', '/FoodFighter/src/webapp/storage/restaurant/'+data.restaurantDTO.resImage1);
+			$('#title').text(data.restaurantDTO.resName);
+			$('#resAddress').text(data.restaurantDTO.resAddress);
+			$('#resTel').text(data.restaurantDTO.resTel);
+			$('#resTheme').text(data.restaurantDTO.resTheme);
+			$('#resPrice').text(data.restaurantDTO.resPrice);
+			$('#resHours').text(data.restaurantDTO.resHours);
+			$('#resClosing').text(data.restaurantDTO.resClosing);
+			$('#menu-text').text(data.restaurantDTO.resMenu);
+			
+		}, error : function(err){
+			console.log(err);
+		}
+	});
+});
+</script>
 </html>

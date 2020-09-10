@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="adminSQL">
+	<select id="getMemberList" parameterType="java.util.Map"  resultType="member">
+		<![CDATA[select * from (select @ROWNUM := @ROWNUM + 1 as rn,tt.* 
+ 						from (select * from testmember,(SELECT @ROWNUM :=0) R order by member_seq)tt)list
+ 								where rn>=#{startNum} and rn<=#{endNum}]]> 
+	</select>
+<!-- 회원 페이징 -->	
+	<select id="getMemberTotalA" resultType="int">
+		select count(*) from testmember
+	</select>
+<!-- 회원탈퇴  -->
+	<delete id="AdminWithdraw" parameterType="int">
+		delete  from testmember where member_seq= #{member_seq}
+	</delete>
+	
+<!-- 검색한 결과의 총 글 개수  -->
+	 <select id="getSearchTotalA" parameterType="java.util.Map" resultType="int" >
+	 	select count (*) from testmember where (email || name || nickname) like '%'||#{memSearchKeyword}||'%'
+	 </select>
+	
+<!-- 검색한  글 목록 가져오기 -->
+ 	<select id="getMemberSearch" parameterType="java.util.Map" resultType="member">
+ 	<![CDATA[select * from (select @ROWNUM := @ROWNUM + 1 as rn,tt.* from 
+ 					(select * from testmember,(SELECT @ROWNUM :=0) R 
+ 							where (email || name || nickname) like '%'||#{memSearchKeyword}||'%' order by member_seq)tt)list
+ 									where rn>=#{startNum} and rn<=#{endNum} ]]>
+ 	</select>
+ 	
+ <!-- 가게 페이징  -->
+ 	<select id="getShopTotalA" resultType="int">
+		select count(*) from restaurant
+	</select>
+	
+<!-- 	<select id="getResList" parameterType="java.util.Map"  resultType="restaurant">
+		<![CDATA[select * from (select @ROWNUM := @ROWNUM + 1 as rn,tt.* 
+ 						from (select * from restaurant,(SELECT @ROWNUM :=0) R order by resSeq)tt)list 
+ 								where rn>=#{startNum} and rn<=#{endNum}]]> 
+	</select> -->
+	
+<!-- 	<delete id="adminShopDelete" parameterType="int">
+		delete  from restaurant where resSeq= #{resSeq}
+	</delete> -->
+	
+</mapper>

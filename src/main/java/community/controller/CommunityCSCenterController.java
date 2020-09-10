@@ -21,6 +21,7 @@ import community.service.CommunityBoardService;
 @Controller
 @RequestMapping(value = "community")
 public class CommunityCSCenterController {
+
 	@Autowired
 	private CommunityBoardService communityBoardService;
 	

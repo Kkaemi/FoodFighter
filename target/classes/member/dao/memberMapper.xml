@@ -3,9 +3,15 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="memberSQL">
+
   <insert id="write" parameterType="member">
+<<<<<<< HEAD
 	insert into testmember (member_seq, email, pwd, name, nickname,roleId,socialLogin,signupDate) values (member_seq.nextval,#{email},#{pwd},#{name},#{nickname},'ROLE_USER',0,sysdate)
+=======
+	insert into testmember (member_seq,email, pwd, name, nickname,roleId,socialLogin,signupDate) values (nextval(member_seq),#{email},#{pwd},#{name},#{nickname},'ROLE_USER',0,now())
+>>>>>>> upstream/master
   </insert>
+
 
   <select id="checkEmail" parameterType="String" resultType="member">
   	select * from testmember where email=#{email}
@@ -17,6 +23,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   
   <!-- 로그인 -->
 	<select id="login" parameterType="java.util.Map" resultType="member">
+		select * from testmember where email=#{email}
+	</select>
+	
+	<!-- 카카오로그인 -->
+	<select id="kakaologin" parameterType="String" resultType="member">
 		select * from testmember where email=#{email}
 	</select>
 	
