@@ -6,7 +6,7 @@
       http://www.springframework.org/schema/security https://www.springframework.org/schema/security/spring-security-5.2.xsd">
 
    <bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
-   
+   	<!-- 데이터 문제때문에 임의로 수정(양효정) -->
   	<security:http use-expressions="true"> 
 		<security:intercept-url pattern="/storage/**" access="permitAll" />
 		
@@ -22,7 +22,7 @@
       
       <security:intercept-url pattern="/event/eventList" access="permitAll"/> -->
       
-   <!--    <security:intercept-url pattern="/event/eventWriteForm" access="hasRole('ROLE_USER')"/> -->
+  	 <!--    <security:intercept-url pattern="/event/eventWriteForm" access="hasRole('ROLE_USER')"/> -->
 
       <security:logout logout-url="/login/logout" invalidate-session="true" delete-cookies="JSESSIONID"/>
       
