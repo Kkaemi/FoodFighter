@@ -59,25 +59,15 @@
           </li>
           <li class="nav-item">
             <a class="nav-link js-scroll" href="/FoodFighter/event/eventList">이벤트</a>
-            <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
           </li>
-          
           <li class="nav-item">
-           <c:if test="${sessionScope.memId == null}">
-            <a class="nav-link js-scroll" href="/FoodFighter/login/loginForm">로그인</a> 
-            
-            <li>
-           <a class="nav-link js-scroll" href="/FoodFighter/member/signupChoice">회원가입</a>
-           </li>
-            </c:if>	       
-          <!--   <img src="/FoodFighter/resources/img/member.png" class="header_searchIcon" width="30" height="30" align="center"> -->
-         
-         	<c:if test="${memId != null}">
-			 <a class="nav-link js-scroll" href="/FoodFighter/login/logout">로그아웃</a>	
-			 </c:if> 
+            <a class="nav-link js-scroll">
+            <img src="/FoodFighter/resources/img/member.png" id="headerUser" class="header_searchIcon" width="30" height="30" align="center">
+            </a>
           </li>
-          
-          
+          <!-- <li class="nav-item">
+            <a class="nav-link js-scroll" href="#blog"><img src="./img/member.png" class="header_searchIcon" width="30" height="30" align="center"></a>
+          </li> -->
         </ul>
       </div>
     </div>
@@ -91,7 +81,13 @@
 	  	<button type="button" id="loginBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/login/loginForm'" >로그인</button>
 	  	<button type="button" id="signupBtn" class="headUserMenu-Btn" onclick="location.href='/FoodFighter/member/signupChoice'" >회원가입</button>
   	</c:if>
-  	<c:if test="${sessionScope.memId != null}">
+  	<c:if test="${sessionScope.memId == 'admin@admin.com'}">
+  		<p>관리자로<br> 로그인 하셨습니다. </p>
+  		<hr>
+	  	<button type="button" id="adminBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/admin/adminMain'" >관리자페이지</button>
+	  	<button type="button" id="logoutBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/login/logout'">로그아웃</button>
+  	</c:if>
+  	<c:if test="${sessionScope.memId != null && sessionScope.memId != 'admin@admin.com'}">
   		<p>맛집을 찾아보고 <br> 후기를 남겨보세요.</p>
   		<hr>
 	  	<button type="button" id="mypageBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/mypage/mypageMain'" >마이페이지</button>

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -172,9 +173,9 @@ public class MyPageController {
 	//정보수정
 	@RequestMapping(value="modify",method=RequestMethod.POST)
 	@ResponseBody
-	public void modify(@ModelAttribute MemberDTO memberDTO,@RequestParam MultipartFile profileFile) {
+	public void modify(@ModelAttribute MemberDTO memberDTO,@RequestPart MultipartFile profileFile) {
 		System.out.println("빈값 넘어올 때= "+profileFile);
-		if(profileFile != null) {
+		if(!profileFile.isEmpty()) {
 			String filePath="D:\\reallysong\\FoodFighter\\src\\main\\webapp\\storage\\profile";
 		
 			String fileName = profileFile.getOriginalFilename();
@@ -187,6 +188,8 @@ public class MyPageController {
 			}
 			
 			memberDTO.setProfile(fileName);
+		}else {
+			memberDTO.setProfile(null);
 		}
 		
 		mypageService.modify(memberDTO);

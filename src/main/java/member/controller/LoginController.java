@@ -61,11 +61,6 @@ public class LoginController {
 			//System.out.println(pwd+", "+enCodePwd);
 					
 			MemberDTO memberDTO = memberService.login(map);
-<<<<<<< HEAD
-			//System.out.println(memberDTO);
-=======
-			
->>>>>>> upstream/master
 			
 			if(passEncoder.matches(map.get("pwd"), memberDTO.getPwd())) {
 				session.setAttribute("memId", memberDTO.getEmail());
@@ -127,19 +122,12 @@ public class LoginController {
 //			}
 		
 		//로그아웃
-<<<<<<< HEAD
 	      @RequestMapping(value="/logout", method=RequestMethod.GET)
 	      public ModelAndView logout(HttpSession session) {
 	         session.invalidate();
 	         return new ModelAndView("redirect:/");
 	      }
-=======
-		@RequestMapping(value="/logout", method=RequestMethod.GET)
-		public ModelAndView logout(HttpSession session) {
-			session.invalidate();
-			return new ModelAndView("redirect:/");
-		}
->>>>>>> upstream/master
+
 		
 		//비밀번호 찾기
 		@RequestMapping(value="/getforgotId", method=RequestMethod.POST)

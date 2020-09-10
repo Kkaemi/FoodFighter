@@ -21,9 +21,9 @@ import community.service.CommunityBoardService;
 @Controller
 @RequestMapping(value = "community")
 public class CommunityCSCenterController {
-
-	@Autowired
-	private CommunityBoardService communityBoardService;
+	//->BoardService를 사용하시면 안되고 csCenterService로 사용하셔야 되기 때문에 주석처리합니다.
+	//@Autowired
+	//private CommunityBoardService communityBoardService;
 	
 	// cs center
 	@RequestMapping(value = "csCenter", method = RequestMethod.GET)
@@ -44,15 +44,15 @@ public class CommunityCSCenterController {
 	public ModelAndView getQnaList(@RequestParam String pg, HttpSession session, HttpServletResponse response) {
 
 		// 1페이지 당 5개씩
-		List<QnAboardDTO> list = communityBoardService.getBoardList(pg);
+		//List<QnAboardDTO> list = communityBoardService.getBoardList(pg);
 
 		// 페이징 처리
-		BoardPaging boardPaging = communityBoardService.boardPaging(pg);
+		//BoardPaging boardPaging = communityBoardService.boardPaging(pg);
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("pg", pg);
-		mav.addObject("list", list);
-		mav.addObject("boardPaging", boardPaging);
+		//mav.addObject("list", list);
+		//mav.addObject("boardPaging", boardPaging);
 
 		mav.setViewName("jsonView");
 

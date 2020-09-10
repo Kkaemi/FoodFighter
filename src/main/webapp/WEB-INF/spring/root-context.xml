@@ -60,34 +60,25 @@
 			</props>
 		</property>
 	</bean>
-<<<<<<< HEAD
 	
-	 <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+	<!--  <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
 	      <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
 	      <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
 	      <property name="username" value="c##java"/>
 	      <property name="password" value="bit"/>
 	      <property name="maxTotal" value="20"/>
 	      <property name="maxIdle" value="3"/>
-   	</bean>
-   	
-  <!--  	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
-=======
+   	</bean>  -->
 
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
->>>>>>> upstream/master
       <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
       <property name="url" value="jdbc:mysql://foodfighter.ci7ykwrhuqgy.ap-northeast-2.rds.amazonaws.com/FoodFighter?useSSL=false&amp;"/>
       <property name="username" value="admin"/>
       <property name="password" value="admin123"/>
       <property name="maxTotal" value="20"/>
       <property name="maxIdle" value="3"/>
-<<<<<<< HEAD
-   </bean> -->
-=======
    </bean>
 
->>>>>>> upstream/master
 
 	<bean id="sqlSessionFactory"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
