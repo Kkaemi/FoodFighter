@@ -185,7 +185,9 @@ a.now,a.now:visited {
 	font-weight: bold;
 }
 
-
+#review-resName {
+	text-align: center;
+}
 /* Header */
 #header-container{
 	width:100%;

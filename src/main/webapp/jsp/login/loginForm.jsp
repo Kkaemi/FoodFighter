@@ -84,23 +84,13 @@
 
 <script src="/FoodFighter/resources/js/review/keyword.js"></script>
 <script type="text/javascript">
-<<<<<<< HEAD
-/* $(document).ready(function(){
-=======
- $(document).ready(function(){
->>>>>>> upstream/master
+$(document).ready(function(){
     var token = $("meta[name='_csrf']").attr("content");
     var header = $("meta[name='_csrf_header']").attr("content");
     $(document).ajaxSend(function(e, xhr, options) {
         xhr.setRequestHeader(header, token);
     });
-<<<<<<< HEAD
-}); */
-
-=======
 });
- 
->>>>>>> upstream/master
 //header부분 키워드 입력 시, 검색 버튼 나타는 기능
 $('.header_searchInput').click(function(){
    $('#header_searchBtn').addClass('show');

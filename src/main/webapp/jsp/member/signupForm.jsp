@@ -128,7 +128,7 @@ $(document).ready(function(){
 $('#email').focusout(function(){
 		$('#emailDiv').empty();
 		let email = $('#email').val();
-		if(email == ""){
+		if($('#email').val() == ''){
 			$('#emailDiv').text("먼저 아이디를 입력하세요");
 			$('#email').focus();
 			$('#emailDiv').css('color','blue');
@@ -169,7 +169,7 @@ $('#email').focusout(function(){
 $('#nickname').focusout(function(){
 	$('#nicknameDiv').empty();
 	let nickname = $('#nickname').val();
-	if(nickname == ""){
+	if($('#nickname').val() == ""){
 		$('#nicknameDiv').text("먼저 닉네임을 입력하세요");
 		$('#nickname').focus();
 		$('#nicknameDiv').css('color','blue');
@@ -182,6 +182,7 @@ $('#nickname').focusout(function(){
 	 		data: 'nickname='+nickname,
 	 		dataType: 'text',
 	 		success : function(data){
+	 			alert(data);
 	 			if(data == 'exist'){
 					$('#nicknameDiv').text('사용 불가능')
 					$('#nicknameDiv').css('color','magenta')
@@ -221,7 +222,7 @@ $('#sendEmailBtn').click(function() {
 			$('#emailDiv').text('올바른 형식으로 입력해주세요.');
 			$('#emailDiv').css('color', 'red');
 			
-		} else {	
+	} else {	
 			$('#sendEmailModal').modal();//발송 완료 모달
 			
 				

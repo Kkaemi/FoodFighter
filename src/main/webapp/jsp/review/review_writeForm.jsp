@@ -94,10 +94,7 @@
 					
 		 		
 			 <div class="button-group">
-<<<<<<< HEAD
-=======
 			 	<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
->>>>>>> upstream/master
 		 			<button type="button" class="btn btn-outline-light text-dark" id="reviewBtn">리뷰 작성</button>
 		 			<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"> 
 		  			<button type="reset" class="btn btn-outline-light text-dark" id="resetBtn">다시 작성</button>

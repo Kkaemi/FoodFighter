@@ -33,7 +33,7 @@
                  <c:if test="${list != null}">
   					<c:forEach var="RestaurantDTO" items="${list}">
                     <tr>
-                        <td class="resSeq">${RestaurantDTO.seq}</td>
+                        <td class="resSeq">${RestaurantDTO.resSeq}</td>
                         <td>${RestaurantDTO.resName}</td>
                         <td>${RestaurantDTO.resAddress}</td>
                         <td>${RestaurantDTO.resTel}</td>
@@ -65,7 +65,10 @@ $(document).ready(function(){
         xhr.setRequestHeader(header, token);
     });
 });
-
+$('.view').on('click',function(){
+	let resSeq = $(this).parent().prevAll(".resSeq").text();
+	location.href='/FoodFighter/review/reviewView?resSeq='+resSeq
+});
 $('.delete').on('click',function(){
 	let check = confirm("삭제처리 하시겠습니까?");
 	let resSeq = $(this).parent().prevAll(".resSeq").text();

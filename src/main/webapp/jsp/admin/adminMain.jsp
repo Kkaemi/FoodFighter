@@ -55,7 +55,7 @@
  <div class="adminMain">
  	<div id="sideMenu" class="sideMenu-part col-2">
  	  <div id="adminProfile"><img src="/FoodFighter/resources/img/member.png"><span>관리자</span></div>
- 	  <div class="menu"><a href="/FoodFighter/admin/adminDashboard"><span>dashboard</span></a></div>
+ 	  <div class="menu"><a href="/FoodFighter/admin/adminDashboard"><span>home</span></a></div>
  	  <div class="menu"><a href="/FoodFighter/admin/adminMemberManagement"><span>회원 관리</span></a></div>
  	  <div class="menu"><a href="/FoodFighter/admin/adminShopManagement"><span>가게 관리</span></a></div>
  	</div>

@@ -68,13 +68,13 @@ $(document).ready(function(){
 		            	    +'<img src="/FoodFighter/storage/review/'+items.image1+'" class="img-responsive">'
 		            	    +'</div>'
 		            	    
+		            	    +'<div id="review-resName" class="review-part">'
+		            	    +'<span>'+items.resName+'</span>'
+		            	    +'</div>'
+		            	    
 		            	    +'<div id="review-score" class="review-part">'
 		            	    +'<span class="fa fa-star checked"></span>'
-		            	    +'<span class="fa fa-star checked"></span>'
-		            	    +'<span class="fa fa-star checked"></span>'
-		            	    +'<span class="fa fa-star"></span>'
-		            	    +'<span class="fa fa-star"></span>'
-		            	    +'<span>'+data.resScore+'</span>'
+		            	    +'<span>'+items.resScore+'</span>'
 		            	    +'</div>'
 		            	    
 		            	    +'<div id="review-content" class="review-part">'
@@ -101,13 +101,13 @@ $(document).ready(function(){
 		            	    +'<img src="/FoodFighter/storage/review/'+items.image1+'" class="img-responsive">'
 		            	    +'</div>'
 		            	    
+		            	    +'<div id="review-resName" class="review-part">'
+		            	    +'<span>'+items.resName+'</span>'
+		            	    +'</div>'
+		            	    
 		            	    +'<div id="review-score" class="review-part">'
 		            	    +'<span class="fa fa-star checked"></span>'
-		            	    +'<span class="fa fa-star checked"></span>'
-		            	    +'<span class="fa fa-star checked"></span>'
-		            	    +'<span class="fa fa-star"></span>'
-		            	    +'<span class="fa fa-star"></span>'
-		            	    +'<span>'+data.resScore+'</span>'
+		            	    +'<span>'+items.resScore+'</span>'
 		            	    +'</div>'
 		            	    
 		            	    +'<div id="review-content" class="review-part">'
@@ -164,13 +164,13 @@ $('#addReviewList').click(function(){
 		            	    +'<img src="/FoodFighter/storage/review/'+items.image1+'" class="img-responsive">'
 		            	    +'</div>'
 		            	    
+		            	    +'<div id="review-resName" class="review-part">'
+		            	    +'<span>'+items.resName+'</span>'
+		            	    +'</div>'
+		            	    
 		            	    +'<div id="review-score" class="review-part">'
 		            	    +'<span class="fa fa-star checked"></span>'
-		            	    +'<span class="fa fa-star checked"></span>'
-		            	    +'<span class="fa fa-star checked"></span>'
-		            	    +'<span class="fa fa-star"></span>'
-		            	    +'<span class="fa fa-star"></span>'
-		            	    +'<span>'+data.resScore+'</span>'
+		            	    +'<span>&emsp;'+items.resScore+'</span>'
 		            	    +'</div>'
 		            	    
 		            	    +'<div id="review-content" class="review-part">'
@@ -194,13 +194,13 @@ $('#addReviewList').click(function(){
 		            	    +'<img src="/FoodFighter/storage/review/'+items.image1+'" class="img-responsive">'
 		            	    +'</div>'
 		            	    
+		            	    +'<div id="review-resName" class="review-part">'
+		            	    +'<span>'+items.resName+'</span>'
+		            	    +'</div>'
+		            	    
 		            	    +'<div id="review-score" class="review-part">'
 		            	    +'<span class="fa fa-star checked"></span>'
-		            	    +'<span class="fa fa-star checked"></span>'
-		            	    +'<span class="fa fa-star checked"></span>'
-		            	    +'<span class="fa fa-star"></span>'
-		            	    +'<span class="fa fa-star"></span>'
-		            	    +'<span>'+data.resScore+'</span>'
+		            	    +'<span>'+items.resScore+'</span>'
 		            	    +'</div>'
 		            	    
 		            	    +'<div id="review-content" class="review-part">'
@@ -250,12 +250,13 @@ $('#listDiv').on('click','.review',function(){
               	 	+'<div class="swiper-button-next"></div>'/* 다음 */
             		+'<div class="swiper-button-prev"></div>'/* 이전 버튼  */
               	    +'</div>'
+            	    
+            	    +'<div id="modalView-resName" class="modalView-part">'
+            	    +'<span>'+data.resName+'</span>'
+            	    +'</div>'
+            	    
               	    +'<div id="modalView-score" class="modalView-part">'
               	    +'<span class="fa fa-star checked"></span>'
-              	    +'<span class="fa fa-star checked"></span>'
-              	    +'<span class="fa fa-star checked"></span>'
-              	    +'<span class="fa fa-star"></span>'
-              	    +'<span class="fa fa-star"></span>'
               	  	+'<span>'+data.resScore+'</span>'
               	    +'</div>'
               	    +'<div id="modalView-content" class="modalView-part">'
@@ -269,7 +270,7 @@ $('#listDiv').on('click','.review',function(){
 	   
 	   });  
 	 
-	 $('div.modal').modal(); 
+	 $('#reviewModal').modal(); 
 	 
 	 
 /* 	 new Swiper( '.swiper-container', {
