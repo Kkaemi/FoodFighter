@@ -1,42 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xmlns:security="http://www.springframework.org/schema/security"
-   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-      http://www.springframework.org/schema/security https://www.springframework.org/schema/security/spring-security-5.2.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/security https://www.springframework.org/schema/security/spring-security-5.2.xsd">
 
-   <bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
-   	<!-- 데이터 문제때문에 임의로 수정(양효정) -->
-  	<security:http use-expressions="true"> 
-		<security:intercept-url pattern="/storage/**" access="permitAll" />
+	<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
+	
+	<security:http auto-config="true" use-expressions="true"> 	
+	
+		<!-- <security:intercept-url pattern="/storage/**" access="permitAll" />
 		
-		<security:intercept-url pattern="/main/index" access="permitAll"/>
+		<security:intercept-url pattern="/index" access="permitAll"/>
 		
-		<security:form-login login-page="/login/login" />
+		<security:intercept-url pattern="/event/eventList" access="permitAll"/> -->
 		
-		<security:csrf disabled="true"/>
-
-      <!-- <security:intercept-url pattern="/storage/**" access="permitAll" />
-      
-      <security:intercept-url pattern="/index" access="permitAll"/>
-      
-      <security:intercept-url pattern="/event/eventList" access="permitAll"/> -->
-      
-  	 <!--    <security:intercept-url pattern="/event/eventWriteForm" access="hasRole('ROLE_USER')"/> -->
-
-      <security:logout logout-url="/login/logout" invalidate-session="true" delete-cookies="JSESSIONID"/>
-      
-   </security:http>
-   
-   <security:authentication-manager>
-      <security:authentication-provider>
-         <security:jdbc-user-service data-source-ref="dataSource"
-            users-by-username-query="select email as username, pwd as password, enabled from testmember where email=?"
-            authorities-by-username-query="select email as username, authority from testmember where email=?"/>   
-         
-         <security:password-encoder ref="bcryptPasswordEncoder" />
-         
-      </security:authentication-provider>
-   </security:authentication-manager>
+	<!-- 	<security:intercept-url pattern="/event/eventWriteForm" access="hasRole('ROLE_USER')"/> -->
+		
+		
+		<security:form-login login-page="/login/loginForm"/>
+		
+		
+		<security:logout logout-url="/login/logout" invalidate-session="true" delete-cookies="JSESSIONID"/>
+		
+		
+		
+	</security:http>
+	
+	<security:authentication-manager>
+		<security:authentication-provider>
+			<security:jdbc-user-service data-source-ref="dataSource"
+				users-by-username-query="select email as username, pwd as password, enabled from testmember where email=?"
+				authorities-by-username-query="select email as username, authority from testmember where email=?"/>	
+			
+			<security:password-encoder ref="bcryptPasswordEncoder" />
+			
+		</security:authentication-provider>
+	</security:authentication-manager>
 
 </beans>
