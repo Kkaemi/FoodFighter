@@ -26,12 +26,9 @@ String keyword = request.getParameter("keyword");
 </head>
 <body>
 <input type="hidden" value="${resSeq}" id="resSeq" name="resSeq">
-<<<<<<< HEAD
-=======
 
->>>>>>> a3af54018469769cbe74fa2c362c35a1abcab862
-<form id="headerForm" name="headerForm" method="post" action="../review/getSearchList">
-<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+<form id="headerForm" name="headerForm" method="post" action="./review/getSearchList">
+<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"> 
 
 	<!--================ Header ================-->
 	<div id="header-container">
@@ -39,7 +36,7 @@ String keyword = request.getParameter("keyword");
 	      <ul id="header-menu">
 		      <li class="header-items">
 		  		<img src="../resources/img/search.png" class="header_searchIcon" width="30" height="30" align="center"> 
-		   		<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword" value="<%=keyword%>" autocomplete="on" maxlength="50" >
+		   		<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword" autocomplete="on" maxlength="50" >
 		   		<button size="10" id="header_searchBtn">검색</button>
 		      </li>
 		       <li class="nav-item">
@@ -145,15 +142,9 @@ String keyword = request.getParameter("keyword");
 		  			<li>카테고리:&emsp; ${restaurantDTO.resTheme}</li>
 		  			<li>가격대:&emsp;&emsp;${restaurantDTO.resPrice}</li>
 		  		</ul>
-<<<<<<< HEAD
 		  		<div class="storeMore"><a id="gotoReviewView" class="reviewList_detailPage" href="/FoodFighter/review/reviewView?resSeq=${restaurantDTO.resSeq}" style="color: #ffc34d;">가게이름 상세보기 ></a></div>
 	   		</div><!-- col-sm-9 -->
 	   </div><hr><!-- row -->
-=======
-	  		<div class="storeMore"><a id="gotoReviewView" class="reviewList_detailPage" href="/FoodFighter/review/reviewView?resSeq=${restaurantDTO.resSeq}" style="color: #ffc34d;">가게이름 상세보기 ></a></div>
-   		</div><!-- col-sm-9 -->
-   </div><hr><!-- row -->
->>>>>>> a3af54018469769cbe74fa2c362c35a1abcab862
 	</c:forEach>
 </c:if>
 </div>
@@ -200,8 +191,4 @@ String keyword = request.getParameter("keyword");
 <script>
 let resSeq = "${restaurantDTO.resSeq}";
 </script>
-<<<<<<< HEAD
-
-=======
->>>>>>> a3af54018469769cbe74fa2c362c35a1abcab862
 </html>
