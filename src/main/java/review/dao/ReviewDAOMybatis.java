@@ -28,10 +28,12 @@ public class ReviewDAOMybatis implements ReviewDAO {
 
 	@Override
 	public RestaurantDTO getReviewView(String resSeq) {
-		
 		return sqlSession.selectOne("reviewSQL.getReviewView", resSeq);
 	}
-
-
+	
+	@Override
+	public List<RestaurantDTO> modalSearchList(Map<String, String > map) {
+		return sqlSession.selectList("reviewSQL.modalSearchList", map);
+	}
 
 }
