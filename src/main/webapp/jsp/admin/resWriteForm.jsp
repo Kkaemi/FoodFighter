@@ -92,13 +92,7 @@
 				<div id="image1Div"></div>
 			</td>
 		</tr>
-		<!-- 이미지 드래그해서 보내는 부분 -->
-		<tr>
-			<td colspan="2">
-				<input type="file" name="img[]" id="resImageImage3" size="50" multiple="multiple">
-				<div id="image1Div"></div>
-			</td>
-		</tr>		
+		
 		<tr>
 			<td colspan="2" align="center">		
 			<input type="button" value="가게 등록" id="resWriteBtn"> 
@@ -206,7 +200,7 @@
 				data : new FormData($('#resWriteForm')[0]),
 				success : function(){
 					alert("저장 완료");
-					location.href="/FoodFighter/review/reviewNonSearchList";
+					location.href="/FoodFighter/";
 				}, error : function(err){
 					console.log(err);
 				}

@@ -142,7 +142,9 @@ public class AdminController {
 	@ResponseBody
 	@RequestMapping(value="resWrite", method=RequestMethod.POST)
 	public void resWrite(@ModelAttribute RestaurantDTO restaurantDTO, @RequestParam MultipartFile[] img){
+		
 		String filePath = "D:\\spring\\workSTS\\FoodFighter\\src\\main\\webapp\\storage\\restaurant";
+		
 		String fileName;
 		File file;
 		

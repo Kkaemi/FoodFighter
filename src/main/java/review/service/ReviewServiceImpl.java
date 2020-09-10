@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import admin.bean.RestaurantDTO;
+
 import review.dao.ReviewDAO;
 
 @Service
@@ -21,11 +22,12 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public List<RestaurantDTO> getSearchList(String pg, String keyword) {
+	public List<RestaurantDTO> getSearchList(String pg, String keyword, String resSeq) {
 
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("pg", pg);
 		map.put("keyword", keyword);
+		map.put("resSeq", resSeq);
 
 		// 1페이지당 5개씩
 		int endNum = (Integer.parseInt(pg)) * 5;
@@ -39,6 +41,26 @@ public class ReviewServiceImpl implements ReviewService {
 		System.out.println(endNum);
 		return reviewDAO.getSearchList(map);
 	}
+	
+	@Override
+	public List<RestaurantDTO> modalSearchList(String pg, String keyword, String soonFilter,String resSeq) {
+
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("pg", pg="1");
+		map.put("keyword", keyword);
+		
+		// 1페이지당 5개씩
+		int endNum = (Integer.parseInt(pg)) * 5;
+		int startNum = endNum - 4;
+
+		map.put("startNum", startNum + "");
+		map.put("endNum", endNum + "");
+		
+		return reviewDAO.modalSearchList(map);
+	}
+
+
 
 	@Override
 	public RestaurantDTO getReviewView(String resSeq) {
