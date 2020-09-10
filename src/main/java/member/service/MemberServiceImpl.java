@@ -64,6 +64,12 @@ public class MemberServiceImpl implements MemberService{
 	public MemberDTO kakaologin(String email) {
 		return memberDAO.kakaologin(email);
 	}
+
+	@Override
+	public void socialWrite(MemberDTO memberDTO) {
+		memberDAO.socialWrite(memberDTO);
+		
+	}
 	
 	
 }

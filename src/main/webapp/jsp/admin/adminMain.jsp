@@ -19,11 +19,43 @@
 
 </head>
 <body>
+<!--================ Header ================-->
+<form id="headerForm" name="headerForm" method="post" action="../review/getSearchList">
+<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+	<div id="header-container">
+	  <a class="header-logo" href="/FoodFighter"><img src="../resources/img/logo.png" width="250px;" height="55px;" align="left" style="margin-top: 10px; margin-left: 200px;"></a>
+	      <ul id="header-menu">
+		      <li class="header-items">
+		  		<img src="../resources/img/search.png" class="header_searchIcon" width="30" height="30" align="center"> 
+		   		<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword" value="" autocomplete="on" maxlength="50" >
+		   		<button size="10" id="header_searchBtn">검색</button>
+		      </li>
+		       <li class="nav-item">
+		           <a class="nav-link js-scroll active" href="/FoodFighter">Home</a>
+		       </li>
+		       <li class="nav-item">
+	         	  <a class="nav-link js-scroll" href="/FoodFighter/review/reviewNonSearchList">리뷰 리스트</a>
+	          </li>
+	          <li class="nav-item">
+	           <a class="nav-link js-scroll" href="/FoodFighter/community/communityMain">커뮤니티</a>
+	          </li>
+	          <li class="nav-item">
+	            <a class="nav-link js-scroll" href="/FoodFighter/event/eventList">이벤트</a>
+	          </li>
+	          <li class="nav-item">
+	            <a class="nav-link js-scroll">
+	            <img src="/FoodFighter/resources/img/member.png" id="headerUser" class="header_searchIcon" width="30" height="30" align="center">
+	            </a>
+     	     </li>
+	   	</ul>
+	</div>
+ </form>
+<!-- ============main ============== -->
 <div class="adminMainContainer">
  <div class="adminMain">
  	<div id="sideMenu" class="sideMenu-part col-2">
  	  <div id="adminProfile"><img src="/FoodFighter/resources/img/member.png"><span>관리자</span></div>
- 	  <div class="menu"><a href="/FoodFighter/admin/adminDashboard"><span>dashboard</span></a></div>
+ 	  <div class="menu"><a href="/FoodFighter/admin/adminDashboard"><span>home</span></a></div>
  	  <div class="menu"><a href="/FoodFighter/admin/adminMemberManagement"><span>회원 관리</span></a></div>
  	  <div class="menu"><a href="/FoodFighter/admin/adminShopManagement"><span>가게 관리</span></a></div>
  	</div>
@@ -46,117 +78,9 @@ $(document).ready(function(){
 $(document).ready(function(){
 	$('[data-toggle="tooltip"]').tooltip();
 	 $("#memberTable").tablesorter();
+	 $("#shopTable").tablesorter();
 });
 
-$('memberTable .delete').on('click',function(){
-	let check = confirm("탈퇴처리 하시겠습니까?");
-	let member_seq = $(this).parent().prevAll(".member_seq").text();
-	if(check){
-	 $.ajax({
-		 	type: 'post',
-	 		url: '/FoodFighter/admin/AdminWithdraw',
-	 		data: 'member_seq='+member_seq,
-	 		success : function(){
-	 			alert("탈퇴처리가 완료되었습니다.");
-	 			location.href="/FoodFighter/admin/adminMemberManagement"
-	 		},
-	 		error : function(e){
-				console.log(e);
-			}
-	    });
-	}
-});
-
-$('#memSearchKeyword').keydown(function(key,str) {
-	if(str != 'continue') $('#pg').val(1);	
-	 if (key.keyCode == 13) {
-	    if($('#memSearchKeyword').val() == ''){
-	    	alert('검색할 키워드를 입력해주세요');
-	    }else{
-	    	 $.ajax({
-	    		 type:'post',
-	 			url : '/FoodFighter/admin/getMemberSearch',
-	 			data: {	'pg':$('#pg').val(),
-	 					'memSearchKeyword' : $('#memSearchKeyword').val()},
-	 			success:function(){
-	 				console.log('검색 데이터');
-	 			},
-	 			error: function(err){
-	 				console.log(err);
-	 			}
-	 	    });
-	    }
-		
-	 }//엔터키
-});
-
-
-
-$('shopTable .delete').on('click',function(){
-	let check = confirm("삭제처리 하시겠습니까?");
-	let resSeq = $(this).parent().prevAll(".resSeq").text();
-	if(check){
-	 $.ajax({
-		 	type: 'post',
-	 		url: '/FoodFighter/admin/adminShopDelete',
-	 		data: 'resSeq='+resSeq,
-	 		success : function(){
-	 			alert("삭제처리가 완료되었습니다.");
-	 			location.href="/FoodFighter/admin/admiShopManagement"
-	 		},
-	 		error : function(e){
-				console.log(e);
-			}
-	    });
-	}
-});
-
-$('#shopSearchKeyword').keydown(function(key,str) {
-	if(str != 'continue') $('#pg').val(1);	
-	 if (key.keyCode == 13) {
-	    if($('#shopSearchKeyword').val() == ''){
-	    	alert('검색할 키워드를 입력해주세요');
-	    }else{
-	    	 $.ajax({
-	    		 type:'post',
-	 			url : '/FoodFighter/admin/getShopSearch',
-	 			data: {	'pg':$('#pg').val(),
-	 					'shopSearchKeyword' : $('#shopSearchKeyword').val()},
-	 			success:function(){
-	 				console.log('검색 데이터');
-	 			},
-	 			error: function(err){
-	 				console.log(err);
-	 			}
-	 	    });
-	    }
-		
-	 }//엔터키
-});
-
-
-function adminMemberPaging(pg){
-	let searchKeyword = $('#memSearchKeyword').val();
-	alert()
-	if(searchKeyword == ""){
-		location.href="/FoodFighter/admin/adminMemberManagement?pg="+pg;
-	}else{
-		$('#pg').val(pg);
-		$('#memSearchKeyword').trigger('keydown','continue');
-	}
-	
-}
-function adminShopPaging(pg){
-	let searchKeyword = $('#shopSearchKeyword').val();
-	alert()
-	if(searchKeyword == ""){
-		location.href="/FoodFighter/admin/adminShopManagement?pg="+pg;
-	}else{
-		$('#pg').val(pg);
-		$('#shopSearchKeyword').trigger('keydown','continue');
-	}
-	
-}
 </script>
 </body>
 </html>

@@ -22,4 +22,6 @@ public interface MemberService {
 	public void pwdUpdate(MemberDTO memberDTO);
 
 	public MemberDTO kakaologin(String email);
+
+	public void socialWrite(MemberDTO memberDTO);
 }

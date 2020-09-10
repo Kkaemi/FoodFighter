@@ -91,7 +91,6 @@
         xhr.setRequestHeader(header, token);
     });
 });
- 
 //header부분 키워드 입력 시, 검색 버튼 나타는 기능
 $('.header_searchInput').click(function(){
 	$('#header_searchBtn').addClass('show');

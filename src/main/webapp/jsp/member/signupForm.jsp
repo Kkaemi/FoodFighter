@@ -14,10 +14,42 @@
 <link rel="stylesheet" href="/FoodFighter/resources/css/member/memberStyle.css">
 </head>
 <body>
+<!--================ Header ================-->
+<form id="headerForm" name="headerForm" method="post" action="../review/getSearchList">
+<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+	<div id="header-container">
+	  <a class="header-logo" href="/FoodFighter"><img src="../resources/img/logo.png" width="250px;" height="55px;" align="left" style="margin-top: 10px; margin-left: 200px;"></a>
+	      <ul id="header-menu">
+		      <li class="header-items">
+		  		<img src="../resources/img/search.png" class="header_searchIcon" width="30" height="30" align="center"> 
+		   		<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword" value="" autocomplete="on" maxlength="50" >
+		   		<button size="10" id="header_searchBtn">검색</button>
+		      </li>
+		       <li class="nav-item">
+		           <a class="nav-link js-scroll active" href="/FoodFighter">Home</a>
+		       </li>
+		       <li class="nav-item">
+	         	  <a class="nav-link js-scroll" href="/FoodFighter/review/reviewNonSearchList">리뷰 리스트</a>
+	          </li>
+	          <li class="nav-item">
+	           <a class="nav-link js-scroll" href="/FoodFighter/community/communityMain">커뮤니티</a>
+	          </li>
+	          <li class="nav-item">
+	            <a class="nav-link js-scroll" href="/FoodFighter/event/eventList">이벤트</a>
+	          </li>
+	          <li class="nav-item">
+	            <a class="nav-link js-scroll">
+	            <img src="/FoodFighter/resources/img/member.png" id="headerUser" class="header_searchIcon" width="30" height="30" align="center">
+	            </a>
+     	     </li>
+	   	</ul>
+	</div>
+ </form>
+ <!-- ============main ============== -->
 <div class="signup-form">
     <form id="signupForm" action="" method="post">
       	<div class="row">
-        	<div class="col-8 offset-4">
+        	<div id="title" class="col-8 offset-4">
 				<h2>회원가입</h2>
 			</div>	
       	</div>
@@ -128,7 +160,7 @@ $(document).ready(function(){
 $('#email').focusout(function(){
 		$('#emailDiv').empty();
 		let email = $('#email').val();
-		if(email == ""){
+		if($('#email').val() == ''){
 			$('#emailDiv').text("먼저 아이디를 입력하세요");
 			$('#email').focus();
 			$('#emailDiv').css('color','blue');
@@ -169,7 +201,7 @@ $('#email').focusout(function(){
 $('#nickname').focusout(function(){
 	$('#nicknameDiv').empty();
 	let nickname = $('#nickname').val();
-	if(nickname == ""){
+	if($('#nickname').val() == ""){
 		$('#nicknameDiv').text("먼저 닉네임을 입력하세요");
 		$('#nickname').focus();
 		$('#nicknameDiv').css('color','blue');
@@ -182,6 +214,7 @@ $('#nickname').focusout(function(){
 	 		data: 'nickname='+nickname,
 	 		dataType: 'text',
 	 		success : function(data){
+	 			alert(data);
 	 			if(data == 'exist'){
 					$('#nicknameDiv').text('사용 불가능')
 					$('#nicknameDiv').css('color','magenta')
@@ -221,7 +254,7 @@ $('#sendEmailBtn').click(function() {
 			$('#emailDiv').text('올바른 형식으로 입력해주세요.');
 			$('#emailDiv').css('color', 'red');
 			
-		} else {	
+	} else {	
 			$('#sendEmailModal').modal();//발송 완료 모달
 			
 				
@@ -325,7 +358,8 @@ $('#emailCheckBtn').click(function(){
 				url : '/FoodFighter/member/signup',
 				data : $('#signupForm').serialize(),
 				success : function() {
-					location.href = '/FoodFighter/member/signupChoice';
+					alert("회원가입 완료!");
+					location.href = '/FoodFighter/';
 
 				},
 				error : function(e) {
