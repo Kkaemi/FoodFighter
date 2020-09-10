@@ -36,5 +36,4 @@ public class ReviewDAOMybatis implements ReviewDAO {
 		return sqlSession.selectList("reviewSQL.modalSearchList", map);
 	}
 
-
 }
