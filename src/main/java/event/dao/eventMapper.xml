@@ -85,5 +85,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="geteventSearchTotalA" resultType="int">
 		select count(*) from event_board where ${where} like '%'||#{inp}||'%'
 	</select>
+	
+	<!-- 선택삭제 -->
+	<delete id="eventBoardListDelete" parameterType="java.util.List">
+		delete from event_board where seq_event = #{temp}
+	</delete>
  	
 </mapper>
