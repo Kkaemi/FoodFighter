@@ -43,6 +43,7 @@
 	<context:component-scan base-package="com.spring.foodFighter" />
 	
 	<!-- controller -->
+	<context:component-scan base-package="admin.controller" />
 	<context:component-scan base-package="mypage.controller" />
 	<context:component-scan base-package="review.controller" />
 	<context:component-scan base-package="community.controller" />

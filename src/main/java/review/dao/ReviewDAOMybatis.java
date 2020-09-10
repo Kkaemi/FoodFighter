@@ -16,7 +16,6 @@ public class ReviewDAOMybatis implements ReviewDAO {
 	@Autowired
 	private SqlSession sqlSession;
 
-
 	@Override
 	public void writeReview(Map<String, Object> map) {
 		sqlSession.insert("reviewSQL.writeReview", map);
@@ -26,6 +25,13 @@ public class ReviewDAOMybatis implements ReviewDAO {
 	public List<RestaurantDTO> getSearchList(Map<String, String > map) {
 		return sqlSession.selectList("reviewSQL.getSearchList", map);
 	}
+
+	@Override
+	public RestaurantDTO getReviewView(String resSeq) {
+		
+		return sqlSession.selectOne("reviewSQL.getReviewView", resSeq);
+	}
+
 
 
 }

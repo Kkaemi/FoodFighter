@@ -20,4 +20,6 @@ public interface MemberService {
 	public MemberDTO userInfo(Map<String, String> map);
 
 	public void pwdUpdate(MemberDTO memberDTO);
+
+	public MemberDTO kakaologin(String email);
 }

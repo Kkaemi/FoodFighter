@@ -20,4 +20,10 @@ public class RestaurantDTO {
 	private String resImage1; // 가게 이미지 
 	private String resImage2;
 
+	
+	@Override
+	public String toString() {
+		return resName+resScore+resAddress+resTheme+resPrice;
+	}
 }
+

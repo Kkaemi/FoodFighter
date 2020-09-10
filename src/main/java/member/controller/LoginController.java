@@ -32,7 +32,7 @@ public class LoginController {
 	@Autowired 
 	private JavaMailSender mailSender;
 	
-	
+	///////////////////////////////////////////////////
 	// 로그인 폼
 	@RequestMapping(value="loginForm", method=RequestMethod.GET)
 	public String loginForm() {
@@ -71,6 +71,29 @@ public class LoginController {
 				
 					return "success";
 					
+<<<<<<< HEAD
+=======
+				} else {
+					
+					return "fail";
+				}
+			}
+		
+		//카카오로그인
+		@RequestMapping(value="kakaologin", method=RequestMethod.POST)
+		public @ResponseBody String kakaologin(@RequestParam String email,
+										  HttpSession session) {
+				
+			MemberDTO memberDTO = memberService.kakaologin(email);
+			//System.out.println(memberDTO);
+			
+			if(memberDTO != null) {
+			session.setAttribute("memId", memberDTO.getEmail());
+			session.setAttribute("memberDTO", memberDTO);
+
+				
+					return "success";
+>>>>>>> upstream/master
 				} else {
 					
 					return "fail";

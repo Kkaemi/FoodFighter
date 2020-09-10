@@ -24,7 +24,8 @@
 <head>
 
 </head>
-<form id="headerForm" name="headerForm" method="get" action="../review/getSearchList">
+<form id="headerForm" name="headerForm" method="post" action="../review/getSearchList">
+<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">  
 <!--================ Header ================-->
 <div id="header-container">
   <a class="header-logo" href="/FoodFighter"><img src="../resources/img/logo.png" width="250px;" height="55px;" align="left" style="margin-top: 10px; margin-left: 200px;"></a>
@@ -93,7 +94,7 @@
 					
 		 		
 			 <div class="button-group">
-					<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">  
+			 	<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
 		 			<button type="button" class="btn btn-outline-light text-dark" id="reviewBtn">리뷰 작성</button>
 		  			<button type="reset" class="btn btn-outline-light text-dark" id="resetBtn">다시 작성</button>
 		 		 	<div id="reviewDiv"></div>
@@ -127,7 +128,9 @@
  
 </form> 
 </body>
-
+<script type="text/javascript">
+let id = '${memberDTO.nickname}';
+</script>
 <!-- Vendor JS Files -->
 <!-- <script src="../../assets/vendor/jquery/jquery.min.js"></script>  -->
  <script src="../resources/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

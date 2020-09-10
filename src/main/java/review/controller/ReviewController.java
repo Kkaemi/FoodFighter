@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -46,19 +47,17 @@ public class ReviewController {
 		return "/jsp/review/review_searchList";
 	}
 		
-	//리뷰 페이지(searchView)
-	@RequestMapping(value="reviewView", method=RequestMethod.GET)
-	public String reviewView() {
-		return "/jsp/review/reviewView";
-	}
+
+
 	
 	//리뷰 DB저장 
 	@RequestMapping(value="writeReview", method=RequestMethod.POST)
-	public String writeReview(@RequestParam Map<String, Object> map,
-							  @RequestParam("img[]") List<MultipartFile> list,
-							  HttpSession session){
+	public String writeReview(HttpSession session,@RequestParam Map<String, Object> map,
+							  @RequestParam("img[]") List<MultipartFile> list){
 		
-		String filePath = "/Users/jiyelin/Documents/GitHub/FoodFighter/src/main/webapp/storage/review";
+		
+		String filePath = "D:\\reallysong\\FoodFighter\\src\\main\\webapp\\storage\\review";
+
 		
 		int i=1;
 		for(MultipartFile img : list) {
@@ -118,7 +117,27 @@ public class ReviewController {
 		return mav;
 	}
 
+	//리뷰 페이지(reviewView)
+	@RequestMapping(value="reviewView", method=RequestMethod.GET)
+	public String reviewView(@RequestParam String resSeq, Model model) {
+		model.addAttribute("resSeq", resSeq);
+		
+		return "/jsp/review/reviewView";
+	}
 	
+	
+	// 가게데이터 끌어오기 
+	//리뷰(reviewView)
+	@ResponseBody
+	@RequestMapping(value="getReviewView", method=RequestMethod.POST)
+	public ModelAndView getReviewView(@RequestParam String resSeq) {
+		RestaurantDTO restaurantDTO = reviewService.getReviewView(resSeq);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("restaurantDTO", restaurantDTO);
+		mav.setViewName("jsonView");
+		
+		return mav;
+	}
+
 }
-
-
