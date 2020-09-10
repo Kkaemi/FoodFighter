@@ -11,9 +11,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <!-- 부가적인 테마 -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="/FoodFighter/recourses/css/community/headerCss.css">
-    <link rel="stylesheet" href="/FoodFighter/recourses/css/community/header_and_footer.css">
-    <link rel="stylesheet" href="/FoodFighter/recourses/css/community/sidenav.css">
+    <link rel="stylesheet" href="/FoodFighter/resources/css/community/headerCss.css">
+    <link rel="stylesheet" href="/FoodFighter/resources/css/community/header_and_footer.css">
+    <link rel="stylesheet" href="/FoodFighter/resources/css/community/sidenav.css">
     <style>
         figure.item {
             /* To correctly align image, regardless of content height: */
@@ -54,15 +54,15 @@
             <div class="bar2"></div>
             <div class="bar3"></div>
         </div>
-        <a class="header-logo" href="/FoodFighter/">로고 자리</a>
+        <a class="header-logo" href="/FoodFighter"><img src="/FoodFighter/resources/img/logo.png" width="250px;" height="55px;" align="left" style="margin-top: 10px; margin-left: 200px;"></a>
         <ul id="header-menu">
             <li class="header-items">
-                <img src="/FoodFighter/img/community/search.png" class="header_searchIcon" width="30" height="30" align="center">
+                <img src="/FoodFighter/resources/img/community/search.png" class="header_searchIcon" width="30" height="30" align="center">
                 <input type="text" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" value=""
                     autocomplete="on" maxlength="50">
             </li>
             <li class="header-items">
-                <a class="header-link" href="/FoodFighter/">Home</a>
+                <a class="header-link" href="/FoodFighter/index">Home</a>
             </li>
             <li class="header-items">
                 <a class="header-link" href="/FoodFighter/review/reviewNonSearchList">리뷰 리스트</a>
@@ -74,7 +74,7 @@
                 <a class="header-link" href="/FoodFighter/event/eventList">이벤트</a>
             </li>
             <li class="header-items">
-                <a class="header-link" href="communityMain.jsp"><img src="/FoodFighter/img/member.png" class="header_searchIcon"
+                <a class="header-link" href="communityMain.jsp"><img src="/FoodFighter/resources/img/member.png" class="header_searchIcon"
                         width="30" height="30" align="center"></a>
             </li>
         </ul>
@@ -91,11 +91,11 @@
     <!-- 중앙 QnA와 FAQ -->
     <div style="text-align: center; margin-top: 300px;">
         <figure class="item">
-            <img src="/FoodFighter/img/community/qna.png" class="imagebtn" onclick="" />
+            <img src="/FoodFighter/resources/img/community/qna.png" class="imagebtn" onclick="location.href='/FoodFighter/community/qna'" />
             <figcaption class="caption">QnA</figcaption>
         </figure>
         <figure class="item">
-            <img src="/FoodFighter/img/community/faq.png" class="imagebtn" onclick="" />
+            <img src="/FoodFighter/resources/img/community/faq.png" class="imagebtn" onclick="location.href='/FoodFighter/community/memberFAQ'" />
             <figcaption class="caption">FAQ</figcaption>
         </figure>
     </div>
@@ -112,7 +112,7 @@
     </div>
 
 </body>
-<script src="js/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script>
     function myFunction(x) {

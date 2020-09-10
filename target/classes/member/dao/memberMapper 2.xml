@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="memberSQL">
+
+  <insert id="write" parameterType="member">
+	<!-- insert into testmember (member_seq, email, pwd, name, nickname,roleId,socialLogin,signupDate) values (member_seq.nextval,#{email},#{pwd},#{name},#{nickname},'ROLE_USER',0,sysdate) -->
+	insert into testmember (member_seq,email, pwd, name, nickname,roleId,socialLogin,signupDate) values (nextval(member_seq),#{email},#{pwd},#{name},#{nickname},'ROLE_USER',0,now())
+  </insert>
+
+
+  <select id="checkEmail" parameterType="String" resultType="member">
+  	select * from testmember where email=#{email}
+  </select>
+  
+  <select id="checkNickname" parameterType="String" resultType="member">
+  	select * from testmember where nickname=#{nickname}
+  </select>
+  
+  <!-- 로그인 -->
+	<select id="login" parameterType="java.util.Map" resultType="member">
+		select * from testmember where email=#{email}
+	</select>
+	
+	<!-- 카카오로그인 -->
+	<select id="kakaologin" parameterType="String" resultType="member">
+		select * from testmember where email=#{email}
+	</select>
+	
+	<!-- 아이디 찾기 -->
+  	<select id="getforgotId" parameterType="java.util.Map" resultType="member">
+		select * from testmember where nickName = #{nickName}
+	</select>
+	
+	<!-- 임시 비밀번호 DB저장 -->
+	<update id="pwdUpdate" parameterType="member">
+  		update testmember set pwd=#{pwd} where email=#{email}
+  	</update>
+  	
+  	<!-- 비밀번호맞는 아이디 찾아오기 -->
+  	<select id="userInfo" parameterType="java.util.Map" resultType="member">
+  		select * from testmember where email=#{email}
+	 </select>
+	 
+	<insert id="socialWrite" parameterType="member">
+		insert into testmember (member_seq,email, name, nickname,roleId,socialLogin,signupDate) values (nextval(member_seq),#{email},#{name},#{nickname},'ROLE_USER',1,now())
+    </insert>
+ 
+ </mapper>

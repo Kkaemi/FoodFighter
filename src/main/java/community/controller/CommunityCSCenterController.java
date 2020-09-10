@@ -1,6 +1,7 @@
 package community.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -14,17 +15,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import community.bean.BoardPaging;
-import community.bean.QnAboardDTO;
-import community.service.CommunityBoardService;
+import community.bean.QnaBoardDTO;
+import community.bean.QnaBoardPaging;
+import community.service.CommunityCSService;
 
 @Controller
 @RequestMapping(value = "community")
 public class CommunityCSCenterController {
-	//->BoardService를 사용하시면 안되고 csCenterService로 사용하셔야 되기 때문에 주석처리합니다.
-	//@Autowired
-	//private CommunityBoardService communityBoardService;
 	
+	@Autowired
+	private CommunityCSService communityCSService;
+
 	// cs center
 	@RequestMapping(value = "csCenter", method = RequestMethod.GET)
 	public String csCenter() {
@@ -44,20 +45,145 @@ public class CommunityCSCenterController {
 	public ModelAndView getQnaList(@RequestParam String pg, HttpSession session, HttpServletResponse response) {
 
 		// 1페이지 당 5개씩
-		//List<QnAboardDTO> list = communityBoardService.getBoardList(pg);
+		List<QnaBoardDTO> list = communityCSService.getQnaBoardList(pg);
 
 		// 페이징 처리
-		//BoardPaging boardPaging = communityBoardService.boardPaging(pg);
+		QnaBoardPaging boardPaging = communityCSService.boardPaging(pg);
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("pg", pg);
-		//mav.addObject("list", list);
-		//mav.addObject("boardPaging", boardPaging);
+		mav.addObject("list", list);
+		mav.addObject("boardPaging", boardPaging);
 
 		mav.setViewName("jsonView");
 
 		return mav;
 
+	}
+	
+	@RequestMapping(value = "getBoardSearchList", method = RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView getBoardSearchList(@RequestParam Map<String, String> map) {
+		
+		List<QnaBoardDTO> list = communityCSService.getQnaBoardSearchList(map);
+
+		// 페이징 처리
+		QnaBoardPaging boardPaging = communityCSService.boardPaging(map);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("pg", map.get("pg"));
+		mav.addObject("list", list);
+		mav.addObject("boardPaging", boardPaging);
+		mav.addObject("search_type", map.get("search_type"));
+		mav.addObject("search_keyword", map.get("search_keyword"));
+		
+		mav.setViewName("jsonView");
+		
+		return mav;
+	}
+	
+	// qna write
+	@RequestMapping(value = "qnaWriteForm", method = RequestMethod.GET)
+	public String qnaWriteForm() {
+		return "/jsp/community/communityCS/qnaWrite";
+	}
+	
+	@RequestMapping(value = "qnaWrite", method = RequestMethod.POST)
+	public @ResponseBody void qnaWrite(@RequestParam Map<String, String> map) {
+		communityCSService.qnaWrite(map);
+	}
+	
+	// qna password page
+	@RequestMapping(value = "passwordPage", method = RequestMethod.GET)
+	public String passwordPage(@RequestParam String seq,
+						@RequestParam String pg, 
+						Model model) {
+		
+			model.addAttribute("seq", seq);
+			model.addAttribute("pg", pg);
+			
+			return "/jsp/community/communityCS/passwordPage";
+	}
+	
+	@RequestMapping(value = "passwordCheck", method = RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView passwordCheck(@RequestParam Map<String, String> map) {
+		
+		boolean true_or_false = communityCSService.passwordCheck(map);
+		
+		String pg = map.get("pg");
+		String seq = map.get("seq");
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("pg", pg);
+		mav.addObject("seq", seq);
+
+		mav.setViewName("jsonView");
+		
+		if (!true_or_false) {
+			mav.clear();
+			mav.setViewName("jsonView");
+			return mav;
+		}
+
+		return mav;
+	}
+	
+	// qna View
+	@RequestMapping(value = "qnaView", method = RequestMethod.GET)
+	public String boardView(@RequestParam String seq,
+							@RequestParam String pg, 
+							Model model) {
+		
+		model.addAttribute("seq", seq);
+		model.addAttribute("pg", pg);
+		
+		return "/jsp/community/communityCS/qnaView";
+	}
+	
+	@RequestMapping(value = "getQnaView", method = RequestMethod.POST)
+	public ModelAndView getBoardView(@RequestParam String seq,
+									 HttpServletResponse response) {
+		
+		QnaBoardDTO qnaboardDTO = communityCSService.getBoard(seq);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("qnaboardDTO", qnaboardDTO);
+		mav.addObject("seq", seq);
+		
+		mav.setViewName("jsonView");
+		
+		return mav;
+	}
+	
+	// qna 게시판 관리자 답글달기
+	@RequestMapping(value = "qnaReplyForm", method = RequestMethod.POST)
+	public String qnaReplyForm(@RequestParam String seq,
+								 @RequestParam String pg, 
+								 Model model) {
+		
+		model.addAttribute("pseq", seq); // 원글번호
+		model.addAttribute("pg", pg); // 원글이 있는 페이지번호
+		
+		return "/jsp/community/communityCS/qnaReply";
+	}
+	
+	@RequestMapping(value = "qnaReply", method = RequestMethod.POST)
+	@ResponseBody
+	public void qnaReply(@RequestParam Map<String, String> map) {
+		
+		communityCSService.qnaReply(map);
+	}
+	
+	// qna 게시판 글 삭제
+	@RequestMapping(value = "qnaDelete", method = RequestMethod.POST)
+	public String qnaDelete(@RequestParam String seq) {
+		
+		communityCSService.qnaDelete(seq);
+		
+		return "/jsp/community/communityCS/qnaDelete";
 	}
 
 	// faq

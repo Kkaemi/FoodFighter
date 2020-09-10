@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="eventSQL">
+
+	<!-- 글쓰기 -->
+	<insert id="eventdWrite" parameterType="java.util.Map">
+		<!-- INSERT INTO eventboard(seq,email,nickname,subject,content,hit) 	
+		values(seq_eventboard.nextval
+			 , #{email}
+			 , #{nickname}
+			 , #{subject}
+			 , #{content}
+			 , '0') -->
+			 
+			 insert into event_board values (Nextval(seq_event),#{email},#{nickname},#{subject},#{content},now(),'0')
+	</insert>
+	
+	<!-- 목록 -->
+ 	<select id="eventBoardList" parameterType="java.util.Map" resultType="event">
+	  	<!-- <![CDATA[
+	  select * from (select rownum rn, tt.* 
+	  	from (select * from eventboard order by seq desc)tt) 
+	  	where rn between #{startNum} and #{endNum}
+	  	]]> -->
+	  	
+	  	<![CDATA[
+	  	select * from
+			(select @ROWNUM := @ROWNUM + 1 as rn, tt.* from
+			(select seq_event, email, nickname, subject, content, logtime, hit
+	  	from event_board, (select @ROWNUM := 0)TMP
+	  	order by seq_event desc)tt)PAGING
+	  	where rn >= #{startNum} and rn <= #{endNum}
+	  	]]>
+ 	</select>
+ 	
+ 	<!-- 작성한 글 확인 -->
+	<select id="geteventBoardtView" parameterType="int" resultType="event">
+		select * from event_board where seq_event = #{seq_event}
+	</select>
+	
+	<!-- 조회수 -->
+	<update id="hit" parameterType="int">
+		UPDATE event_board SET hit=hit+1 WHERE seq_event=#{seq_event}
+	</update>
+ 	
+ 	<!-- 글수정 -->
+	<update id="eventBoardModify" parameterType="java.util.Map">
+		UPDATE event_board SET subject=#{subject}
+		                ,content=#{content}
+		                ,logtime=now() 
+		WHERE seq_event=#{seq_event}
+	</update>
+	
+	<!-- 글 삭제 -->
+	<delete id="eventBoardDelete" parameterType="int">
+			DELETE from event_board WHERE seq_event=#{seq_event}
+	</delete>
+	
+	<!-- 총글수페이징 -->
+	<select id="geteventTotalA" resultType="int">
+		select count(*) from event_board
+	</select>
+	
+	<!-- 검색 -->
+	<select id="getEventSearch" parameterType="java.util.Map" resultType="event">
+		<!-- <![CDATA[
+			select * from (select rownum rn, tt.* from 
+			(select * from event_board where ${where} like '%'||#{inp}||'%' order by seq desc)tt 
+			)where rn>=#{startNum} and rn<=#{endNum}
+			]]> -->
+			
+			<![CDATA[
+			select * from 
+			(select @ROWNUM := @ROWNUM + 1 as rn, tt.* from
+			(select seq_event, email, nickname, subject, content, logtime, hit
+			from event_board, (select @ROWNUM := 0)TMP
+			where ${where} like CONCAT('%',#{inp},'%') order by seq_event desc)tt)PAGING
+			where rn >= #{startNum} and rn <= #{endNum}
+			]]>
+	</select>
+	
+	<!-- 검색 총글수 -->
+	<select id="geteventSearchTotalA" resultType="int">
+		select count(*) from event_board where ${where} like '%'||#{inp}||'%'
+	</select>
+	
+	<!-- 선택삭제 -->
+	<delete id="eventBoardListDelete" parameterType="java.util.List">
+		delete from event_board where seq_event = #{temp}
+	</delete>
+ 	
+</mapper>
