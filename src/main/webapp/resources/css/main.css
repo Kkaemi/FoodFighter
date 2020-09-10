@@ -89,6 +89,77 @@ b.navbar-trans .nav-link.active {
 .navbar-b.navbar-reduce .nav-item {
     padding-left: 15px;
 }
+
+
+/* headerUser mune  */
+.headUser-menu {
+	position: fixed;
+	width: 15%;
+	height: 250px;
+	top: 110px;
+	left: auto;
+   	right: 8%;
+   	z-index: 1100;
+	background-color: #fff;
+	border-radius: 5px;
+	padding-top: 5px;
+	padding-left: 5px;
+	overflow: visible;
+}
+
+
+.tri{
+	position: absolute;
+    top: -15px;
+    right: 73%;
+  	width: 0;
+    border-width: 0 16px 16px;
+    border-color: #FFFFFF transparent;
+    border-style: solid;
+    z-index: 9999;
+}
+
+.headUser-menu p{
+	font-size: 10pt;
+	color: #999;
+	margin: 5px;
+	text-align: center;
+}
+.headUser-menu hr{
+	margin: 10px;
+	border: solid 0.5px #999;
+}
+@media (min-width:1578px) and (max-width:1650px) { 
+  .headUser-menu {
+   	right: 6%;
+  }
+}
+@media (min-width:1535px) and (max-width:1578px) { .headUser-menu {	right: 5%; }}
+@media (min-width:1490px) and (max-width:1534px) { .headUser-menu { right: 4%; }}
+@media (min-width:1450px) and (max-width:1490px) { .headUser-menu { right: 3%;}}
+@media (min-width:1410px) and (max-width:1450px) { .headUser-menu { right: 2%; }}
+@media (min-width:1410px) and (max-width:1450px) {  .headUser-menu { right: 2%;}}
+@media all and (max-width:1400px) { .tri{ right: 15%; }}
+
+#headUser-menu {
+     overflow-x: visible;
+     overflow-y: visible;
+}
+
+
+.headUserMenu-Btn{
+	width: 100%;
+    height: 50px;
+    border: 2px solid #ffc34d;
+    border-radius: 50px;
+    font-size: 16px;
+    color: #ffc34d;
+    background-color: #fff;
+    margin: 10px 5px;
+}
+
+
+
 /* Footer */
 #footer-container{
 	z-index: 100;
@@ -164,4 +235,3 @@ b.navbar-trans .nav-link.active {
 .line-mf{
     background-color: #ffc34d;
 }
-

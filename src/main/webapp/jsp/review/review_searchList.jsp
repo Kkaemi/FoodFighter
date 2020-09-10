@@ -25,9 +25,21 @@ String keyword = request.getParameter("keyword");
 <title>List 화면</title>
 </head>
 <body>
+<<<<<<< HEAD
 
 <form id="headerForm" name="headerForm" method="post" action="../review/getSearchList">
 <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+=======
+<<<<<<< HEAD
+<input type="hidden" value="1" id="pg" name="pg">
+<input type="hidden" value="${resSeq}" id="resSeq" name="resSeq">
+<form id="headerForm" name="headerForm" method="get" action="../review/getSearchList">
+=======
+
+<form id="headerForm" name="headerForm" method="post" action="../review/getSearchList">
+<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+>>>>>>> fd5914bed779e1883421c17ec5e1d08001c374c9
+>>>>>>> upstream/master
 	<!--================ Header ================-->
 	<div id="header-container">
 	  <a class="header-logo" href="/FoodFighter"><img src="../resources/img/logo.png" width="250px;" height="55px;" align="left" style="margin-top: 10px; margin-left: 200px;"></a>
@@ -136,9 +148,16 @@ String keyword = request.getParameter("keyword");
 		  			<li>카테고리:&emsp; ${restaurantDTO.resTheme}</li>
 		  			<li>가격대:&emsp;&emsp;${restaurantDTO.resPrice}</li>
 		  		</ul>
-	  		<div class="storeMore"><a class="reviewList_detailPage" href="/FoodFighter/review/reviewView?resSeq="+${resSeq}; style="color: #ffc34d;">가게이름 상세보기 ></a></div>
+<<<<<<< HEAD
+		
+	  		<div class="storeMore"><a id="gotoReviewView" class="reviewList_detailPage" href="/FoodFighter/review/reviewView?resSeq=${restaurantDTO.resSeq}" style="color: #ffc34d;">가게이름 상세보기 ></a></div>
    		</div><!-- col-sm-9 -->
    </div><hr><!-- row -->
+=======
+	  		<div class="storeMore"><a class="reviewList_detailPage" href="/FoodFighter/review/reviewView?resSeq="+${resSeq}; style="color: #ffc34d;">가게이름 상세보기 ></a></div>
+   			</div><!-- col-sm-9 -->
+  		 </div><hr><!-- row -->
+>>>>>>> fd5914bed779e1883421c17ec5e1d08001c374c9
 	</c:forEach>
 </c:if>
 </div>
@@ -181,7 +200,12 @@ String keyword = request.getParameter("keyword");
  <script src="../resources/assets/js/main.js"></script> 
  <script src="/FoodFighter/resources/js/review/keyword.js"></script>
  <script src="/FoodFighter/resources/js/review/review_searchList.js"></script>	
+<<<<<<< HEAD
  
-
- </script>
+<script>
+let resSeq = "${restaurantDTO.resSeq}";
+console.log(resSeq);
+</script>
+=======
+>>>>>>> fd5914bed779e1883421c17ec5e1d08001c374c9
 </html>

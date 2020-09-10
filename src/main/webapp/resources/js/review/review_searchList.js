@@ -1,3 +1,14 @@
+<<<<<<< HEAD
+=======
+$(document).ready(function(){
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+    $(document).ajaxSend(function(e, xhr, options) {
+        xhr.setRequestHeader(header, token);
+    });
+});
+
+>>>>>>> upstream/master
 //더보기 기능
 $(document).ready(function(){
 $(".moreBtn").click(function(){

@@ -50,11 +50,12 @@ public class ReviewController {
 	
 	//리뷰 DB저장 
 	@RequestMapping(value="writeReview", method=RequestMethod.POST)
-	public String writeReview(@RequestParam Map<String, Object> map,
-							  @RequestParam("img[]") List<MultipartFile> list,
-							  HttpSession session){
+	public String writeReview(HttpSession session,@RequestParam Map<String, Object> map,
+							  @RequestParam("img[]") List<MultipartFile> list){
 		
-		String filePath = "/Users/jiyelin/Documents/GitHub/FoodFighter/src/main/webapp/storage/review";
+		
+		String filePath = "D:\\reallysong\\FoodFighter\\src\\main\\webapp\\storage\\review";
+
 		
 		int i=1;
 		for(MultipartFile img : list) {
@@ -89,6 +90,7 @@ public class ReviewController {
 		return "/jsp/review/reviewView";
 	}
 
+<<<<<<< HEAD
 	//리뷰 리스트(review_searchList)
 	@RequestMapping(value="getSearchList", method=RequestMethod.POST)
 	public String getSearchList(@RequestParam Map<String, Object> map, Model model,
@@ -98,6 +100,17 @@ public class ReviewController {
 	List<RestaurantDTO> list = reviewService.getSearchList(pg,(String)map.get("keyword"));
 
 	map.put("list",list);
+=======
+	//검색어를 통한 리스트
+	@RequestMapping(value="getSearchList", method=RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView getSearchList(@RequestParam Map<String, Object> map,
+									  @RequestParam(required=false, defaultValue="1") String pg, @RequestParam(required=false) String resSeq, HttpSession session, HttpServletResponse response) {
+		
+		
+		//5개씩 보여지는 리스트
+		List<RestaurantDTO> list = reviewService.getSearchList(pg,(String)map.get("keyword"), resSeq);
+>>>>>>> upstream/master
 
 	model.addAttribute("list",list);
 	model.addAttribute("pg", pg);
@@ -114,16 +127,35 @@ public class ReviewController {
 		System.out.println(map.get("pg"));
 		System.out.println(map.get("keyword"));
 		
+<<<<<<< HEAD
 		//5개씩 보여지는 리스트
 		List<RestaurantDTO> list = reviewService.getSearchList(map.get("pg")+"",(String)map.get("keyword"));
 		
 		return list;
+=======
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.addObject("pg", pg);
+		mav.addObject("resSeq", resSeq);
+
+		mav.addObject("keyword", map.get("keyword"));
+
+		
+		mav.setViewName("/jsp/review/review_searchList");
+		
+		System.out.println("keyword = "+ map.get("keyword"));
+		System.out.println("resSeq = "+ resSeq);
+
+		
+		return mav;
+>>>>>>> upstream/master
 	}
 
 	//리뷰 페이지(reviewView)
 	@RequestMapping(value="reviewView", method=RequestMethod.GET)
-	public String reviewView(@RequestParam String resSeq, Model model) {
+	public String reviewView(@RequestParam String resSeq, Model model, HttpServletRequest request) {
 		model.addAttribute("resSeq", resSeq);
+		request.getParameter("resSeq");
 		
 		return "/jsp/review/reviewView";
 	}
@@ -134,7 +166,10 @@ public class ReviewController {
 	@ResponseBody
 	@RequestMapping(value="getReviewView", method=RequestMethod.POST)
 	public ModelAndView getReviewView(@RequestParam String resSeq) {
+		
 		RestaurantDTO restaurantDTO = reviewService.getReviewView(resSeq);
+		
+		
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("restaurantDTO", restaurantDTO);
@@ -143,4 +178,8 @@ public class ReviewController {
 		return mav;
 	}
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> upstream/master

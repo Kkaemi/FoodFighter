@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 @Getter
 public class RestaurantDTO {
-	private int seq;
+	private String resSeq;
 	private String resName; // 음식점 이름
 	private String resScore; // 평점
 	private String resAddress; // 주소
@@ -19,10 +19,18 @@ public class RestaurantDTO {
 	private String resMenu; // 대표메뉴
 	private String resImage1; // 가게 이미지 
 	private String resImage2;
+<<<<<<< HEAD
 	
 	@Override
 	public String toString() {
 		return "resName"+resName+"resScore"+resScore+"resAddress"+resAddress+resTheme+resPrice;
+=======
+
+	
+	@Override
+	public String toString() {
+		return resName+resScore+resAddress+resTheme+resPrice;
+>>>>>>> upstream/master
 	}
 }
 

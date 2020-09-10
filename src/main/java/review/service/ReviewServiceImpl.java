@@ -22,11 +22,12 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public List<RestaurantDTO> getSearchList(String pg, String keyword) {
+	public List<RestaurantDTO> getSearchList(String pg, String keyword, String resSeq) {
 
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("pg", pg);
 		map.put("keyword", keyword);
+		map.put("resSeq", resSeq);
 
 		// 1페이지당 5개씩
 		int endNum = (Integer.parseInt(pg)) * 5;

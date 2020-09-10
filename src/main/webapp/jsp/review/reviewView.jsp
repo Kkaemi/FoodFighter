@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%
+request.setCharacterEncoding("utf-8");
+String keyword = request.getParameter("keyword");
+%> 
 <!DOCTYPE html>
 <html lang="kor">
 <head>
@@ -18,49 +22,56 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=x4xnbzhxl0"></script>
-    <title>Document</title>
+    <script src="/FoodFighter/resources/js/review/keyword.js"></script>
+    <title>리뷰보기</title>
 
 </head>
-
+<style>
+#reviewWriteBtn {
+	margin : 50px;
+}
+</style>
 <body> 
 
-<nav class="navbar navbar-b navbar-trans navbar-expand-md fixed-top" id="mainNav">
-    <div class="nav-container">
-      <a class="navbar-brand js-scroll" href="/FoodFighter/">로고 자리</a>
-      
-      <div class="navbar-collapse collapse justify-content-end" id="navbarDefault">
-        <ul id="navbar-nav">
-	        <li class="nav-search">
-	    		<img src="/FoodFighter/resources/img/search.png" class="header_searchIcon" width="30" height="30" align="center"> 
-		    	<input type="text" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" value="" autocomplete="on" maxlength="50" >
-	        </li>
-	        <li class="nav-item">
-	           <a class="nav-link js-scroll active" href="/FoodFighter/">Home</a>
-	        </li>
-	        <li class="nav-item">
-	           <a class="nav-link js-scroll" href="/FoodFighter/review/reviewNonSearch">리뷰 리스트</a>
-	        </li>
-	        <li class="nav-item">
-	          <a class="nav-link js-scroll" href="/FoodFighter/community/communityMain">커뮤니티</a>
-	        </li>
-	        <li class="nav-item">
-	          <a class="nav-link js-scroll" href="/FoodFighter/event/eventList">이벤트</a>
-	        </li>
-	        <li class="nav-item">
-	          <a class="nav-link js-scroll">
+
+<!--================ Header ================-->
+<form id="headerForm" name="headerForm" method="post" action="../review/getSearchList">
+<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+	<div id="header-container">
+	  <a class="header-logo" href="/FoodFighter"><img src="../resources/img/logo.png" width="250px;" height="55px;" align="left" style="margin-top: 10px; margin-left: 200px;"></a>
+	      <ul id="header-menu">
+		      <li class="header-items">
+		  		<img src="../resources/img/search.png" class="header_searchIcon" width="30" height="30" align="center"> 
+		   		<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword" value="<%=keyword%>" autocomplete="on" maxlength="50" >
+		   		<button size="10" id="header_searchBtn">검색</button>
+		      </li>
+		       <li class="nav-item">
+		           <a class="nav-link js-scroll active" href="/FoodFighter">Home</a>
+		       </li>
+		       <li class="nav-item">
+	         	  <a class="nav-link js-scroll" href="/FoodFighter/review/reviewNonSearchList">리뷰 리스트</a>
+	          </li>
+	          <li class="nav-item">
+	           <a class="nav-link js-scroll" href="/FoodFighter/community/communityMain">커뮤니티</a>
+	          </li>
+	          <li class="nav-item">
+	            <a class="nav-link js-scroll" href="/FoodFighter/event/eventList">이벤트</a>
+	          </li>
+	          <li class="nav-item">
+	            <a class="nav-link js-scroll">
 	            <img src="/FoodFighter/resources/img/member.png" class="header_searchIcon" width="30" height="30" align="center">
 	            </a>
-	        </li>
-       	 </ul>
-      </div>
-    </div>
-  </nav>
+     	     </li>
+	   	</ul>
+	</div>
+ </form>
 
 
-</header>
+
+<input type="hidden" value="${resSeq}" id="resSeq" name="resSeq">
 <!--리뷰 페이지-->
 <div class="reviewView-container">
-    <!--타이틀 및 점수-->
+	<!--타이틀 및 점수-->
     <div class="title">
         <span id="title"><span>
         <span class="review-score"></span>   
@@ -90,7 +101,7 @@
 
     <!--가게 정보-->
     <div class="restaurant-info">
-   
+   		
         <div class="table-div">
             <table class="table">
                 <tbody>
@@ -170,6 +181,7 @@
 
     <!--리뷰-->
     <div class="review-list">
+    
         <div class="review-count">
             <button class="review-count-btn-selected">전체(72)</button>
             |

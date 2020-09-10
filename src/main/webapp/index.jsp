@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <!DOCTYPE html>
 <html>
 
@@ -61,7 +62,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link js-scroll">
-            <img src="/FoodFighter/resources/img/member.png" class="header_searchIcon" width="30" height="30" align="center">
+            <img src="/FoodFighter/resources/img/member.png" id="headerUser" class="header_searchIcon" width="30" height="30" align="center">
             </a>
           </li>
           <!-- <li class="nav-item">
@@ -71,7 +72,24 @@
       </div>
     </div>
   </nav>
+  <!-- usermenu -->
+  <div class="modal headUser-menu" id="headUser-menu" role="dialog">
+  	<div class="tri"></div>
+  	<c:if test="${sessionScope.memId == null}">
+  		<p>로그인 또는 회원가입을 하시면 <br> 더 많은 서비스를 <br>이용하실 수 있습니다.</p>
+  		<hr>
+	  	<button type="button" id="loginBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/login/loginForm'" >로그인</button>
+	  	<button type="button" id="signupBtn" class="headUserMenu-Btn" onclick="location.href='/FoodFighter/member/signupChoice'" >회원가입</button>
+  	</c:if>
+  	<c:if test="${sessionScope.memId != null}">
+  		<p>맛집을 찾아보고 <br> 후기를 남겨보세요.</p>
+  		<hr>
+	  	<button type="button" id="mypageBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/mypage/mypageMain'" >마이페이지</button>
+	  	<button type="button" id="logoutBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/login/logout'">로그아웃</button>
+  	</c:if>
+  </div>
 </form>
+
   <!-- ======= Intro Section ======= -->
 <form id="searchMainForm" name="searchMainForm" method="post" action="./review/getSearchList">
 <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"> 
@@ -472,10 +490,16 @@
   <script src="/FoodFighter/resources/assets/vendor/owl.carousel/owl.carousel.min.js"></script>
   <script src="/FoodFighter/resources/assets/vendor/typed.js/typed.min.js"></script>
   <script src="/FoodFighter/resources/assets/vendor/venobox/venobox.min.js"></script>
-
+	
   <!-- Template Main JS File -->
   <script src="/FoodFighter/resources/assets/js/main.js"></script>
   <script src="/FoodFighter/resources/js/review/keyword.js"></script>
+
+<script type="text/javascript">
+$('#headerUser').click(function(){
+	$('#headUser-menu').modal();
+});
+</script>
 </body>
 
 </html>
