@@ -27,54 +27,51 @@ body, html {
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> <!-- 부트스트랩 JS -->
 </head>
 <body>
-<!-- 헤더 -->
-<form id="headerForm" name="headerForm" method="post" action="../review/getSearchList">
-<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">  
+
+<!-- 헤더 --> 
 <!--================ Header ================-->
-<div id="header-container">
-  <a class="header-logo" href="/FoodFighter"><img src="../resources/img/logo.png" width="250px;" height="55px;" align="left" style="margin-top: 10px; margin-left: 200px;"></a>
-      <ul id="header-menu">
-	       <li class="header-items">
+<form id="headerForm" name="headerForm" method="post" action="../review/getSearchList">
+<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+	<div id="header-container">
+	  <a class="header-logo" href="/FoodFighter"><img src="../resources/img/logo.png" width="250px;" height="55px;" align="left" style="margin-top: 10px; margin-left: 200px;"></a>
+	      <ul id="header-menu">
+		      <li class="header-items">
 		  		<img src="../resources/img/search.png" class="header_searchIcon" width="30" height="30" align="center"> 
-		   		<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword" autocomplete="on" maxlength="50" >
+		   		<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword"  autocomplete="on" maxlength="50" >
 		   		<button size="10" id="header_searchBtn">검색</button>
 		      </li>
-	       <li class="nav-item">
-	           <a class="nav-link js-scroll active" href="/FoodFighter">Home</a>
-	       </li>
-	       <li class="nav-item">
-	        	  <a class="nav-link js-scroll" href="/FoodFighter/review/reviewNonSearchList">리뷰 리스트</a>
+		       <li class="nav-item">
+		           <a class="nav-link js-scroll active" href="/FoodFighter">Home</a>
+		       </li>
+		       <li class="nav-item">
+	         	  <a class="nav-link js-scroll" href="/FoodFighter/review/reviewNonSearchList">리뷰 리스트</a>
 	          </li>
-	       <li class="nav-item">
-	         <a class="nav-link js-scroll" href="/FoodFighter/community/communityMain">커뮤니티</a>
-	       </li>
-	       <li class="nav-item">
-	         <a class="nav-link js-scroll" href="/FoodFighter/event/eventList">이벤트</a>
-	       </li>
-	       <li class="nav-item">
-	         <a class="nav-link js-scroll">
-	         <img src="/FoodFighter/resources/img/member.png" class="header_searchIcon" width="30" height="30" align="center">
-	         </a>
-	    	</li>
+	          <li class="nav-item">
+	           <a class="nav-link js-scroll" href="/FoodFighter/community/communityMain">커뮤니티</a>
+	          </li>
+	          <li class="nav-item">
+	            <a class="nav-link js-scroll" href="/FoodFighter/event/eventList">이벤트</a>
+	          </li>
+	      
+		      <li class="nav-item">
+	           <c:if test="${sessionScope.memId == null}">
+	            <a class="nav-link js-scroll" href="/FoodFighter/login/loginForm">로그인</a>   
+	            </c:if>	       
+	          <!--   <img src="/FoodFighter/resources/img/member.png" class="header_searchIcon" width="30" height="30" align="center"> -->
+	         
+	         	<c:if test="${memId != null}">
+				 <a class="nav-link js-scroll" href="/FoodFighter/login/logout">로그아웃</a>
+				 </form>		
+				</c:if>    
+	          </li>
+	          
+		       <li class="header-items">
+		       <a class="header-link" href="communityMain.jsp"><img src="/FoodFighter/resources/img/member.png" class="header_searchIcon" width="30" height="30" align="center"></a>
+	    	 </li>
    	</ul>
 </div>
 </form>
 
-
-  <header>커뮤니티</header>
-  <a href="#">
-    <i class="far fa-comments"></i>
-    <span>게시판</span>
-  </a>
-  <a href="#">
-    <i class="fas fa-link"></i>
-    <span>랭킹</span>
-  </a>
-  <a href="#">
-    <i class="far fa-question-circle"></i>
-    <span>고객센터</span>
-  </a>
-</div>
 <!-- 본문 -->
 <form name="eventViewForm">
 <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
@@ -87,15 +84,7 @@ body, html {
    	</div>
 </div>
 <div class="page-body" style = "z-index : 1;">
-	<div class = "view-upper clearfix">
-		<div class = "area_r" id="eventViewSpan">
-			<a href = "#" onclick="mode(1)">
-				<span class = "plain-btn">수정</span></a>
-				
-			<a href = "#" class="delete" onclick="">
-				<span class = "plain-btn" style = "color : red;">삭제</span></a>
-		</div>
-	</div>
+	
 	<div class = "view_stat">
 		<div class ="mphoto">
 			<img src = "/FoodFighter/resources/img/community/mainImg/user.png">
@@ -408,6 +397,7 @@ body, html {
  </p>
 </div>
 </body>
+<script src="/FoodFighter/resources/js/review/keyword.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
     var token = $("meta[name='_csrf']").attr("content");

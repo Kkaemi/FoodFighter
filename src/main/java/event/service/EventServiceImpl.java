@@ -106,4 +106,11 @@ public class EventServiceImpl implements EventService {
 		return eventPaging;
 	}
 
+
+	@Override
+	public void eventBoardListDelete(List<String> list) {
+		eventDAO.eventBoardListDelete(list);
+		
+	}
+
 }

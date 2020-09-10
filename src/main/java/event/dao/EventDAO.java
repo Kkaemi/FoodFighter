@@ -25,4 +25,6 @@ public interface EventDAO {
 
 	public int geteventSearchTotalA(Map<String, String> map);
 
+	public void eventBoardListDelete(List<String> list);
+
 }
