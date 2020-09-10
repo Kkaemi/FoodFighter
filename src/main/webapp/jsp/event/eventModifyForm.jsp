@@ -30,50 +30,49 @@ body, html {
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 </head>
 <body>
-<body>
-    <!--================ Header ================-->
-
-    <div id="header-container">
-        <!-- 햄버거버튼 -->
-        <div class="hamberger pull-left" onclick="myFunction(this)">
-            <div class="bar1"></div>
-            <div class="bar2"></div>
-            <div class="bar3"></div>
-        </div>
-        <a class="header-logo" href="#page-top">로고 자리</a>
-        <ul id="header-menu">
-            <li class="header-items">
-                <img src="/FoodFighter/resources/img/community/search.png" class="header_searchIcon" width="30" height="30" align="center">
-                <input type="text" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" value=""
-                    autocomplete="on" maxlength="50">
-            </li>
-            <li class="header-items">
-                <a class="header-link" href="/FoodFighter/index">Home</a>
-            </li>
-            <li class="header-items">
-                <a class="header-link" href="/FoodFighter/review/reviewNonSearchList">리뷰 리스트</a>
-            </li>
-            <li class="header-items">
-                <a class="header-link" href="/FoodFighter/community/communityMain">커뮤니티</a>
-            </li>
-            <li class="header-items">
-                <a class="header-link" href="/FoodFighter/event/eventList">이벤트</a>
-            </li>
-            <li class="header-items">
-                <a class="header-link" href="communityMain.jsp"><img src="/FoodFighter/resources/img/member.png" class="header_searchIcon"
-                        width="30" height="30" align="center"></a>
-            </li>
-        </ul>
-    </div>
-    
-    <!-- 왼쪽 메뉴바 -->
-    <div id="mySidenav" class="sidenav">
-	  	<a href="/FoodFighter/community/communityNotice"><span class="glyphicon glyphicon-exclamation-sign"></span>&emsp;공지사항</a>
-	    <a href="/FoodFighter/community/communityBoardList"><span class="glyphicon glyphicon-list"></span>&emsp;게시판</a>
-	    <a href="/FoodFighter/community/communityRank"><span class="glyphicon glyphicon-star"></span>&emsp;랭킹</a>
-	    <a href="/FoodFighter/community/csCenter"><span class="glyphicon glyphicon-question-sign"></span>&emsp;고객센터</a>
-    </div>
-
+<!--================ Header ================-->
+<form id="headerForm" name="headerForm" method="post" action="../review/getSearchList">
+<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+	<div id="header-container">
+	  <a class="header-logo" href="/FoodFighter"><img src="../resources/img/logo.png" width="250px;" height="55px;" align="left" style="margin-top: 10px; margin-left: 200px;"></a>
+	      <ul id="header-menu">
+		      <li class="header-items">
+		  		<img src="../resources/img/search.png" class="header_searchIcon" width="30" height="30" align="center"> 
+		   		<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword"  autocomplete="on" maxlength="50" >
+		   		<button size="10" id="header_searchBtn">검색</button>
+		      </li>
+		       <li class="nav-item">
+		           <a class="nav-link js-scroll active" href="/FoodFighter">Home</a>
+		       </li>
+		       <li class="nav-item">
+	         	  <a class="nav-link js-scroll" href="/FoodFighter/review/reviewNonSearchList">리뷰 리스트</a>
+	          </li>
+	          <li class="nav-item">
+	           <a class="nav-link js-scroll" href="/FoodFighter/community/communityMain">커뮤니티</a>
+	          </li>
+	          <li class="nav-item">
+	            <a class="nav-link js-scroll" href="/FoodFighter/event/eventList">이벤트</a>
+	          </li>
+	      
+		      <li class="nav-item">
+	           <c:if test="${sessionScope.memId == null}">
+	            <a class="nav-link js-scroll" href="/FoodFighter/login/loginForm">로그인</a>   
+	            </c:if>	       
+	          <!--   <img src="/FoodFighter/resources/img/member.png" class="header_searchIcon" width="30" height="30" align="center"> -->
+	         
+	         	<c:if test="${memId != null}">
+				 <a class="nav-link js-scroll" href="/FoodFighter/login/logout">로그아웃</a>
+				 </form>		
+				</c:if>    
+	          </li>
+	          
+		       <li class="header-items">
+		       <a class="header-link" href="communityMain.jsp"><img src="/FoodFighter/resources/img/member.png" class="header_searchIcon" width="30" height="30" align="center"></a>
+	    	 </li>
+   	</ul>
+</div>
+</form>
+   
     <!-- 제목부분 -->
     <div class="container" style="margin-top: 65px;">
         <div class="page-header">
@@ -125,6 +124,7 @@ body, html {
              Designed by foodFighter
  </p>
 </div>
+<script src="/FoodFighter/resources/js/review/keyword.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
     var token = $("meta[name='_csrf']").attr("content");

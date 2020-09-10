@@ -32,7 +32,6 @@ public class LoginController {
 	@Autowired 
 	private JavaMailSender mailSender;
 	
-	///////////////////////////////////////////////////
 	// 로그인 폼
 	@RequestMapping(value="loginForm", method=RequestMethod.GET)
 	public String loginForm() {
@@ -62,21 +61,25 @@ public class LoginController {
 			//System.out.println(pwd+", "+enCodePwd);
 					
 			MemberDTO memberDTO = memberService.login(map);
-			//System.out.println(memberDTO.getAuthority());
+			
 			
 			if(passEncoder.matches(map.get("pwd"), memberDTO.getPwd())) {
 				session.setAttribute("memId", memberDTO.getEmail());
 				session.setAttribute("memberDTO", memberDTO);
-
 				
-					return "success";
-					
-<<<<<<< HEAD
-=======
+				if (memberDTO.getNickname().equals("관리자")) {
+					return "admin";
+
 				} else {
 					
-					return "fail";
+					 return "success";
 				}
+			
+			}else {
+				
+				return "fail";
+			}
+		
 			}
 		
 		//카카오로그인
@@ -93,7 +96,7 @@ public class LoginController {
 
 				
 					return "success";
->>>>>>> upstream/master
+
 				} else {
 					
 					return "fail";
