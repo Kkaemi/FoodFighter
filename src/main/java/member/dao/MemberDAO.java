@@ -20,4 +20,6 @@ public interface MemberDAO {
 	public void pwdUpdate(MemberDTO memberDTO);
 
 	public MemberDTO userInfo(Map<String, String> map);
+
+	public MemberDTO kakaologin(String email);
 }
