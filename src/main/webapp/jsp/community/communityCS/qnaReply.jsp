@@ -10,7 +10,7 @@ String keyword = request.getParameter("keyword");
 
 <head>
     <meta charset="UTF-8">
-    <title>QnA게시판 글쓰기</title>
+    <title>QnA게시판 답글달기</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/FoodFighter/resources/css/community/communityCSBoard.css">
@@ -80,6 +80,8 @@ String keyword = request.getParameter("keyword");
     <!-- SUMMERNOTE FORM-->
     <div class="page-body">
         <form method="post" class="form-horizontal">
+        <input type="hidden" name="pseq" id="pseq" value="${pseq }">
+		<input type="hidden" name="pg" id="pg" value="${pg }">
             <!-- 제목 -->
             <div class="form-group">
                 <label for="subject" class="col-sm-2 control-label" style="text-align: center;">제목</label>
@@ -89,16 +91,8 @@ String keyword = request.getParameter("keyword");
             </div>
             <!-- summernote부분 -->
             <textarea id="summernote" name="qna_content"></textarea>
-            <!-- 비밀번호 -->
-            <div class="form-group">
-                <label for="password" class="col-sm-2 control-label" style="text-align: center;">비밀번호</label>
-                <div class="col-sm-4">
-                    <input type="password" class="form-control" name="qna_password" id="qna_password">
-                </div>
-            </div>
             <!-- 목록으로 돌아가기 버튼 -->
-            <div style="border-top: 1px solid #eee; margin-bottom: 1%;">
-            </div>
+            <div style="border-top: 1px solid #eee; margin-bottom: 1%;"></div>
             <button class="btn btn-default" type="button" onclick="location.href='qna'">LIST</button>
             <div class="pull-right">
                 <!-- 취소버튼 -->
@@ -128,16 +122,16 @@ String keyword = request.getParameter("keyword");
     	
     	let qna_subject = $('#qna_subject').val();
     	let qna_content = $('#summernote').summernote('code');
-    	let qna_password = $('#qna_password').val();
     	
     	$.ajax({
     		
 			type : 'post',
-			url : '/FoodFighter/community/qnaWrite',
+			url : '/FoodFighter/community/qnaReply',
 			data : {
+				'pseq' : $('#pseq').val(),
+				'pg' : $('#pg').val(),
 				'subject' : qna_subject,
-				'content' : qna_content,
-				'password' : qna_password
+				'content' : qna_content
 			},
 			success : function() {
 				alert("글쓰기 완료");
