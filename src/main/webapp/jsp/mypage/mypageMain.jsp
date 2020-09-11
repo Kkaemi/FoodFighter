@@ -112,7 +112,7 @@
 	<div class="col-12">
 		<nav id="menu" class="border-top">
 		  <div id="menuTextBox" class="col-10  offset-1" >
-			  	<a id="myReview" class="first menu-part" href="/FoodFighter/mypage/myReview">
+			  	<a id="myReview" class="menu-part" href="/FoodFighter/mypage/myReview">
 			  	  <span class="glyphicon glyphicon-list-alt"></span>
 			  	  <span>내가 쓴 리뷰</span>
 			  	</a>

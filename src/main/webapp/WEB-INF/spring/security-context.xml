@@ -1,68 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:security="http://www.springframework.org/schema/security"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/security https://www.springframework.org/schema/security/spring-security-5.2.xsd">
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:security="http://www.springframework.org/schema/security"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/security https://www.springframework.org/schema/security/spring-security-5.2.xsd">
 
-	<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
-	
-	<security:http auto-config="true" use-expressions="true"> 	
-	
-		<!-- <security:intercept-url pattern="/storage/**" access="permitAll" />
-		
-		<security:intercept-url pattern="/index" access="permitAll"/>
-		
-<<<<<<< HEAD
-		<security:form-login login-page="/login/loginForm" />
-		
-<<<<<<< HEAD
-		<!-- <security:intercept-url pattern="/community/communityNotice" access="hasRole('ROLE_ADMIN')"/> -->
-		
-		<security:csrf disabled="false"/>
-=======
-		<security:intercept-url pattern="/event/eventList" access="permitAll"/> -->
-		
-	<!-- 	<security:intercept-url pattern="/event/eventWriteForm" access="hasRole('ROLE_USER')"/> -->
-		
-		
-		<security:form-login login-page="/login/loginForm"/>
-		
-		
-		<security:logout logout-url="/login/logout" invalidate-session="true" delete-cookies="JSESSIONID"/>
-		
-		
->>>>>>> 34051883a6e7ddfb7dc6d8a5e2bfd2318fc15196
-		
-	</security:http>
-	
-	<security:authentication-manager>
-		<security:authentication-provider>
-			<security:jdbc-user-service data-source-ref="dataSource"
-<<<<<<< HEAD
-				users-by-username-query="select username, password, enabled from membertable where username=?"
-										authorities-by-username-query="select username, auth as authority from membertable where username=?"/>	
-=======
-				users-by-username-query="select email as username, pwd as password, enabled from testmember where email=?"
-				authorities-by-username-query="select email as username, authority from testmember where email=?"/>	
->>>>>>> 34051883a6e7ddfb7dc6d8a5e2bfd2318fc15196
-			
-			<security:password-encoder ref="bcryptPasswordEncoder" />
-			
-		</security:authentication-provider>
-	</security:authentication-manager>
-<<<<<<< HEAD
-=======
-		<security:csrf disabled="true"/>
-
+   <bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
+   
+   <security:http auto-config="true" use-expressions="true">    
+   
       <!-- <security:intercept-url pattern="/storage/**" access="permitAll" />
       
       <security:intercept-url pattern="/index" access="permitAll"/>
       
       <security:intercept-url pattern="/event/eventList" access="permitAll"/> -->
       
-  	 <!--    <security:intercept-url pattern="/event/eventWriteForm" access="hasRole('ROLE_USER')"/> -->
-
+   <!--    <security:intercept-url pattern="/event/eventWriteForm" access="hasRole('ROLE_USER')"/> -->
+      
+      <security:form-login login-page="/login/loginForm"/>
       <security:logout logout-url="/login/logout" invalidate-session="true" delete-cookies="JSESSIONID"/>
       
    </security:http>
@@ -77,8 +32,5 @@
          
       </security:authentication-provider>
    </security:authentication-manager>
->>>>>>> upstream/master
-=======
->>>>>>> 34051883a6e7ddfb7dc6d8a5e2bfd2318fc15196
 
 </beans>
