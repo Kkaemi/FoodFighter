@@ -17,8 +17,8 @@ String keyword = request.getParameter("keyword");
     <!-- 부가적인 테마 -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="/FoodFighter/resources/css/community/normalize.css">
-    <link rel="stylesheet" href="/FoodFighter/resources/css/community/communityBoard.css">
-    <link rel="stylesheet" href="/FoodFighter/resources/css/community/communityHeader.css">
+    <link rel="stylesheet" href="/FoodFighter/resources/css/community/communityCSBoard.css">
+    <link rel="stylesheet" href="/FoodFighter/resources/css/community/communityCSHeader.css">
     <link rel="stylesheet" href="/FoodFighter/resources/css/community/sidenav.css">
 </head>
 
