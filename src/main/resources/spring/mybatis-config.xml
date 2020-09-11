@@ -13,5 +13,7 @@
 
 		<typeAlias type="event.bean.EventDTO" alias="event"/>
 		<typeAlias type="admin.bean.RestaurantDTO" alias="restaurant"/>
+		
+		<typeAlias type="community.bean.QnaBoardDTO" alias="qnaBoard"/>
 	</typeAliases>
 </configuration>
