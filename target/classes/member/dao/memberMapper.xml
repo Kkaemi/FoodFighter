@@ -5,6 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="memberSQL">
 
   <insert id="write" parameterType="member">
+	<!-- insert into testmember (member_seq, email, pwd, name, nickname,roleId,socialLogin,signupDate) values (member_seq.nextval,#{email},#{pwd},#{name},#{nickname},'ROLE_USER',0,sysdate) -->
 	insert into testmember (member_seq,email, pwd, name, nickname,roleId,socialLogin,signupDate) values (nextval(member_seq),#{email},#{pwd},#{name},#{nickname},'ROLE_USER',0,now())
   </insert>
 
