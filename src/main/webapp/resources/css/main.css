@@ -1,5 +1,8 @@
 @charset "UTF-8";
 /* 헤더공통 부분 css */
+* {
+	
+}
 .header_searchInput:focus {
 	outline: none;
 }
@@ -58,6 +61,7 @@ ul.navbar-nav{
 
 .navbar-b.navbar-reduce .nav-link {
     color: #ffc34d;
+    padding-right : 10px;
 }
 
 .navbar-b.navbar-reduce .nav-link:before {
@@ -138,7 +142,7 @@ b.navbar-trans .nav-link.active {
 @media (min-width:1490px) and (max-width:1534px) { .headUser-menu { right: 4%; }}
 @media (min-width:1450px) and (max-width:1490px) { .headUser-menu { right: 3%;}}
 @media (min-width:1410px) and (max-width:1450px) { .headUser-menu { right: 2%; }}
-@media (min-width:1410px) and (max-width:1450px) {  .headUser-menu { right: 2%;}}
+@media (min-width:800px) and (max-width:1080px) {  .headUser-menu { right: 2%; height: 300px;}}
 @media all and (max-width:1400px) { .tri{ right: 15%; }}
 
 #headUser-menu {
