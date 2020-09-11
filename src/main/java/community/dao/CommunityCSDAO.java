@@ -24,5 +24,7 @@ public interface CommunityCSDAO {
 	public void qnaReply(Map<String, String> map);
 
 	public void qnaDelete(String seq);
+
+	public void qnaModify(Map<String, Object> map);
 	
 }

@@ -212,7 +212,7 @@ String keyword = request.getParameter("keyword");
 		
 		case 1:
 			document.qnaViewForm.method = 'post';
-			document.qnaViewForm.action = 'boardModifyForm';
+			document.qnaViewForm.action = 'qnaModifyForm';
 			document.qnaViewForm.submit();
 			break;
 		case 2:

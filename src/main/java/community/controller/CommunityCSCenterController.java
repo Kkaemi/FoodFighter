@@ -147,10 +147,10 @@ public class CommunityCSCenterController {
 	public ModelAndView getBoardView(@RequestParam String seq,
 									 HttpServletResponse response) {
 		
-		QnaBoardDTO qnaboardDTO = communityCSService.getBoard(seq);
+		QnaBoardDTO qnaBoardDTO = communityCSService.getBoard(seq);
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("qnaboardDTO", qnaboardDTO);
+		mav.addObject("qnaboardDTO", qnaBoardDTO);
 		mav.addObject("seq", seq);
 		
 		mav.setViewName("jsonView");
@@ -184,6 +184,23 @@ public class CommunityCSCenterController {
 		communityCSService.qnaDelete(seq);
 		
 		return "/jsp/community/communityCS/qnaDelete";
+	}
+	
+	// qna 게시판 글 수정
+	@RequestMapping(value = "qnaModifyForm", method = RequestMethod.POST)
+	public String qnaModifyForm(@RequestParam String seq,
+								  @RequestParam String pg,
+								  Model model) {
+		model.addAttribute("seq", seq);
+		model.addAttribute("pg", pg);
+		
+		return "/jsp/community/communityCS/qnaModify";
+	}
+	
+	@RequestMapping(value = "qnaModify", method = RequestMethod.POST)
+	@ResponseBody
+	public void qnaModify(@RequestParam Map<String, Object> map) {
+		communityCSService.qnaModify(map);
 	}
 
 	// faq
