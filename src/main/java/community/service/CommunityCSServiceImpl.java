@@ -133,4 +133,9 @@ public class CommunityCSServiceImpl implements CommunityCSService {
 		communityCSDAO.qnaDelete(seq);
 	}
 
+	@Override
+	public void qnaModify(Map<String, Object> map) {
+		communityCSDAO.qnaModify(map);
+	}
+
 }
