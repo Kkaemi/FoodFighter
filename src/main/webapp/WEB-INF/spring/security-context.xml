@@ -17,10 +17,7 @@
       
    <!--    <security:intercept-url pattern="/event/eventWriteForm" access="hasRole('ROLE_USER')"/> -->
       
-      <security:form-login login-page="/login/loginForm"/>
       <security:logout logout-url="/login/logout" invalidate-session="true" delete-cookies="JSESSIONID"/>
-      
-      <security:csrf disabled="true"/>
       
    </security:http>
    

@@ -65,13 +65,6 @@
             <img src="/FoodFighter/resources/img/member.png" id="headerUser" class="header_searchIcon" width="30" height="30" align="center">
             </a>
           </li>
-<<<<<<< HEAD
-         
-=======
-           <!-- <li class="nav-item">
-            <a class="nav-link js-scroll" href="#blog"><img src="./img/member.png" class="header_searchIcon" width="30" height="30" align="center"></a>
-          </li> --> 
->>>>>>> upstream/master
         </ul>
       </div>
     </div>
