@@ -35,16 +35,12 @@ public class ReviewServiceImpl implements ReviewService {
 
 		map.put("startNum", startNum + "");
 		map.put("endNum", endNum + "");
-		
-		System.out.println(keyword);
-		System.out.println(startNum);
-		System.out.println(endNum);
+
 		return reviewDAO.getSearchList(map);
 	}
 	
 	@Override
-	public List<RestaurantDTO> modalSearchList(String pg, String keyword, String soonFilter,String resSeq) {
-
+	public List<RestaurantDTO> modalSearchList(String pg, String keyword, String Filter,String resSeq) {
 		
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("pg", pg="1");
