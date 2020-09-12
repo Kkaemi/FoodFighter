@@ -44,9 +44,9 @@
       <div class="navbar-collapse collapse justify-content-end" id="navbarDefault">
         <ul class="navbar-nav">
          <li class="nav-search">
-	   		<img src="./resources/img/search.png" class="header_searchIcon" width="30" height="30" align="center"> 
-		   	<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword" autocomplete="on" maxlength="50" >
-		   	<button size="10" id="header_searchBtn">검색</button>
+            <img src="./resources/img/search.png" class="header_searchIcon" width="30" height="30" align="center"> 
+            <input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword" autocomplete="on" maxlength="50" >
+            <button size="10" id="header_searchBtn">검색</button>
           </li>
           <li class="nav-item">
             <a class="nav-link js-scroll active" href="/FoodFighter">Home</a>
@@ -65,7 +65,13 @@
             <img src="/FoodFighter/resources/img/member.png" id="headerUser" class="header_searchIcon" width="30" height="30" align="center">
             </a>
           </li>
+<<<<<<< HEAD
          
+=======
+           <!-- <li class="nav-item">
+            <a class="nav-link js-scroll" href="#blog"><img src="./img/member.png" class="header_searchIcon" width="30" height="30" align="center"></a>
+          </li> --> 
+>>>>>>> upstream/master
         </ul>
       </div>
     </div>
@@ -73,25 +79,25 @@
  </form>
   <!-- usermenu -->
   <div class="modal headUser-menu" id="headUser-menu" role="dialog">
-  	<div class="tri"></div>
-  	<c:if test="${sessionScope.memId == null}">
-  		<p>로그인 또는 회원가입을 하시면 <br> 더 많은 서비스를 <br>이용하실 수 있습니다.</p>
-  		<hr>
-	  	<button type="button" id="loginBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/login/loginForm'" >로그인</button>
-	  	<button type="button" id="signupBtn" class="headUserMenu-Btn" onclick="location.href='/FoodFighter/member/signupChoice'" >회원가입</button>
-  	</c:if>
-  	<c:if test="${sessionScope.memId == 'admin@admin.com'}">
-  		<p>관리자로<br> 로그인 하셨습니다. </p>
-  		<hr>
-	  	<button type="button" id="adminBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/admin/adminMain'" >관리자페이지</button>
-	  	<button type="button" id="logoutBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/login/logout'">로그아웃</button>
-  	</c:if>
-  	<c:if test="${sessionScope.memId != null && sessionScope.memId != 'admin@admin.com'}">
-  		<p>맛집을 찾아보고 <br> 후기를 남겨보세요.</p>
-  		<hr>
-	  	<button type="button" id="mypageBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/mypage/mypageMain'" >마이페이지</button>
-	  	<button type="button" id="logoutBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/login/logout'">로그아웃</button>
-  	</c:if>
+     <div class="tri"></div>
+     <c:if test="${sessionScope.memId == null}">
+        <p>로그인 또는 회원가입을 하시면 <br> 더 많은 서비스를 <br>이용하실 수 있습니다.</p>
+        <hr>
+        <button type="button" id="loginBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/login/loginForm'" >로그인</button>
+        <button type="button" id="signupBtn" class="headUserMenu-Btn" onclick="location.href='/FoodFighter/member/signupChoice'" >회원가입</button>
+     </c:if>
+     <c:if test="${sessionScope.memId == 'admin@admin.com'}">
+        <p>관리자로<br> 로그인 하셨습니다. </p>
+        <hr>
+        <button type="button" id="adminBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/admin/adminMain'" >관리자페이지</button>
+        <button type="button" id="logoutBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/login/logout'">로그아웃</button>
+     </c:if>
+     <c:if test="${sessionScope.memId != null && sessionScope.memId != 'admin@admin.com'}">
+        <p>맛집을 찾아보고 <br> 후기를 남겨보세요.</p>
+        <hr>
+        <button type="button" id="mypageBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/mypage/mypageMain'" >마이페이지</button>
+        <button type="button" id="logoutBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/login/logout'">로그아웃</button>
+     </c:if>
   </div>
 
   <!-- ======= Intro Section ======= -->
@@ -104,8 +110,8 @@
         <div class="container">
           <!--<p class="display-6 color-d">Hello, world!</p>-->
           <h1 class="intro-title mb-4">푸드파이터</h1>
-       		 <input type="text" class="Intro_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" class="keyword" id ="keyword" name="keyword" value = "${keyword}" autocomplete="on" maxlength="20" size="80">
-      		 <button id="Intro_searchBtn"><font class="searchBtn">검색</font></button>
+              <input type="text" class="Intro_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" class="keyword" id ="keyword" name="keyword" value = "${keyword}" autocomplete="on" maxlength="20" size="80">
+             <button id="Intro_searchBtn"><font class="searchBtn">검색</font></button>
         </div>
       </div>
     </div>
@@ -471,13 +477,13 @@
 
  <!-- Footer -->
  <div id="footer-container">
-	 <p class="copyright" style="text-align:left;">
-	     ㈜ 푸드파이터<br>서울 서초구 강남대로 459(백암빌딩) 202호<br>대표이사: FOODFIGHTER<br>사업자 등록번호: 2020-020-22222 
-	       <br>고객센터: 0507-1414-9601<br><br>
-	       <strong>HOME | 리뷰리스트 | 커뮤니티 | 이벤트</strong><br><br>
-	       &copy; Copyright <strong>foodFighter</strong>. All Rights Reserved
+    <p class="copyright" style="text-align:left;">
+        ㈜ 푸드파이터<br>서울 서초구 강남대로 459(백암빌딩) 202호<br>대표이사: FOODFIGHTER<br>사업자 등록번호: 2020-020-22222 
+          <br>고객센터: 0507-1414-9601<br><br>
+          <strong>HOME | 리뷰리스트 | 커뮤니티 | 이벤트</strong><br><br>
+          &copy; Copyright <strong>foodFighter</strong>. All Rights Reserved
               Designed by foodFighter
-	 </p>
+    </p>
  </div>
   
   <!-- Up -->
@@ -494,14 +500,14 @@
   <script src="/FoodFighter/resources/assets/vendor/owl.carousel/owl.carousel.min.js"></script>
   <script src="/FoodFighter/resources/assets/vendor/typed.js/typed.min.js"></script>
   <script src="/FoodFighter/resources/assets/vendor/venobox/venobox.min.js"></script>
-	
+   
   <!-- Template Main JS File -->
   <script src="/FoodFighter/resources/assets/js/main.js"></script>
   <script src="/FoodFighter/resources/js/review/keyword.js"></script>
 
 <script type="text/javascript">
 $('#headerUser').click(function(){
-	$('#headUser-menu').modal();
+   $('#headUser-menu').modal();
 });
 </script>
 </body>

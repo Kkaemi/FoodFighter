@@ -10,19 +10,21 @@ import lombok.Data;
 
 @Data
 @Component
-public class QnAboardDTO {
+public class QnaBoardDTO {
 	
 	private int seq;
 
     private String id;
 
-    private String name;
+    private String nickname;
 
     private String email;
 
     private String subject;
 
     private String content;
+    
+    private String password;
 
     private int ref;
 
