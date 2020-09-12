@@ -30,6 +30,7 @@ String keyword = request.getParameter("keyword");
 #reviewWriteBtn {
 	margin : 50px;
 }
+
 </style>
 <body> 
 
@@ -155,7 +156,22 @@ String keyword = request.getParameter("keyword");
         </div>
         <div class="map-container" >
             <div id="map"></div> 
-            
+            <!--지도 script-->
+            <script>
+                var mapOptions = {
+                    center: new naver.maps.LatLng(37.3595704, 127.105399),
+                    zoom: 10
+                };
+                                
+                var map = new naver.maps.Map('map', {
+                    center: new naver.maps.LatLng(37.3595704, 127.105399),
+                    zoom: 15
+                });
+                var marker = new naver.maps.Marker({
+                    position: new naver.maps.LatLng(37.3595704, 127.105399),
+                    map: map
+                });
+            </script>
         </div>
     </div>  
 
@@ -252,23 +268,6 @@ var span = document.getElementsByClassName("close")[0];
 span.onclick = function() { 
   modal.style.display = "none";
 }
-</script>
-
-<!--지도 script-->
-<script>
-    var mapOptions = {
-        center: new naver.maps.LatLng(37.3595704, 127.105399),
-        zoom: 10
-    };
-                    
-    var map = new naver.maps.Map('map', {
-        center: new naver.maps.LatLng(37.3595704, 127.105399),
-        zoom: 15
-    });
-    var marker = new naver.maps.Marker({
-        position: new naver.maps.LatLng(37.3595704, 127.105399),
-        map: map
-    });
 </script>
 
 <!-- 북마크 클릭 시 색깔 바꾸기 -->

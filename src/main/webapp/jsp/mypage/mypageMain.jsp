@@ -20,31 +20,52 @@
 </head>
 <body>
 <!--================ Header ================-->
+<form id="headerForm" name="headerForm" method="post" action="../review/getSearchList">
+<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
 	<div id="header-container">
-	  <a class="header-logo" href="/FoodFighter/">로고 자리</a>
+	  <a class="header-logo" href="/FoodFighter"><img src="../resources/img/logo.png" width="250px;" height="55px;" align="left" style="margin-top: 10px; margin-left: 200px;"></a>
 	      <ul id="header-menu">
-		     <li class="header-items">
-		  		<img src="/FoodFighter/resources/img/search.png" class="header_searchIcon" width="30" height="30" align="center"> 
-		   		<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" value = "${keyword}" autocomplete="on" maxlength="50" >
-		   		<button size="10" id="header_searchBtn" >검색</button>
-		      </li>
 		      <li class="header-items">
-		         <a class="header-link" href="/FoodFighter/">Home</a>
+		  		<img src="../resources/img/search.png" class="header_searchIcon" width="30" height="30" align="center"> 
+		   		<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword" value="" autocomplete="on" maxlength="50" >
+		   		<button size="10" id="header_searchBtn">검색</button>
 		      </li>
-		      <li class="header-items">
-		         <a class="header-link" href="/FoodFighter/review/reviewNonSearchList">리뷰 리스트</a>
-		      </li>
-		      <li class="header-items">
-		        <a class="header-link" href="/FoodFighter/community/communityMain">커뮤니티</a>
-		      </li>
-		      <li class="header-items">
-		        <a class="header-link" href="/FoodFighter/event/eventList">이벤트</a>
-		      </li>
-		      <li class="header-items">
-		       <a class="header-link" href="communityMain.jsp"><img src="/FoodFighter/resources/img/member.png" class="header_searchIcon" width="30" height="30" align="center"></a>
-	    	 </li>
+		       <li class="nav-item">
+		           <a class="nav-link js-scroll active" href="/FoodFighter">Home</a>
+		       </li>
+		       <li class="nav-item">
+	         	  <a class="nav-link js-scroll" href="/FoodFighter/review/reviewNonSearchList">리뷰 리스트</a>
+	          </li>
+	          <li class="nav-item">
+	           <a class="nav-link js-scroll" href="/FoodFighter/community/communityMain">커뮤니티</a>
+	          </li>
+	          <li class="nav-item">
+	            <a class="nav-link js-scroll" href="/FoodFighter/event/eventList">이벤트</a>
+	          </li>
+	          <li class="nav-item">
+	            <a class="nav-link js-scroll">
+	            <img src="/FoodFighter/resources/img/member.png" id="headerUser" class="header_searchIcon" width="30" height="30" align="center">
+	            </a>
+     	     </li>
 	   	</ul>
 	</div>
+	<!-- usermenu -->
+  <div class="modal headUser-menu" id="headUser-menu" role="dialog">
+  	<div class="tri"></div>
+  	<c:if test="${sessionScope.memId == null}">
+  		<p>로그인 또는 회원가입을 하시면 <br> 더 많은 서비스를 <br>이용하실 수 있습니다.</p>
+  		<hr>
+	  	<button type="button" id="loginBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/login/loginForm'" >로그인</button>
+	  	<button type="button" id="signupBtn" class="headUserMenu-Btn" onclick="location.href='/FoodFighter/member/signupChoice'" >회원가입</button>
+  	</c:if>
+  	<c:if test="${sessionScope.memId != null}">
+  		<p>맛집을 찾아보고 <br> 후기를 남겨보세요.</p>
+  		<hr>
+	  	<button type="button" id="mypageBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/mypage/mypageMain'" >마이페이지</button>
+	  	<button type="button" id="logoutBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/login/logout'">로그아웃</button>
+  	</c:if>
+  </div>
+ </form>
 <!-- ============main ============== -->
 <div class="container">
   <div id="row1" class="row">
@@ -66,7 +87,12 @@
 		  <div id="profileInfoBox" class="col-7 offset-2">
 		  	<div id="info">
 		  		<div id="name">${memberDTO.name }</div>
-		  		<button type="button" id="modifyBtn" class="btn btn-primary" onclick="location.href='/FoodFighter/mypage/modifyCheckPwd'">정보수정</button>
+		  		<c:if test="${memberDTO.socialLogin != 1}">
+		  			<button type="button" id="modifyBtn" class="btn btn-primary" onclick="location.href='/FoodFighter/mypage/modifyCheckPwd'">정보수정</button>
+		  		</c:if>
+		  		<c:if test="${memberDTO.socialLogin == 1}">
+		  			<button type="button" id="modifyBtn" class="btn btn-primary" onclick="location.href='/FoodFighter/mypage/profileEdit'">프로필 수정</button>
+		  		</c:if>
 		  	</div>
 		  	
 		  	<div id="alramBox">
@@ -86,7 +112,7 @@
 	<div class="col-12">
 		<nav id="menu" class="border-top">
 		  <div id="menuTextBox" class="col-10  offset-1" >
-			  	<a id="myReview" class="first menu-part" href="/FoodFighter/mypage/myReview">
+			  	<a id="myReview" class="menu-part" href="/FoodFighter/mypage/myReview">
 			  	  <span class="glyphicon glyphicon-list-alt"></span>
 			  	  <span>내가 쓴 리뷰</span>
 			  	</a>
@@ -146,6 +172,8 @@
 <!-- 부트스트랩 js -->
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" ></script>
+
+<script src="/FoodFighter/resources/js/review/keyword.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
     var token = $("meta[name='_csrf']").attr("content");
@@ -161,6 +189,10 @@ $('.header_searchInput').click(function(){
 	$('#header_searchBtn').addClass('show');
 });
 
+$('#headerUser').click(function(){
+	$('#headUser-menu').modal();
+});
+
 
 $('#menuTextBox a').click(function(){
 	$('#menuTextBox a').removeClass('first');
@@ -168,232 +200,8 @@ $('#menuTextBox a').click(function(){
 	$(this).addClass('now');
 });
 
-/* 리뷰리스트 쪽  */
-$(document).ready(function(){
-	$.ajax({
-		data:'pg='+$('#pg').val(),
-	    url:"/FoodFighter/mypage/myreviewGetList",
-	    type: "post",
-	    dataType: "json",
-	    success: function(data){
 
-	    	let pg = parseInt($('#pg').val());
-	        $.each(data.list, function(index, items){
-	        	
-	        	
-	        	if(index ==0 || index==3 ){
-			
-	            	 let html ='<div id="inner-row'+(pg)+'" class="row">' 
-	            		+'<div id="re" class="review col-3 ">'
-	            		+'<input type="hidden" id="seq_review" value='+items.seq_review+'>'
-	            		+'<div id="reviewImg-Div" class="review-part">'
-	            	    +'<img src="/FoodFighter/storage/review/'+items.image1+'" class="img-responsive">'
-	            	    +'</div>'
-	            	    
-	            	    +'<div id="review-score" class="review-part">'
-	            	    +'<span class="fa fa-star checked"></span>'
-	            	    +'<span class="fa fa-star checked"></span>'
-	            	    +'<span class="fa fa-star checked"></span>'
-	            	    +'<span class="fa fa-star"></span>'
-	            	    +'<span class="fa fa-star"></span>'
-	            	    +'</div>'
-	            	    
-	            	    +'<div id="review-content" class="review-part">'
-	            	    +'<span>'+items.content+'</span>'
-	            	    +'</div>'
-	            	    +'</div>'
-	            	    +'</div>'
-	            	    
-	            	    if(index == 0){
-	            	    	$("#reviewListDiv").last().prepend(html);
-	            	    }else if(index ==3){
-	            	    	$("#reviewListDiv .row").last().after(html);
-	            	    }
-	            	    
-	            	    
-	            		
-	            		
-	        	} else if(index%3 == 1||index%3 == 2){
-	        		
-	        		
-	        		let html = '<div id="re" class="review col-3 ">'
-	        			+'<input type="hidden" id="seq_review" value='+items.seq_review+'>'
-	            	    +'<div id="reviewImg-Div" class="review-part">'
-	            	    +'<img src="/FoodFighter/storage/review/'+items.image1+'" class="img-responsive">'
-	            	    +'</div>'
-	            	    
-	            	    +'<div id="review-score" class="review-part">'
-	            	    +'<span class="fa fa-star checked"></span>'
-	            	    +'<span class="fa fa-star checked"></span>'
-	            	    +'<span class="fa fa-star checked"></span>'
-	            	    +'<span class="fa fa-star"></span>'
-	            	    +'<span class="fa fa-star"></span>'
-	            	    +'</div>'
-	            	    
-	            	    +'<div id="review-content" class="review-part">'
-	            	    +'<span>'+items.content+'</span>'
-	            	    +'</div>'
-	            	    +'</div>'
-	            	    
-	            	    $("#reviewListDiv .row").last().append(html);
-					
-	            	    
-	        	} 
 
-	        })
-	        
-	        
-	        pg++;
-	        $('#pg').val(pg);
-	    }
-	});
-	
-});
-
-let totPg;
-$('#addReviewList').click(function(){
-	if($('#pg').val() >= totPg){ //총 페이지를 계산해서 마지막 pg값 정해지면 스크롤 내려도 계속 return 해서 메소드에서 나가도록(나머지 수정!!!)
-        alert("마지막 페이지입니다.");
-		return;
-    }else{
-		$.ajax({
-			data:'pg='+$('#pg').val(),
-		    url:"/FoodFighter/mypage/myreviewGetList",
-		    type: "post",
-		    dataType: "json",
-		    success: function(data){
-		      let length = data.list.length;
-	
-		    	
-		    	let pg = parseInt($('#pg').val());
-		    	
-		    	if(length <= 5){
-			    	  totPg = pg;
-			      }
-		        $.each(data.list, function(index, items){
-		        	
-		        	
-		        	if(index ==0 || index==3 ){
-				
-		            	 let html ='<div id="inner-row'+(pg)+'" class="row">' 
-		            		+'<div id="re" class="review col-3 ">'
-		            		+'<input type="hidden" id="seq_review" value='+items.seq_review+'>'
-		            		+'<div id="reviewImg-Div" class="review-part">'
-		            	    +'<img src="/FoodFighter/storage/review/'+items.image1+'" class="img-responsive">'
-		            	    +'</div>'
-		            	    
-		            	    +'<div id="review-score" class="review-part">'
-		            	    +'<span class="fa fa-star checked"></span>'
-		            	    +'<span class="fa fa-star checked"></span>'
-		            	    +'<span class="fa fa-star checked"></span>'
-		            	    +'<span class="fa fa-star"></span>'
-		            	    +'<span class="fa fa-star"></span>'
-		            	    +'</div>'
-		            	    
-		            	    +'<div id="review-content" class="review-part">'
-		            	    +'<span>'+items.content+'</span>'
-		            	    +'</div>'
-		            	    +'</div>'
-		            	    +'</div>'
-		            	    
-		            	   
-		            	    	$("#reviewListDiv .row").last().after(html);
-		            	   
-		            	    
-		            		
-		            		
-		        	} else if(index%3 == 1||index%3 == 2){
-		        		
-		        		
-		        		let html = '<div id="re" class="review col-3 ">'
-		        			+'<input type="hidden" id="seq_review" value='+items.seq_review+'>'
-		            	    +'<div id="reviewImg-Div" class="review-part">'
-		            	    +'<img src="/FoodFighter/storage/review/'+items.image1+'" class="img-responsive">'
-		            	    +'</div>'
-		            	    
-		            	    +'<div id="review-score" class="review-part">'
-		            	    +'<span class="fa fa-star checked"></span>'
-		            	    +'<span class="fa fa-star checked"></span>'
-		            	    +'<span class="fa fa-star checked"></span>'
-		            	    +'<span class="fa fa-star"></span>'
-		            	    +'<span class="fa fa-star"></span>'
-		            	    +'</div>'
-		            	    
-		            	    +'<div id="review-content" class="review-part">'
-		            	    +'<span>'+items.content+'</span>'
-		            	    +'</div>'
-		            	    +'</div>'
-		            	    
-		            	    $("#reviewListDiv .row").last().append(html);
-						
-		            	    
-		        	} 
-	
-		        })
-		        
-		        
-		        pg++;
-		        $('#pg').val(pg);
-		    }
-		});
-    }
-});
-
-$('#listDiv').on('click','.review',function(){
-	 $('.modal-body').empty();
-	
-	let seq_review = $(this).children('#seq_review').val();
-	
-	 $.ajax({
-	       data:'seq_review='+seq_review,
-	        url:"/FoodFighter/mypage/getModalView",
-	        type: "post",
-	        dataType: "json",
-	        success: function(data){
-	        	let modalView='<div class="swiper-container">'
-    	            +'<div class="swiper-wrapper">' 
-    	        	+'<div id="modalViewImg-Div" class="swiper-slide modalView-part">'
-               	    +'<img src="/FoodFighter/storage/review/'+data.image1+'" class="modalViewImg img-responsive">'
-               	    +'</div>'
-               	 	+'<div id="modalViewImg-Div" class="swiper-slide modalView-part">'
-               	    +'<img src="/FoodFighter/storage/review/'+data.image2+'" class="modalViewImg img-responsive">'
-               	    +'</div>'
-               	 	+'<div id="modalViewImg-Div" class="swiper-slide modalView-part">'
-               	    +'<img src="/FoodFighter/storage/review/'+data.image3+'" class="modalViewImg img-responsive">'
-               	    +'</div>'
-               	    +'</div>'
-               	 	+'<div class="swiper-button-next"></div>'/* 다음 */
-             		+'<div class="swiper-button-prev"></div>'/* 이전 버튼  */
-               	    +'</div>'
-               	    +'<div id="modalView-score" class="modalView-part">'
-               	    +'<span class="fa fa-star checked"></span>'
-               	    +'<span class="fa fa-star checked"></span>'
-               	    +'<span class="fa fa-star checked"></span>'
-               	    +'<span class="fa fa-star"></span>'
-               	    +'<span class="fa fa-star"></span>'
-               	    +'</div>'
-               	    +'<div id="modalView-content" class="modalView-part">'
-               	    +'<span>'+data.content+'</span>'
-               	    +'</div>'
-               	    
-    				$('.modal-body').append(modalView);
-	        	
-	        	
-	        }
-	   
-	   });  
-	 
-	 $('div.modal').modal(); 
-	 
-	 
-/* 	 new Swiper( '.swiper-container', {
-		    navigation : { // 네비게이션
-		        nextEl : '.swiper-button-next', // 오른쪽(다음) 화살표
-		        prevEl : '.swiper-button-prev', // 왼쪽(이전) 화살표
-		    },
-		}); */
-	 
-});
 
 
 </script>

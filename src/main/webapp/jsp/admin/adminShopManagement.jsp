@@ -17,7 +17,7 @@
                     </div>
                 </div>
             </div>
-            <div><button type="button" id="insertShopBtn" >맛집 등록</button></div>
+            <div><button type="button" id="insertShopBtn" onclick="location.href='/FoodFighter/admin/resWriteForm'" >가게 등록</button></div>
             <table id="shopTable" class="table table-striped table-hover table-bordered tablesorter">
                 <thead>
                     <tr>
@@ -30,10 +30,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                <%-- <c:if test="${list != null}">
+                 <c:if test="${list != null}">
   					<c:forEach var="RestaurantDTO" items="${list}">
                     <tr>
-                        <td class="resSeq">${RestaurantDTO.seq}</td>
+                        <td class="resSeq">${RestaurantDTO.resSeq}</td>
                         <td>${RestaurantDTO.resName}</td>
                         <td>${RestaurantDTO.resAddress}</td>
                         <td>${RestaurantDTO.resTel}</td>
@@ -44,7 +44,7 @@
                         </td>
                     </tr>
                   </c:forEach>
-                  </c:if>   --%>
+                  </c:if>   
                 </tbody>
             </table>
             <div class="clearfix">
@@ -53,5 +53,76 @@
         </div>
     </div>  
 </div>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" ></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.9.1/jquery.tablesorter.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+    $(document).ajaxSend(function(e, xhr, options) {
+        xhr.setRequestHeader(header, token);
+    });
+});
+$('.view').on('click',function(){
+	let resSeq = $(this).parent().prevAll(".resSeq").text();
+	location.href='/FoodFighter/review/reviewView?resSeq='+resSeq
+});
+$('.delete').on('click',function(){
+	let check = confirm("삭제처리 하시겠습니까?");
+	let resSeq = $(this).parent().prevAll(".resSeq").text();
+	if(check){
+	 $.ajax({
+		 	type: 'post',
+	 		url: '/FoodFighter/admin/adminShopDelete',
+	 		data: 'resSeq='+resSeq,
+	 		success : function(){
+	 			alert("삭제처리가 완료되었습니다.");
+	 			location.href="/FoodFighter/admin/admiShopManagement"
+	 		},
+	 		error : function(e){
+				console.log(e);
+			}
+	    });
+	}
+});
+
+$('#shopSearchKeyword').keydown(function(key,str) {
+	if(str != 'continue') $('#pg').val(1);	
+	 if (key.keyCode == 13) {
+	    if($('#shopSearchKeyword').val() == ''){
+	    	alert('검색할 키워드를 입력해주세요');
+	    }else{
+	    	 $.ajax({
+	    		 type:'post',
+	 			url : '/FoodFighter/admin/getShopSearch',
+	 			data: {	'pg':$('#pg').val(),
+	 					'shopSearchKeyword' : $('#shopSearchKeyword').val()},
+	 			success:function(){
+	 				console.log('검색 데이터');
+	 			},
+	 			error: function(err){
+	 				console.log(err);
+	 			}
+	 	    });
+	    }
+		
+	 }//엔터키
+});
+
+
+
+function adminShopPaging(pg){
+	let searchKeyword = $('#shopSearchKeyword').val();
+	if(searchKeyword == ""){
+		location.href="/FoodFighter/admin/adminShopManagement?pg="+pg;
+	}else{
+		$('#pg').val(pg);
+		$('#shopSearchKeyword').trigger('keydown','continue');
+	}
+	
+}
+</script>
 </body>
 
