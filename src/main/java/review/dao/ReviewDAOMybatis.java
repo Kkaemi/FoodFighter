@@ -32,8 +32,10 @@ public class ReviewDAOMybatis implements ReviewDAO {
 	}
 	
 	@Override
-	public List<RestaurantDTO> modalSearchList(Map<String, String > map) {
+	public List<RestaurantDTO> modalSearchList(Map<String, String> map) {
 		return sqlSession.selectList("reviewSQL.modalSearchList", map);
 	}
+
+	
 
 }
