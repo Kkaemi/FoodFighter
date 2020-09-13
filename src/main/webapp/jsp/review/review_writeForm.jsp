@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%
+request.setCharacterEncoding("utf-8");
+String resName = request.getParameter("resName");
+String nickname = request.getParameter("nickname");
+String resSeq = request.getParameter("resSeq");
+%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,10 +63,14 @@
 </div>
 </form>
 <!--================ Container ================-->
+<c:if test="${!empty list}">
+		<c:forEach var="restaurantDTO" items="${list}">
 <form id="reviewForm" name="reviewForm" method="post" enctype = "multipart/form-data">
+<input type="hidden" name="resName" value="<%=resName%>">
+<input type="hidden" name="resSeq" value="<%=resSeq%>">
 	<div class="container">
 		  <div class="title" align="left">
-			  <font class="storeName"><strong>코스믹커피</strong></font>&emsp;<strong>에 대한 솔직한 리뷰를 작성해주세요.</strong> &emsp;&emsp;&emsp;&emsp;&emsp;
+			  <font class="storeName"><strong>${restaurantDTO.resName}</strong></font>&emsp;<strong>에 대한 솔직한 리뷰를 작성해주세요.</strong> &emsp;&emsp;&emsp;&emsp;&emsp;
 				 <div class="starRev">
 				 	<input type="hidden" id="resScore" name="resScore">
 				     <span class="starR1 on" id = star1_Left data-value="0.5" >별1_왼쪽</span>
@@ -77,7 +88,7 @@
 		  </div><br><!-- title -->
 
 		  <div class="form-group">
-			  <textarea id="content" name="content" class="form-control" rows="10" placeholder="000님 주문하신 메뉴는 어떠셨나요? 상점에 대한 진솔하면서도 고운말 부탁드립니다"></textarea>
+			  <textarea id="content" name="content" class="form-control" rows="10" placeholder="${memberDTO.nickname} 님 주문하신 메뉴는 어떠셨나요? 상점에 대한 진솔하면서도 고운말 부탁드립니다"></textarea>
 			 	   <div class="upload-group" align="left"> 
 			  			<div class="filebox" width="100%" align="left">
        						<label for="ex_file">+</label>
@@ -103,15 +114,16 @@
 		</div><!-- form-group -->
 	 
 		  <div class="card" style="width:300px" align="center" >
-			    <img class="card-img-top" src="../resources/img/store1.jpeg" alt="Card image" style="align:center">
+			    <img class="card-img-top" src="/FoodFighter/storage/restaurant/${restaurantDTO.resImage1}" alt="Card image" style="align:center">
 			    <div class="card-body" align="center">
-			      <h4 class="card-title" align="center"><font style="color:#fff;"><strong>코스믹 커피</strong></font></h4>
-		      	  <h6><font style="color:#fff;">가격대:&emsp; 1만원-2만원대</font></h6>
-			      <h6 ><font style="color:#fff;">카테고리:&emsp; 카페/디저트</font></h6>
+			      <h4 class="card-title" align="center"><font style="color:#fff;"><strong>${restaurantDTO.resName}</strong></font></h4>
+		      	  <h6><font style="color:#fff;">가격대:&emsp; ${restaurantDTO.resPrice}</font></h6>
+			      <h6 ><font style="color:#fff;">카테고리:&emsp; ${restaurantDTO.resTheme}</font></h6>
 		    </div>
 		  </div>
  	</div><!-- container -->
- 
+	</c:forEach>
+</c:if>
  <!--================  Footer ================-->
  <div id="footer-container">
 	 <p class="copyright" style="text-align:left;">
@@ -131,6 +143,42 @@
 </body>
 <script type="text/javascript">
 let id = '${memberDTO.nickname}';
+/* let resName = '${restaurantDTO.resName}';
+let resSeq = '${restaurantDTO.resSeq}'; */
+
+//유효성검사 
+$(document).ready(function(){
+
+	if(id == ''){
+		alert("로그인 후 리뷰작성이 가능합니다");
+		location.href="/FoodFighter/login/loginForm";
+	}else{
+		$('#reviewBtn').click(function(){
+			if($('#content').val()==''){
+				alert('내용을 입력해주세요');
+			} else {
+			 /*  document.reviewForm.submit(); */
+				$.ajax({
+					type: 'post',
+					enctype:'multipart/form-data',
+					processData: false,
+					contentType: false,
+					url: 'writeReview',
+					data: new FormData($('#reviewForm')[0]),
+					success: function(){
+						alert("리뷰를 저장하였습니다");
+						location.href="/FoodFighter/review/reviewView?resSeq=<%=resSeq%>&resName=<%=resName%>";
+					},
+					error:function(err){
+						console.log(err);
+					}
+					
+				});
+			} 
+			/* return false; */
+		});
+	}//else
+});
 </script>
 <!-- Vendor JS Files -->
 <!-- <script src="../../assets/vendor/jquery/jquery.min.js"></script>  -->

@@ -65,13 +65,12 @@
             <img src="/FoodFighter/resources/img/member.png" id="headerUser" class="header_searchIcon" width="30" height="30" align="center">
             </a>
           </li>
-           <!-- <li class="nav-item">
-            <a class="nav-link js-scroll" href="#blog"><img src="./img/member.png" class="header_searchIcon" width="30" height="30" align="center"></a>
-          </li> --> 
+
         </ul>
       </div>
     </div>
   </nav>
+ </form>
   <!-- usermenu -->
   <div class="modal headUser-menu" id="headUser-menu" role="dialog">
      <div class="tri"></div>
@@ -94,7 +93,6 @@
         <button type="button" id="logoutBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/login/logout'">로그아웃</button>
      </c:if>
   </div>
-</form>
 
   <!-- ======= Intro Section ======= -->
 <form id="searchMainForm" name="searchMainForm" method="post" action="./review/getSearchList">
