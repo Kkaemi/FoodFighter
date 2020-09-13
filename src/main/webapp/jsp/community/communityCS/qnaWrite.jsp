@@ -10,6 +10,8 @@ String keyword = request.getParameter("keyword");
 
 <head>
     <meta charset="UTF-8">
+    <meta id="_csrf" name="_csrf" content="${_csrf.token}" />
+	<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
     <title>QnA게시판 글쓰기</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
@@ -114,6 +116,13 @@ String keyword = request.getParameter("keyword");
 <script src="/FoodFighter/resources/js/review/keyword.js"></script>
 <script>
     $(document).ready(function () {
+    	
+    	var token = $("meta[name='_csrf']").attr("content");
+	    var header = $("meta[name='_csrf_header']").attr("content");
+	    $(document).ajaxSend(function(e, xhr, options) {
+	        xhr.setRequestHeader(header, token);
+	    });
+	    
         $('#summernote').summernote({
             height: 300,                 // 에디터 높이
             minHeight: null,             // 최소 높이

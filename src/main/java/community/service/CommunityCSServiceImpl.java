@@ -4,12 +4,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import community.bean.QnaBoardDTO;
 import community.bean.QnaBoardPaging;
 import community.dao.CommunityCSDAO;
+import member.bean.MemberDTO;
 
 @Service
 public class CommunityCSServiceImpl implements CommunityCSService {
@@ -18,6 +21,8 @@ public class CommunityCSServiceImpl implements CommunityCSService {
 	private CommunityCSDAO communityCSDAO;
 	@Autowired
 	private QnaBoardPaging boardPaging;
+	@Autowired
+	private HttpSession session;
 
 	@Override
 	public List<QnaBoardDTO> getQnaBoardList(String pg) {
@@ -83,9 +88,15 @@ public class CommunityCSServiceImpl implements CommunityCSService {
 	@Override
 	public void qnaWrite(Map<String, String> map) {
 		
-		map.put("id", "test");
-		map.put("nickname", "테스트맨");
-		map.put("email", "test@test");
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberDTO");
+		
+		String id = memberDTO.getName();
+		String nickname = memberDTO.getNickname();
+		String email = memberDTO.getEmail();
+		
+		map.put("id", id);
+		map.put("nickname", nickname);
+		map.put("email", email);
 		
 		communityCSDAO.qnaWrite(map);
 	}
@@ -136,6 +147,11 @@ public class CommunityCSServiceImpl implements CommunityCSService {
 	@Override
 	public void qnaModify(Map<String, Object> map) {
 		communityCSDAO.qnaModify(map);
+	}
+
+	@Override
+	public void qnaHit(String seq) {
+		communityCSDAO.qnaHit(seq);
 	}
 
 }
