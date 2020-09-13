@@ -3,6 +3,8 @@ package community.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -18,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import community.bean.QnaBoardDTO;
 import community.bean.QnaBoardPaging;
 import community.service.CommunityCSService;
+import member.bean.MemberDTO;
 
 @Controller
 @RequestMapping(value = "community")
@@ -97,13 +100,17 @@ public class CommunityCSCenterController {
 	// qna password page
 	@RequestMapping(value = "passwordPage", method = RequestMethod.GET)
 	public String passwordPage(@RequestParam String seq,
-						@RequestParam String pg, 
-						Model model) {
+							@RequestParam String pg,
+							HttpSession session,
+							Model model) {
 		
-			model.addAttribute("seq", seq);
-			model.addAttribute("pg", pg);
-			
-			return "/jsp/community/communityCS/passwordPage";
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberDTO");
+		
+		model.addAttribute("memberDTO", memberDTO);
+		model.addAttribute("seq", seq);
+		model.addAttribute("pg", pg);
+		
+		return "/jsp/community/communityCS/passwordPage";
 	}
 	
 	@RequestMapping(value = "passwordCheck", method = RequestMethod.POST)
@@ -134,7 +141,7 @@ public class CommunityCSCenterController {
 	// qna View
 	@RequestMapping(value = "qnaView", method = RequestMethod.GET)
 	public String boardView(@RequestParam String seq,
-							@RequestParam String pg, 
+							@RequestParam String pg,
 							Model model) {
 		
 		model.addAttribute("seq", seq);
@@ -145,12 +152,51 @@ public class CommunityCSCenterController {
 	
 	@RequestMapping(value = "getQnaView", method = RequestMethod.POST)
 	public ModelAndView getBoardView(@RequestParam String seq,
-									 HttpServletResponse response) {
+									 HttpServletRequest req,
+									 HttpServletResponse res,
+									 HttpSession session) {
+		
+		
+		
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberDTO");
 		
 		QnaBoardDTO qnaBoardDTO = communityCSService.getBoard(seq);
 		
 		ModelAndView mav = new ModelAndView();
+		
+		if (memberDTO == null || !(memberDTO.getEmail().equals(qnaBoardDTO.getEmail()))) {
+			mav.setViewName("jsonView");
+			return mav;
+		}
+		
+		// 쿠키들을 불러온다
+		Cookie cookies[] = req.getCookies();
+		
+		// 비교를 위한 임시쿠키 생성
+		Cookie viewCookie = null;
+		
+		// 쿠키가 있을 경우 cookies배열에서 게시판 번호를 가진 쿠키를 viewCookie에 넣어줌
+	    if (cookies != null && cookies.length > 0) {
+	        for (int i = 0; i < cookies.length; i++) {
+	            if (cookies[i].getName().equals("cookie"+seq)) viewCookie = cookies[i];
+	        }
+	    }
+	    
+	    // 쿠키가 없을 경우
+	    if (viewCookie == null) {    
+	
+	        // 쿠키 생성(이름, 값)
+	        Cookie newCookie = new Cookie("cookie"+seq, seq);
+	                        
+	        // 쿠키 추가
+	        res.addCookie(newCookie);
+	
+	        // 쿠키를 추가 시키고 조회수 증가시킴
+	        communityCSService.qnaHit(seq);
+	    }
+		
 		mav.addObject("qnaboardDTO", qnaBoardDTO);
+		mav.addObject("memberDTO", memberDTO);
 		mav.addObject("seq", seq);
 		
 		mav.setViewName("jsonView");
