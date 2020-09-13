@@ -64,6 +64,9 @@ String keyword = request.getParameter("keyword");
 <form id="modalForm" name="modalForm" method="post" action="../review/modalSearchList">
 <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
 <input type="hidden" name="keyword" value="<%=keyword%>">
+<input type="hidden" name="orderby">
+<input type="hidden" name="Price"> 
+<input type="hidden" name="Food"> 
     <div class="container">
     <!-- Page Keyword -->
       <div class="keywordZone">
@@ -84,29 +87,29 @@ String keyword = request.getParameter("keyword");
 					      <div class="modal-content">
 					        <div class="modal-body" align="center"><br>
 					          <p  align="left">검색순 </p>
-					           <button type="button"class="soonFilter" value="avgsoon">평점순</button>
-			                   <button type="button" class="soonFilter" value="searchsoon">조회순</button>
+					           <button type="button" class="orderbyAvg" >평점순</button>
+			                   <button type="button" class="orderbyHit">조회순</button>
 					          <hr>
 					        </div>
 					         <div class="modal-body" align="center">
 					      	  <p  align="left">가격순 </p><br>
-					           <button type="button"class="priceFilter" value="firstPrice" >1만원미만</button>
-			                   <button type="button" class="priceFilter" value="secondPrice">1만원대</button> 
-			                   <button type="button" class="priceFilter" value="thirdPrice">2만원대</button> 
-	                           <button type="button" class="priceFilter" value="fourthPrice">3만원대</button> 
-	                           <button type="button" class="priceFilter" value="fifthPrice">4만원이상</button> 
+					           <button type="button" class="firstPrice">1만원미만</button>
+			                   <button type="button" class="secondPrice">1만원대</button> 
+			                   <button type="button" class="thirdPrice">2만원대</button> 
+	                           <button type="button" class="fourthPrice">3만원대</button> 
+	                           <button type="button" class="fifthPrice">4만원이상</button> 
 							<hr>
 					        </div>
 					         <div class="modal-body" align="center">
 					          <p  align="left">음식 카테고리 </p><br>
-					           <button type="button"class="foodFilter" value=" koreanFood"> 한식</button>
-			                   <button type="button" class="foodFilter" value="WesternFood">양식</button>
-			                   <button type="button" class="foodFilter" value="ChineseFood">중식</button>
-	                           <button type="button" class="foodFilter" value="JapaneseFood">일식</button>
-                               <button type="button" class="foodFilter" value="Dessert">카페/디저트</button>
+					           <button type="button" class="koreanFood"> 한식</button>
+			                   <button type="button" class="westernFood">양식</button>
+			                   <button type="button" class="chineseFood">중식</button>
+	                           <button type="button" class="japaneseFood">일식</button>
+                               <button type="button" class="dessert">카페/디저트</button>
 					        </div>
 					       	<div class="modal-footer">
-					          <button type="submit" class="btn btn-default" data-dismiss="modal" style="background-color:#ffc34d; outline: none; border-style:none;">검색</button>
+					        <button type="submit" id="modalsearchBtn" class="btn btn-default" data-dismiss="modal" style="background-color:#ffc34d; outline: none; border-style:none;">검색</button>
 					       </div>
 					   </div><!-- modal-content -->
 				    </div><!-- modal-dialog -->
@@ -153,7 +156,7 @@ String keyword = request.getParameter("keyword");
 
     <!--================ 더보기 버튼 ================-->    
 <div class="contentMore">
- 	<input type="hidden" value="2" id="pg" name="pg">
+ 	<input type="hidden" value="1" id="pg" name="pg">
   	<button type="button" class="moreBtn" id="moreBtn"><font style="color: #ffc34d;">더보기</font></button>
   </div>    
 </div><!-- container -->  
@@ -173,6 +176,70 @@ String keyword = request.getParameter("keyword");
   <a href="#" class="back-to-top"><i class="fa fa-chevron-up"> <img src="../resources/img/back-up.png" width="32px;" height="32px;"></i></a>
   <div id="preloader"></div>
 
+<script type="text/javascript">
+$('.orderbyAvg').click(function(){
+	$('input[name=orderby]').attr({"value" : "resScore"});
+});
+$('.orderbyHit').click(function(){
+	$('input[name=orderby]').attr({"value" : "orderbyHit"});
+});
+
+$('.firstPrice').click(function(){
+	$('input[name=Price]').attr({"value" : "1만원미만"});
+});
+$('.secondPrice').click(function(){
+	$('input[name=Price]').attr({"value" : "1만원대"});
+});
+$('.thirdPrice').click(function(){
+	$('input[name=Price]').attr({"value" : "2만원대"});
+});
+$('.fourthPrice').click(function(){
+	$('input[name=Price]').attr({"value" : "3만원대"});
+});
+$('.fifthPrice').click(function(){
+	$('input[name=Price]').attr({"value" : "4만원이상"});
+});
+
+$('.koreanFood').click(function(){
+	$('input[name=Food]').attr({"value" : "한식"});
+});
+$('.westernFood').click(function(){
+	$('input[name=Food]').attr({"value" : "양식"});
+});
+$('.chineseFood').click(function(){
+	$('input[name=Food]').attr({"value" : "중식"});
+});
+$('.japaneseFood').click(function(){
+	$('input[name=Food]').attr({"value" : "일식"});
+});
+$('.dessert').click(function(){
+	$('input[name=Food]').attr({"value" : "카페/디저트"});
+});
+
+
+$('#modalsearchBtn').click(function(){
+
+	if($('.orderbyAvg').hasClass("check") == false && $('.orderbyHit').hasClass("check") == false) {
+		alert('검색순을 체크해주세요');
+		return false;
+	}else if($('.firstPrice').hasClass("check") == false && $('.secondPrice').hasClass("check") == false
+			&& $('.thirdPrice').hasClass("check") == false && $('.fourthPrice').hasClass("check") == false 
+			&& $('.fifthPrice').hasClass("check") == false){
+		alert('가격순을 체크해주세요');
+		return false;
+	}else if($('.koreanFood').hasClass("check") == false && $('.westernFood').hasClass("check") == false
+			&& $('.chineseFood').hasClass("check") == false && $('.japaneseFood').hasClass("check") == false 
+			&& $('.dessert').hasClass("check") == false){
+		alert('음식카테고리를 체크해주세요');
+		return false;
+	}else{
+		document.modalForm.submit();
+	}
+	
+});
+
+ 
+</script>
 
 <!-- Vendor JS Files -->
 <!-- <script src="../../assets/vendor/jquery/jquery.min.js"></script>  -->
