@@ -65,6 +65,7 @@
             <img src="/FoodFighter/resources/img/member.png" id="headerUser" class="header_searchIcon" width="30" height="30" align="center">
             </a>
           </li>
+
         </ul>
       </div>
     </div>

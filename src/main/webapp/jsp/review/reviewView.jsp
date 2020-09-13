@@ -23,7 +23,7 @@ String resSeq = request.getParameter("resSeq");
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=x4xnbzhxl0"></script>
+
   
     <title>리뷰보기</title>
 <!-- security -->
@@ -326,4 +326,26 @@ $(document).ready(function(){
 	});
 });
 </script>
+<!-- 지도 api -->    
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=x4xnbzhxl0"></script>
+<script type="text/javascript">
+naver.maps.onJSContentLoaded = initGeocoder;
+naver.maps.Event.once(map, 'init_stylemap', initGeocoder);
+
+
+naver.maps.Service.geocode({
+    address: '${resAddress}'
+}, function(status, response) {
+    if (status !== naver.maps.Service.Status.OK) {
+        return alert('Something wrong!');
+    }
+
+    var result = response.result, // 검색 결과의 컨테이너
+        items = result.items; // 검색 결과의 배열
+	
+        console.log(result.items);
+    // do Something
+});
+</script>
+
 </html>
