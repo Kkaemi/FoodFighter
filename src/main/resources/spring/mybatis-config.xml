@@ -12,6 +12,8 @@
 		<typeAlias type="community.bean.CommunityNoticeDTO" alias="cNotice"/>
 
 		<typeAlias type="event.bean.EventDTO" alias="event"/>
+		<typeAlias type="event.bean.EventCoDTO" alias="eventC"/>
+		
 		<typeAlias type="admin.bean.RestaurantDTO" alias="restaurant"/>
 		
 		<typeAlias type="community.bean.QnaBoardDTO" alias="qnaBoard"/>

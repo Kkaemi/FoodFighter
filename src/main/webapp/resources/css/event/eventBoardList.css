@@ -8,9 +8,10 @@
     margin: 40px 0 0px;
 }
 .page-body{
-	min-height : 100%;
-	position:relative;
+	/* min-height : 100%;
+	position:relative; */
 	padding: 0px 460px;
+	height : 720px;
 }
 div {
     display: block;

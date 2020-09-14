@@ -96,8 +96,6 @@ public class ReviewController {
 			map.put("image"+i, "");
 		}
 			
-		System.out.println("writeReview"+ request.getParameter("resName"));
-
 			MemberDTO memberDTO =(MemberDTO)session.getAttribute("memberDTO");
 
 			map.put("nickname", memberDTO.getNickname());
@@ -107,8 +105,6 @@ public class ReviewController {
 			
 		//DB
 		reviewService.writeReview(map);
-		
-		System.out.println(request.getParameter("resSeq"));
 		
 		return "/jsp/review/reviewView";
 	}
@@ -144,19 +140,16 @@ public class ReviewController {
 	@RequestMapping(value="modalSearchList", method=RequestMethod.POST)
 	public String modalSearchList(@RequestParam Map<String, Object> map, Model model, @RequestParam String pg,  @RequestParam(required=false) String resSeq) {
 	
-	System.out.println("modalSearchList= "+map.get("keyword"));
-	System.out.println("modalSearchList= "+map.get("pg"));
-	
-	//5개씩 보여지는 리스트
-	List<RestaurantDTO> list = reviewService.modalSearchList(pg,(String)map.get("keyword"),(String)map.get("Filter"),resSeq);
-	
-	map.put("list",list);
+	//5개씩 필터링
+    List<RestaurantDTO> list = reviewService.modalSearchList(pg,(String)map.get("orderby"),(String)map.get("Price") ,(String)map.get("Food") ,
+    		(String)map.get("keyword"),resSeq);
 
-	model.addAttribute("list",list);
-	model.addAttribute("pg", pg);
-	model.addAttribute("Filter", map.get("Filter"));
-	model.addAttribute("keyword", map.get("keyword"));
-		
+		map.put("list",list);
+
+		model.addAttribute("list",list);
+		model.addAttribute("pg", pg);
+		model.addAttribute("keyword", map.get("keyword"));
+	
 	return "/jsp/review/review_searchList";
 	
 	}
@@ -166,8 +159,9 @@ public class ReviewController {
 	@RequestMapping(value="moreSearchList", method=RequestMethod.POST, produces={"application/json"})
 	@ResponseBody
 	public List<RestaurantDTO> moreSearchList(@RequestBody HashMap<String, Object> map,HttpServletRequest requeest,
+											@RequestParam(required=false) String resName,
 											@RequestParam(required=false) String resSeq, HttpServletResponse response) {
-	
+		
 	//5개씩 보여지는 리스트
 	List<RestaurantDTO> list = reviewService.getSearchList(map.get("pg")+"",(String)map.get("keyword"), resSeq);
 	

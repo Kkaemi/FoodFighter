@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 리뷰 작성 -->
 	<insert id="writeReview" parameterType="java.util.Map">
-		insert into view_test values(Nextval(seq_review),#{member_seq},#{nickname},#{resName},#{resScore},#{content},#{image1},#{image2},#{image3},#{image4},#{image5},now())
+		insert into review values(Nextval(seq_review),#{member_seq},#{nickname},#{resName},#{resScore},#{content},#{image1},#{image2},#{image3},#{image4},#{image5},now())
 		<!-- insert into view_test values(seq_review.nextval,#{member_seq},#{nickname},#{resName},#{resScore},#{content},#{image1},#{image2},#{image3},#{image4},#{image5}) -->
 	</insert>
 
@@ -31,13 +31,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM (
 		    SELECT @ROWNUM := @ROWNUM + 1 as rownum, resSeq, resImage1, resName, resScore, resAddress, resTheme, resPrice
 		    FROM restaurant, (SELECT @ROWNUM :=0) A
-		    where resName like CONCAT('%',#{keyword},'%') order by resScore desc
+		    where resName like CONCAT('%',#{keyword},'%') 
+		    and resPrice like CONCAT('%',#{Price},'%') 
+            and resTheme like CONCAT('%',#{Food},'%') 
+            order by #{orderby} asc
 		    ) RESULT
 		where rownum between #{startNum} and #{endNum}
 		]]> 
 	</select>
-	
-	
+
 	<!-- 가게데이터 끌어오기 -->
 	<select id="getReviewView" parameterType="String" resultType="restaurant">
 		select * from restaurant where resSeq=#{resSeq}

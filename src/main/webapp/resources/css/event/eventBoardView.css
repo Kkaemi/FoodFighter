@@ -254,6 +254,35 @@ div.view_stat div.info p span.date {
 .comment_reply a {
     color: #666;
 }
+.option {
+	display: table-cell;
+}
+.dropdown {
+	float: right;
+	border-color: none;
+}
+.dropdown-toggle {
+	border : 0;
+	background-color: #f8f8f8;
+}
+.open>.dropdown-menu {
+    display: table !important;
+}
+.dropdown-menu {
+	text-align : center;
+    min-width : 20px !important;
+    height: 56px !important;
+    cursor: pointer !important;
+}
+.dropdown-menu .a {
+	margin: 20px;
+	font-size : 20px;
+}
+.ico_more {
+	width: 20px;
+    height: 20px;
+    background: url( "/FoodFighter/resources/img/community/boardImg/more.svg" ) no-repeat center;
+}
 /* 댓글 페이징 */
 .simple_paging {
     position: relative;
@@ -379,6 +408,14 @@ div.view_stat div.info p span.date {
 .btn_group {
     display: inline-block;
     margin-left: 6px;
+}
+
+.comment_modify { /* 댓글 수정 */
+    margin-top: 25px;
+}
+
+.comment_replyWrite{
+    padding-top: 25px;
 }
 
 /* 대댓 작성 */

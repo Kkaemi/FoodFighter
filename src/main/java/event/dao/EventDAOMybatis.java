@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import event.bean.EventCoDTO;
 import event.bean.EventDTO;
 
 @Repository
@@ -67,9 +68,37 @@ public class EventDAOMybatis implements EventDAO {
 	public void eventBoardListDelete(List<String> list) {
 		for (int i = 0; i < list.size(); i++) {
 			String temp = list.get(i);
-			System.out.println(temp);
+			//System.out.println(temp);
 			sqlSession.update("eventSQL.eventBoardListDelete",temp);
 		}
+	}
+
+	@Override
+	public void eventboardcommentwirte(Map<String, String> map) {
+		sqlSession.insert("eventSQL.eventboardcommentwirte", map);
+		
+	}
+
+	@Override
+	public List<EventCoDTO> eventboardcommentList(Map<String, Object> map) {
+		return sqlSession.selectList("eventSQL.eventboardcommentList",map);
+	}
+
+	@Override
+	public EventCoDTO geteventBoardtcommentView(Map<String, String> map) {
+		return sqlSession.selectOne("eventSQL.geteventBoardtcommentView",map);
+	}
+
+	@Override
+	public void eventBoardcommentModify(Map<String, String> map) {
+		sqlSession.update("eventSQL.eventBoardcommentModify",map);
+		
+	}
+
+	@Override
+	public void eventBoardcommentDelete(String seq_eventco) {
+		sqlSession.delete("eventSQL.eventBoardcommentDelete",Integer.parseInt(seq_eventco));
+		
 	}
 
 }

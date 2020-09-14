@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import event.bean.EventCoDTO;
 import event.bean.EventDTO;
 import event.bean.EventPaging;
 import event.service.EventService;
@@ -165,13 +167,13 @@ public class EventController {
 	@RequestMapping(value="geteventBoardtView", method=RequestMethod.POST)
 	public ModelAndView geteventBoardtView(@RequestParam String seq_event, @CookieValue(value="memHit", required=false)
 												Cookie cookie,HttpServletResponse response,HttpSession session){
-		System.out.println(seq_event);
+		//System.out.println(seq_event);
 	
 		String email = (String) session.getAttribute("memId");
 		
 		//쿠키 - 조회수 증가
 		//System.out.println(cookie);
-		if(cookie != null && seq_event != null && !seq_event.isEmpty()) {//쿠키존재여부묻기
+		if(cookie != null) {//쿠키존재여부묻기
 		eventService.hit(seq_event);//조회수 증가
 		
 		
@@ -218,6 +220,58 @@ public class EventController {
 	@ResponseBody
 	public void eventBoardListDelete(@RequestParam(value="deleteSelect[]")List<String> list) {
 		eventService.eventBoardListDelete(list);	
+	}
+	
+	@RequestMapping(value = "eventboardcomment", method = RequestMethod.POST)
+	@ResponseBody
+	public void eventboardcomment(@RequestParam Map<String,String> map) {
+		eventService.eventboardcommentwirte(map);
+	}
+	
+	@RequestMapping(value = "eventboardcommentList", method = RequestMethod.GET, produces={"application/json"})
+	@ResponseBody
+	public List<EventCoDTO> eventboardcommentList(@RequestParam(required=false, defaultValue="1") String pg,
+														@RequestParam Map<String,Object> map, HttpServletRequest session, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		map.put("pg", pg);
+		List<EventCoDTO> list = eventService.eventboardcommentList(map);
+		
+
+		if(list != null) {
+			
+			return list;
+			
+		}else {
+			
+			return null;
+		}
+	}
+	
+	@RequestMapping(value="geteventBoardtcommentView", method=RequestMethod.GET)
+	public ModelAndView geteventBoardtcommentView(@RequestParam String seq_event, String seq_eventco){
+		
+		//String email = (String) session.getAttribute("memId");
+		
+		EventCoDTO eventCoDTO = eventService.geteventBoardtcommentView(seq_event,seq_eventco);
+	
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("eventCoDTO",eventCoDTO);
+		//mav.addObject("memId", email);
+		mav.setViewName("jsonView");
+		return mav;
+		
+	}
+	
+	@RequestMapping(value="eventBoardcommentModify", method=RequestMethod.POST)
+	@ResponseBody
+	public void eventBoardcommentModify(@RequestParam Map<String, String> map) {
+		eventService.eventBoardcommentModify(map);
+	}
+	
+	@RequestMapping(value="eventBoardcommentDelete", method=RequestMethod.POST)
+	@ResponseBody
+	public void eventBoardcommentDelete(@RequestParam String seq_eventco) {
+		eventService.eventBoardcommentDelete(seq_eventco);
 	}
 	
 }
