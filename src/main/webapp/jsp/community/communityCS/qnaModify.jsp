@@ -10,9 +10,7 @@ String keyword = request.getParameter("keyword");
 
 <head>
     <meta charset="UTF-8">
-    <meta id="_csrf" name="_csrf" content="${_csrf.token}" />
-	<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
-    <title>QnA게시판 글쓰기</title>
+    <title>QnA게시판 글수정</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/FoodFighter/resources/css/community/communityCSBoard.css">
@@ -81,21 +79,23 @@ String keyword = request.getParameter("keyword");
 
     <!-- SUMMERNOTE FORM-->
     <div class="page-body">
-        <form method="post" class="form-horizontal">
+        <form method="post" class="form-horizontal" id="qnaModifyForm">
+	        <input type="hidden" name="seq" id="seq" value="${seq }">
+			<input type="hidden" name="pg" id="pg" value="${pg }">
             <!-- 제목 -->
             <div class="form-group">
                 <label for="subject" class="col-sm-2 control-label" style="text-align: center;">제목</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="qna_subject" id="qna_subject">
+                    <input type="text" class="form-control" name="subject" id="qna_subject">
                 </div>
             </div>
             <!-- summernote부분 -->
-            <textarea id="summernote" name="qna_content"></textarea>
+            <textarea id="summernote" name="content"></textarea>
             <!-- 비밀번호 -->
             <div class="form-group">
                 <label for="password" class="col-sm-2 control-label" style="text-align: center;">비밀번호</label>
                 <div class="col-sm-4">
-                    <input type="password" class="form-control" name="qna_password" id="qna_password">
+                    <input type="password" class="form-control" name="password" id="qna_password">
                 </div>
             </div>
             <!-- 목록으로 돌아가기 버튼 -->
@@ -117,46 +117,50 @@ String keyword = request.getParameter("keyword");
 <script>
     $(document).ready(function () {
     	
-    	var token = $("meta[name='_csrf']").attr("content");
-	    var header = $("meta[name='_csrf_header']").attr("content");
-	    $(document).ajaxSend(function(e, xhr, options) {
-	        xhr.setRequestHeader(header, token);
-	    });
-	    
         $('#summernote').summernote({
             height: 300,                 // 에디터 높이
             minHeight: null,             // 최소 높이
             maxHeight: null,             // 최대 높이
             focus: false,                  // 에디터 로딩후 포커스를 맞출지 여부
             lang: "ko-KR",					// 한글 설정
-            placeholder: '최대 2048자까지 쓸 수 있습니다' //placeholder 설정
         });
+        
+		$.ajax({
+			
+			type : 'post',
+			url : '/FoodFighter/community/getQnaView',
+			data : 'seq='+$('#seq').val(),
+			dataType : 'json',
+			success : function(data) {
+				
+				$('#qna_subject').val(data.qnaboardDTO.subject);
+				$('#summernote').summernote('code', data.qnaboardDTO.content);
+				$('#qna_password').val(data.qnaboardDTO.password);
+				
+			},
+			error : function(err) {
+				console.log(err);
+			}
+			
+		});
+		
     });
     
     $('#qna_writeBtn').click(function() {
     	
-    	let qna_subject = $('#qna_subject').val();
-    	let qna_content = $('#summernote').summernote('code');
-    	let qna_password = $('#qna_password').val();
-    	
     	$.ajax({
-    		
+			
 			type : 'post',
-			url : '/FoodFighter/community/qnaWrite',
-			data : {
-				'subject' : qna_subject,
-				'content' : qna_content,
-				'password' : qna_password
-			},
-			success : function() {
-				alert("글쓰기 완료");
-				location.href='/FoodFighter/community/qna';
+			url : '/FoodFighter/community/qnaModify',
+			data : $('#qnaModifyForm').serialize(),
+			success : function(data) {
+				alert("글수정 완료");
+				location.href='/FoodFighter/community/qna?pg='+$('#pg').val();
 			},
 			error : function(err) {
 				console.log(err);
-				alert("에러발생!!!");
 			}
-		
+			
 		});
     	
     });

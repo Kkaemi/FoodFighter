@@ -26,5 +26,9 @@ public interface CommunityCSService {
 	public void qnaReply(Map<String, String> map);
 
 	public void qnaDelete(String seq);
+
+	public void qnaModify(Map<String, Object> map);
+
+	public void qnaHit(String seq);
 	
 }

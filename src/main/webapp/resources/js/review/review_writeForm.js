@@ -7,40 +7,6 @@ $(document).ready(function(){
     });
 });
 
-//유효성검사 
-$(document).ready(function(){
-
-	if(id == ''){
-		alert("로그인 후 리뷰작성이 가능합니다");
-		location.href="/FoodFighter/login/loginForm";
-	}else{
-		$('#reviewBtn').click(function(){
-			if($('#content').val()==''){
-				alert('내용을 입력해주세요');
-			} else {
-			 /*  document.reviewForm.submit(); */
-				$.ajax({
-					type: 'post',
-					enctype:'multipart/form-data',
-					processData: false,
-					contentType: false,
-					url: 'writeReview',
-					data: new FormData($('#reviewForm')[0]),
-					success: function(){
-						alert("리뷰를 저장하였습니다");
-						location.href="reviewView";
-					},
-					error:function(err){
-						console.log(err);
-					}
-					
-				});
-			} 
-			/* return false; */
-		});
-	}//else
-});
-
 //다시작성 
 $('#resetBtn').click(function(){
 	if(confirm("지금까지 작성하신걸 지우시겠습니까?")){

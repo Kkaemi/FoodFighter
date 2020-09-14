@@ -4,6 +4,8 @@
 <%
 request.setCharacterEncoding("utf-8");
 String keyword = request.getParameter("keyword");
+String resName = request.getParameter("resName");
+String resSeq = request.getParameter("resSeq");
 %> 
 <!DOCTYPE html>
 <html lang="kor">
@@ -23,10 +25,12 @@ String keyword = request.getParameter("keyword");
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=x4xnbzhxl0"></script>
+
   
     <title>리뷰보기</title>
-
+<!-- security -->
+ <meta id="_csrf" name="_csrf" content="${_csrf.token}" />
+ <meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
 </head>
 <style>
 #reviewWriteBtn {
@@ -191,7 +195,11 @@ String keyword = request.getParameter("keyword");
             |
             <button class="review-count-btn">별로(1)</button>
         </div>
-
+		<!-- 리뷰쓰기 버튼 -->
+         <input type="button" id="reviewWriteBtn" name="reviewWriteBtn" value="리뷰쓰기">
+         <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+        <input type="hidden" name="resName" value="<%=resName%>">
+        
         <div class="restaurant-images">
             <div id="direc-icon-left" class="glyphicon glyphicon-chevron-left"></div>
                 <img class="restaurant-image" id="restaurant-image">
@@ -265,6 +273,12 @@ $(document).ready(function(){
     });
 });
 
+//리뷰페이지 이동
+$('#reviewWriteBtn').click(function(){
+	location.href="/FoodFighter/review/review_writeForm?resSeq=<%=resSeq%>&resName=<%=resName%>";
+});
+
+>>>>>>> e0efb7529aa27d31f724668a62144e4e032ac0d3
 var modal = document.getElementById('myModal');
 var img = document.getElementById('restaurant-image');
 var modalImg = document.getElementById("img01");
@@ -315,4 +329,26 @@ $(document).ready(function(){
 	});
 });
 </script>
+<!-- 지도 api -->    
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=x4xnbzhxl0"></script>
+<script type="text/javascript">
+naver.maps.onJSContentLoaded = initGeocoder;
+naver.maps.Event.once(map, 'init_stylemap', initGeocoder);
+
+
+naver.maps.Service.geocode({
+    address: '${resAddress}'
+}, function(status, response) {
+    if (status !== naver.maps.Service.Status.OK) {
+        return alert('Something wrong!');
+    }
+
+    var result = response.result, // 검색 결과의 컨테이너
+        items = result.items; // 검색 결과의 배열
+	
+        console.log(result.items);
+    // do Something
+});
+</script>
+
 </html>

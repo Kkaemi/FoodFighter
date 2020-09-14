@@ -11,6 +11,8 @@ String keyword = request.getParameter("keyword");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta id="_csrf" name="_csrf" content="${_csrf.token}" />
+	<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
     <title>QnA게시글 보기</title>
     <!-- 합쳐지고 최소화된 최신 CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -20,53 +22,7 @@ String keyword = request.getParameter("keyword");
     <link rel="stylesheet" href="/FoodFighter/resources/css/community/communityCSBoard.css">
     <link rel="stylesheet" href="/FoodFighter/resources/css/community/communityCSHeader.css">
     <link rel="stylesheet" href="/FoodFighter/resources/css/community/sidenav.css">
-    <style>
-        .myButton {
-            background:linear-gradient(to bottom, #ffa64d 5%, #ffa64d 100%);
-            background-color:#ffa64d;
-            border-radius:1px;
-            display:inline-block;
-            cursor:pointer;
-            color:#ffffff;
-            font-family:Arial;
-            font-size:17px;
-            padding:8px 29px;
-            text-decoration:none;
-        }
-        .myButton:hover {
-            background:linear-gradient(to bottom, #ffa64d 5%, #ffa64d 100%);
-            background-color:#ffa64d;
-            text-decoration: none;
-            color:#ffffff;
-        }
-        .myButton:active {
-            position:relative;
-            top:1px;
-        }
-
-        td, th {
-            padding: 8px;
-            border: 1px solid #ddd;
-        }
-
-        table {
-            width: 100%;
-            margin-top: 10%;
-            border: 1px solid #ddd;
-        }
-
-        th {
-            text-align: center;
-        }
-
-        .btn-group {
-            width: 100%;
-            margin-top: 2%;
-            padding-top: 3%;
-            border-top: 1px solid #ddd;
-        }
-
-    </style>
+    <link rel="stylesheet" href="/FoodFighter/resources/css/community/qnaView.css">
 </head>
 
 <body>
@@ -152,13 +108,11 @@ String keyword = request.getParameter("keyword");
 	
 	        <!-- 버튼그룹 -->
 	        <div class="btn-group">
-	            <a href="javascript:void(0);" class="myButton" onclick="mode(1)">수정</a>
-	            <a href="javascript:void(0);" class="myButton" onclick="mode(2)">삭제</a>
-	            <a href="javascript:void(0);" class="myButton" onclick="mode(3)">답변</a>
 	            <span class="pull-right">
 	                <a href="#" class="myButton">글쓰기</a>
 	                <a href="javascript:void(0);" class="myButton" onclick="location.href='qna?pg=${pg}'">목록보기</a>
 	            </span>
+
 	        </div>
         </form>
 
@@ -206,13 +160,81 @@ String keyword = request.getParameter("keyword");
 <script type="text/javascript" src="/FoodFighter/resources/js/community/sidenav.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
+	$(document).ready(function() {
+		
+		var token = $("meta[name='_csrf']").attr("content");
+	    var header = $("meta[name='_csrf_header']").attr("content");
+	    $(document).ajaxSend(function(e, xhr, options) {
+	        xhr.setRequestHeader(header, token);
+	    });
+		
+		$.ajax({
+			
+			type : 'post',
+			url : '/FoodFighter/community/getQnaView',
+			data : 'seq='+$('#seq').val(),
+			dataType : 'json',
+			success : function(data) {
+				
+				if (data.memberDTO == null || data.memberDTO.email != data.qnaboardDTO.email) {
+					alert('올바른 접근이 아닙니다!!!');
+					location.href='qna';
+				}
+				
+				$('#subjectSpan').text(data.qnaboardDTO.subject);
+				$('#nicknameSpan').text(data.qnaboardDTO.nickname);
+				$('#hitSpan').text(data.qnaboardDTO.hit);
+				$('#contentSpan').html(data.qnaboardDTO.content);
+				
+				if (data.memberDTO.nickname != '관리자' && data.memberDTO.email != data.qnaboardDTO.email) return;
+				
+				$('.btn-group').append($('<a/>', {
+					
+					href : 'javascript:void(0);',
+					class : 'myButton',
+					onclick : 'mode(1)',
+					style : 'margin-right: 5px;',
+					text : '수정'
+					
+				})).append($('<a/>', {
+					
+					href : 'javascript:void(0);',
+					class : 'myButton',
+					onclick : 'mode(2)',
+					style : 'margin-right: 5px;',
+					text : '삭제'
+					
+				}));
+				
+				if (data.memberDTO.nickname != '관리자') return;
+				
+				$('.btn-group').append($('<a/>', {
+					
+					href : 'javascript:void(0);',
+					class : 'myButton',
+					onclick : 'mode(3)',
+					text : '답변'
+					
+				}));
+				
+				
+			},
+			error : function(err) {
+				console.log(err);
+			}
+			
+		});
+		
+	});
+</script>
+<script type="text/javascript">
 	function mode(num) {
 		
 		switch (num) {
 		
 		case 1:
 			document.qnaViewForm.method = 'post';
-			document.qnaViewForm.action = 'boardModifyForm';
+			document.qnaViewForm.action = 'qnaModifyForm';
 			document.qnaViewForm.submit();
 			break;
 		case 2:
@@ -230,30 +252,5 @@ String keyword = request.getParameter("keyword");
 		}
 		
 	}
-</script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		
-		$.ajax({
-			
-			type : 'post',
-			url : '/FoodFighter/community/getQnaView',
-			data : 'seq='+$('#seq').val(),
-			dataType : 'json',
-			success : function(data) {
-				
-				$('#subjectSpan').text(data.qnaboardDTO.subject);
-				/* $('#seqSpan').text(data.qnaboardDTO.seq); */
-				$('#nicknameSpan').text(data.qnaboardDTO.nickname);
-				$('#hitSpan').text(data.qnaboardDTO.hit);
-				$('#contentSpan').html(data.qnaboardDTO.content);
-			},
-			error : function(err) {
-				console.log(err);
-			}
-			
-		});
-		
-	});
 </script>
 </html>

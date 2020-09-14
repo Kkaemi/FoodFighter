@@ -10,6 +10,8 @@ String keyword = request.getParameter("keyword");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta id="_csrf" name="_csrf" content="${_csrf.token}" />
+	<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
     <title>QnA비밀번호</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
@@ -94,7 +96,7 @@ String keyword = request.getParameter("keyword");
     </div>
 
     <!-- 제목부분 -->
-    <div class="container" style="margin-top: 65px;">
+    <div class="container">
         <div class="page-header">
             <h2 class="text-center">QnA</h2>
               <p class="text-center">비밀번호를 입력해 주세요</p>      
@@ -138,6 +140,21 @@ String keyword = request.getParameter("keyword");
 <script type="text/javascript" src="/FoodFighter/resources/js/community/sidenav.js"></script>
 <script src="/FoodFighter/resources/js/review/keyword.js"></script>
 <script type="text/javascript">
+	$(document).ready(function() {
+	    
+		var token = $("meta[name='_csrf']").attr("content");
+	    var header = $("meta[name='_csrf_header']").attr("content");
+	    $(document).ajaxSend(function(e, xhr, options) {
+	        xhr.setRequestHeader(header, token);
+	    });
+	    
+	    if ($.isEmptyObject(${memberDTO})) {	    	
+	    	location.href='qna';
+	    	alert('먼저 로그인해 주세요');
+	    }
+	    
+	});
+	
 	$('#passwordCheckBtn').click(function() {
 		
 		$.ajax({

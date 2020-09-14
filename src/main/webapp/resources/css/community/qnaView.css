@@ -1,0 +1,46 @@
+@charset "UTF-8";
+
+.myButton {
+    background:linear-gradient(to bottom, #ffa64d 5%, #ffa64d 100%);
+    background-color:#ffa64d;
+    border-radius:1px;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    font-family:Arial;
+    font-size:17px;
+    padding:8px 29px;
+    text-decoration:none;
+}
+.myButton:hover {
+    background:linear-gradient(to bottom, #ffa64d 5%, #ffa64d 100%);
+    background-color:#ffa64d;
+    text-decoration: none;
+    color:#ffffff;
+}
+.myButton:active {
+    position:relative;
+    top:1px;
+}
+
+td, th {
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+table {
+    width: 100%;
+    margin-top: 10%;
+    border: 1px solid #ddd;
+}
+
+th {
+    text-align: center;
+}
+
+.btn-group {
+    width: 100%;
+    margin-top: 2%;
+    padding-top: 3%;
+    border-top: 1px solid #ddd;
+}

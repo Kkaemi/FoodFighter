@@ -13,6 +13,7 @@
 <form id="headerForm" name="headerForm" method="post" action="../review/getSearchList">
 <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">  
 <!--================ Header ================-->
+<header>
 <div id="header-container">
   <a class="header-logo" href="/FoodFighter"><img src="../resources/img/logo.png" width="250px;" height="55px;" align="left" style="margin-top: 10px; margin-left: 200px;"></a>
       <ul id="header-menu">
@@ -41,7 +42,7 @@
    	</ul>
 </div>
 </form>
-
+</header>
 
 <body>
 
@@ -91,6 +92,7 @@
         xhr.setRequestHeader(header, token);
     });
 });
+ 
 //header부분 키워드 입력 시, 검색 버튼 나타는 기능
 $('.header_searchInput').click(function(){
 	$('#header_searchBtn').addClass('show');

@@ -95,6 +95,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="qnaModify" parameterType="java.util.Map">
 		update qna_board set subject = #{subject}
 					, content = #{content}
+					, password = #{password}
 					, logtime = now() where seq = #{seq}
 	</update>
 	

@@ -68,4 +68,14 @@ public class CommunityCSDAOMybatis implements CommunityCSDAO {
 		sqlSession.delete("qnaBoardSQL.qnaDelete3", seq);
 	}
 
+	@Override
+	public void qnaModify(Map<String, Object> map) {
+		sqlSession.update("qnaBoardSQL.qnaModify", map);
+	}
+
+	@Override
+	public void qnaHit(String seq) {
+		sqlSession.update("qnaBoardSQL.qnaHit", seq);
+	}
+
 }
