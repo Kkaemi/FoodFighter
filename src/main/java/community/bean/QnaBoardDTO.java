@@ -10,7 +10,7 @@ import lombok.Data;
 
 @Data
 @Component
-public class QnAboardDTO {
+public class QnaBoardDTO {
 	
 	private int seq;
 
