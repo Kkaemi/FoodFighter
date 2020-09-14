@@ -48,7 +48,7 @@ public class CommunityCSCenterController {
 	public ModelAndView getQnaList(@RequestParam String pg, HttpSession session, HttpServletResponse response) {
 
 		// 1페이지 당 5개씩
-		List<QnAboardDTO> list = communityCSService.getQnaBoardList(pg);
+		List<QnaBoardDTO> list = communityCSService.getQnaBoardList(pg);
 
 		// 페이징 처리
 		QnaBoardPaging boardPaging = communityCSService.boardPaging(pg);
