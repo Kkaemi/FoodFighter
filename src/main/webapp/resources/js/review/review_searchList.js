@@ -6,6 +6,7 @@ $(document).ready(function(){
     });
 });
 
+
 let keyword = document.getElementById("keyword").value;
 let pg = document.getElementById("pg").value;
 //더보기 기능

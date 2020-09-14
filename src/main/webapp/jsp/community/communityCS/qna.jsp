@@ -11,6 +11,8 @@ String keyword = request.getParameter("keyword");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta id="_csrf" name="_csrf" content="${_csrf.token}" />
+	<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
     <title>QnA게시판</title>
     <!-- 합쳐지고 최소화된 최신 CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -143,6 +145,13 @@ String keyword = request.getParameter("keyword");
 <script src="/FoodFighter/resources/js/review/keyword.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
+		
+		var token = $("meta[name='_csrf']").attr("content");
+	    var header = $("meta[name='_csrf_header']").attr("content");
+	    $(document).ajaxSend(function(e, xhr, options) {
+	        xhr.setRequestHeader(header, token);
+	    });
+	    
 		$.ajax({
 			type : 'post',
 			url : '/FoodFighter/community/getQnaList',

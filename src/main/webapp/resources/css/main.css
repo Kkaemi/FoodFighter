@@ -1,5 +1,8 @@
 @charset "UTF-8";
 /* 헤더공통 부분 css */
+* {
+	
+}
 .header_searchInput:focus {
 	outline: none;
 }
@@ -58,6 +61,7 @@ ul.navbar-nav{
 
 .navbar-b.navbar-reduce .nav-link {
     color: #ffc34d;
+    padding-right : 10px;
 }
 
 .navbar-b.navbar-reduce .nav-link:before {

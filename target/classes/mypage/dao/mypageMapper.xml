@@ -25,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   </update>	
   
   <select id="myreviewGetList" parameterType="java.util.Map" resultType="review">
-  	<![CDATA[select * from (select @ROWNUM := @ROWNUM + 1 as rn,tt.* from (select * from view_test,
+  	<![CDATA[select * from (select @ROWNUM := @ROWNUM + 1 as rn,tt.* from (select * from review,
 		 (SELECT @ROWNUM :=0) R where member_seq=#{member_seq} order by seq_review desc)tt)list
 		where rn>=#{startNum} and rn<=#{endNum}]]> 
   </select>

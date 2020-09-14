@@ -10,11 +10,12 @@ String keyword = request.getParameter("keyword");
 <head>
 <meta charset="utf-8">
 <!-- bootstraps -->
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	
 <!-- css -->
  <link rel = "stylesheet" href="../resources/css/review/reviewList.css">
 <!-- jquery -->
@@ -29,7 +30,7 @@ String keyword = request.getParameter("keyword");
 <input type="hidden" value="${restaurantDTO.resSeq}" id="resSeq" name="resSeq">
 <input type="hidden" value="${restaurantDTO.resName}" id="resName" name="resName">
 
-	<!--================ Header ================-->
+<!--================ Header ================-->
 <form id="headerForm" name="headerForm" method="post" action="../review/getSearchList">
 <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"> 
 	<div id="header-container">
@@ -54,12 +55,35 @@ String keyword = request.getParameter("keyword");
 	          </li>
 	          <li class="nav-item">
 	            <a class="nav-link js-scroll">
-	            <img src="/FoodFighter/resources/img/member.png" class="header_searchIcon" width="30" height="30" align="center">
+	            <img src="/FoodFighter/resources/img/member.png" id="headerUser" class="header_searchIcon" width="30" height="30" align="center">
 	            </a>
      	     </li>
 	   	</ul>
 	</div>
- </form>	
+ </form>
+<!-- usermenu -->
+  <div class="modal headUser-menu" id="headUser-menu" role="dialog">
+     <div class="tri"></div>
+     <c:if test="${sessionScope.memId == null}">
+        <p>로그인 또는 회원가입을 하시면 <br> 더 많은 서비스를 <br>이용하실 수 있습니다.</p>
+        <hr>
+        <button type="button" id="loginBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/login/loginForm'" >로그인</button>
+        <button type="button" id="signupBtn" class="headUserMenu-Btn" onclick="location.href='/FoodFighter/member/signupChoice'" >회원가입</button>
+     </c:if>
+     <c:if test="${sessionScope.memId == 'admin@admin.com'}">
+        <p>관리자로<br> 로그인 하셨습니다. </p>
+        <hr>
+        <button type="button" id="adminBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/admin/adminMain'" >관리자페이지</button>
+        <button type="button" id="logoutBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/login/logout'">로그아웃</button>
+     </c:if>
+     <c:if test="${sessionScope.memId != null && sessionScope.memId != 'admin@admin.com'}">
+        <p>맛집을 찾아보고 <br> 후기를 남겨보세요.</p>
+        <hr>
+        <button type="button" id="mypageBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/mypage/mypageMain'" >마이페이지</button>
+        <button type="button" id="logoutBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/login/logout'">로그아웃</button>
+     </c:if>
+  </div>	
+
 	<!--================ Container ================-->
 <form id="modalForm" name="modalForm" method="post" action="../review/modalSearchList">
 <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
@@ -72,9 +96,9 @@ String keyword = request.getParameter("keyword");
       <div class="keywordZone">
 		<div id="keyword_name" name="keyword_name" align="center" style="width: 100%; font-size:60px; text-align:center; font-weight:bold;"><%=keyword%></div><br>
 			<ul class="keword_issue" align="center">
-  				<li>#여름</li>
-  				<li>#아이스크림</li>
-  				<li>#냉면</li>
+  				<li><a href="" style="color:#FF6A4D;"># 신논현 맛집 Top5</a></li>
+  				<li><a href="" style="color:#FF6A4D;"># 강남 맛집 Top5</a></li>
+  				<li><a href="" style="color:#FF6A4D;"># 디저트 맛집</a></li>
   				<li><div class="modalZone" id="modalZone" align="right">
   				 	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style="background: rgba(0,0,0,0); border: rgba(0,0,0,0); outline:none; ">
   				 	<img src="../resources/img/filter.png" class="keyword_FilterIcon">
@@ -177,6 +201,11 @@ String keyword = request.getParameter("keyword");
   <div id="preloader"></div>
 
 <script type="text/javascript">
+$('#headerUser').click(function(){
+   $('#headUser-menu').modal();
+});
+</script>
+<script type="text/javascript">
 $('.orderbyAvg').click(function(){
 	$('input[name=orderby]').attr({"value" : "resScore"});
 });
@@ -242,8 +271,8 @@ $('#modalsearchBtn').click(function(){
 </script>
 
 <!-- Vendor JS Files -->
-<!-- <script src="../../assets/vendor/jquery/jquery.min.js"></script>  -->
- <!-- <script src="../resources/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
+ <script src="/FoodFighter/resources/assets/vendor/jquery/jquery.min.js"></script>
+ <script src="../resources/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
  <script src="../resources/assets/vendor/jquery.easing/jquery.easing.min.js"></script>
  <script src="../resources/assets/vendor/php-email-form/validate.js"></script>
  <script src="../resources/assets/vendor/waypoints/jquery.waypoints.min.js"></script>
@@ -253,7 +282,7 @@ $('#modalsearchBtn').click(function(){
  <script src="../resources/assets/vendor/venobox/venobox.min.js"></script>
 
 <!--  Template Main JS File -->
- <script src="../resources/assets/js/main.js"></script> 
+ <!-- <script src="../resources/assets/js/main.js"></script>  -->
  <script src="/FoodFighter/resources/js/review/keyword.js"></script>
  <script src="/FoodFighter/resources/js/review/review_searchList.js"></script>	
  
