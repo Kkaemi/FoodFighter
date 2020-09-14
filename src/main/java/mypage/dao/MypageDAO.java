@@ -3,6 +3,8 @@ package mypage.dao;
 import java.util.List;
 import java.util.Map;
 
+import community.bean.CommunityBoardDTO;
+import community.bean.QnaBoardDTO;
 import member.bean.MemberDTO;
 import review.bean.ReviewDTO;
 
@@ -19,5 +21,17 @@ public interface MypageDAO {
 	public List<ReviewDTO> myreviewGetList(Map<String,Object> map);
 
 	public ReviewDTO getModalView(String seq_review);
+
+	public int getReviewNum(String nickname);
+
+	public int getPostNum(String nickname);
+
+	public int getReplyNum(String nickname);
+
+	public List<CommunityBoardDTO> getMyPost(String nickname);
+
+	public List<QnaBoardDTO> getMyAsk(String nickname);
+
+	public void socialModify(Map<String,Object> map);
 
 }

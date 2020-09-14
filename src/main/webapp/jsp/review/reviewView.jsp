@@ -12,6 +12,8 @@ String resSeq = request.getParameter("resSeq");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta id="_csrf" name="_csrf" content="${_csrf.token}" />
+	<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
     <link rel= "stylesheet" type="text/css" href="/FoodFighter/resources/css/review/bootstrap.css">
     <link rel= "stylesheet" type="text/css" href="/FoodFighter/resources/css/review/reviewView.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -262,7 +264,7 @@ String resSeq = request.getParameter("resSeq");
 <!--모달 script-->
 <script src="/FoodFighter/resources/js/review/keyword.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script type="text/javascript">
+<script type="text/javascript"> 
 $(document).ready(function(){
     var token = $("meta[name='_csrf']").attr("content");
     var header = $("meta[name='_csrf_header']").attr("content");
@@ -276,6 +278,7 @@ $('#reviewWriteBtn').click(function(){
 	location.href="/FoodFighter/review/review_writeForm?resSeq=<%=resSeq%>&resName=<%=resName%>";
 });
 
+>>>>>>> e0efb7529aa27d31f724668a62144e4e032ac0d3
 var modal = document.getElementById('myModal');
 var img = document.getElementById('restaurant-image');
 var modalImg = document.getElementById("img01");

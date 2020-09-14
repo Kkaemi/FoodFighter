@@ -8,6 +8,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import community.bean.CommunityBoardDTO;
+import community.bean.QnaBoardDTO;
 import member.bean.MemberDTO;
 import mypage.dao.MypageDAO;
 import review.bean.ReviewDTO;
@@ -52,6 +54,42 @@ public class MypageServiceImpl implements MypageService {
 	public ReviewDTO getModalView(String seq_review) {
 
 		return mypageDAO.getModalView(seq_review);
+	}
+
+	@Override
+	public int getReviewNum(String nickname) {
+
+		return mypageDAO.getReviewNum(nickname);
+	}
+
+	@Override
+	public int getPostNum(String nickname) {
+
+		return mypageDAO.getPostNum(nickname);
+	}
+
+	@Override
+	public int getReplyNum(String nickname) {
+
+		return mypageDAO.getReplyNum(nickname);
+	}
+
+	@Override
+	public List<CommunityBoardDTO> getMyPost(String nickname) {
+
+		return mypageDAO.getMyPost(nickname);
+	}
+
+	@Override
+	public List<QnaBoardDTO> getMyAsk(String nickname) {
+
+		return mypageDAO.getMyAsk(nickname);
+	}
+
+	@Override
+	public void socialModify(Map<String,Object> map) {
+		mypageDAO.socialModify(map);
+		
 	}
 
 }

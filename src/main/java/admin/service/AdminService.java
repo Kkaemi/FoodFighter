@@ -28,4 +28,22 @@ public interface AdminService {
 	public void adminShopDelete(String resSeq);
 	
 	public void resWrite(RestaurantDTO restaurantDTO);
+
+	public AdminShopPaging getShopSearchPaging(Map<String, Object> map);
+
+	public List<MemberDTO> getShopSearch(Map<String, Object> map);
+
+	public Map<String, Object> getReviewData();
+
+	public Map<String, Object> getPostData();
+
+	public Map<String, Object> getQnaData();
+
+	public Map<String, Object> getJoinData();
+
+	public Map<String, Object> getFoodData();
+
+	public Map<String, Object> getPriceData();
+
+	public Map<String, Object> getJoinwayData();
 }

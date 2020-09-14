@@ -31,6 +31,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   </select>
   
   <select id="getModalView" parameterType="int" resultType="review">
-  	select * from view_test where seq_review=#{seq_review}
+  	select * from review where seq_review=#{seq_review}
   </select>
+  
+  <select id="getReviewNum" parameterType="String" resultType="int">
+  	select count(*) from review where nickname=#{nickname}
+  </select>
+  
+  <select id="getPostNum" parameterType="String" resultType="int">
+  	select count(*) from cboard where nickname=#{nickname}
+  </select>
+  
+  <select id="getReplyNum" parameterType="String" resultType="int">
+  	select count(*) from cb_cmnt where rnickname=#{nickname}
+  </select>
+  
+  <select id="getMyPost" parameterType="String" resultType="cBoard">
+  	select * from cboard where nickname=#{nickname}
+  </select>
+  
+  <select id="getMyAsk" parameterType="String" resultType="qnaBoard">
+  	select * from qna_board where nickname=#{nickname}
+  </select>
+  
+  <update id="socialModify" parameterType="java.util.Map">
+  	update testmember set profile=#{profile} where email=#{email}
+  </update>	
 </mapper>
