@@ -71,102 +71,101 @@
    outline: none;
 }
 
-/* 상단 타이틀*/
-
-#title {
-    text-align: left;
-    margin-left: 260px;
-    margin-top: 90px;
-    margin-bottom: 14px;
-    color :  #ffC038;
-}
-/*상단 태그*/
-.top-tag {
-    text-align: left;
-    margin-left: 250px;
-    margin-bottom: 4px;
-}
-.top-tag button {
-    background-color: white;
-    border : 1px solid #ff6a4d;
-    color : black;
-    padding : 10px 18px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 13px;
-    margin: 4px 2px;
-    transition-duration: 0.4s;
-    cursor: pointer;
-    border-radius: 40px;
-}
-
-/*전체부분*/
-.riewViewList-nonSearch-container{
-    
-    height: 200%;
-}
-.category-container {
-    width:110%;
-    text-align: center;
-    margin-left: 220px;
-}
-
-.category img:hover {
-    filter : brightness(80%);
-}
-.tag-item {
-    background-color: #ff6a4d;
-    color : #6a6a6a;
-    border : 2px solid #ff6a4d;
-}
-
-.tag-item:hover{
-    background-color: #ff6a4d;
-    color: white;
-}
-
-/*카테고리*/
-.category img{
-    width: 585px;
-    height: 267.7px;
-    margin-top: 20px;
-    margin-bottom: 80px;
-
-}
-
-.category {
-    float: left;
-    width: 34%;
-}
-
-/* 더보기 */
-#more {
-    position: absolute;
-    text-align : center;
-    margin-left: 200px;
-    margin-top: 77%;
-    margin-bottom: 50px;
-}
-
-#moreBtn {
-    border: 2px solid #ffC038;
-    text-align: center;
-    color: #ffC038;
-    cursor: pointer;
-    font-size: 13px;
-    background-color: white;
-    padding: 10px 500px;
-    font-weight: bold;
-    
-
-}
-
-#moreBtn:hover {
-    background-color :#ffC038;
-    color : white;
-    transition-duration: 0.4s;
-}
+	/* 상단 타이틀*/
+	
+	#title {
+	    text-align: left;
+	    margin-left: 260px;
+	    margin-top: 90px;
+	    margin-bottom: 14px;
+	    color :  #ffC038;
+	}
+	/*상단 태그*/
+	.top-tag {
+	    text-align: left;
+	    margin-left: 250px;
+	    margin-bottom: 4px;
+	}
+	.top-tag button {
+	    background-color: white;
+	    border : 1px solid #ff6a4d;
+	    color : black;
+	    padding : 10px 18px;
+	    text-align: center;
+	    text-decoration: none;
+	    display: inline-block;
+	    font-size: 13px;
+	    margin: 4px 2px;
+	    transition-duration: 0.4s;
+	    cursor: pointer;
+	    border-radius: 40px;
+	}
+	
+	/*전체부분*/
+	.riewViewList-nonSearch-container{
+	    height: 200%;
+	}
+	.category-container {
+	    width:110%;
+	    text-align: center;
+	    margin-left: 220px;
+	}
+	
+	.category img:hover {
+	    filter : brightness(80%);
+	}
+	.tag-item {
+	    background-color: #ff6a4d;
+	    color : #6a6a6a;
+	    border : 2px solid #ff6a4d;
+	}
+	
+	.tag-item:hover{
+	    background-color: #ff6a4d;
+	    color: white;
+	}
+	
+	/*카테고리*/
+	.category img{
+	    width: 585px;
+	    height: 267.7px;
+	    margin-top: 20px;
+	    margin-bottom: 80px;
+	
+	}
+	
+	.category {
+	    float: left;
+	    width: 34%;
+	}
+	
+	/* 더보기 */
+	#more {
+	    position: absolute;
+	    text-align : center;
+	    margin-left: 200px;
+	    margin-top: 77%;
+	    margin-bottom: 50px;
+	}
+	
+	#moreBtn {
+	    border: 2px solid #ffC038;
+	    text-align: center;
+	    color: #ffC038;
+	    cursor: pointer;
+	    font-size: 13px;
+	    background-color: white;
+	    padding: 10px 500px;
+	    font-weight: bold;
+	    
+	
+	}
+	
+	#moreBtn:hover {
+	    background-color :#ffC038;
+	    color : white;
+	    transition-duration: 0.4s;
+	}
 
 /* Footer */
 #footer-container{
