@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,11 +57,33 @@ body, html {
 	          </li>
 	          <li class="nav-item">
 	            <a class="nav-link js-scroll">
-	            <img src="/FoodFighter/resources/img/member.png" class="header_searchIcon" width="30" height="30" align="center">
+	            <img src="/FoodFighter/resources/img/member.png" id="headerUser"  class="header_searchIcon" width="30" height="30" align="center">
 	            </a>
      	     </li>
 	   	</ul>
 	</div>
+	 <!-- usermenu -->
+  <div class="modal headUser-menu" id="headUser-menu" role="dialog">
+     <div class="tri"></div>
+     <c:if test="${sessionScope.memId == null}">
+        <p>로그인 또는 회원가입을 하시면 <br> 더 많은 서비스를 <br>이용하실 수 있습니다.</p>
+        <hr>
+        <button type="button" id="loginBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/login/loginForm'" >로그인</button>
+        <button type="button" id="signupBtn" class="headUserMenu-Btn" onclick="location.href='/FoodFighter/member/signupChoice'" >회원가입</button>
+     </c:if>
+     <c:if test="${sessionScope.memId == 'admin@admin.com'}">
+        <p>관리자로<br> 로그인 하셨습니다. </p>
+        <hr>
+        <button type="button" id="adminBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/admin/adminMain'" >관리자페이지</button>
+        <button type="button" id="logoutBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/login/logout'">로그아웃</button>
+     </c:if>
+     <c:if test="${sessionScope.memId != null && sessionScope.memId != 'admin@admin.com'}">
+        <p>맛집을 찾아보고 <br> 후기를 남겨보세요.</p>
+        <hr>
+        <button type="button" id="mypageBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/mypage/mypageMain'" >마이페이지</button>
+        <button type="button" id="logoutBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/login/logout'">로그아웃</button>
+     </c:if>
+  </div>
  </form>
 <!-- 사이드바 -->
 <div id="mySidenav" class="sidenav">
@@ -262,5 +285,10 @@ body, html {
  </p>
 </div>
 <script type="text/javascript" src= "/FoodFighter/resources/js/review/keyword.js"></script> <!-- 헤더 JS -->
+<script type="text/javascript">
+$('#headerUser').click(function(){
+   $('#headUser-menu').modal();
+});
+</script>
 </body>
 </html>
