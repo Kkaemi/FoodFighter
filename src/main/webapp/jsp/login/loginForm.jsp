@@ -136,7 +136,7 @@ $('.header_searchInput').click(function(){
               	 location.href = '/FoodFighter/';
               	 
                }else if(data == 'admin')	{
-              	 location.href = '/FoodFighter/admin/adminMain';
+              	 location.href = '/FoodFighter/admin/adminDashboard';
                      
             }else if(data == 'fail'){      
                    $('#loginResultDiv').text('가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.');
