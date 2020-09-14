@@ -278,7 +278,6 @@ $('#reviewWriteBtn').click(function(){
 	location.href="/FoodFighter/review/review_writeForm?resSeq=<%=resSeq%>&resName=<%=resName%>";
 });
 
->>>>>>> e0efb7529aa27d31f724668a62144e4e032ac0d3
 var modal = document.getElementById('myModal');
 var img = document.getElementById('restaurant-image');
 var modalImg = document.getElementById("img01");
