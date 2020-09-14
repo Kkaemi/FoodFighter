@@ -1,0 +1,33 @@
+@charset "UTF-8";
+.sidebar-brand-img img{
+	width: 14rem;
+	height: 4rem;
+	/* webkit-filter: opacity(.5) drop-shadow (0 0 0 red);
+	filter: opacity(.5) drop-shadow(0 0 0 red); */
+}
+#sidebar-logo {
+	vertical-align: baseline;
+}
+#sidebar-logo-part {
+	width: 14rem;
+	background-color: #fff;
+	margin-top: 0;
+}
+.FFlogo.toggled{
+	width: 6.5rem;
+}
+
+#dashboardTitleDiv{
+	margin: 2.5rem 0;
+}
+
+.h5 {
+	margin-top: 1rem;
+}
+
+.text-yellow {
+	color: #ffe400;
+}
+.text-bBlue {
+	color: #5cd1e5;
+}

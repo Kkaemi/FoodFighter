@@ -7,7 +7,10 @@
     left: 0;
     background-color: #FFFFFF; 
     overflow-x: hidden;
-    padding-top: 2.5%; 
+
+    /* Disable horizontal scroll */
+    padding-top: 2.5%; /* 2% -> 2.5%로 변경 */
+    /* Place content 60px from the top */
     transition: 0.5s;
 }
 

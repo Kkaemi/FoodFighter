@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <!-- 별 css -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css"><!-- 슬라이드  -->
@@ -91,14 +92,64 @@
 		  			<button type="button" id="modifyBtn" class="btn btn-primary" onclick="location.href='/FoodFighter/mypage/modifyCheckPwd'">정보수정</button>
 		  		</c:if>
 		  		<c:if test="${memberDTO.socialLogin == 1}">
-		  			<button type="button" id="modifyBtn" class="btn btn-primary" onclick="location.href='/FoodFighter/mypage/profileEdit'">프로필 수정</button>
+		  			<button type="button" id="socialModifyBtn" class="btn btn-primary">프로필 수정</button>
 		  		</c:if>
 		  	</div>
+		  		
+		  	 <div class="modal" id="socialModifyModal" role="dialog">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				    
+				      <div class="modal-header">
+				      	<p>프로필 변경 & 회원탈퇴</p><button type="button" class="close" data-dismiss="modal">×</button>
+				      </div>
+				      
+				      <div class="modal-body">
+						<form id="socialMofidyForm" action="" method="post" enctype="multipart/form-data">
+						  	<div id="profileImgBox" class="form-group row">
+								<div id="profilePrevWrap" class="col-12">
+									<c:choose>
+									  <c:when test="${memberDTO.profile == null}">
+										<img id="profilePrev" src="/FoodFighter/resources/img/basic.png" class="profileImg-part">
+										<input type="hidden" id="resetProfilePrev" value="/FoodFighter/resources/img/basic.png">
+									  </c:when>
+									  <c:otherwise>	
+										<img id="profilePrev" src="/FoodFighter/storage/profile/${memberDTO.profile}" class="profileImg-part">
+										<input type="hidden" id="resetProfilePrev" value="/FoodFighter/storage/profile/${memberDTO.profile}">
+									  </c:otherwise>	
+									</c:choose>
+								</div>
+									
+									
+									<div id="fileboxWrap" class="filebox profileImg-part form-group"> 
+										<label for="profile">프로필 등록 </label>
+										<input type="hidden" id="eamil" name="email" value=${sessionScope.memId }> 
+										<input type="file" id="profile" name ="profileFile"> 
+									</div>
+							</div>
+			
+					      	<div id="btnWrap" class="modalForm form-group">
+					      		<button type="button" id="resetModifyBtn" class="btn btn-primary btnPart">다시 수정</button>
+					        	<button type="button" id="completeModifyBtn" class="btn btn-primary btnPart">변경완료</button>
+								<button type="button" id="socialWithdrawBtn" class="btn btn-primary btnPart">회원탈퇴</button>
+					     	</div>
+				      </form>
+				    </div>
+				    
+				  </div>
+				</div>
+			</div>
+		
 		  	
 		  	<div id="alramBox">
 		  		<div class="alram-part">리뷰</div>
 		  		<div class="alram-part">게시글</div>
 		  		<div class="alram-part">댓글</div>
+		  	</div>
+		  	<div id="alramDataBox">
+		  		<div class="alram-data-part">${reviewNum}</div>
+		  		<div class="alram-data-part">${postNum}</div>
+		  		<div class="alram-data-part">&emsp;${replyNum}</div>
 		  	</div>
 		  
 		  </div>
@@ -112,7 +163,7 @@
 	<div class="col-12">
 		<nav id="menu" class="border-top">
 		  <div id="menuTextBox" class="col-10  offset-1" >
-			  	<a id="myReview" class="first menu-part" href="/FoodFighter/mypage/myReview">
+			  	<a id="myReview" class="menu-part" href="/FoodFighter/mypage/myReview">
 			  	  <span class="glyphicon glyphicon-list-alt"></span>
 			  	  <span>내가 쓴 리뷰</span>
 			  	</a>
@@ -200,9 +251,68 @@ $('#menuTextBox a').click(function(){
 	$(this).addClass('now');
 });
 
+//파일 확장자 체크
+$('#profile').on('change',function(){
+	ext = $('#profile').val().split('.').pop().toLowerCase();
+	 if($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
+		 
+		 $("#profile").replaceWith( $("#profile").clone(true) ); 
+		
+         alert("이미지 파일이 아닙니다! (gif, png, jpg, jpeg 만 업로드 가능)");
+	 }else{
+		 file = $('#profile').prop("files")[0];
+         prev = window.URL.createObjectURL(file);
+         $('#profilePrev').attr('src', prev);
+	 }
+});
 
+$('#resetModifyBtn').click(function(){
+	let resetProfilePrev = $('#resetProfilePrev').val();
+	$('#profilePrev').attr('src',resetProfilePrev);
+	$('#socialModifyModal').find("#socialMofidyForm")[0].reset(); 
+});
 
-
+//프로필 수정 버튼
+$('#socialModifyBtn').click(function(){
+	$('#socialModifyModal').modal();
+});
+$('#socialWithdrawBtn').click(function(){
+let check = confirm("정말 탈퇴하시겠습니까?");
+	
+	if(check){
+		$.ajax({
+			type : 'post',
+			url : '/FoodFighter/mypage/withdraw',
+			data : 'email='+$('#memId').val(),
+			success : function(){
+					alert("탈퇴가 완료되었습니다");
+					location.href = '/FoodFighter';	
+				
+			},
+			error : function(e){
+				console.log(e);
+			}
+		});
+	}
+});
+$('#completeModifyBtn').click(function(){
+	$.ajax({
+		type : 'post',
+		enctype:'multipart/form-data',
+		processData: false, 
+		contentType: false,
+		url : '/FoodFighter/mypage/socialModify',
+		data : new FormData($('#socialMofidyForm')[0]),
+		success : function(){
+				alert("정보수정 완료!");
+				location.href = '/FoodFighter/mypage/mypageMain';	
+			
+		},
+		error : function(e){
+			console.log(e);
+		}
+	});
+});
 
 </script>
 </body>

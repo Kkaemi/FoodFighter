@@ -237,31 +237,33 @@ $('#listDiv').on('click','.review',function(){
 	        success: function(data){
 	        	let modalView='<div class="swiper-container">'
    	            +'<div class="swiper-wrapper">' 
-   	        	+'<div id="modalViewImg-Div" class="swiper-slide modalView-part">'
+   	        		+'<div id="modalViewImg-Div" class="swiper-slide modalView-part">'
               	    +'<img src="/FoodFighter/storage/review/'+data.image1+'" class="modalViewImg img-responsive">'
               	    +'</div>'
+              	    
               	 	+'<div id="modalViewImg-Div" class="swiper-slide modalView-part">'
               	    +'<img src="/FoodFighter/storage/review/'+data.image2+'" class="modalViewImg img-responsive">'
               	    +'</div>'
+              	    
               	 	+'<div id="modalViewImg-Div" class="swiper-slide modalView-part">'
               	    +'<img src="/FoodFighter/storage/review/'+data.image3+'" class="modalViewImg img-responsive">'
               	    +'</div>'
-              	    +'</div>'
+              	    
+              		+'</div>'
               	 	+'<div class="swiper-button-next"></div>'/* 다음 */
             		+'<div class="swiper-button-prev"></div>'/* 이전 버튼  */
-              	    +'</div>'
-            	    
-            	    +'<div id="modalView-resName" class="modalView-part">'
+		            +'</div>'
+		            
+		            +'<div id="review-resName" class="review-part">'
             	    +'<span>'+data.resName+'</span>'
             	    +'</div>'
-            	    
-              	    +'<div id="modalView-score" class="modalView-part">'
-              	    +'<span class="fa fa-star checked"></span>'
-              	  	+'<span>'+data.resScore+'</span>'
-              	    +'</div>'
-              	    +'<div id="modalView-content" class="modalView-part">'
-              	    +'<span>'+data.content+'</span>'
-              	    +'</div>'
+		            +'<div id="modalView-score" class="modalView-part">'
+		       	    +'<span class="fa fa-star checked"></span>'
+		       	  	+'<span>'+data.resScore+'</span>'
+		       	    +'</div>'
+		       	    +'<div id="modalView-content" class="modalView-part">'
+		       	    +'<span>'+data.content+'</span>'
+		       	    +'</div>'
               	    
    				$('.modal-body').append(modalView);
 	        	
@@ -273,12 +275,13 @@ $('#listDiv').on('click','.review',function(){
 	 $('#reviewModal').modal(); 
 	 
 	 
-/* 	 new Swiper( '.swiper-container', {
-		    navigation : { // 네비게이션
-		        nextEl : '.swiper-button-next', // 오른쪽(다음) 화살표
-		        prevEl : '.swiper-button-prev', // 왼쪽(이전) 화살표
-		    },
-		}); */
+	 var swiper = new Swiper('.swiper-container', {
+	        pagination: '.swiper-pagination',
+	        paginationClickable: true,
+	        nextButton: '.swiper-button-next',
+	        prevButton: '.swiper-button-prev',
+	        spaceBetween: 30
+	});
 	 
 });
 

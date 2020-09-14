@@ -96,13 +96,78 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public void adminShopDelete(String resSeq) {
-		adminDAO.adminShopDelete(resSeq);
+		adminDAO.adminShopDelete(Integer.parseInt(resSeq));
 		
 	}
 	@Override
 	public void resWrite(RestaurantDTO restaurantDTO) {
 		restaurantDAO.resWrite(restaurantDTO);
 		
+	}
+
+	@Override
+	public AdminShopPaging getShopSearchPaging(Map<String, Object> map) {
+		int totalA= adminDAO.shopSearchTotalA(map);
+		
+		adminShopPaging.setCurrentPage(Integer.parseInt((String) map.get("pg")));
+		adminShopPaging.setPageBlock(5);
+		adminShopPaging.setPageSize(10);
+		adminShopPaging.setTotalA(totalA);
+		adminShopPaging.makePagingHTML();
+		
+		return adminShopPaging;
+	}
+
+	@Override
+	public List<MemberDTO> getShopSearch(Map<String, Object> map) {
+		int endNum = Integer.parseInt((String) map.get("pg"))*10;
+		int startNum = endNum-9;
+
+		map.put("startNum",startNum);
+		map.put("endNum",endNum);
+		return adminDAO.getShopSearch(map);
+	}
+
+	@Override
+	public Map<String, Object> getReviewData() {
+		
+		return adminDAO.getReviewData();
+	}
+
+	@Override
+	public Map<String, Object> getPostData() {
+
+		return adminDAO.getPostData();
+	}
+
+	@Override
+	public Map<String, Object> getQnaData() {
+
+		return adminDAO.getQnaData();
+	}
+
+	@Override
+	public Map<String, Object> getJoinData() {
+
+		return adminDAO.getJoinData();
+	}
+
+	@Override
+	public Map<String, Object> getFoodData() {
+
+		return adminDAO.getFoodData();
+	}
+
+	@Override
+	public Map<String, Object> getPriceData() {
+
+		return adminDAO.getPriceData();
+	}
+
+	@Override
+	public Map<String, Object> getJoinwayData() {
+
+		return adminDAO.getJoinwayData();
 	}
 }
 
