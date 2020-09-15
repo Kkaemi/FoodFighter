@@ -14,6 +14,7 @@ public interface ReviewService {
 
 	public RestaurantDTO getReviewView(String resSeq);
 
-	public List<RestaurantDTO> modalSearchList(String pg, String keyword, String Filter,String resSeq);
+	public List<RestaurantDTO> modalSearchList(String pg, String orderby,String Price ,String Food ,String keyword,String resSeq);
+
 
 }

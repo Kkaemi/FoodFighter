@@ -23,7 +23,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import community.bean.CommunityBoardDTO;
+import community.bean.QnaBoardDTO;
 import member.bean.MemberDTO;
+import mypage.bean.MypagePaging;
 import mypage.service.MypageService;
 import review.bean.ReviewDTO;
 
@@ -42,6 +45,14 @@ public class MyPageController {
 		
 		MemberDTO memberDTO = mypageService.getInfo(email);
 		
+		String nickname = memberDTO.getNickname();
+		int reviewNum=mypageService.getReviewNum(nickname);
+		int postNum=mypageService.getPostNum(nickname);
+		int replyNum=mypageService.getReplyNum(nickname);
+		
+		model.addAttribute("reviewNum", reviewNum);
+		model.addAttribute("postNum", postNum);
+		model.addAttribute("replyNum", replyNum);
 		model.addAttribute("memberDTO",memberDTO);
 		model.addAttribute("display","/jsp/mypage/myReview.jsp");
 		return "/jsp/mypage/mypageMain";
@@ -49,29 +60,110 @@ public class MyPageController {
 	
 	// 마이리뷰 페이지 
 	@RequestMapping(value = "myReview")
-	public String myReview(Model model) {
+	public String myReview(HttpSession session,Model model) {
 		
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberDTO");
+
+		String nickname = memberDTO.getNickname();
+		int reviewNum=mypageService.getReviewNum(nickname);
+		int postNum=mypageService.getPostNum(nickname);
+		int replyNum=mypageService.getReplyNum(nickname);
+		
+		model.addAttribute("reviewNum", reviewNum);
+		model.addAttribute("postNum", postNum);
+		model.addAttribute("replyNum", replyNum);
+
 		model.addAttribute("display","/jsp/mypage/myReview.jsp");
 		return "/jsp/mypage/mypageMain";
 	}
 	//북마크
 	@RequestMapping(value = "myShop")
-	public String myShop(Model model) {
+	public String myShop(HttpSession session,Model model) {
 		
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberDTO");
+
+		String nickname = memberDTO.getNickname();
+		int reviewNum=mypageService.getReviewNum(nickname);
+		int postNum=mypageService.getPostNum(nickname);
+		int replyNum=mypageService.getReplyNum(nickname);
+		
+		model.addAttribute("reviewNum", reviewNum);
+		model.addAttribute("postNum", postNum);
+		model.addAttribute("replyNum", replyNum);
 		model.addAttribute("display","/jsp/mypage/myShop.jsp");
 		return "/jsp/mypage/mypageMain";
 	}
 	//작성글
 	@RequestMapping(value = "myPost")
-	public String myPost(Model model) {
+	public String myPost(Model model,HttpSession session,@RequestParam(defaultValue = "1") String pg) {
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberDTO");
 		
+		String nickname = memberDTO.getNickname();
+		int reviewNum=mypageService.getReviewNum(nickname);
+		int postNum=mypageService.getPostNum(nickname);
+		int replyNum=mypageService.getReplyNum(nickname);
+		
+		//페이징
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("nickname",memberDTO.getNickname());
+		map.put("pg",pg);
+		
+		MypagePaging mypagePaging = mypageService.myPostPaging(map);
+		//글
+		
+		int endNum = Integer.parseInt(pg)*5;
+		int startNum = endNum-4;
+		
+		Map<String,Object> listMap = new HashMap<String, Object>();
+		listMap.put("startNum",startNum);
+		listMap.put("endNum",endNum);
+		listMap.put("nickname", memberDTO.getNickname());
+		
+		List<CommunityBoardDTO> list = mypageService.getMyPost(listMap);
+		
+		
+		model.addAttribute("reviewNum", reviewNum);
+		model.addAttribute("postNum", postNum);
+		model.addAttribute("replyNum", replyNum);
+		model.addAttribute("mypagePaging", mypagePaging);
+		model.addAttribute("list", list);
 		model.addAttribute("display","/jsp/mypage/myPost.jsp");
 		return "/jsp/mypage/mypageMain";
 	}
 	//문의
 	@RequestMapping(value = "myAsk")
-	public String myAsk(Model model) {
+	public String myAsk(Model model,HttpSession session,@RequestParam(defaultValue = "1") String pg) {
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberDTO");
 		
+		String nickname = memberDTO.getNickname();
+		int reviewNum=mypageService.getReviewNum(nickname);
+		int postNum=mypageService.getPostNum(nickname);
+		int replyNum=mypageService.getReplyNum(nickname);
+		
+		//페이징
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("nickname",nickname);
+		map.put("pg",pg);
+		
+		MypagePaging mypagePaging = mypageService.myAskPaging(map);
+		
+		
+		//글
+		int endNum = Integer.parseInt(pg)*5;
+		int startNum = endNum-4;
+		
+		Map<String,Object> listMap = new HashMap<String, Object>();
+		listMap.put("startNum",startNum);
+		listMap.put("endNum",endNum);
+		listMap.put("nickname", nickname);
+		
+		List<QnaBoardDTO> list = mypageService.getMyAsk(listMap);
+		
+		model.addAttribute("reviewNum", reviewNum);
+		model.addAttribute("postNum", postNum);
+		model.addAttribute("replyNum", replyNum);
+		model.addAttribute("mypagePaging", mypagePaging);
+		model.addAttribute("list", list);
 		model.addAttribute("display","/jsp/mypage/myAsk.jsp");
 		return "/jsp/mypage/mypageMain";
 	}
@@ -195,6 +287,28 @@ public class MyPageController {
 		mypageService.modify(memberDTO);
 	}
 	
+	//소셜 정보수정
+	@RequestMapping(value="socialModify",method=RequestMethod.POST)
+	@ResponseBody
+	public void socialModify(@RequestParam Map<String,Object> map,@RequestPart MultipartFile profileFile) {
+		
+		if(!profileFile.isEmpty()) {
+			String filePath="D:\\reallysong\\FoodFighter\\src\\main\\webapp\\storage\\profile";
+		
+			String fileName = profileFile.getOriginalFilename();
+			File file = new File(filePath,fileName);
+			
+			try {
+				FileCopyUtils.copy(profileFile.getInputStream(), new FileOutputStream(file));
+			}catch (IOException e) {
+				e.printStackTrace();
+			}
+			map.put("profile", fileName);
+			mypageService.socialModify(map);
+		}
+		
+		
+	}
 	
 }
 

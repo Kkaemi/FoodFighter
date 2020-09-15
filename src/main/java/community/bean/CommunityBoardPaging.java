@@ -76,18 +76,18 @@ public class CommunityBoardPaging {
 		}
 		
 		if(startPage > pageBlock){ // == currentPage > pageBlock
-			pagingHTML.append("<a id='paging' href = 'communityBoard?pg="+(startPage-1)+"' title = 'prev'><span><</span></a>");
+			pagingHTML.append("<a id='paging' onclick = 'cmntList("+(startPage-1)+")' title = 'prev'><span><</span></a>");
 		}
 		for(int i = startPage; i <= endPage; i++) {
 			if(i == currentPage) {
-				pagingHTML.append("<a id = 'currentPaging' class = 'now' href = 'communityBoard?pg="+i+"' title = '"+i+"페이지'><span>"+i+"</span></a>");
+				pagingHTML.append("<a id = 'currentPaging' class = 'now' onclick = 'cmntList("+i+")' title = '"+i+"페이지'><span>"+i+"</span></a>");
 			}else {
-				pagingHTML.append("<a id = 'paging' href = 'communityBoard?pg="+i+"' title = '"+i+"페이지'>"+i+"</span></a>");
+				pagingHTML.append("<a id = 'paging' onclick = 'cmntList("+i+")' title = '"+i+"페이지'>"+i+"</span></a>");
 			}
 		}//for
 		
 		if(endPage < totalP){
-			pagingHTML.append("<a id = 'paging' href = 'communityBoard?pg="+(endPage+1)+"' title = 'next'><span>></span></a>");
+			pagingHTML.append("<a id = 'paging' onclick = 'cmntList("+(endPage+1)+")' title = 'next'><span>></span></a>");
 		}
-	}//makePagingHTML
+	}//makeCmntPagingHTML
 }

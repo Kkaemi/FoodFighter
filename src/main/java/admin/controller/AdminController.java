@@ -48,8 +48,50 @@ public class AdminController {
 	@RequestMapping(value = "adminDashboard")
 	public String adminDashboard(Model model) {
 	
-		model.addAttribute("display","/jsp/admin/adminDashboard.jsp");
-		return "/jsp/admin/adminMain";
+		//리뷰
+		Map<String,Object> reviewMap = adminService.getReviewData();
+		//게시글
+		Map<String,Object> postMap = adminService.getPostData();
+		//문의
+		Map<String,Object> qnaMap = adminService.getQnaData();
+		//등록가게
+		Map<String,Object> countJMap = adminService.getJoinData();
+		//음식별 파이차트
+		Map<String,Object> foodMap = adminService.getFoodData();
+		//가격대별 파이차트
+		Map<String,Object> priceMap = adminService.getPriceData();
+		//회원가입
+		Map<String,Object> joinMap = adminService.getJoinwayData();
+		
+		
+		model.addAttribute("todayReview", reviewMap.get("todayReview"));
+		model.addAttribute("totalReview", reviewMap.get("totalReview"));
+		
+		model.addAttribute("todayPost", postMap.get("todayPost"));
+		model.addAttribute("totalPost", postMap.get("totalPost"));
+		
+		model.addAttribute("todayQna", qnaMap.get("todayQna"));
+		model.addAttribute("totalQna", qnaMap.get("totalQna"));
+		
+		model.addAttribute("todayJoin", countJMap.get("todayJoin"));
+		model.addAttribute("totalJoin", countJMap.get("totalJoin"));
+		
+		model.addAttribute("kFood", foodMap.get("kFood"));
+		model.addAttribute("wFood", foodMap.get("wFood"));
+		model.addAttribute("cFood", foodMap.get("cFood"));
+		model.addAttribute("jFood", foodMap.get("jFood"));
+		model.addAttribute("dessert", foodMap.get("dessert"));
+		
+		model.addAttribute("under1", priceMap.get("under1"));
+		model.addAttribute("manwon1", priceMap.get("manwon1"));
+		model.addAttribute("manwon2", priceMap.get("manwon2"));
+		model.addAttribute("manwon3", priceMap.get("manwon3"));
+		model.addAttribute("manwon4", priceMap.get("manwon4"));
+		
+		model.addAttribute("joinKakao", joinMap.get("joinKakao"));
+		model.addAttribute("join", joinMap.get("join"));
+		
+		return "/jsp/admin/adminDashboard";
 	}
 	
 	//멤버관리
@@ -71,8 +113,7 @@ public class AdminController {
 			model.addAttribute("pg", pg);
 			model.addAttribute("adminMemberPaging", adminMemberPaging);
 			model.addAttribute("list", list);
-			model.addAttribute("display","/jsp/admin/adminMemberManagement.jsp");
-			return "/jsp/admin/adminMain";
+			return "/jsp/admin/adminMemberManagement";
 
 		}
 	//가게 관리
@@ -94,8 +135,7 @@ public class AdminController {
 			model.addAttribute("pg", pg);
 			model.addAttribute("adminShopPaging", adminShopPaging);
 			model.addAttribute("list", list); 
-			model.addAttribute("display","/jsp/admin/adminShopManagement.jsp");
-			return "/jsp/admin/adminMain";
+			return "/jsp/admin/adminShopManagement";
 
 		}
 		
@@ -123,13 +163,27 @@ public class AdminController {
 			return mav;
 
 		}
-		//가게 삭제
-		/*
-		 * @RequestMapping(value="adminShopDelete",method=RequestMethod.POST)
-		 * 
-		 * @ResponseBody public void adminShopDelete(@RequestParam String resSeq) {
-		 * adminService.adminShopDelete(resSeq); }
-		 */
+	//가게 삭제
+	  @RequestMapping(value="adminShopDelete",method=RequestMethod.POST)
+	  @ResponseBody public void adminShopDelete(@RequestParam String resSeq) {
+		  	adminService.adminShopDelete(resSeq); 
+	  }
+	//가게 검색
+	  @RequestMapping(value = "getShopSearch", method = RequestMethod.POST)
+		public @ResponseBody ModelAndView getShopSearch(Model model,@RequestParam Map<String, Object> map) {
+		  	AdminShopPaging adminShopPaging = adminService.getShopSearchPaging(map);
+			
+			
+			List<MemberDTO> list = adminService.getShopSearch(map);
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("list", list);
+			mav.addObject("pg", map.get("pg"));
+			mav.addObject("adminShopPaging", adminShopPaging);
+			mav.setViewName("jsonView");
+
+			return mav;
+
+		}	 
 
 
 	// 가게정보 입력 페이지

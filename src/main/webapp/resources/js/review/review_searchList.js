@@ -6,12 +6,13 @@ $(document).ready(function(){
     });
 });
 
+
+let keyword = document.getElementById("keyword").value;
+let pg = document.getElementById("pg").value;
 //더보기 기능
 $(document).ready(function(){
 $(".moreBtn").click(function(){
-	let keyword = document.getElementById("keyword").value;
-	let pg = document.getElementById("pg").value;
-	
+	 pg++;
 	var obj = {"keyword":keyword,"pg":pg};
     
 	$.ajax({
@@ -24,6 +25,7 @@ $(".moreBtn").click(function(){
 		},
 		success : function(data){
 			$.each(data, function(index, items){
+				
 				let row = $('<div class = "row"/>');
 				let col3 = $('<div class = "col-sm-3"/>');
 					let img = $('<img src = "/FoodFighter/storage/restaurant/'+items.resImage1 + '"class = "row_StoreImg">');
@@ -36,7 +38,7 @@ $(".moreBtn").click(function(){
 						let resTh = $('<li>카테고리:&emsp;'+ items.resTheme+'</li>');
 						let resPr = $('<li>가격대:&emsp;&emsp;'+items.resPrice+'</li>');
 					let storeMore = $('<div class = "storeMore"/>');
-						let detailPage = $('<a id="gotoReviewView" class = "reviewList_detailPage" href = "/FoodFighter/review/reviewView?resSeq='+items.resSeq+'+&resName=+items.resName" style ="color : #ffc34d;">가게이름 상세보기 ></a>');
+						let detailPage = $('<a id="gotoReviewView" class = "reviewList_detailPage" href = "/FoodFighter/review/reviewView?resSeq='+items.resSeq+'&resName='+items.resName+'" style ="color : #ffc34d;">가게이름 상세보기 ></a>');
 
 			col3.append(img).appendTo(row);
 			storeMain.append(resN).append(resS);

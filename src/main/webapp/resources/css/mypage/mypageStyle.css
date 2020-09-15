@@ -24,6 +24,12 @@
 	font-weight: bold;
 }
 
+.alram-data-part {
+	margin: 0 50px;
+	font-size: 15px;
+	font-weight: bold;
+}
+
 .menu-part {
 	
 	padding: 13px 0;
@@ -51,7 +57,8 @@
 }
 
 .emptyDiv .emptyDivContent{
-	transform: translate(5%,30%);
+	transform: translate(0,100%);
+    position: absolute;
 }
 .emptyDiv div span{
 	text-align: center;
@@ -100,7 +107,11 @@ a.now,a.now:visited {
 
 #alramBox {
 	display: flex;
-	margin: 40px 0;
+	margin: 40px 0 10px;
+}
+
+#alramDataBox {
+	display: flex;
 }
 /* ======= */
 
@@ -188,6 +199,69 @@ a.now,a.now:visited {
 #review-resName {
 	text-align: center;
 }
+/* socialModify */
+#socialModifyBtn{
+	margin-left: 10px;
+}
+.profileImg-part {
+	margin:	10px 0;
+}
+#profilePrevWrap,#btnWrap{
+	text-align: center;
+}
+#fileboxWrap{
+	margin-left: 110px;
+}
+#profilePrev {
+	width: 150px;
+    height: 150px; 
+    border-radius: 70%;
+
+}
+
+
+/* 파일업로드 버튼  */
+.filebox label {
+	width: 150px;
+	height: 40px;
+	padding: 5px 0;
+	font-size: inherit;
+	font-weight: bold;
+	text-align: center;
+	background-color: #ffc34d;
+	color: #fff;
+	border: 1px solid #ffc34d;
+	border-radius: 4px;
+}
+
+.filebox label:hover {
+	width: 150px;
+	height: 40px;
+	padding: 5px 0;
+	font-size: inherit;
+	text-align: center;
+	background-color: #FF6A4D;
+	color: #fff;
+	border: 1px solid #FF6A4D;
+	border-radius: 4px;
+}
+.filebox input[type="file"] { 파일 필드 숨기기 
+	position: absolute; 
+	width: 0; 
+	height: 0; 
+	padding: 0; 
+	overflow: hidden; 
+	clip:rect(0,0,0,0); 
+	border: 0; 
+} 
+
+
+
+
+
+
+
+
 /* Header */
 #header-container{
 	width:100%;

@@ -38,7 +38,7 @@ body, html {
 	      <ul id="header-menu">
 		      <li class="header-items">
 		  		<img src="../resources/img/search.png" class="header_searchIcon" width="30" height="30" align="center"> 
-		   		<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword"  autocomplete="on" maxlength="50" >
+		   		<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword" autocomplete="on" maxlength="50" >
 		   		<button size="10" id="header_searchBtn">검색</button>
 		      </li>
 		       <li class="nav-item">
@@ -53,24 +53,13 @@ body, html {
 	          <li class="nav-item">
 	            <a class="nav-link js-scroll" href="/FoodFighter/event/eventList">이벤트</a>
 	          </li>
-	      
-		      <li class="nav-item">
-	           <c:if test="${sessionScope.memId == null}">
-	            <a class="nav-link js-scroll" href="/FoodFighter/login/loginForm">로그인</a>   
-	            </c:if>	       
-	          <!--   <img src="/FoodFighter/resources/img/member.png" class="header_searchIcon" width="30" height="30" align="center"> -->
-	         
-	         	<c:if test="${memId != null}">
-				 <a class="nav-link js-scroll" href="/FoodFighter/login/logout">로그아웃</a>
-				 </form>		
-				</c:if>    
-	          </li>
-	          
-		       <li class="header-items">
-		       <a class="header-link" href="communityMain.jsp"><img src="/FoodFighter/resources/img/member.png" class="header_searchIcon" width="30" height="30" align="center"></a>
-	    	 </li>
-   	</ul>
-</div>
+	          <li class="nav-item">
+	            <a class="nav-link js-scroll">
+		           <img src="/FoodFighter/resources/img/member.png" id="headerUser" class="header_searchIcon" width="30" height="30" align="center">
+		        </a>
+     	     </li>
+	   	</ul>
+	</div>
 </form>
    
     <!-- 제목부분 -->
@@ -101,14 +90,14 @@ body, html {
             <textarea id="summernote" name="content" class="content"></textarea>
             
             <!-- 목록으로 돌아가기 버튼 -->
-            <button class="btn btn-default" type="button">목록</button>
+            <button class="btn btn-default" type="button" onclick="location.href='eventList'">목록</button>
             <div class="pull-right">
                 
                 <!-- 수정 버튼 -->
                 <button class="btn btn-primary" type="button" id="modify">수정</button>
                 
                 <!-- 취소버튼 -->
-                <button class="btn btn-default" type="button">취소</button>
+                <button class="btn btn-default" type="button" onclick="location.href='eventView?seq_event='+seq_event+'&pg='+pg">취소</button>
             </div>
         </form>
     </div>
