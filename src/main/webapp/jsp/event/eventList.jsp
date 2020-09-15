@@ -34,10 +34,10 @@ body, html {
 <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
 	<div id="header-container">
 	  <a class="header-logo" href="/FoodFighter"><img src="../resources/img/logo.png" width="250px;" height="55px;" align="left" style="margin-top: 10px; margin-left: 200px;"></a>
-	      <ul id="header-menu">
+	     <ul id="header-menu">
 		      <li class="header-items">
 		  		<img src="../resources/img/search.png" class="header_searchIcon" width="30" height="30" align="center"> 
-		   		<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword"  autocomplete="on" maxlength="50" >
+		   		<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword" autocomplete="on" maxlength="50" >
 		   		<button size="10" id="header_searchBtn">검색</button>
 		      </li>
 		       <li class="nav-item">
@@ -52,24 +52,36 @@ body, html {
 	          <li class="nav-item">
 	            <a class="nav-link js-scroll" href="/FoodFighter/event/eventList">이벤트</a>
 	          </li>
-	      
-		      <li class="nav-item">
-	           <c:if test="${sessionScope.memId == null}">
-	            <a class="nav-link js-scroll" href="/FoodFighter/login/loginForm">로그인</a>   
-	            </c:if>	       
-	          <!--   <img src="/FoodFighter/resources/img/member.png" class="header_searchIcon" width="30" height="30" align="center"> -->
-	         
-	         	<c:if test="${memId != null}">
-				 <a class="nav-link js-scroll" href="/FoodFighter/login/logout">로그아웃</a>
-				 </form>		
-				</c:if>    
-	          </li>
-	          
-		       <li class="header-items">
-		       <a class="header-link" href="communityMain.jsp"><img src="/FoodFighter/resources/img/member.png" class="header_searchIcon" width="30" height="30" align="center"></a>
-	    	 </li>
-   	</ul>
-</div>
+	          <li class="nav-item">
+	            <a class="nav-link js-scroll">
+		           <img src="/FoodFighter/resources/img/member.png" id="headerUser" class="header_searchIcon" width="30" height="30" align="center">
+		        </a>
+     	     </li>
+	   	</ul>
+	</div>
+<!-- usermenu -->
+    <div class="modal headUser-menu" id="headUser-menu" role="dialog">
+  	  <div class="tri"></div>
+  	  <c:if test="${memId == null}">
+  	  	  <p>로그인 또는 회원가입을 하시면 <br> 더 많은 서비스를 <br>이용하실 수 있습니다.</p>
+  		  <hr>
+	  	  <button type="button" id="loginBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/login/loginForm'" >로그인</button>
+	  	  <button type="button" id="signupBtn" class="headUserMenu-Btn" onclick="location.href='/FoodFighter/member/signupChoice'" >회원가입</button>
+  	  </c:if>
+  	  <c:if test="${memId == 'admin@admin.com'}">
+  		  <p>관리자로<br> 로그인 하셨습니다. </p>
+  		  <hr>
+	  	  <button type="button" id="adminBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/admin/adminMain'" >관리자페이지</button>
+	  	  <button type="button" id="logoutBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/login/logout'">로그아웃</button>
+  	  </c:if>
+  	  <c:if test="${memId != null && sessionScope.memId != 'admin@admin.com'}">
+  		  <p>맛집을 찾아보고 <br> 후기를 남겨보세요.</p>
+  		  <hr>
+	  	  <button type="button" id="mypageBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/mypage/mypageMain'" >마이페이지</button>
+	  	  <button type="button" id="logoutBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/login/logout'">로그아웃</button>
+  	  </c:if>
+    </div>
+
 </form>
 
 <style type="text/css">
@@ -154,6 +166,11 @@ body, html {
 </div>
 <script src="/FoodFighter/resources/js/review/keyword.js"></script>
 <script type="text/javascript">
+$('#headerUser').click(function(){
+	$('#headUser-menu').modal();
+});
+</script>
+<script type="text/javascript">
 window.onload = function() {
 	if ("${where}" == "subject" || "${where}" == "content") {
 		document.getElementById("where").value = "${where}";
@@ -191,6 +208,7 @@ function eventPaging(pg) {
 			}); //each
 			
 			//페이징 처리
+			//alert(JSON.stringify(data.eventPaging.pagingHTML));
 			$('#eventPagingDiv').html(data.eventPaging.pagingHTML);
 			
 			//로그인 여부 & 작성한 글 확인
@@ -313,18 +331,6 @@ $(document).on('click', '.select', function(){
 	}
 });
 
-//선택삭제
-/* $(document).on('click', '#deleteBtn', function(){
-	let count = $('input[class=select]:checked').length;
-	
-	if(count==0){
-		alert("삭제할 항목을 선택하세요");
-	}else{
-		if(confirm("정말로 삭제하시겠습니까")){
-			$('#eventBoardListForm').submit();
-		} 
-	}
-}); */
  $(document).ready(function(){
     var token = $("meta[name='_csrf']").attr("content");
     var header = $("meta[name='_csrf_header']").attr("content");
@@ -333,15 +339,7 @@ $(document).on('click', '.select', function(){
     });
 }); 
 
-/* $(document).ready(function(){
-    var token = $("meta[name='_csrf']").attr('content');
-    var header = $("meta[name='_csrf_header']").attr('content');
-    if(token && header) {
-        $(document).ajaxSend(function(event, xhr, options) {
-            xhr.setRequestHeader(header, token);
-        });
-    }
-}); */
+
 $(document).on('click', '#deleteBtn', function(){
 	let select = $('.select');
 	let count = 0;

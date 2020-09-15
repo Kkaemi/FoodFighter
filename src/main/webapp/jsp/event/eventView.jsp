@@ -22,7 +22,6 @@ body, html {
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> <!-- 부트스트랩 CSS  -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript" src="/FoodFighter/resources/js/community/communityMainJs/sidebarJs.js"></script> <!-- 사이드바JS -->
 <script src="https://kit.fontawesome.com/a076d05399.js"></script> <!-- 사이드바 아이콘 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> <!-- 부트스트랩 JS -->
 </head>
@@ -37,7 +36,7 @@ body, html {
 	      <ul id="header-menu">
 		      <li class="header-items">
 		  		<img src="../resources/img/search.png" class="header_searchIcon" width="30" height="30" align="center"> 
-		   		<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword"  autocomplete="on" maxlength="50" >
+		   		<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword" autocomplete="on" maxlength="50" >
 		   		<button size="10" id="header_searchBtn">검색</button>
 		      </li>
 		       <li class="nav-item">
@@ -52,24 +51,13 @@ body, html {
 	          <li class="nav-item">
 	            <a class="nav-link js-scroll" href="/FoodFighter/event/eventList">이벤트</a>
 	          </li>
-	      
-		      <li class="nav-item">
-	           <c:if test="${sessionScope.memId == null}">
-	            <a class="nav-link js-scroll" href="/FoodFighter/login/loginForm">로그인</a>   
-	            </c:if>	       
-	          <!--   <img src="/FoodFighter/resources/img/member.png" class="header_searchIcon" width="30" height="30" align="center"> -->
-	         
-	         	<c:if test="${memId != null}">
-				 <a class="nav-link js-scroll" href="/FoodFighter/login/logout">로그아웃</a>
-				 </form>		
-				</c:if>    
-	          </li>
-	          
-		       <li class="header-items">
-		       <a class="header-link" href="communityMain.jsp"><img src="/FoodFighter/resources/img/member.png" class="header_searchIcon" width="30" height="30" align="center"></a>
-	    	 </li>
-   	</ul>
-</div>
+	          <li class="nav-item">
+	            <a class="nav-link js-scroll">
+		           <img src="/FoodFighter/resources/img/member.png" id="headerUser" class="header_searchIcon" width="30" height="30" align="center">
+		        </a>
+     	     </li>
+	   	</ul>
+	</div>
 </form>
 
 <!-- 본문 -->
@@ -97,6 +85,8 @@ body, html {
 				<span class = "nickname" id="nicknameSpan"></span>
 				
 				<span class = "date" id="dateSpan"></span>
+				
+				<span class = "hit" id="hitSpan"></span>		
 			</p>
 		</div>
 	</div>
@@ -108,265 +98,48 @@ body, html {
 			<p></p>
 			<div class ="attach"></div>
 		</div>
-		</div>
+		
 		<div class ="cont_recommendation clearfix">
-			<div class = "area_l">
-				<a href = "#"><span class = "plain-btn">댓글</span></a>
+		<div class = "area_l">
+			<a href = "#"><span class = "plain-btn">댓글</span></a>
 		</div>
-		
-		
-	<!-- 댓글 -->
+	</div>
+<!-- 댓글 -->
 	<div class = "cont_comment" id = "cont_comment">
 		<ul class = "comment_list">
-			<li class = "comment_section">
-			
-				<!-- 원댓 영역 -->
-				<div class ="pic"><img src = "/FoodFighter/resources/img/community/boardImg/d.jpg"></div>
-				<div class ="info">
-					<div class ="comment_post">
-						<div class = "data">
-							<span class = "txt_name">가성비트캠프</span>
-						</div>
-						<span class ="txt_date">08.03 17:50</span>
-						<div class ="comment_cont">
-							신논현 근처에 맛집 없어요. 걍 아무거나 드세요
-						</div>
-					</div>
-				</div>
-				<div class ="option">
-					<div class ="dropdown" style ="visibility: hidden;">
-						<button type = "button" data-toggle = "dropdown" class ="dropdown-toggle">
-							<span class ="ico_bbs ico_more"></span>
-						</button>
-						<ul class = "dropdown-menu">
-							<li><a>수정</a></li>
-							<li><a>삭제</a></li>
-						</ul>
-					</div>
-					
-					
-					<div class = "comment_reply" id = "comment_reply">
-						<a href ="javascript:" id ="cmt_reply">답글</a>
-					</div>
-				</div> <!-- 원댓 영역 (div option) -->
-			<!-- </li>
-			<li class = "comment_section">
-				원댓 영역
-				<div class ="pic"></div>
-				<div class ="info">
-					<div class = "data">
-						<span class = "txt_name">집에갈거야</span>
-					</div>
-					<span class ="txt_date">08.05 20:50</span>
-					<div class ="comment_cont">
-						집에 가고 싶네
-					</div>
-				</div>
-				<div class ="option">
-					<div class ="dropdown">
-						<button type = "button" data-toggle = "dropdown" class ="dropdown-toggle">
-							<span class ="ico_bbs ico_more"></span>
-						</button>
-						<ul class = "dropdown-menu">
-							<li><a>수정</a></li>
-							<li><a>삭제</a></li>
-						</ul>
-					</div>
-					<div class = "comment_reply" id = "comment_reply">
-						<a href ="javascript:" id ="cmt_reply">답글</a>
-					</div>
-				</div> 원댓 영역 (div option)
-				대댓 영역
-				<div class = "reply_section">
-					<div class ="pic"></div>
-					<div class ="info">
-						<div class = "data">
-							<span class = "txt_name">김비트</span>
-						</div>
-						<span class ="txt_date">08.08 12:50</span>
-						<div class ="comment_cont">
-							너 집에 못가
-						</div>
-					</div>
-					<div class ="option">
-						<div class ="dropdown">
-							<button type = "button" data-toggle = "dropdown" class ="dropdown-toggle">
-								<span class ="ico_bbs ico_more"></span>
-							</button>
-							<ul class = "dropdown-menu">
-								<li><a>수정</a></li>
-								<li><a>삭제</a></li>
-							</ul>
-						</div>
-						<div class = "comment_reply" id = "comment_reply">
-							<a href ="javascript:" id ="cmt_reply">답글</a>
-						</div>
-					</div> 대댓 영역
-					대댓 글쓰는 칸
-					<div class = "comment_replyWrite">
-						<div class ="inner_text_write">
-							<div class ="box_textarea">
-							<textarea placeholder="인터넷은 우리가 함께 만들어가는 소중한 공간입니다. 댓글 작성 시 타인에 대한 배려와 책임을 담아주세요"	
-							maxlength="600" style ="height : 86px;"></textarea> 모달로 경고 띄우기
-							</div>
-							<div class = "wrap_menu">
-								<div class = "area_l">
-									<button class = "btnTab">
-										<span class ="ico_bbs ico_lock" id ="lock">비밀글</span>
-									</button>
-								</div>
-								<div class = "area_r">
-									<span class ="num_text">
-										<span class ="sr_only">글자수</span>
-										<span class ="num_count">0</span> / <span class ="sr_only">총 글자 개수</span> 600
-									</span>
-									<div class ="btn_group">
-										<a href = "#">
-										<span class = "plain-btn" id = "commentWrite" style ="background-color: red; color: white;">등록</span></a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div> 대댓 글쓰는 칸
-				</div> 대댓 영역
-				<div class = "reply_section">
-					<div class ="pic"></div>
-					<div class ="info">
-						<div class = "data">
-							<span class = "txt_name">김비트</span>
-						</div>
-						<span class ="txt_date">08.08 12:50</span>
-						<div class ="comment_cont">
-							나도 몰라 시발
-						</div>
-					</div>
-					<div class ="option">
-						<div class ="dropdown">
-							<button type = "button" data-toggle = "dropdown" class ="dropdown-toggle">
-								<span class ="ico_bbs ico_more"></span>
-							</button>
-							<ul class = "dropdown-menu">
-								<li><a>수정</a></li>
-								<li><a>삭제</a></li>
-							</ul>
-						</div>
-						<div class = "comment_reply" id = "comment_reply">
-							<a href ="javascript:" id ="cmt_reply">답글</a>
-						</div>
-					</div>
-				</div>
-			</li>
-			<li class = "comment_section">
-				<div class ="pic"><img src = "/fighter/resources/img/community/boardImg/d.jpg"></div>
-				<div class ="info">
-					<div class ="comment_post">
-						<div class = "data">
-							<span class = "txt_name">가성비트캠프</span>
-						</div>
-						<span class ="txt_date">08.03 17:50</span>
-						<div class ="comment_cont">
-							짜증난다 이거 왜 하냐?
-						</div>
-					</div>
-				</div>
-				<div class ="option">
-					<div class ="dropdown">
-						<button type = "button" data-toggle = "dropdown" class ="dropdown-toggle">
-							<span class ="ico_bbs ico_more"></span>
-						</button>
-						<ul class = "dropdown-menu">
-							<li><a>수정</a></li>
-							<li><a>삭제</a></li>
-						</ul>
-					</div>
-					<div class = "comment_reply" id = "comment_reply">
-						<a href ="javascript:" id ="cmt_reply">답글</a>
-					</div>
-				</div>
-				<div class = "reply_section">
-					<div class ="pic"></div>
-					<div class ="info">
-						<div class = "data">
-							<span class = "txt_name">김비트</span>
-						</div>
-						<span class ="txt_date">08.08 12:50</span>
-						<div class ="comment_cont">
-							나도 몰라 시발
-						</div>
-					</div>
-					<div class ="option">
-						<div class ="dropdown">
-							<button type = "button" data-toggle = "dropdown" class ="dropdown-toggle">
-								<span class ="ico_bbs ico_more"></span>
-							</button>
-							<ul class = "dropdown-menu">
-								<li><a>수정</a></li>
-								<li><a>삭제</a></li>
-							</ul>
-						</div>
-						<div class = "comment_reply" id = "comment_reply">
-							<a href ="javascript:" id ="cmt_reply">답글</a>
-						</div>
-					</div>
-				</div>
-			</li>
 		</ul>
-		<div class ="simple_paging">
-			<a href ="#" title = "prev">
-				<span><</span>
-			</a>
-			<a href ="#" title = "1페이지">
-			<span>1</span>
-			</a>
-			<a href ="#" title = "2페이지">
-				<span>2</span>
-			</a>
-			<a class = "now" href ="#" title = "3페이지">
-				<span>3</span>
-			</a>
-			<a href ="#" title = "4페이지">
-				<span>4</span>
-			</a>
-			<a href ="#" title = "5페이지">
-				<span>5</span>
-			</a>
-			<a href ="#" title = "next">
-				<span>></span>
-			</a>
-		</div>
+		
+	<!-- 댓글쓰기 영역 -->
 		<div class ="comment_write">
 			<div class ="inner_text_write">
 				<div class ="box_textarea">
 					<textarea placeholder="인터넷은 우리가 함께 만들어가는 소중한 공간입니다. 댓글 작성 시 타인에 대한 배려와 책임을 담아주세요"	
-							maxlength="600" style ="height : 86px;"></textarea>모달로 경고 띄우기
+					id = "cwrite_place" maxlength="600" style ="height : 86px;"></textarea>
 				</div>
-					<div class = "wrap_menu">
-						<div class = "area_l">
-							<button class = "btnTab">
-								<span class ="ico_bbs ico_photo">이미지업로드</span>
-							</button>
-						</div>
-						<div class = "area_r">
-							<span class ="num_text">
-								<span class ="sr_only">글자수</span>
-								<span class ="num_count">0</span> / <span class ="sr_only">총 글자 개수</span> 600
-							</span>
-							<button class = "btnTab btn_item">
-								<span class ="ico_bbs ico_lock">비밀글</span>
-							</button>
-							<div class ="btn_group">
-								<a href = "#">
-								<span class = "plain-btn" style ="background-color: red; color: white;">등록</span></a>
-							</div>
+				<div class = "wrap_menu">
+					<div class = "area_l">
+						<button class = "btnTab">
+							<span class ="ico_bbs ico_lock" id = "lock">비밀글</span>
+						</button>
+					</div>
+					<div class = "area_r">
+						<span class ="num_text">
+							<span class ="sr_only">글자수</span>
+							<span class ="num_count">0</span> / <span class ="sr_only">총 글자 개수</span> 600
+						</span>
+						<div class ="btn_group">
+							<button class = "plain-btn" id = "cwrite" style ="background-color: red; color: white;">등록</button>
 						</div>
 					</div>
 				</div>
-			</div> -->
-			
-			
-			
-			<div class ="clear"></div>
+			</div>
+			<div class ="simple_paging">
+			<a href ="now" title = "1페이지">
+			<span>1</span>
+			</a>
 		</div>
+		</div>
+	<!-- 댓글쓰기 영역 -->
 	</div>
 	<div class = "view-upper clearfix">
 		<div class = "area_l">
@@ -383,6 +156,7 @@ body, html {
 		</c:if>
 		</div>
 		</span>
+	</div>
 	</div>
 </div>
 </form>
@@ -418,17 +192,14 @@ function mode(num){
 		document.eventViewForm.method = 'post';
 		document.eventViewForm.action = 'eventBoardDelete';
 		document.eventViewForm.submit();
-		
 		}
 	}
 }
-
+/* 글 보기 */
 $(document).ready(function(){
 	$.ajax({
 		type : 'post',
 		url : '/FoodFighter/event/geteventBoardtView',
-		//다른건 필요없고 seq_event값만 가져가면 된다.(한사람의 글만 뽑아오면 된다.)
-		
 		data : 'seq_event='+$('#seq_event').val(),
 		dataType : 'json',
 		success : function(data){
@@ -436,7 +207,9 @@ $(document).ready(function(){
 			
 			$('#seq_eventSpan').text(data.eventDTO.seq_event);
 			$('#subjectSpan').text(data.eventDTO.subject);
-			$('#nickname').text(data.eventDTO.nickname);
+			$('#nicknameSpan').text(data.eventDTO.nickname);
+			$('#dateSpan').text(data.eventDTO.logtime);
+			$('#hitSpan').html(data.eventDTO.hit);
 			$('#contentSpan').html(data.eventDTO.content);
 			
 			 if(data.memId==data.eventDTO.email)
@@ -451,55 +224,228 @@ $(document).ready(function(){
 	});
 	
 });
-
-$('.comment_reply').on('click', '#cmt_reply', function(){
-	let reply = $('#cmt_reply');
-	if(reply.text() == '답글') {
-		reply.text('접기');
-		let comment_replyWrite = $('<div class ="comment_replyWrite"/>'); 
-		let inner_text_write = $('<div class = "inner_text_write"/>');
-		let box_textarea = $('<div class = "box_textarea"/>'); 
-		let reply_content = $('<textarea id ="reply_content" placeholder="인터넷은 우리가 함께 만들어가는 소중한 공간입니다. 댓글 작성 시 타인에 대한 배려와 책임을 담아주세요" maxlength="600" style ="height : 86px;"></textarea>');
-		let wrap_menu = $('<div class = "wrap_menu"/>');
-		let area_l = $('<div class = "area_l"/>');
-		let btnTab = $('<button class = "btnTab"/>');
-		let area_r = $('<div class = "area_r"/>');
-		let num_text = $('<span class ="num_text"/>');
-
-		box_textarea.append(reply_content);
-		
-		area_l.append(btnTab.append($('<span class ="ico_bbs ico_lock" id = "lock">비밀글</span>',{}))).appendTo(wrap_menu);
-		area_r.append(num_text.append($('<span class = "sr_only">글자수</span>'),{}).append($('<span class = "num_count">0</span>').append(' / ')).append($('<span class= "sr_only">총 글자 개수</span>')).append(' 600')).appendTo(wrap_menu);
-
-		inner_text_write.append(box_textarea).append(wrap_menu);
-		comment_replyWrite.append(inner_text_write);
-		comment_replyWrite.appendTo($('.comment_section'));
-	} else {
-		reply.text('답글');
-		$('.comment_replyWrite').remove();
-	}
-});
-/* 댓글 쓰는 창에 있는 비밀댓글버튼 */
-$('.comment_write .btnTab span#lock').on('click', function(){
-	if($('.comment_write .btnTab span#lock').hasClass('ico_lock')){
-		$('.comment_write .btnTab span#lock').removeClass('ico_lock');
-		$('.comment_write .btnTab span#lock').addClass('ico_lock_on');
+/* 댓글 쓰기*/
+let secret = 'n';
+$('#cwrite').click(function(){
+	cocontent = $('#cwrite_place').val();
+	if('${memId}' == ''){
+			alert("로그인 후 이용 가능한 서비스입니다.");
+		location.href='/FoodFighter/login/loginForm';
 	}else {
-		$('.comment_write .btnTab span#lock').removeClass('ico_lock_on');
-		$('.comment_write .btnTab span#lock').addClass('ico_lock');
+		if(cocontent == ''){
+			alert("댓글 내용을 입력해주세요");
+		}else {
+			seq_event = $('#seq_event').val();
+			conickname = '${memberDTO.nickname}'
+			$.ajax({
+				type :'post',
+				url :'/FoodFighter/event/eventboardcomment',
+				data :{'seq_event' : seq_event,
+						'cocontent' : cocontent,
+						'conickname' : conickname,
+						'secret' : secret},
+				success: function() {
+			    	alert("111111");
+			    	$('#cwrite_place').val("");
+			    	
+	       		},
+		        error : function(err){
+			       alert("실패"+JSON.stringify(err));
+		        }
+			});
+		}
 	}
 });
 
-/* 동적으로 생기는 대댓 쓰는 창에 있는 비밀댓글버튼 */
-$(document).on('click', '.comment_replyWrite .btnTab span#lock', function(){
-	if($('.comment_replyWrite .btnTab span#lock').hasClass('ico_lock')){
-		$('.comment_replyWrite .btnTab span#lock').removeClass('ico_lock');
-		$('.comment_replyWrite .btnTab span#lock').addClass('ico_lock_on');
-	}else {
-		$('.comment_replyWrite .btnTab span#lock').removeClass('ico_lock_on');
-		$('.comment_replyWrite .btnTab span#lock').addClass('ico_lock');
-	}
+$(document).ready(function(){
+	commentList();
 });
+/* 댓글 리스트 */
+ function commentList(){
+	seq_event = $('#seq_event').val();
+	conickname = '${memberDTO.nickname}'
+	$.ajax({
+		type : 'get',
+		url : '/FoodFighter/event/eventboardcommentList',
+		data :{'seq_event' : seq_event,
+				'conickname' : conickname},
+		dataType : 'json',
+		success : function(data){
+			var cmnt_N = "";
+			if(data == null){
+			}else {
+			$.each(data, function(index, items){
+    			cmnt_N += '<li class = "comment_section" id = "comt'+index+'">';
+    			cmnt_N += '<div class = "pic">';
+    				cmnt_N += '<img src = "/FoodFighter/storage/profile/'+items.profile+'"/>';
+    				cmnt_N += '</div>';
+    					cmnt_N += '<div class ="info">';
+    						cmnt_N += '<div class ="comment_post">';
+    							cmnt_N += '<div class = "data">';
+    								cmnt_N += '<span class = "txt_name">'+items.conickname+'</span>';
+											cmnt_N += '</div>';
+												cmnt_N += '<span class = "txt_date">'+items.clogtime+'</span>';
+												cmnt_N += '<div class = "comment_cont">'+items.cocontent+'</div>';
+												cmnt_N += '</div>';
+													cmnt_N += '</div>';
+														cmnt_N += '<div class ="option">';
+								if(conickname != items.conickname){
+									cmnt_N += '<div class ="dropdown" style ="visibility: hidden;">';
+									alert("1111111");
+								
+								}else{
+									cmnt_N += '<div class ="dropdown">';
+								}
+								cmnt_N += '<button type = "button" data-toggle = "dropdown" class ="dropdown-toggle">';
+									cmnt_N += '<span class ="ico_bbs ico_more"></span>';
+										cmnt_N += '</button>';
+											cmnt_N += '<ul class = "dropdown-menu">';
+												cmnt_N += '<li><a id = "cmnt_modify" onclick = "cmnt_modify('+index+','+items.seq_eventco+')">수정</a></li>';
+				
+												cmnt_N += '<li><a id = "recmnt_delete" onclick = " recmnt_delete('+items.seq_eventco+')">삭제</a></li>';
+												cmnt_N += '</ul>';
+													cmnt_N += '</div>';
+														cmnt_N += '<div class = "comment_reply" id = "comment_reply">';
+															cmnt_N += '<a href ="javascript:" id ="cmnt_reply'+index+'" onclick = "cmnt_reply('+items.seq_eventco+')"></a>';
+															cmnt_N += '</div>';
+																cmnt_N += '</div>';
+																	cmnt_N += '</li>';
+				$('.comment_list').prepend(cmnt_N);
+				/* if(items.secret == 'y') {
+					let cmnt_Y = '<li class = "comment_section" id = "comt'+index+'" style = " padding: 15px 0 15px 68px !important;">'
+								+ '<div class = "secretIcon">'
+								+ '<img class ="ico_bbs ico_lock" id = "lock" src = "/FoodFighter/resources/img/community/boardImg/lock.svg"/>'
+								+ '</div>'
+								+ '<div class = "comment_cont">'
+								+ '<span id = "secret">해당 댓글은 작성자와 관리자만 볼 수 있습니다.</span>'
+								+ '<span class = "txt_date" style = "float : initial !important;">'+items.clogtime+'</span>'
+								+ '</div>'
+								+ '</div>'
+								+ '</li>'
+					if (memberDTO.nickname != items.conickname && memberDTO.nickname != '관리자'){
+						$('#comt'+index).replaceWith(cmnt_Y);
+					} 
+				}*/
 
-</script>
-</html>
+    			/* 해당 댓글작성자만 수정 */
+				if(items.conickname == ''){
+					$('.dropdown').removeAttr('style');
+				}
+				
+				});//each
+			}
+   		},
+        error : function(err){
+	       alert("실패"+JSON.stringify(err));
+        }
+	});
+}
+ 
+ 
+
+/* 댓글 수정 */
+function cmnt_modify(index, seq_eventco){
+	seq_event = $('#seq_event').val();
+	$.ajax({
+		type : 'get',
+		url : '/FoodFighter/event/geteventBoardtcommentView',
+		data :{'seq_event' : seq_event,
+				'seq_eventco' : seq_eventco},
+		dataType : 'json',
+		success : function(data){
+			//alert(JSON.stringify(data));
+			let cmnt_modify = '<div class = "comment_modify" id = "comment_modify'+index+'">'
+							+ '<div class ="inner_text_write">'
+								+ '<div class = "box_textarea">'
+								+ '<textarea placeholder="인터넷은 우리가 함께 만들어가는 소중한 공간입니다. 댓글 작성 시 타인에 대한 배려와 책임을 담아주세요"	class = "cmnt" id = "cmnt_cocontent'+index+'" maxlength="600" style ="height : 86px;"></textarea>'
+								+ '</div>'
+								+ '<div class = "wrap_menu">'
+									+ '<div class = "area_l">'
+										+ '<button class = "btnTab">'
+											+ '<span class ="ico_bbs ico_lock_state" id ="lock'+index+'">비밀글</span>'
+										+ '</button>'
+									+ '</div>'
+									+ '<div class = "area_r">'
+										+ '<span class ="num_text">'
+											+ '<span class ="sr_only">글자수</span>'
+											+ '<span class ="num_count'+index+'" style = "color : black;">0</span> / <span class ="sr_only">총 글자 개수</span> 600'
+										+ '</span>'
+										+ '<div class ="btn_group">'
+											+ '<button class = "plain-btn" id = "cmntModifyBtn'+index+'" style ="background-color: red; color: white;">등록</button></a>'
+											+ '<button class = "plain-btn" id = "cmntModifyCancelBtn'+index+'" style = "margin-left : 5px;">취소</button></a>'
+										+ '</div>'
+									+ '</div>'
+								+ '</div>'
+							+ '</div>'
+						+ '</div>'
+						
+						
+			/* if($('#comment_replyWrite'+index).length){
+				$('#comment_replyWrite'+index).remove();
+			} else */if($('#comment_modify'+index).length) {
+				$('#comment_modify'+index).remove();
+			} else {
+				$('#comt'+index).append(cmnt_modify);
+			}
+			$('#cmnt_cocontent'+index).val(data.rcontent);
+			let rc = $('#cmnt_cocontent'+index).val().length;
+		    $('.num_count'+index).html(rc); 
+		    
+			
+			if(data.secret == 'y'){
+				$('#lock'+index).removeClass('ico_lock_state');
+				$('#lock'+index).addClass('ico_lock_on');
+			} 
+			
+			//취소버튼을 누르면 수정창 사라지기
+			$('#cmntModifyCancelBtn'+index).on('click', function(){ 
+				$('#cmt_'+index+' > #comment_modify'+index).remove();
+			});
+			
+			//댓글 수정
+			$('#cmntModifyBtn'+index).on('click', function(){
+				var cmnt_cocontent = $('#cmnt_cocontent'+index);
+				if (cmnt_cocontent.val() == ''){
+					alert("댓글 내용을 입력해주세요");
+					cmnt_cocontent.focus();
+				}else {
+					$.ajax({
+						type : 'post',
+						url : '/FoodFighter/event/eventBoardcommentModify',
+						data :{'seq_eventco' : seq_eventco,
+							   'cocontent' : cmnt_cocontent.val()},
+						success : function(){
+							commentList();
+						},//success
+				        error : function(err){
+					       //alert("실패"+JSON.stringify(err));
+				        }
+			    	});
+				}
+			});
+			
+		},//success
+        error : function(err){
+	       alert("실패"+JSON.stringify(err));
+        }
+    });//ajax 
+}
+
+function recmnt_delete(seq_eventco){
+	if(confirm("정말로 삭제하시겠습니까?")){
+		$.ajax({
+			type : 'post',
+			url : '/FoodFighter/event/eventBoardcommentDelete',
+			data : {'seq_eventco' : seq_eventco},
+			success: function() {
+				//alert("성공");
+				commentList();
+       		},
+	         error : function(err){
+		       console.log("실패"+JSON.stringify(err));
+	        } 
+		});
+	}
+} 
+ </script>
+ </html>

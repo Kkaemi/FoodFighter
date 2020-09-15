@@ -1,16 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%
+request.setCharacterEncoding("utf-8");
+String resName = request.getParameter("resName");
+String nickname = request.getParameter("nickname");
+String resSeq = request.getParameter("resSeq");
+%> 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- bootstraps -->
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script> 
+<!-- Favicons -->
+  <link href="/FoodFighter/resources/assets/img/favicon.png" rel="icon">
+  <link href="/FoodFighter/resources/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Vendor CSS Files -->
+  <link href="/FoodFighter/resources/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/FoodFighter/resources/assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+  <link href="/FoodFighter/resources/assets/vendor/venobox/venobox.css" rel="stylesheet">
 <!-- css -->
 	<link rel = "stylesheet" href="../resources/css/review/reviewWrite.css">
 <!-- jquery -->
@@ -49,17 +59,44 @@
 	       </li>
 	       <li class="nav-item">
 	         <a class="nav-link js-scroll">
-	         <img src="/FoodFighter/resources/img/member.png" class="header_searchIcon" width="30" height="30" align="center">
+	         <img src="/FoodFighter/resources/img/member.png" id="headerUser" class="header_searchIcon" width="30" height="30" align="center">
 	         </a>
 	    	</li>
    	</ul>
 </div>
 </form>
+  <!-- usermenu -->
+  <div class="modal headUser-menu" id="headUser-menu" role="dialog">
+     <div class="tri"></div>
+     <c:if test="${sessionScope.memId == null}">
+        <p>로그인 또는 회원가입을 하시면 <br> 더 많은 서비스를 <br>이용하실 수 있습니다.</p>
+        <hr>
+        <button type="button" id="loginBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/login/loginForm'" >로그인</button>
+        <button type="button" id="signupBtn" class="headUserMenu-Btn" onclick="location.href='/FoodFighter/member/signupChoice'" >회원가입</button>
+     </c:if>
+     <c:if test="${sessionScope.memId == 'admin@admin.com'}">
+        <p>관리자로<br> 로그인 하셨습니다. </p>
+        <hr>
+        <button type="button" id="adminBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/admin/adminDashboard'" >관리자페이지</button>
+        <button type="button" id="logoutBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/login/logout'">로그아웃</button>
+     </c:if>
+     <c:if test="${sessionScope.memId != null && sessionScope.memId != 'admin@admin.com'}">
+        <p>맛집을 찾아보고 <br> 후기를 남겨보세요.</p>
+        <hr>
+        <button type="button" id="mypageBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/mypage/mypageMain'" >마이페이지</button>
+        <button type="button" id="logoutBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/login/logout'">로그아웃</button>
+     </c:if>
+  </div>
+
+
 <!--================ Container ================-->
+
 <form id="reviewForm" name="reviewForm" method="post" enctype = "multipart/form-data">
+<input type="hidden" name="resName" value="<%=resName%>">
+<input type="hidden" name="resSeq" value="<%=resSeq%>">
 	<div class="container">
 		  <div class="title" align="left">
-			  <font class="storeName"><strong>코스믹커피</strong></font>&emsp;<strong>에 대한 솔직한 리뷰를 작성해주세요.</strong> &emsp;&emsp;&emsp;&emsp;&emsp;
+			  <font class="storeName"><strong>${restaurantDTO.resName}</strong></font>&emsp;<strong>에 대한 솔직한 리뷰를 작성해주세요.</strong> &emsp;&emsp;&emsp;&emsp;&emsp;
 				 <div class="starRev">
 				 	<input type="hidden" id="resScore" name="resScore">
 				     <span class="starR1 on" id = star1_Left data-value="0.5" >별1_왼쪽</span>
@@ -77,7 +114,7 @@
 		  </div><br><!-- title -->
 
 		  <div class="form-group">
-			  <textarea id="content" name="content" class="form-control" rows="10" placeholder="000님 주문하신 메뉴는 어떠셨나요? 상점에 대한 진솔하면서도 고운말 부탁드립니다"></textarea>
+			  <textarea id="content" name="content" class="form-control" rows="10" placeholder="${memberDTO.nickname} 님 주문하신 메뉴는 어떠셨나요? 상점에 대한 진솔하면서도 고운말 부탁드립니다"></textarea>
 			 	   <div class="upload-group" align="left"> 
 			  			<div class="filebox" width="100%" align="left">
        						<label for="ex_file">+</label>
@@ -103,15 +140,14 @@
 		</div><!-- form-group -->
 	 
 		  <div class="card" style="width:300px" align="center" >
-			    <img class="card-img-top" src="../resources/img/store1.jpeg" alt="Card image" style="align:center">
+			    <img class="card-img-top" src="/FoodFighter/storage/restaurant/${restaurantDTO.resImage1}" alt="Card image" style="align:center">
 			    <div class="card-body" align="center">
-			      <h4 class="card-title" align="center"><font style="color:#fff;"><strong>코스믹 커피</strong></font></h4>
-		      	  <h6><font style="color:#fff;">가격대:&emsp; 1만원-2만원대</font></h6>
-			      <h6 ><font style="color:#fff;">카테고리:&emsp; 카페/디저트</font></h6>
+			      <h4 class="card-title" align="center"><font style="color:#fff;"><strong>${restaurantDTO.resName}</strong></font></h4>
+		      	  <h6><font style="color:#fff;">가격대:&emsp; ${restaurantDTO.resPrice}</font></h6>
+			      <h6 ><font style="color:#fff;">카테고리:&emsp; ${restaurantDTO.resTheme}</font></h6>
 		    </div>
 		  </div>
  	</div><!-- container -->
- 
  <!--================  Footer ================-->
  <div id="footer-container">
 	 <p class="copyright" style="text-align:left;">
@@ -126,25 +162,66 @@
  <!--================ Up ================-->
  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"> <img src="../resources/img/back-up.png" width="32px;" height="32px;"></i></a>
  <div id="preloader"></div>
- 
-</form> 
+  
 </body>
 <script type="text/javascript">
-let id = '${memberDTO.nickname}';
+$('#headerUser').click(function(){
+   $('#headUser-menu').modal();
+});
 </script>
+<script type="text/javascript">
+let id = '${memberDTO.nickname}';
+
+//유효성검사 
+$(document).ready(function(){
+
+	if(id == ''){
+		alert("로그인 후 리뷰작성이 가능합니다");
+		location.href="/FoodFighter/login/loginForm";
+	}else{
+		$('#reviewBtn').click(function(){
+			if($('#content').val()==''){
+				alert('내용을 입력해주세요');
+			} else {
+			 /*  document.reviewForm.submit(); */
+				$.ajax({
+					type: 'post',
+					enctype:'multipart/form-data',
+					processData: false,
+					contentType: false,
+					url: 'writeReview',
+					data: new FormData($('#reviewForm')[0]),
+					success: function(){
+						alert("리뷰를 저장하였습니다");
+						location.href="/FoodFighter/review/reviewView?resSeq=<%=resSeq%>&resName=<%=resName%>";
+					},
+					error:function(err){
+						console.log(err);
+					}
+					
+				});
+			} 
+			/* return false; */
+		});
+	}//else
+});
+</script>
+
+  <!-- Vendor JS Files -->
+  <script src="/FoodFighter/resources/assets/vendor/jquery/jquery.min.js"></script>
+  <script src="/FoodFighter/resources/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/FoodFighter/resources/assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+  <script src="/FoodFighter/resources/assets/vendor/php-email-form/validate.js"></script>
+  <script src="/FoodFighter/resources/assets/vendor/waypoints/jquery.waypoints.min.js"></script>
+  <script src="/FoodFighter/resources/assets/vendor/counterup/jquery.counterup.min.js"></script>
+  <script src="/FoodFighter/resources/assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+  <script src="/FoodFighter/resources/assets/vendor/typed.js/typed.min.js"></script>
+  <script src="/FoodFighter/resources/assets/vendor/venobox/venobox.min.js"></script>
 <!-- Vendor JS Files -->
-<!-- <script src="../../assets/vendor/jquery/jquery.min.js"></script>  -->
- <script src="../resources/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
- <script src="../resources/assets/vendor/jquery.easing/jquery.easing.min.js"></script>
- <script src="../resources/assets/vendor/php-email-form/validate.js"></script>
- <script src="../resources/assets/vendor/waypoints/jquery.waypoints.min.js"></script>
- <script src="../resources/assets/vendor/counterup/jquery.counterup.min.js"></script>
- <script src="../resources/assets/vendor/owl.carousel/owl.carousel.min.js"></script>
-<!--  <script src="../../assets/vendor/typed.js/typed.min.js"></script> -->
- <script src="../resources/assets/vendor/venobox/venobox.min.js"></script>
+
 
 <!--  Template Main JS File -->
-  <script src="../resources/assets/js/main.js"></script> 
+  <!-- <script src="../resources/assets/js/main.js"></script>  -->
   <script src="/FoodFighter/resources/js/review/keyword.js"></script>
   <script src="/FoodFighter/resources/js/review/review_writeForm.js"></script>
 </html>

@@ -25,12 +25,48 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   </update>	
   
   <select id="myreviewGetList" parameterType="java.util.Map" resultType="review">
-  	<![CDATA[select * from (select @ROWNUM := @ROWNUM + 1 as rn,tt.* from (select * from view_test,
+  	<![CDATA[select * from (select @ROWNUM := @ROWNUM + 1 as rn,tt.* from (select * from review,
 		 (SELECT @ROWNUM :=0) R where member_seq=#{member_seq} order by seq_review desc)tt)list
 		where rn>=#{startNum} and rn<=#{endNum}]]> 
   </select>
   
   <select id="getModalView" parameterType="int" resultType="review">
-  	select * from view_test where seq_review=#{seq_review}
+  	select * from review where seq_review=#{seq_review}
+  </select>
+  
+  <select id="getReviewNum" parameterType="String" resultType="int">
+  	select count(*) from review where nickname=#{nickname}
+  </select>
+  
+  <select id="getPostNum" parameterType="String" resultType="int">
+  	select count(*) from cboard where nickname=#{nickname}
+  </select>
+  
+  <select id="getReplyNum" parameterType="String" resultType="int">
+  	select count(*) from cb_cmnt where rnickname=#{nickname}
+  </select>
+  
+  <select id="getMyPost" parameterType="java.util.Map" resultType="cBoard">
+  	<![CDATA[select * from (select @ROWNUM := @ROWNUM + 1 as rn,tt.* from (select * from cboard,
+		 (SELECT @ROWNUM :=0) R where nickname=#{nickname} order by bseq desc)tt)list
+		where rn>=#{startNum} and rn<=#{endNum}]]> 
+  </select>
+  
+  <select id="getMyAsk" parameterType="java.util.Map" resultType="qnaBoard">
+  	<![CDATA[select * from (select @ROWNUM := @ROWNUM + 1 as rn,tt.* from (select * from qna_board,
+		 (SELECT @ROWNUM :=0) R where nickname=#{nickname} order by seq desc)tt)list
+		where rn>=#{startNum} and rn<=#{endNum}]]> 
+  </select>
+  
+  <update id="socialModify" parameterType="java.util.Map">
+  	update testmember set profile=#{profile} where email=#{email}
+  </update>	
+  
+  <select id="getPostTotalA" parameterType="java.util.Map" resultType="int">
+  	select count(*) from cboard where nickname=#{nickname}
+  </select>
+  
+  <select id="getAskTotalA" parameterType="java.util.Map" resultType="int">
+  	select count(*) from qna_board where nickname=#{nickname}
   </select>
 </mapper>

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import event.bean.EventCoDTO;
 import event.bean.EventDTO;
 import event.bean.EventPaging;
 import event.dao.EventDAO;
@@ -110,6 +111,45 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public void eventBoardListDelete(List<String> list) {
 		eventDAO.eventBoardListDelete(list);
+		
+	}
+
+	@Override
+	public void eventboardcommentwirte(Map<String, String> map) {
+		eventDAO.eventboardcommentwirte(map);
+		
+	}
+
+	@Override
+	public List<EventCoDTO> eventboardcommentList(Map<String, Object> map) {
+		//1페이지당 5개씩
+		int endNum = Integer.parseInt((String) map.get("pg"))*5;
+		int startNum = endNum-4;
+		
+		map.put("startNum", startNum);
+		map.put("endNum", endNum);
+		
+		return eventDAO.eventboardcommentList(map);
+
+	}
+
+	@Override
+	public EventCoDTO geteventBoardtcommentView(String seq_event, String seq_eventco) {
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("seq_event", seq_event);
+		map.put("seq_eventco", seq_eventco);
+		return eventDAO.geteventBoardtcommentView(map);
+	}
+
+	@Override
+	public void eventBoardcommentModify(Map<String, String> map) {
+		eventDAO.eventBoardcommentModify(map);
+		
+	}
+
+	@Override
+	public void eventBoardcommentDelete(String seq_eventco) {
+		eventDAO.eventBoardcommentDelete(seq_eventco);
 		
 	}
 
