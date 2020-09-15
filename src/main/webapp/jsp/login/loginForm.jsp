@@ -167,8 +167,8 @@ $('#kakao-login-btn').click(function(){
 					email = res.kakao_account.email;
 					$.ajax({
 						type : 'post',
-						url : '/FooFighter/login/kakaologin',
-						data : {'email' : $('#email').val()},
+						url : '/FoodFighter/login/kakaologin',
+						data : {'email' : email},
 			    		dataType : 'text',
 			    		success : function(data){
 		    			if(data == 'success'){

@@ -46,14 +46,14 @@ body, html {
 		   		<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword" autocomplete="on" maxlength="50" >
 		   		<button size="10" id="header_searchBtn">검색</button>
 		      </li>
-		       <li class="nav-item">
-		           <a class="nav-link js-scroll active" href="/FoodFighter">Home</a>
-		       </li>
-		       <li class="nav-item">
-	         	  <a class="nav-link js-scroll" href="/FoodFighter/review/reviewNonSearchList">리뷰 리스트</a>
+		      <li class="nav-item">
+		        <a class="nav-link js-scroll active" href="/FoodFighter">Home</a>
+		      </li>
+		      <li class="nav-item">
+	         	<a class="nav-link js-scroll" href="/FoodFighter/review/reviewNonSearchList">리뷰 리스트</a>
 	          </li>
 	          <li class="nav-item">
-	           <a class="nav-link js-scroll" href="/FoodFighter/community/communityMain">커뮤니티</a>
+	            <a class="nav-link js-scroll" href="/FoodFighter/community/communityMain">커뮤니티</a>
 	          </li>
 	          <li class="nav-item">
 	            <a class="nav-link js-scroll" href="/FoodFighter/event/eventList">이벤트</a>
@@ -71,7 +71,7 @@ body, html {
   	  <c:if test="${memId == null}">
   	  	  <p>로그인 또는 회원가입을 하시면 <br> 더 많은 서비스를 <br>이용하실 수 있습니다.</p>
   		  <hr>
-	  	  <button type="button" id="loginBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/login/loginForm'" >로그인</button>
+	  	  <button type="button" id="loginBtn" class="headUserMenu-Btn" onclick="location.href='/FoodFighter/login/loginForm'" >로그인</button>
 	  	  <button type="button" id="signupBtn" class="headUserMenu-Btn" onclick="location.href='/FoodFighter/member/signupChoice'" >회원가입</button>
   	  </c:if>
   	  <c:if test="${memId == 'admin@admin.com'}">
@@ -87,7 +87,7 @@ body, html {
 	  	  <button type="button" id="logoutBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/login/logout'">로그아웃</button>
   	  </c:if>
     </div>
- </form>
+</form>
 <!-- 사이드바 -->
 <div id="mySidenav" class="sidenav">
 	<a href="communityNotice"><span class="glyphicon glyphicon-exclamation-sign"></span>&emsp;공지사항</a>
