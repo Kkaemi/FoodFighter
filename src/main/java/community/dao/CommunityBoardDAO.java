@@ -42,4 +42,14 @@ public interface CommunityBoardDAO {
 
 	public List<CommunityBoardCmntDTO> getCmntList(Map<String, Object> map);
 
+	public int getCmntTotalA(int bseq);
+
+	public CommunityBoardCmntDTO viewCmnt(Map<String, Object> map);
+
+	public void modifyCmnt(Map<String, String> map);
+
+	public void deleteCmnt(String rseq);
+
+	public void replyCmnt(Map<String, Object> map);
+
 }

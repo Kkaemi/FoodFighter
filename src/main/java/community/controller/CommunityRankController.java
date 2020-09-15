@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping(value="community")
 public class CommunityRankController {
 	// 랭킹페이지
-//	@RequestMapping(value = "communityRank", method = RequestMethod.GET)
-//	public String communityRank() {
-//		return "/jsp/community/communityRank/communityRank";
-//	}
+	@RequestMapping(value = "communityRank", method = RequestMethod.GET)
+	public String communityRank() {
+		return "/jsp/community/communityRank/communityRank";
+	}
 
 }

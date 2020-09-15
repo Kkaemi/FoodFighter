@@ -200,7 +200,7 @@ div.view_stat div.info p span.comment {
     clear : both;
 }
 
-.comment_section {
+.comment_list li {
     position: relative;
     padding: 20px 0 20px 68px;
     border-bottom: 1px solid #f1f1f1;
@@ -212,7 +212,7 @@ div.view_stat div.info p span.comment {
     height: 48px;
     position: absolute;
     left: 0;
-    top: 25px;
+    top: 22px;
     overflow: hidden;
     border-radius: 24px;
     background: url( "/FoodFighter/resources/img/community/boardImg/simbol.png" ) no-repeat center;
@@ -223,7 +223,7 @@ div.view_stat div.info p span.comment {
     height: 48px;
 }
 
-.comment_section .info {
+.comment_list li .info {
     display: table-cell;
     width: 92.64%;
     margin-top: -2px;
@@ -235,13 +235,13 @@ div.view_stat div.info p span.comment {
     padding-right: 100px;
 }
 
-.comment_section .info .data {
+.comment_list li .info .data {
     display: inline-block;
     vertical-align: top;
     float: left;
 }
 
-.comment_section .info .txt_name {
+.comment_list li .info .txt_name {
     font-size: 16px;
     font-weight: bold;
     float: left;
@@ -249,7 +249,7 @@ div.view_stat div.info p span.comment {
     display: inline-block;
 }
 
-.comment_section .info .txt_date {
+.txt_date {
     font-size: 14px;
     color: #ccc;
     float: left;
@@ -257,7 +257,7 @@ div.view_stat div.info p span.comment {
     line-height: 25px;
 }
 
-.comment_section .info .comment_cont {
+.comment_list li .info .comment_cont {
     font-size: 14px;
     line-height: 20px;
     float: left;
@@ -282,7 +282,7 @@ div.view_stat div.info p span.comment {
 }
 
 .option {
-	display: table-cell;
+	display: table-cell !important;
 }
 .dropdown {
 	float: right;
@@ -296,7 +296,7 @@ div.view_stat div.info p span.comment {
     display: table !important;
 }
 .dropdown-menu {
-	text-align : center;
+	text-align : center !important;
     min-width : 20px !important;
     height: 56px !important;
     cursor: pointer !important;
@@ -305,10 +305,45 @@ div.view_stat div.info p span.comment {
 	margin: 20px;
 	font-size : 20px;
 }
+.dropdown-menu li{
+    position: relative;
+    border-bottom: 1px solid #f1f1f1;
+    padding: 0px 0 0px 0px;
+    border-bottom: 1px solid #f1f1f1;
+ }
+.dropdown-menu li {
+   position: relative;
+    border-bottom: 1px solid #f1f1f1;
+    padding: 0px 0 0px 0px;
+    border-bottom: 1px solid #f1f1f1;
+ }
 .ico_more {
 	width: 20px;
     height: 20px;
     background: url( "/FoodFighter/resources/img/community/boardImg/more.svg" ) no-repeat center;
+}
+
+#secret {
+	font-size: 14px;
+    line-height: 21px;
+    display: inline-block;
+}
+
+.secretIcon {
+    width: 48px;
+    height: 48px;
+    position: absolute;
+    left: 11px;
+    bottom : 5px;
+    overflow: hidden;
+    border-radius: 24px;
+    background-size: 48px auto;
+}
+
+.ico_lock {
+	margin-top : 10px;
+	width: 28px;
+    height: 28px;
 }
 
 /* 댓글 페이징 */
@@ -328,6 +363,7 @@ div.view_stat div.info p span.comment {
     line-height: 26px;
     color: black;
     margin: 0px 3px;
+    cursor: pointer;
 }
 .simple_paging a.now, .simple_paging a:hover{
     border: 1px solid #343434;
@@ -341,6 +377,10 @@ div.view_stat div.info p span.comment {
     margin-top: 30px;
     margin-bottom: 30px;
     padding: 0 30px;
+}
+
+.comment_modify { /* 댓글 수정 */
+    margin-top: 25px;
 }
 
 .cont_comment .inner_text_write {
@@ -420,13 +460,18 @@ div.view_stat div.info p span.comment {
     vertical-align: top;
     color: #666;
 }
+
+.num_text .num_count{
+    color: black;
+}
+
 .btn_item {
     margin: 0px 0px 0px 6px;
 }
-.ico_lock {
+.ico_lock_state {
 	width: 18px;
     height: 21px;
-    background: url( "/FoodFighter/resources/img/community/boardImg/lock.svg" ) no-repeat center;
+    background: url( "/FoodFighter/resources/img/community/boardImg/lock_state.svg" ) no-repeat center;
 }
 .ico_lock_on {
 	width: 18px;
@@ -447,14 +492,14 @@ div.view_stat div.info p span.comment {
 }
 .reply_section .info {
     display: table-cell;
-    width: 92%;
+    width: 92% !important;
     margin-top: -2px;
     box-sizing: border-box;
     vertical-align: top;
 }
 
 .comment_replyWrite{
-    padding-top: 23px;
+    padding-top: 25px;
 }
 .comment_replyWrite .inner_text_write {
     border-color: #efefef;
