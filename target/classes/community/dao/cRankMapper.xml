@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cRankSQL">
+
+	<!-- 레스토랑 랭킹 목록 -->
+	<select id = "getRankResList" resultType = "cRankRes">
+		select * from
+		(select @ROWNUM := @ROWNUM + 1 as rn, tt.*
+        from(select resSeq, resName, resScore, resImage1 from restaurant, (select @ROWNUM := 0)TMP
+        order by resScore desc)tt)PAGING
+        where rn between 1 and 10;
+	</select>
+	
+	<select id = "getRankResRevList" resultType = "cRankRes">
+		select resName, seq_review, content, image1 from review where resName = #{temp};
+	</select>
+</mapper>
