@@ -115,4 +115,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="qnaHit" parameterType="String">
 		update qna_board set hit = hit + 1 where seq = #{seq}
 	</update>
+	
+	<!-- qnaView에서 같은 그룹번호를 가진 글들을 정렬해서 보여줌 -->
+	<select id="getQnaViewList" parameterType="String" resultType="qnaBoard">
+		select seq, id, nickname, email, subject, content, ref, lev, step, pseq, reply, hit, logtime
+		from qna_board
+		where ref = (
+			select ref
+			from qna_board
+			where seq = #{seq}
+		)
+		order by step asc;
+	</select>
 </mapper>

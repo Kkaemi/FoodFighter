@@ -79,8 +79,8 @@ String keyword = request.getParameter("keyword");
           </div>
     </div>
 
-    <!-- SUMMERNOTE FORM-->
     <div class="page-body">
+	    <!-- SUMMERNOTE FORM-->
         <form method="post" class="form-horizontal">
             <!-- 제목 -->
             <div class="form-group">
@@ -111,6 +111,23 @@ String keyword = request.getParameter("keyword");
             </div>
         </form>
     </div>
+    
+    <!-- 모달 -->
+    <div class="modal fade" id="myModal" tabindex="-1"role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title">오류</h4>
+	      </div>
+	      <div class="modal-body">
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
 </body>
 <script type="text/javascript" src="/FoodFighter/resources/js/community/sidenav.js"></script>
 <script src="/FoodFighter/resources/js/review/keyword.js"></script>
@@ -122,6 +139,12 @@ String keyword = request.getParameter("keyword");
 	    $(document).ajaxSend(function(e, xhr, options) {
 	        xhr.setRequestHeader(header, token);
 	    });
+	    
+	    if ('${memId}' == '') {
+	    	location.href='/FoodFighter/login/loginForm';
+	    	alert('먼저 로그인해 주세요');
+	    	return;
+	    }
 	    
         $('#summernote').summernote({
             height: 300,                 // 에디터 높이
@@ -139,6 +162,32 @@ String keyword = request.getParameter("keyword");
     	let qna_content = $('#summernote').summernote('code');
     	let qna_password = $('#qna_password').val();
     	
+    	if (qna_subject == '') {
+    		
+    		$('.modal-body').text('제목을 입력해 주세요');
+    		$('#myModal').modal('show');
+    		$('#myModal').on('hide.bs.modal', function (e) {
+    			  $('#qna_subject').focus();
+    		});
+    		
+    	} else if ($('#summernote').val() == '') {
+    		
+    		$('.modal-body').text('내용을 입력해 주세요');
+    		$('#myModal').modal('show');
+    		$('#myModal').on('hide.bs.modal', function (e) {
+    			  $('#summernote').summernote({focus: true});
+    		});
+    		
+    	} else if (qna_password == '') {
+    		
+    		$('.modal-body').text('비밀번호를 입력해 주세요');
+    		$('#myModal').modal('show');
+    		$('#myModal').on('hide.bs.modal', function (e) {
+    			  $('#qna_password').focus();
+    		});
+    		
+    	} else {
+    		
     	$.ajax({
     		
 			type : 'post',
@@ -158,6 +207,8 @@ String keyword = request.getParameter("keyword");
 			}
 		
 		});
+    	
+    	}
     	
     });
 </script>
