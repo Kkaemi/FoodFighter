@@ -4,6 +4,8 @@ import java.util.Date;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Data;
 
 @Data
@@ -24,6 +26,7 @@ public class CommunityBoardDTO {
     private int reply; //답글 수
     
     private int hit; //조회수
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yy.MM.dd")
     private Date logtime; //글 작성 시간
-    private String show; //글 삭제 여부 -> y는 게시 / n는 삭제
+    private String bshow; //글 삭제 여부 -> y는 게시 / n는 삭제
 }

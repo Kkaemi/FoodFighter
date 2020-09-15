@@ -100,7 +100,7 @@ $('#modify').click(function(){
 	} else {
 		var markupStr = $('#summernote').summernote('code');
 	  	let content = markupStr.replace(/&nbsp;/g, " ");
-	  	let seq = $('#seq').val();
+	  	let nseq = $('#nseq').val();
 	  	let nSrchOption = $('#nSrchOption').val();
 	  	let nKeyword = $('#nKeyword').val();
 		$.ajax({
@@ -110,9 +110,9 @@ $('#modify').click(function(){
         	success: function() {
 		    	alert("작성하신 글을 수정하였습니다.");
 		    	if (nSrchOption != '' && nKeyword != ''){
-					location.href = "communityNoticeView?seq="+seq+"&nSrchOption="+nSrchOption+"&nKeyword="+nKeyword;
+					location.href = "communityNoticeView?nseq="+nseq+"&nSrchOption="+nSrchOption+"&nKeyword="+nKeyword;
 				}else {
-					location.href = "communityNoticeView?seq="+seq;
+					location.href = "communityNoticeView?nseq="+nseq;
 				}
        		},
 	        error : function(err){

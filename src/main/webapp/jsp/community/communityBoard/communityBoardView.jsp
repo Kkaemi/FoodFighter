@@ -25,7 +25,6 @@ body, html {
 <!-- JS 파일 -->
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> <!-- 부트스트랩 CSS  -->
-<script type="text/javascript" src= "/FoodFighter/resources/js/community/communitySidenavJS.js"></script> <!-- 사이드바 JS -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> <!-- 부트스트랩 JS -->
 </head>
@@ -61,11 +60,33 @@ body, html {
 	          </li>
 	          <li class="nav-item">
 	            <a class="nav-link js-scroll">
-	            <img src="/FoodFighter/resources/img/member.png" class="header_searchIcon" width="30" height="30" align="center">
-	            </a>
+		           <img src="/FoodFighter/resources/img/member.png" id="headerUser" class="header_searchIcon" width="30" height="30" align="center">
+		        </a>
      	     </li>
 	   	</ul>
 	</div>
+	<!-- usermenu -->
+    <div class="modal headUser-menu" id="headUser-menu" role="dialog">
+  	  <div class="tri"></div>
+  	  <c:if test="${memId == null}">
+  	  	  <p>로그인 또는 회원가입을 하시면 <br> 더 많은 서비스를 <br>이용하실 수 있습니다.</p>
+  		  <hr>
+	  	  <button type="button" id="loginBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/login/loginForm'" >로그인</button>
+	  	  <button type="button" id="signupBtn" class="headUserMenu-Btn" onclick="location.href='/FoodFighter/member/signupChoice'" >회원가입</button>
+  	  </c:if>
+  	  <c:if test="${memId == 'admin@admin.com'}">
+  		  <p>관리자로<br> 로그인 하셨습니다. </p>
+  		  <hr>
+	  	  <button type="button" id="adminBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/admin/adminMain'" >관리자페이지</button>
+	  	  <button type="button" id="logoutBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/login/logout'">로그아웃</button>
+  	  </c:if>
+  	  <c:if test="${memId != null && sessionScope.memId != 'admin@admin.com'}">
+  		  <p>맛집을 찾아보고 <br> 후기를 남겨보세요.</p>
+  		  <hr>
+	  	  <button type="button" id="mypageBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/mypage/mypageMain'" >마이페이지</button>
+	  	  <button type="button" id="logoutBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/login/logout'">로그아웃</button>
+  	  </c:if>
+    </div>
  </form>
 <!-- 사이드바 -->
 <div id="mySidenav" class="sidenav">
@@ -75,6 +96,7 @@ body, html {
     <a href=""><span class="glyphicon glyphicon-question-sign"></span>&emsp;고객센터</a>
 </div>
 <!-- 본문 -->
+<input type="hidden" id="num" value="${num}">
 <div class="container" style="margin-top : 95px; margin-bottom: 10px;">
 	<div class="page-header" style = "border-bottom: none !important;">
     	<h2 class="text-center">커뮤니티 자유게시판</h2>      
@@ -142,7 +164,7 @@ body, html {
 				<fmt:formatDate var = "date" value="${cBDTO.logtime }" pattern="yyyy.MM.dd HH:mm"/>
 					<span class = "date">${date }</span>
 				<span class = "hit">조회 ${cBDTO.hit }</span>
-				<span class = "comment">댓글<a class = "cmt_num">0</a></span> <!-- 댓글카운트 가져와야함 ${cBDTO.cmt}-->
+				<span class = "comment">댓글<a class = "cmt_num">${cBDTO.cmt }</a></span> <!-- 댓글카운트 가져와야함 ${cBDTO.cmt}-->
 			</p>
 		</div>
 	</div>
@@ -153,47 +175,26 @@ body, html {
 	</div>
 	<div class ="cont_recommendation clearfix">
 		<div class = "area_l">
-			<a href = "#"><span class = "plain-btn">댓글</span></a>
+			<button class = "plain-btn" style = "background-color: white" id = "comment_info">댓글<span class = "cmt_num">${cBDTO.cmt }</span></button>
 		</div>
 	</div>
 <!-- 댓글 -->
 	<div class = "cont_comment" id = "cont_comment">
 		<ul class = "comment_list">
 		</ul>
-		<div class ="simple_paging">
-			<a href ="#" title = "prev">
-				<span><</span>
-			</a>
-			<a href ="#" title = "1페이지">
-			<span>1</span>
-			</a>
-			<a href ="#" title = "2페이지">
-				<span>2</span>
-			</a>
-			<a class = "now" href ="#" title = "3페이지">
-				<span>3</span>
-			</a>
-			<a href ="#" title = "4페이지">
-				<span>4</span>
-			</a>
-			<a href ="#" title = "5페이지">
-				<span>5</span>
-			</a>
-			<a href ="#" title = "next">
-				<span>></span>
-			</a>
+		<div class ="simple_paging" id = "simple_paging">
 		</div>
 	<!-- 댓글쓰기 영역 -->
 		<div class ="comment_write">
 			<div class ="inner_text_write">
 				<div class ="box_textarea">
 					<textarea placeholder="인터넷은 우리가 함께 만들어가는 소중한 공간입니다. 댓글 작성 시 타인에 대한 배려와 책임을 담아주세요"	
-					id = "cmnt_write" maxlength="600" style ="height : 86px;"></textarea>
+					class = "cmnt" id = "cmnt_rcontent" maxlength="600" style ="height : 86px;"></textarea>
 				</div>
 				<div class = "wrap_menu">
 					<div class = "area_l">
 						<button class = "btnTab">
-							<span class ="ico_bbs ico_lock" id = "lock">비밀글</span>
+							<span class ="ico_bbs ico_lock_state" id = "lock">비밀댓글</span>
 						</button>
 					</div>
 					<div class = "area_r">
@@ -202,7 +203,7 @@ body, html {
 							<span class ="num_count">0</span> / <span class ="sr_only">총 글자 개수</span> 600
 						</span>
 						<div class ="btn_group">
-							<button class = "plain-btn" id = "cmtWrite" style ="background-color: red; color: white;">등록</button>
+							<button class = "plain-btn" id = "cmntWriteBtn" style ="background-color: red; color: white;">등록</button>
 						</div>
 					</div>
 				</div>
@@ -241,16 +242,13 @@ body, html {
              Designed by foodFighter
  </p>
 </div>
+<script type="text/javascript" src= "/FoodFighter/resources/js/community/communitySidenavJS.js"></script> <!-- 사이드바 JS -->
 <script type="text/javascript" src= "/FoodFighter/resources/js/review/keyword.js"></script> <!-- 헤더 JS -->
 <script type="text/javascript">
 let id = '${memberDTO.nickname}';
 let bseq = '${bseq}';
 let bSrchOption = '${bSrchOption}';
 let bKeyword = '${bKeyword}';
-$('#write').css('display', 'none');
-$('.reply').css('display', 'none');
-$('.modify').css('display', 'none');
-$('.delete').css('display', 'none');
 </script>
 <script type="text/javascript" src ="/FoodFighter/resources/js/community/communityBoardViewJS.js"></script>
 </body>
