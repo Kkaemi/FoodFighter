@@ -83,43 +83,22 @@ public class LoginController {
 		
 		//카카오로그인
 		@RequestMapping(value="kakaologin", method=RequestMethod.POST)
-		public @ResponseBody String kakaologin(@RequestParam String email,
-										  HttpSession session) {
+		@ResponseBody
+		public ModelAndView kakaologin(@RequestParam String email, HttpSession session) {
 				
 			MemberDTO memberDTO = memberService.kakaologin(email);
-			//System.out.println(memberDTO);
 			
 			if(memberDTO != null) {
-			session.setAttribute("memId", memberDTO.getEmail());
-			session.setAttribute("memberDTO", memberDTO);
-
-				
-					return "success";
-
-				} else {
-					
-					return "fail";
-				}
+				session.setAttribute("memId", memberDTO.getEmail());
+				session.setAttribute("memberDTO", memberDTO);
 			}
-		
-		//카카오로그인
-//		@RequestMapping(value="kakaologin", method=RequestMethod.POST)
-//		public @ResponseBody String kakaologin(@RequestParam String email,
-//										  HttpSession session) {
-//				
-//			MemberDTO memberDTO = memberService.kakaologin(email);
-//			//System.out.println(memberDTO);
-//			
-//			if(memberDTO != null) {
-//			session.setAttribute("memId", memberDTO.getEmail());
-//			session.setAttribute("memberDTO", memberDTO);
-//
-//				
-//					return "success";
-//				} else {
-//					return "fail";
-//				}
-//			}
+
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("memberDTO", memberDTO);
+			mav.setViewName("jsonView");
+			return mav;
+			
+		}
 		
 		//로그아웃
 	      @RequestMapping(value="/logout", method=RequestMethod.GET)

@@ -159,6 +159,7 @@ $('.header_searchInput').click(function(){
 <script type='text/javascript'>
 $('#kakao-login-btn').click(function(){
 	Kakao.init("42cbda65d990bd717a2a38923ec19349");
+	
 	Kakao.Auth.loginForm({
 		success : function(authObj) {
 			Kakao.API.request({
@@ -167,16 +168,19 @@ $('#kakao-login-btn').click(function(){
 					email = res.kakao_account.email;
 					$.ajax({
 						type : 'post',
-						url : '/FooFighter/login/kakaologin',
-						data : {'email' : $('#email').val()},
-			    		dataType : 'text',
-			    		success : function(data){
-		    			if(data == 'success'){
-		    				location.href = '/FoodFighter/';
-		    				}else if(data == 'fail'){		
-		    					location.href = '/FoodFighter//login/loginForm';
-								}
-							},
+						url : '/FoodFighter/login/kakaologin',
+						data : 'email=' + email,
+						dataType : 'json',
+						success : function(data) {
+							alert(JSON.stringify(data));
+							
+							if (data.memberDTO != null) {
+								
+								location.href = '/FoodFighter/';
+							} else {
+								location.href = '/FoodFighter/login/loginForm';
+							}
+						},
 						error : function(err) {
 							console.log(err);
 						}
@@ -191,9 +195,7 @@ $('#kakao-login-btn').click(function(){
 			console.log(err);
 		}
 	});
-	
 });
-
 </script> 
 </body>
 </html>
