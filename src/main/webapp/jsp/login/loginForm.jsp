@@ -12,8 +12,9 @@
 </head>
 <form id="headerForm" name="headerForm" method="post" action="../review/getSearchList">
 <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">  
-<!--================ Header ================-->
 <header>
+<!--================ Header ================-->
+
 <div id="header-container">
   <a class="header-logo" href="/FoodFighter"><img src="../resources/img/logo.png" width="250px;" height="55px;" align="left" style="margin-top: 10px; margin-left: 200px;"></a>
       <ul id="header-menu">
@@ -43,9 +44,8 @@
 </div>
 </form>
 </header>
-
 <body>
-
+  
 	<section class="login-form" >
 		<h1>Login</h1>
 			<!-- <form action="/FoodFighter/login/loginForm-processing" id="loginForm" method="post"> -->
