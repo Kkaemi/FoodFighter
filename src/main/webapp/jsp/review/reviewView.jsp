@@ -273,14 +273,13 @@ $(document).ready(function(){
     });
 });
 
-<<<<<<< HEAD
-=======
+
 //리뷰페이지 이동
 $('#reviewWriteBtn').click(function(){
 	location.href="/FoodFighter/review/review_writeForm?resSeq=<%=resSeq%>&resName=<%=resName%>";
 });
 
->>>>>>> upstream/master
+
 var modal = document.getElementById('myModal');
 var img = document.getElementById('restaurant-image');
 var modalImg = document.getElementById("img01");
