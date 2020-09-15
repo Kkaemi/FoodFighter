@@ -174,7 +174,7 @@ $('#kakao-login-btn').click(function(){
 		    			if(data == 'success'){
 		    				location.href = '/FoodFighter/';
 		    				}else if(data == 'fail'){		
-		    					location.href = '/FoodFighter//login/loginForm';
+		    					location.href = '/FoodFighter/login/loginForm';
 								}
 							},
 						error : function(err) {
