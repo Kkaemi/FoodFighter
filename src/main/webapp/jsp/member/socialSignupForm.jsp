@@ -132,46 +132,6 @@ $(document).ready(function() {
 });
 
 
-//이메일 중복확인
-$('#email').focusout(function(){
-		$('#emailDiv').empty();
-		let email = $('#email').val();
-		if(email == ""){
-			$('#emailDiv').text("먼저 아이디를 입력하세요");
-			$('#email').focus();
-			$('#emailDiv').css('color','blue');
-			$('#emailDiv').css('font-weight','bold');
-			$('#emailDiv').css('font-size','8pt');
-		}else{
-			$.ajax({
-				type: 'post',
-		 		url: '/FoodFighter/member/checkEmail',
-		 		data: 'email='+email,
-		 		dataType: 'text',
-		 		success : function(data){
-		 			if(data == 'exist'){
-						$('#emailDiv').text('이미 가입된 이메일 입니다.')
-						$('#emailDiv').css('color','magenta')
-						$('#emailDiv').css('font-size','8pt')
-						$('#emailDiv').css('font-weight','bold')
-						
-					}else if(data=='non_exist'){
-						$('#checkEmail').val($('#email').val());
-						
-						$('#emailDiv').text('사용 가능')
-						$('#emailDiv').css('color','blue')
-						$('#emailDiv').css('font-size','8pt')
-						$('#emailDiv').css('font-weight','bold')
-					}
-				},
-				error:function(e){
-					console.log(e);
-				}
-			});	
-		}
-			
-		
-	});
 	
 //닉네임 중복확인
 $('#nickname').focusout(function(){
@@ -215,41 +175,55 @@ $('#nickname').focusout(function(){
 });
 //이메일 발송 버튼을 눌렀을 때
 $('#sendEmailBtn').click(function() {
-
 $('#emailDiv').empty();
 	if ($('#email').val() == 'undefined') {
 		$('#emailDiv').text('이메일은 반드시 동의를 해주셔야 가입이 가능합니다.');
 		$('#emailDiv').css('color', 'red');
 
 	} else {
-		if (!/^[a-z0-9_+.-]+@([a-z0-9-]+\.)+[a-z0-9]{2,4}$/.test($('#email').val())) {	//형식 체크
-			$('#emailDiv').text('올바른 형식으로 입력해주세요.');
-			$('#emailDiv').css('color', 'red');
-			
-		} else {
-			
-			$('#sendEmailModal').modal();//발송 완료 모달
-			
-			//메일발송		
-			$.ajax({
-				type:'post',
-				url : '/FoodFighter/member/signupSendMail',
-				data : 'email='+$('#email').val(),
-				dataType:'text',
-				success : function(data) {
-					sessionStorage.setItem("authCode", data ); //히든으로 하면 보안때문에 session으로 변경
-					alert(sessionStorage.getItem("authCode")); //임시
-				},
-				error : function(e) {
-					console.log(e);
+		$.ajax({
+			type: 'post',
+	 		url: '/FoodFighter/member/checkEmail',
+	 		data: 'email='+email,
+	 		dataType: 'text',
+	 		success : function(data){
+	 			if(data == 'exist'){
+					$('#emailDiv').text('이미 가입된 이메일 입니다.')
+					$('#emailDiv').css('color','magenta')
+					$('#emailDiv').css('font-size','8pt')
+					$('#emailDiv').css('font-weight','bold')
+					
+				}else if(data == 'non_exist'){
+					$('#checkEmail').val($('#email').val());
+					$('#sendEmailModal').modal();//발송 완료 모달
+					
+					//메일발송		
+					$.ajax({
+						type:'post',
+						url : '/FoodFighter/member/signupSendMail',
+						data : 'email='+$('#email').val(),
+						dataType:'text',
+						success : function(data) {
+							sessionStorage.setItem("authCode", data ); //히든으로 하면 보안때문에 session으로 변경
+							alert(sessionStorage.getItem("authCode")); //임시
+						},
+						error : function(e) {
+							console.log(e);
+						}
+					});
+					
+					$('#sendEmailBtn').text('재전송');
+					$('#sendEmailBtn').addClass('offset-5')
+					$('#emailCode').show('slide');
+					$('#emailCheckBtn').show('slide');
+
 				}
-			});
-			
-			$('#sendEmailBtn').text('재전송');
-			$('#sendEmailBtn').addClass('offset-5')
-			$('#emailCode').show('slide');
-			$('#emailCheckBtn').show('slide');
-		}
+			},
+			error:function(e){
+				console.log(e);
+			}
+		});	
+		
 	}//빈칸 체크 if
 });
 

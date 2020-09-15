@@ -6,6 +6,7 @@ import java.util.Map;
 import community.bean.CommunityBoardDTO;
 import community.bean.QnaBoardDTO;
 import member.bean.MemberDTO;
+import mypage.bean.MypagePaging;
 import review.bean.ReviewDTO;
 
 public interface MypageService {
@@ -28,11 +29,15 @@ public interface MypageService {
 
 	public int getReplyNum(String nickname);
 
-	public List<CommunityBoardDTO> getMyPost(String nickname);
+	public List<CommunityBoardDTO> getMyPost(Map<String, Object> listMap);
 
-	public List<QnaBoardDTO> getMyAsk(String nickname);
+	public List<QnaBoardDTO> getMyAsk(Map<String, Object> listMap);
 
 	public void socialModify(Map<String,Object> map);
+
+	public MypagePaging myPostPaging(Map<String, Object> map);
+
+	public MypagePaging myAskPaging(Map<String, Object> map);
 
 
 }
