@@ -43,4 +43,16 @@ public interface CommunityBoardService {
 
 	public List<CommunityBoardCmntDTO> getCmntList(Map<String, Object> map);
 
+	public CommunityBoardPaging cmntPaging(Map<String, Object> map);
+
+	public CommunityBoardCmntDTO viewCmnt(Map<String, Object> map);
+
+	public void modifyCmnt(Map<String, String> map);
+
+	public void deleteCmnt(String rseq);
+
+	public void replyCmnt(Map<String, Object> map);
+
+	public int getCmntCnt(String bseq);
+
 }

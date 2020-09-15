@@ -46,15 +46,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   	select count(*) from cb_cmnt where rnickname=#{nickname}
   </select>
   
-  <select id="getMyPost" parameterType="String" resultType="cBoard">
-  	select * from cboard where nickname=#{nickname}
+  <select id="getMyPost" parameterType="java.util.Map" resultType="cBoard">
+  	<![CDATA[select * from (select @ROWNUM := @ROWNUM + 1 as rn,tt.* from (select * from cboard,
+		 (SELECT @ROWNUM :=0) R where nickname=#{nickname} order by bseq desc)tt)list
+		where rn>=#{startNum} and rn<=#{endNum}]]> 
   </select>
   
-  <select id="getMyAsk" parameterType="String" resultType="qnaBoard">
-  	select * from qna_board where nickname=#{nickname}
+  <select id="getMyAsk" parameterType="java.util.Map" resultType="qnaBoard">
+  	<![CDATA[select * from (select @ROWNUM := @ROWNUM + 1 as rn,tt.* from (select * from qna_board,
+		 (SELECT @ROWNUM :=0) R where nickname=#{nickname} order by seq desc)tt)list
+		where rn>=#{startNum} and rn<=#{endNum}]]> 
   </select>
   
   <update id="socialModify" parameterType="java.util.Map">
   	update testmember set profile=#{profile} where email=#{email}
   </update>	
+  
+  <select id="getPostTotalA" parameterType="java.util.Map" resultType="int">
+  	select count(*) from cboard where nickname=#{nickname}
+  </select>
+  
+  <select id="getAskTotalA" parameterType="java.util.Map" resultType="int">
+  	select count(*) from qna_board where nickname=#{nickname}
+  </select>
 </mapper>

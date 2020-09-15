@@ -16,18 +16,55 @@
        height: 50px;
    }
 .boxWrap {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     background-color: #fff;
     border-radius: 4px;
     -webkit-box-shadow: 0 7px 14px 0 rgba(65,69,88,.1), 0 3px 6px 0 rgba(0,0,0,.07);
-    box-shadow: 0 7px 14px 0 rgba(65,69,88,.1), 0 3px 6px 0 rgba(0,0,0,.07);
+    box-shadow: 0 0px 0px 0 rgba(65,69,88,.1), 0 3px 6px 0 rgba(0,0,0,.07);
 }
 
 .box-header {
     padding: 1rem 1.25rem;
     margin-bottom: 5px;
-    background-color: #e3e2e8;
-    border-bottom: 0 solid #edf2f9;
+    background-color: #ffffff;
+    border-bottom: 1px solid #ffc34d;
+}
+
+#cboard a{
+	font-size: 19px;
+	font-weight: bold;
+	color:	#FFC34D; 
+}
+#cboard a:hover {
+    color: #FF6A4D;
+    text-decoration: none;
+}
+#cboard a:active {
+    color: #FF6A4D !important;
+    text-decoration: none;
+    outline: none;
+}
+
+#cboardTr td{
+    padding: 9px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-bottom : 1px solid #ddd;
+    border-top : none;
+    font-size: 15px;
+}
+#cboardTr td a{
+	color : black;
+	font-weight: 500;
+}
+#cboardTr td a:hover {
+    color: #FFC34D;
+    text-decoration: none;
+}
+#cboardTr td a:active {
+    color: #FFC34D !important;
+    text-decoration: none;
+    outline: none;
 }
 
 .ranker {
@@ -36,4 +73,58 @@
     vertical-align: middle;
     font-size: 16px;
     text-align: center;
+}
+#rank a{
+	font-size: 19px;
+	font-weight: bold;
+	color:	#FFC34D; 
+}
+#rank a:hover {
+    color: #FF6A4D;
+    text-decoration: none;
+}
+#rank a:active {
+    color: #FF6A4D !important;
+    text-decoration: none;
+    outline: none;
+}
+
+#cnotice a{
+	font-size: 19px;
+	font-weight: bold;
+	color:	#FFC34D; 
+}
+#cnotice a:hover {
+    color: #FF6A4D;
+    text-decoration: none;
+}
+#cnotice a:active {
+    color: #FF6A4D !important;
+    text-decoration: none;
+    outline: none;
+}
+
+#cnoticeTr td{
+    padding: 13px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-bottom : 1px solid #ddd;
+    border-top : none;
+    font-size: 15px;
+}
+#cnoticeDv {
+    word-spacing: 8px;
+}
+#cnoticeTr td a{
+	color : black;
+	font-weight: 500;
+}
+#cnoticeTr td a:hover {
+    color: #FFC34D;
+    text-decoration: none;
+}
+#cnoticeTr td a:active {
+    color: #FFC34D !important;
+    text-decoration: none;
+    outline: none;
 }

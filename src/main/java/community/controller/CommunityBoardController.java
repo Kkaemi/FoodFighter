@@ -93,7 +93,7 @@ public class CommunityBoardController {
 		
 		//현재 글
 		CommunityBoardDTO cBDTO = cBoardService.viewBoard(bseq);
-		
+		cBDTO.setCmt(cBoardService.getCmntCnt(bseq));
 		if(bSrchOption != null && bKeyword != null){ //검색 키워드가 있을 때
 			Map<String, String> map = new HashMap<String, String>();
 			map.put("bSrchOption", bSrchOption);
@@ -152,7 +152,7 @@ public class CommunityBoardController {
 	private static final String UPLOAD_PATH = "/Users/aria.k/Downloads/bit/fighter/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/FoodFighter/storage/community";
 	@RequestMapping(value = "uploadBoardImage", method = RequestMethod.POST)
 	@ResponseBody
-	public String uploadNoticeImage(@RequestParam("file") MultipartFile[] files) throws Exception {
+	public String uploadBoardImage(@RequestParam("file") MultipartFile[] files) throws Exception {
 		String fileName = "";
 		String saveName = "";
 		String url = "";
@@ -226,7 +226,7 @@ public class CommunityBoardController {
 	//커뮤니티 자유게시판 글 삭제
 	@RequestMapping(value = "communityBoardDelete", method = RequestMethod.POST)
 	@ResponseBody
-	public void communityNoticeDelete(@RequestParam String bseq) {
+	public void communityBoardDelete(@RequestParam String bseq) {
 		cBoardService.deleteBoard(bseq);
 	}
 	
@@ -265,7 +265,7 @@ public class CommunityBoardController {
 	}
 	
 	//커뮤니티 자유게시판 댓글쓰기
-	@RequestMapping(value = "communityBoardCmnt", method = RequestMethod.POST)
+	@RequestMapping(value = "communityBoardCmntWrite", method = RequestMethod.POST)
 	@ResponseBody
 	public void communityBoardCmnt(@RequestParam Map<String,String> map) {
 		cBoardService.writeCmnt(map);
@@ -274,16 +274,57 @@ public class CommunityBoardController {
 	//커뮤니티 자유게시판 댓글리스트
 	@RequestMapping(value = "communityBoardCmntList", method = RequestMethod.GET, produces={"application/json"})
 	@ResponseBody
-	public List<CommunityBoardCmntDTO> communityBoardCmntList(@RequestParam(required=false, defaultValue="1") String pg,
+	public ModelAndView communityBoardCmntList(@RequestParam(required=false, defaultValue="1") String num,
 														@RequestParam Map<String,Object> map, HttpServletRequest session, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
-		map.put("pg", pg);
+		map.put("num", num);
 		List<CommunityBoardCmntDTO> list = cBoardService.getCmntList(map);
-
+		//페이징 처리
+		CommunityBoardPaging cmntPaging = cBoardService.cmntPaging(map);
+		
 		if(list != null) {
-			return list;
+			mav.addObject("list",list);
 		}else {
-			return null;
+			mav.addObject("list", null);
 		}
+		
+		mav.addObject("num", num);
+		mav.addObject("cmntPaging", cmntPaging);
+		mav.setViewName("jsonView");
+		
+		return mav;
+	}
+	
+	@RequestMapping(value = "communityBoardCmntView", method = RequestMethod.GET, produces={"application/json"})
+	@ResponseBody
+	public CommunityBoardCmntDTO communityBoardCmntView (@RequestParam Map<String,Object> map){
+		CommunityBoardCmntDTO cmntDTO = cBoardService.viewCmnt(map);
+		return cmntDTO;
+	}
+	
+	//커뮤니티 자유게시판 댓글수정
+	@RequestMapping(value = "communityBoardCmntModify", method = RequestMethod.POST)
+	@ResponseBody
+	public void communityBoardCmntModify(@RequestParam Map<String,String> map) {
+		cBoardService.modifyCmnt(map);
+	}
+	
+	//커뮤니티 자유게시판 댓글 삭제
+	@RequestMapping(value = "communityBoardCmntDelete", method = RequestMethod.POST)
+	@ResponseBody
+	public void communityBoardCmntDelete(@RequestParam String rseq) {
+		cBoardService.deleteCmnt(rseq);
+	}
+	
+	//커뮤니티 자유게시판 대댓글쓰기
+	@RequestMapping(value = "communityBoardCmntReply", method = RequestMethod.POST)
+	@ResponseBody
+	public void communityBoardCmntReply(@RequestParam Map<String,Object> map) {
+		CommunityBoardCmntDTO cmntDTO = cBoardService.viewCmnt(map);
+		map.put("rref", cmntDTO.getRref()+"");
+		map.put("rlev", cmntDTO.getRlev()+"");
+		map.put("rstep", cmntDTO.getRstep()+"");
+
+		cBoardService.replyCmnt(map);
 	}
 }

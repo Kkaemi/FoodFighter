@@ -4,53 +4,98 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cBoardSQL">
 	<!-- 자유게시판 글쓰기 -->
+	<!-- 오라클 쿼리
 	<insert id="writeBoard" parameterType="java.util.Map">
-		insert into cboard(bseq, nickname, subject, content, ref, show)
+		insert into cboard(bseq, nickname, subject, content, ref, bshow)
 		values(seq_cboard.nextval, #{nickname}, #{subject}, #{content}, seq_cboard.currval, 'y')
+	</insert> -->
+	<insert id="writeBoard" parameterType="java.util.Map">
+		insert into cboard(bseq, nickname, subject, content, ref, bshow)
+		values(nextval(bseq), #{nickname}, #{subject}, #{content}, lastval(bseq), 'y')
 	</insert>
 	
 	<!-- 자유게시판 글목록 -->
+	<!-- 오라클 쿼리
 	<select id = "getCBoardList" parameterType="java.util.Map" resultType="cBoard">
 		select * from (select rownum rn, tt.* 
 	  	from (select * from cboard where show = 'y' order by ref desc, step asc)tt)
 	  	where rn between #{startNum} and #{endNum}
+	</select> -->
+	<select id = "getCBoardList" parameterType="java.util.Map" resultType="cBoard">
+		select * from 
+		(select @ROWNUM := @ROWNUM + 1 as rn, tt.* 
+	  	from (select bseq, nickname, subject, hit, logtime, lev, step
+	  	from cboard, (select @ROWNUM := 0)TMP
+	  	where bshow = 'y' order by ref desc, step asc)tt)PAGING
+	  	where rn between #{startNum} and #{endNum}
 	</select>
 	
 	<!-- 자유게시판 총 글 수 -->
+	<!-- 오라클 쿼리
 	<select id = "getTotalA" resultType="int">
 		select count(*) from cboard where show = 'y'
+	</select> -->
+	<select id = "getTotalA" resultType="int">
+		select count(*) from cboard where bshow = 'y'
 	</select>
 	
-	<!-- 공지사항 조회수 증가 -->
+	<!-- 자유게시판 조회수 증가 -->
 	<update id="hitUpdate" parameterType="int">
 		update cboard set hit = hit+1 where bseq = #{bseq}
 	</update>
 	
 	<!-- 자유게시판 글목록에서 삭제 -->
+	<!-- 오라클 쿼리
 	<update id="deleteBoardAdmin" parameterType="String">
 		begin
 			update cboard set reply=reply-1 
 			where bseq=(select pseq from cboard where bseq=#{temp});
-			<!--원글을 찾아서 reply(답글수) 감소-->
+			원글을 찾아서 reply(답글수) 감소
 
 			update cboard set subject='[원글이 삭제된 답글] ' ||subject where pseq=#{temp};
-			<!--답글을 찾아서 제목에 추가-->
+			답글을 찾아서 제목에 추가
 
 			update cboard set show = 'n' where bseq=#{temp};
-			<!--삭제-->
+			삭제
 		end;
+	</update> -->
+	<update id="deleteBoardAdmin1" parameterType="String">
+		update cboard set reply=reply-1 
+		where bseq=(select pseq from cboard where bseq=#{temp})
+	</update>
+	<update id="deleteBoardAdmin2" parameterType="String">
+		update cboard set subject='[원글이 삭제된 답글] ' ||subject where pseq=#{temp}
+	</update>
+	<update id="deleteBoardAdmin3" parameterType="String">
+		update cboard set bshow = 'n' where bseq=#{temp}
 	</update>
 	
 	<!-- 자유게시판 검색한 글목록 -->
+	<!-- 오라클 쿼리
 	<select id="getCBoardSrch" parameterType="java.util.Map" resultType="cBoard">
 		select * from (select rownum rn, tt.* 
 	  	from (select * from cboard where show = 'y' and ${bSrchOption} like '%'||#{bKeyword}||'%' order by ref desc, step asc)tt)
 	  	where rn between #{startNum} and #{endNum}
+	</select> -->
+	<select id="getCBoardSrch" parameterType="java.util.Map" resultType="cBoard">
+		select * from 
+		(select @ROWNUM := @ROWNUM + 1 as rn, tt.* 
+	  	from (select bseq, nickname, subject, hit, logtime, lev, step
+	  	from cboard, (select @ROWNUM := 0)TMP 
+	  	where bshow = 'y' and
+	  	${bSrchOption} like CONCAT('%',#{bKeyword},'%')
+	  	order by ref desc, step asc)tt)PAGING
+  		where rn between #{startNum} and #{endNum}
 	</select>
-	
+
 	<!-- 자유게시판 검색한 글의 총 글 수 -->
+	<!-- 오라클 쿼리
 	<select id ="getCBSrchTotalA" parameterType="java.util.Map" resultType="int">
 		select count(*) from cboard where show = 'y' and ${bSrchOption} like '%'||#{bKeyword}||'%'
+	</select> -->
+	<!-- 자유게시판 검색한 글의 총 글 수 -->
+	<select id ="getCBSrchTotalA" parameterType="java.util.Map" resultType="int">
+		select count(*) from cboard where bshow = 'y' and ${bSrchOption} like CONCAT('%',#{bKeyword},'%')
 	</select>
 	
 	<!-- 자유게시판 글보기 -->
@@ -59,54 +104,99 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 자유게시판 글보기 이전글 -->
+	<!-- 오라클 쿼리
 	<select id="viewPrevBoard" parameterType="int" resultType="cBoard">
 		select * from (select rownum rn, tt.* 
 	  	from (select * from cboard where show = 'y' and bseq &lt; #{bseq} order by ref desc, step asc)tt) 
 	  	where rn = 1
+	</select> -->
+	<select id="viewPrevBoard" parameterType="int" resultType="cBoard">
+		select * from 
+		(select @ROWNUM := @ROWNUM + 1 as rn, tt.* 
+	  	from (select bseq from cboard, (select @ROWNUM := 0)TMP
+	  	where bshow = 'y' and
+	  	bseq &lt; #{bseq} order by ref desc, step asc)tt)PAGING
+	  	where rn = 1
 	</select>
 	
 	<!-- 자유게시판 글보기 다음글 -->
+	<!-- 오라클 쿼리
 	<select id="viewNextBoard" parameterType="int" resultType="cBoard">
 		select * from (select rownum rn, tt.* 
 	  	from (select * from cboard where show = 'y' and bseq &gt; #{bseq} order by ref, step desc)tt) 
 	  	where rn = 1
+	</select> -->
+	<select id="viewNextBoard" parameterType="int" resultType="cBoard">
+		select * from 
+		(select @ROWNUM := @ROWNUM + 1 as rn, tt.* 
+	  	from (select bseq from cboard, (select @ROWNUM := 0)TMP
+	  	where bshow = 'y' and
+	  	bseq &gt; #{bseq} order by ref, step desc)tt)PAGING
+	  	where rn = 1
 	</select>
 	
 	<!-- 자유게시판 글보기 검색한 글 이전글 -->
+	<!-- 오라클 쿼리
 	<select id="viewSrchPrevBoard" parameterType="java.util.Map" resultType="cBoard">
 		select bseq from (select rownum rn, tt.* 
 	  	from (select bseq from cboard where show = 'y' and ${bSrchOption} like '%'||#{bKeyword}||'%' and bseq &lt; #{bseq} order by ref desc, step asc)tt) 
 	  	where rn = 1
+	</select> -->
+	<select id="viewSrchPrevBoard" parameterType="java.util.Map" resultType="cBoard">
+		select bseq from
+		(select @ROWNUM := @ROWNUM + 1 as rn, tt.*
+	  	from (select bseq from cboard, (select @ROWNUM := 0)TMP
+	  	where bshow = 'y' and
+	  	${bSrchOption} like CONCAT('%',#{bKeyword},'%') and
+	  	bseq &lt; #{bseq} order by ref desc, step asc)tt) 
+	  	where rn = 1
 	</select>
 	
 	<!-- 자유게시판 글보기 검색한 글 다음글 -->
+	<!-- 오라클 쿼리
 	<select id="viewSrchNextBoard" parameterType="java.util.Map" resultType="cBoard">
 		select bseq from (select rownum rn, tt.* 
 	  	from (select bseq from cboard where show = 'y' and ${bSrchOption} like '%'||#{bKeyword}||'%' and bseq &gt; #{bseq} order by ref, step desc)tt) 
+	  	where rn = 1
+	</select> -->
+	<select id="viewSrchNextBoard" parameterType="java.util.Map" resultType="cBoard">
+		select bseq from
+		(select @ROWNUM := @ROWNUM + 1 as rn, tt.*
+	  	from (select bseq from cboard, (select @ROWNUM := 0)TMP
+	  	where bshow = 'y' and
+	  	${bSrchOption} like CONCAT('%',#{bKeyword},'%')
+	  	and bseq &gt; #{bseq} order by ref, step desc)tt) 
 	  	where rn = 1
 	</select>
 	
 	<!-- 자유게시판 글 수정 -->
 	<update id="modifyBoard" parameterType="java.util.Map">
-		update cboard set subject=#{subject}, content=#{content}, logtime=SYSDATE where bseq = #{bseq}
+		update cboard set subject=#{subject}, content=#{content}, logtime=now() where bseq = #{bseq}
 	</update>
 	
 	<!-- 자유게시판 글 삭제 -->
+	<!-- 오라클 쿼리
 	<update id="deleteBoard" parameterType="int">
 		begin
 			update cboard set reply=reply-1 
 			where bseq=(select pseq from cboard where bseq=#{bseq});
-			<!--원글을 찾아서 reply(답글수) 감소-->
-
 			update cboard set subject='[원글이 삭제된 답글] ' ||subject where pseq=#{bseq};
-			<!--답글을 찾아서 제목에 추가-->
-
 			update cboard set show = 'n' where bseq=#{bseq};
-			<!--삭제-->
 		end;
+	</update> -->
+	<update id="deleteBoard1" parameterType="int">
+		update cboard set reply=reply-1 
+		where bseq=(select pseq from cboard where bseq=#{bseq})
+	</update>
+	<update id="deleteBoard2" parameterType="int">
+		update cboard set subject= CONCAT('원글이 삭제된 답글 ', subject) where pseq=#{bseq}
+	</update>
+	<update id="deleteBoard3" parameterType="int">
+		update cboard set bshow = 'n' where bseq=#{bseq}
 	</update>
 	
 	<!-- 자유게시판 답글쓰기 -->
+	<!-- 오라클 쿼리
 	<insert id="replyBoard" parameterType="java.util.Map">
 		begin 
 			update cboard set step=step+1 where ref=#{ref} and step>#{step};
@@ -124,19 +214,103 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 									,'y');
 			update cboard set reply=reply+1 where bseq=#{pseq};
 		end;
+	</insert> -->
+	<update id="replyBoard1" parameterType="java.util.Map">
+		update cboard set step=step+1 where ref=#{ref} and step>#{step}
+	</update>
+	<insert id="replyBoard2" parameterType="java.util.Map">
+			insert into cboard values(nextval(bseq)
+									,#{nickname}
+									,CONCAT('Re: ',#{subject})
+									,#{content}
+									,#{ref}
+									,#{lev}+1
+									,#{step}+1
+									,#{pseq}
+									,0
+									,0
+									,now()
+									,'y')
 	</insert>
+	<update id="replyBoard3" parameterType="java.util.Map">
+			update cboard set reply=reply+1 where bseq=#{pseq}
+	</update>
 	
 	<!-- 자유게시판 댓글쓰기 -->
+	<!-- 오라클 쿼리
 	<insert id="writeCmnt" parameterType="java.util.Map">
 		insert into cb_cmnt(rseq, bseq, rnickname, rcontent, rref, rshow, secret)
 		values(seq_cmnt.nextval, #{bseq}, #{rnickname}, #{rcontent}, seq_cmnt.currval, 'y', #{secret})
+	</insert> -->
+	<insert id="writeCmnt" parameterType="java.util.Map">
+		insert into cb_cmnt(rseq, bseq, rnickname, rcontent, rref, rshow, secret)
+		values(nextval(rseq), #{bseq}, #{rnickname}, #{rcontent}, lastval(rseq), 'y', #{secret})
 	</insert>
 
 	<!-- 자유게시판 댓글목록 -->
+	<!-- 오라클 쿼리
 	<select id = "getCmntList" parameterType="java.util.Map" resultType="cBCmnt">
 		select * from (select rownum rn, tt.* 
-	  	from (select cmnt.*, m.profile from cb_cmnt cmnt inner join testmember m on cmnt.rnickname = m.nickname where bseq = #{bseq} and rshow = 'y' order by rref desc, rstep asc)tt)
+	  	from (select cmnt.*, m.profile from cb_cmnt cmnt 
+	  	inner join testmember m on cmnt.rnickname = m.nickname 
+	  	where bseq = #{bseq} and rshow = 'y' order by rref desc, rstep asc)tt)
+	  	where rn between #{startNum} and #{endNum}
+	</select> -->
+	<select id = "getCmntList" parameterType="java.util.Map" resultType="cBCmnt">
+		select * from 
+		(select @ROWNUM := @ROWNUM + 1 as rn, tt.*
+	  	from (select cmnt.*, m.profile from cb_cmnt cmnt 
+	  	inner join testmember m on cmnt.rnickname = m.nickname, (select @ROWNUM := 0)TMP
+	  	where bseq = #{bseq} and rshow = 'y' order by rref, rstep)tt)PAGING
 	  	where rn between #{startNum} and #{endNum}
 	</select>
+	
+	<select id = "getCmntTotalA" resultType="int">
+		select count(*) from cb_cmnt where rshow = 'y' and bseq = #{bseq}
+	</select>
+	
+	<!-- 자유게시판 댓글 가져오기(수정 시 / 대댓작성 시) -->
+	<select id="viewCmnt" parameterType="java.util.Map" resultType="cBCmnt">
+		select * from cb_cmnt where bseq = #{bseq} and rseq = #{rseq}
+	</select>
+	
+	<!-- 자유게시판 댓글 수정 -->
+	<update id="modifyCmnt" parameterType="java.util.Map">
+		update cb_cmnt set rcontent = #{rcontent}, secret = #{secret}, rlogtime = now() where rseq = #{rseq}
+	</update>
+
+	<!-- 자유게시판 댓글 삭제 -->
+	<update id="deleteCmnt1" parameterType="int">
+		update cb_cmnt set rreply=rreply-1 
+		where rseq=(select rpseq from cb_cmnt where rseq=#{rseq})
+	</update>
+	<update id="deleteCmnt2" parameterType="int">
+		update cb_cmnt set rcontent=CONCAT('원댓글이 삭제된 댓글 ', rcontent) where rpseq=#{rseq}
+	</update>
+	<update id="deleteCmnt3" parameterType="int">
+		update cb_cmnt set rshow = 'n' where rseq=#{rseq}
+	</update>
+	
+	<!-- 자유게시판 대댓 작성 -->
+	<update id="replyCmnt1" parameterType="java.util.Map">
+		update cb_cmnt set rstep=rstep+1 where rref=#{rref} and rstep>#{rstep}
+	</update>
+	<insert id="replyCmnt2" parameterType="java.util.Map">
+		insert into cb_cmnt values(nextval(rseq)
+								,#{bseq}
+								,#{rcnickname}
+								,CONCAT('@',#{rnickname},' ', #{rcontent})
+								,#{rref}
+								,#{rlev}+1
+								,#{rstep}+1
+								,#{rseq}
+								,0
+								,now()
+								,'y'
+								,#{secret})
+	</insert>
+	<update id="replyCmnt3" parameterType="java.util.Map">
+		update cb_cmnt set rreply=rreply+1 where rseq=#{rseq}
+	</update>
 	
 </mapper>

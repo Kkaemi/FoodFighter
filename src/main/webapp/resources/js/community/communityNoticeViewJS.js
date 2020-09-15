@@ -30,9 +30,9 @@ $(document).ready(function(){
 $('#adminWrite').click(function(){
 	if(id == '관리자'){
 		if (nSrchOption != '' && nKeyword != ''){
-			location.href = 'communityNoticeWriteForm?seq='+seq+'&nSrchOption='+nSrchOption+'&nKeyword='+nKeyword;
+			location.href = 'communityNoticeWriteForm?nseq='+nseq+'&nSrchOption='+nSrchOption+'&nKeyword='+nKeyword;
 		}else {
-			location.href = 'communityNoticeWriteForm?seq='+seq;
+			location.href = 'communityNoticeWriteForm?nseq='+nseq;
 		}
 	}else {
 		alert("관리자만 작성할 수 있습니다.");
@@ -40,9 +40,9 @@ $('#adminWrite').click(function(){
 });
 $('.adminModify').click(function(){
 	if (nSrchOption != '' && nKeyword != ''){
-		location.href = 'communityNoticeModifyForm?seq='+seq+'&nSrchOption='+nSrchOption+'&nKeyword='+nKeyword;
+		location.href = 'communityNoticeModifyForm?nseq='+nseq+'&nSrchOption='+nSrchOption+'&nKeyword='+nKeyword;
 	}else {
-		location.href = 'communityNoticeModifyForm?seq='+seq;
+		location.href = 'communityNoticeModifyForm?nseq='+nseq;
 	}
 });
 $('.adminDelete').click(function(){
@@ -50,7 +50,7 @@ $('.adminDelete').click(function(){
 		$.ajax({
 			type : "POST",
         	url : 'communityNoticeDelete',
-        	data : 'seq='+seq,
+        	data : 'nseq='+nseq,
         	success: function() {
 		    	alert("선택한 글을 삭제했습니다.");
 		    	location.href='communityNotice';

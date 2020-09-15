@@ -7,3 +7,8 @@ function myFunction(x) {
     }
     document.getElementById("mySidenav").style.width = "250px";
 }
+
+/* 유저모양 아이콘 */
+$('#headerUser').click(function(){
+	$('#headUser-menu').modal();
+});

@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css"><!-- 슬라이드  -->
 <title>Bootstrap Sign up Form Horizontal</title>
 <link rel="stylesheet" href="/FoodFighter/resources/css/mypage/mypageStyle.css">
+<link rel="stylesheet" href="/FoodFighter/resources/css/mypage/mypageTableStyle.css">
 </head>
 <body>
 <!--================ Header ================-->

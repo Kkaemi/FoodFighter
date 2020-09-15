@@ -17,15 +17,15 @@ public interface CommunityNoticeDAO {
 	
 	public int getCNSrchTotalA(Map<String, String> map);
 	
-	public void hitUpdate(String seq);
+	public void hitUpdate(String nseq);
 
 	public void deleteNoticeAdmin(List<String> list);
 
-	public CommunityNoticeDTO viewNotice(String seq);
+	public CommunityNoticeDTO viewNotice(String nseq);
 
-	public CommunityNoticeDTO viewPrevNoitce(String seq);
+	public CommunityNoticeDTO viewPrevNoitce(String nseq);
 
-	public CommunityNoticeDTO viewNextNoitce(String seq);
+	public CommunityNoticeDTO viewNextNoitce(String nseq);
 	
 	public CommunityNoticeDTO viewSrchPrevNoitce(Map<String, String> map);
 	
@@ -33,6 +33,6 @@ public interface CommunityNoticeDAO {
 
 	public void modifyNotice(Map<String, String> map);
 
-	public void deleteNotice(String seq);
+	public void deleteNotice(String nseq);
 
 }

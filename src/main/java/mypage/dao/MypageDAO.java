@@ -28,10 +28,14 @@ public interface MypageDAO {
 
 	public int getReplyNum(String nickname);
 
-	public List<CommunityBoardDTO> getMyPost(String nickname);
+	public List<CommunityBoardDTO> getMyPost(Map<String, Object> listMap);
 
-	public List<QnaBoardDTO> getMyAsk(String nickname);
+	public List<QnaBoardDTO> getMyAsk(Map<String, Object> listMap);
 
 	public void socialModify(Map<String,Object> map);
+
+	public int getPostTotalA(Map<String, Object> map);
+
+	public int getAskTotalA(Map<String, Object> map);
 
 }

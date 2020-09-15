@@ -168,6 +168,7 @@ $('#kakao-login-btn').click(function(){
 					email = res.kakao_account.email;
 					$.ajax({
 						type : 'post',
+<<<<<<< HEAD
 						url : '/FoodFighter/login/kakaologin',
 						data : 'email=' + email,
 						dataType : 'json',
@@ -181,6 +182,18 @@ $('#kakao-login-btn').click(function(){
 								location.href = '/FoodFighter/login/loginForm';
 							}
 						},
+=======
+						url : '/FooFighter/login/kakaologin',
+						data : {'email' : $('#email').val()},
+			    		dataType : 'text',
+			    		success : function(data){
+		    			if(data == 'success'){
+		    				location.href = '/FoodFighter/';
+		    				}else if(data == 'fail'){		
+		    					location.href = '/FoodFighter/login/loginForm';
+								}
+							},
+>>>>>>> upstream/master
 						error : function(err) {
 							console.log(err);
 						}

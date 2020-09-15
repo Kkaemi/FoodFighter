@@ -16,8 +16,6 @@ import community.dao.CommunityNoticeDAO;
 @Service
 public class CommunityNoticeServiceImpl implements CommunityNoticeService {
 	@Autowired
-	private HttpSession session;
-	@Autowired
 	private CommunityNoticeDAO cNoticeDAO;
 	@Autowired
 	private CommunityNoticePaging cNpaging;
@@ -77,8 +75,8 @@ public class CommunityNoticeServiceImpl implements CommunityNoticeService {
 	}
 	
 	@Override
-	public void hitUpdate(String seq) {
-		cNoticeDAO.hitUpdate(seq);
+	public void hitUpdate(String nseq) {
+		cNoticeDAO.hitUpdate(nseq);
 	}
 
 	@Override
@@ -87,18 +85,18 @@ public class CommunityNoticeServiceImpl implements CommunityNoticeService {
 	}
 
 	@Override
-	public CommunityNoticeDTO viewNotice(String seq) {
-		return cNoticeDAO.viewNotice(seq);
+	public CommunityNoticeDTO viewNotice(String nseq) {
+		return cNoticeDAO.viewNotice(nseq);
 	}
 
 	@Override
-	public CommunityNoticeDTO viewPrevNoitce(String seq) {
-		return cNoticeDAO.viewPrevNoitce(seq);
+	public CommunityNoticeDTO viewPrevNoitce(String nseq) {
+		return cNoticeDAO.viewPrevNoitce(nseq);
 	}
 
 	@Override
-	public CommunityNoticeDTO viewNextNoitce(String seq) {
-		return cNoticeDAO.viewNextNoitce(seq);
+	public CommunityNoticeDTO viewNextNoitce(String nseq) {
+		return cNoticeDAO.viewNextNoitce(nseq);
 	}
 	
 	@Override
@@ -117,8 +115,8 @@ public class CommunityNoticeServiceImpl implements CommunityNoticeService {
 	}
 
 	@Override
-	public void deleteNotice(String seq) {
-		cNoticeDAO.deleteNotice(seq);
+	public void deleteNotice(String nseq) {
+		cNoticeDAO.deleteNotice(nseq);
 	}
 
 }

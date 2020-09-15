@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import community.bean.CommunityBoardDTO;
 import community.bean.QnaBoardDTO;
 import member.bean.MemberDTO;
+import mypage.bean.MypagePaging;
 import mypage.dao.MypageDAO;
 import review.bean.ReviewDTO;
 
@@ -18,6 +19,8 @@ import review.bean.ReviewDTO;
 public class MypageServiceImpl implements MypageService {
 	@Autowired
 	private MypageDAO mypageDAO;
+	@Autowired
+	private MypagePaging mypagePaging;
 	
 	@Override
 	public MemberDTO getInfo(String email) {
@@ -75,21 +78,47 @@ public class MypageServiceImpl implements MypageService {
 	}
 
 	@Override
-	public List<CommunityBoardDTO> getMyPost(String nickname) {
+	public List<CommunityBoardDTO> getMyPost(Map<String, Object> listMap) {
 
-		return mypageDAO.getMyPost(nickname);
+		return mypageDAO.getMyPost(listMap);
 	}
 
 	@Override
-	public List<QnaBoardDTO> getMyAsk(String nickname) {
+	public List<QnaBoardDTO> getMyAsk(Map<String, Object> listMap) {
 
-		return mypageDAO.getMyAsk(nickname);
+		return mypageDAO.getMyAsk(listMap);
 	}
 
 	@Override
 	public void socialModify(Map<String,Object> map) {
 		mypageDAO.socialModify(map);
 		
+	}
+
+	@Override
+	public MypagePaging myPostPaging(Map<String, Object> map) {
+		int totalA= mypageDAO.getPostTotalA(map);
+		
+		mypagePaging.setCurrentPage(Integer.parseInt((String) map.get("pg")));
+		mypagePaging.setPageBlock(5);
+		mypagePaging.setPageSize(5);
+		mypagePaging.setTotalA(totalA);
+		mypagePaging.makePagingHTML();
+		
+		return mypagePaging;
+	}
+
+	@Override
+	public MypagePaging myAskPaging(Map<String, Object> map) {
+		int totalA= mypageDAO.getAskTotalA(map);
+		
+		mypagePaging.setCurrentPage(Integer.parseInt((String) map.get("pg")));
+		mypagePaging.setPageBlock(5);
+		mypagePaging.setPageSize(5);
+		mypagePaging.setTotalA(totalA);
+		mypagePaging.makePagingHTML();
+		
+		return mypagePaging;
 	}
 
 }
