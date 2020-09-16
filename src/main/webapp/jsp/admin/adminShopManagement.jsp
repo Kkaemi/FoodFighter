@@ -113,7 +113,7 @@
 		  					<c:forEach var="RestaurantDTO" items="${list}">
 		                    <tr>
 		                        <td class="resSeq">${RestaurantDTO.resSeq}</td>
-		                        <td>${RestaurantDTO.resName}</td>
+		                        <td class="resName">${RestaurantDTO.resName}</td>
 		                        <td>${RestaurantDTO.resAddress}</td>
 		                        <td>${RestaurantDTO.resTel}</td>
 		                        <td>${RestaurantDTO.resScore}</td>
@@ -168,9 +168,11 @@ $('#shopSearchKeyword').keydown(function(key,str) {
 						
 		 				$.each(data.list, function(index, items){
 		 					$('<tr/>').append($('<td/>',{
-		 						text: items.resSeq
+		 						text: items.resSeq,
+		 						class:'resSeq'
 		 					 })).append($('<td/>',{
-		 					     text: items.resName
+		 					     text: items.resName,
+		 					     class: 'resName'
 		 					})).append($('<td/>',{
 		 						text: items.resAddress
 		 					})).append($('<td/>',{
@@ -194,11 +196,12 @@ $('#shopSearchKeyword').keydown(function(key,str) {
 	 }//엔터키
 });
 
-$('.view').on('click',function(){
+$(document).on('click','.view',function(){
 	let resSeq = $(this).parent().prevAll(".resSeq").text();
-	location.href='/FoodFighter/review/reviewView?resSeq='+resSeq
+	let resName = $(this).parent().prevAll(".resName").text();
+	location.href='/FoodFighter/review/reviewView?resSeq='+resSeq+'&resName='+resName;
 });
-$('.delete').on('click',function(){
+$(document).on('click','.delete',function(){
 	let check = confirm("삭제처리 하시겠습니까?");
 	let resSeq = $(this).parent().prevAll(".resSeq").text();
 	if(check){

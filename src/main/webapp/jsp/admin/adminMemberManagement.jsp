@@ -175,14 +175,19 @@ $('#memSearchKeyword').keydown(function(key,str) {
 						
 						
 		 				$.each(data.list, function(index, items){
+		 					let social = items.socialLogin
+		 					if(social == 1){
 		 					$('<tr/>').append($('<td/>',{
-		 						text: items.member_seq
+		 						text: items.member_seq,
+		 						class: 'member_seq'
 		 					 })).append($('<td/>',{
 		 					      	text: items.email
 		 					})).append($('<td/>',{
 		 						text: items.name
 		 					})).append($('<td/>',{
 		 						text: items.nickname
+		 					})).append($('<td/>',{
+		 							text: '카카오'
 		 					})).append($('<td/>',{
 		 						text: moment(items.signupDate).format('YYYY-MM-DD')
 		 					})).append($('<td/>',{
@@ -192,8 +197,31 @@ $('#memSearchKeyword').keydown(function(key,str) {
 								title: 'Delete',
 								class: 'delete'
 							}).append('<i class="material-icons">&#xE872;</i>'))).appendTo($('#memberTable'));
+		 				
+		 				}else {
+		 					$('<tr/>').append($('<td/>',{
+		 						text: items.member_seq,
+		 						class: 'member_seq'
+		 					 })).append($('<td/>',{
+		 					      	text: items.email
+		 					})).append($('<td/>',{
+		 						text: items.name
+		 					})).append($('<td/>',{
+		 						text: items.nickname
+		 					})).append($('<td/>',{
+		 							text: '일반'
+		 					})).append($('<td/>',{
+		 						text: moment(items.signupDate).format('YYYY-MM-DD')
+		 					})).append($('<td/>',{
+		 						
+							}).append($('<a/>',{
+								href: '#',
+								title: 'Delete',
+								class: 'delete'
+							}).append('<i class="material-icons">&#xE872;</i>'))).appendTo($('#memberTable'));
+		 				
+		 					}
 		 				});//each
-						
 						//페이징처리
 						$('#adminMemberPagingDiv').html(data.adminMemberPaging.pagingHTML);
 	 				  
@@ -208,7 +236,7 @@ $('#memSearchKeyword').keydown(function(key,str) {
 });
 
 
-$('.delete').on('click',function(){
+$(document).on('click','.delete',function(){
 	let check = confirm("탈퇴처리 하시겠습니까?");
 	let member_seq = $(this).parent().prevAll(".member_seq").text();
 	if(check){
