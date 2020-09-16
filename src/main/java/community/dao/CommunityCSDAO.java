@@ -28,5 +28,7 @@ public interface CommunityCSDAO {
 	public void qnaModify(Map<String, Object> map);
 
 	public void qnaHit(String seq);
+
+	public List<QnaBoardDTO> getQnaViewList(String seq);
 	
 }

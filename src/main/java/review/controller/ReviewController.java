@@ -72,8 +72,8 @@ public class ReviewController {
 							  HttpServletRequest request,
 							  HttpServletResponse response){
 		
-		String filePath = "D:\\reallysong\\FoodFighter\\src\\main\\webapp\\storage\\review";
-
+		//String filePath = "D:\\reallysong\\FoodFighter\\src\\main\\webapp\\storage\\review";
+		String filePath = "/Users/aria.k/Downloads/bit/fighter/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/FoodFighter/storage/community";
 		
 		int i=1;
 		for(MultipartFile img : list) {
