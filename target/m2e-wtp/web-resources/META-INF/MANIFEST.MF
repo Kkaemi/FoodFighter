@@ -1,10 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
 Built-By: M.A
 Build-Jdk: 1.8.0_251
-=======
-Built-By: jiyelin
-Build-Jdk: 1.8.0_241
->>>>>>> upstream/master
 Created-By: Maven Integration for Eclipse
 
