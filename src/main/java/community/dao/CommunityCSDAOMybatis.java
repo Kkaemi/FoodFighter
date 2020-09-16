@@ -10,8 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import community.bean.QnaBoardDTO;
 
-//import community.bean.QnaBoardDTO;
-
 @Repository
 @Transactional
 public class CommunityCSDAOMybatis implements CommunityCSDAO {
@@ -76,6 +74,11 @@ public class CommunityCSDAOMybatis implements CommunityCSDAO {
 	@Override
 	public void qnaHit(String seq) {
 		sqlSession.update("qnaBoardSQL.qnaHit", seq);
+	}
+
+	@Override
+	public List<QnaBoardDTO> getQnaViewList(String seq) {
+		return sqlSession.selectList("qnaBoardSQL.getQnaViewList", seq);
 	}
 
 }

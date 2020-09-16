@@ -46,7 +46,9 @@ public class CommunityBoardDAOMybatis implements CommunityBoardDAO {
 	public void deleteBoardAdmin(List<String> list) {
 		for (int i = 0; i < list.size(); i++) {
 			String temp = list.get(i);
-			sqlSession.update("cBoardSQL.deleteBoardAdmin",temp);
+			sqlSession.update("cBoardSQL.deleteBoardAdmin1",temp);
+			sqlSession.update("cBoardSQL.deleteBoardAdmin2",temp);
+			sqlSession.update("cBoardSQL.deleteBoardAdmin3",temp);
 		}
 	}
 
@@ -87,12 +89,16 @@ public class CommunityBoardDAOMybatis implements CommunityBoardDAO {
 
 	@Override
 	public void deleteBoard(String bseq) {
-		sqlSession.update("cBoardSQL.deleteBoard", Integer.parseInt(bseq));
+		sqlSession.update("cBoardSQL.deleteBoard1", Integer.parseInt(bseq));
+		sqlSession.update("cBoardSQL.deleteBoard2", Integer.parseInt(bseq));
+		sqlSession.update("cBoardSQL.deleteBoard3", Integer.parseInt(bseq));
 	}
 
 	@Override
 	public void replyBoard(Map<String, String> map) {
-		sqlSession.insert("cBoardSQL.replyBoard", map);
+		sqlSession.insert("cBoardSQL.replyBoard1", map);
+		sqlSession.insert("cBoardSQL.replyBoard2", map);
+		sqlSession.insert("cBoardSQL.replyBoard3", map);
 	}
 
 	@Override
@@ -103,5 +109,35 @@ public class CommunityBoardDAOMybatis implements CommunityBoardDAO {
 	@Override
 	public List<CommunityBoardCmntDTO> getCmntList(Map<String, Object> map) {
 		return sqlSession.selectList("cBoardSQL.getCmntList", map);
+	}
+
+	@Override
+	public CommunityBoardCmntDTO viewCmnt(Map<String, Object> map) {
+		return sqlSession.selectOne("cBoardSQL.viewCmnt", map);
+	}
+
+	@Override
+	public void modifyCmnt(Map<String, String> map) {
+		sqlSession.update("cBoardSQL.modifyCmnt", map);
+	}
+
+	@Override
+	public void deleteCmnt(String rseq) {
+		sqlSession.update("cBoardSQL.deleteCmnt1", Integer.parseInt(rseq));
+		sqlSession.update("cBoardSQL.deleteCmnt2", Integer.parseInt(rseq));
+		sqlSession.update("cBoardSQL.deleteCmnt3", Integer.parseInt(rseq));
+		
+	}
+
+	@Override
+	public int getCmntTotalA(int bseq) {
+		return sqlSession.selectOne("cBoardSQL.getCmntTotalA", bseq);
+	}
+
+	@Override
+	public void replyCmnt(Map<String, Object> map) {
+		sqlSession.insert("cBoardSQL.replyCmnt1", map);
+		sqlSession.insert("cBoardSQL.replyCmnt2", map);
+		sqlSession.insert("cBoardSQL.replyCmnt3", map);
 	}
 }

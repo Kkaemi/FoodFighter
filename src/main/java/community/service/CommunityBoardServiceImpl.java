@@ -17,8 +17,6 @@ import community.dao.CommunityBoardDAO;
 @Service
 public class CommunityBoardServiceImpl implements CommunityBoardService {
 	@Autowired
-	private HttpSession session;
-	@Autowired
 	private CommunityBoardDAO cBoardDAO;
 	@Autowired
 	private CommunityBoardPaging cBPaging;
@@ -134,12 +132,50 @@ public class CommunityBoardServiceImpl implements CommunityBoardService {
 
 	@Override
 	public List<CommunityBoardCmntDTO> getCmntList(Map<String, Object> map) {
-		int endNum = Integer.parseInt((String) map.get("pg"))*10;
+		int endNum = Integer.parseInt((String) map.get("num"))*10;
 		int startNum = endNum-9;
 		
 		map.put("startNum", startNum+"");
 		map.put("endNum", endNum+"");
 		return cBoardDAO.getCmntList(map);
+	}
+
+	@Override
+	public CommunityBoardPaging cmntPaging(Map<String, Object> map) {
+		int totalA = cBoardDAO.getCmntTotalA(Integer.parseInt((String) map.get("bseq"))); //총 글수
+		
+		cBPaging.setCurrentPage(Integer.parseInt((String) map.get("num")));
+		cBPaging.setPageBlock(10);
+		cBPaging.setPageSize(10);
+		cBPaging.setTotalA(totalA);
+		cBPaging.makeCmntPagingHTML();
+
+		return cBPaging;
+	}
+
+	@Override
+	public CommunityBoardCmntDTO viewCmnt(Map<String, Object> map) {
+		return cBoardDAO.viewCmnt(map);
+	}
+
+	@Override
+	public void modifyCmnt(Map<String, String> map) {
+		cBoardDAO.modifyCmnt(map);
+	}
+
+	@Override
+	public void deleteCmnt(String rseq) {
+		cBoardDAO.deleteCmnt(rseq);
+	}
+
+	@Override
+	public void replyCmnt(Map<String, Object> map) {
+		cBoardDAO.replyCmnt(map);
+	}
+
+	@Override
+	public int getCmntCnt(String bseq) { //댓글 갯수
+		return cBoardDAO.getCmntTotalA(Integer.parseInt(bseq));
 	}
 
 }

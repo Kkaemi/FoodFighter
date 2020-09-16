@@ -90,5 +90,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="eventBoardListDelete" parameterType="java.util.List">
 		delete from event_board where seq_event = #{temp}
 	</delete>
+	
+	<!-- 댓글 글쓰기 -->
+	<insert id="eventboardcommentwirte" parameterType="java.util.Map">
+			 insert into event_comment(seq_eventco, seq_event, conickname, cocontent, cref, cshow, secret) 
+			 
+			 values (Nextval(seq_eventco),#{seq_event},#{conickname}, #{cocontent}, lastval(seq_eventco), 'y', #{secret})
+	</insert>
+	
+	<!-- 댓글 목록 -->
+ 	<select id="eventboardcommentList" parameterType="java.util.Map" resultType="eventC">
+ 		  	
+	    <![CDATA[
+	  	select * from 
+		(select @ROWNUM := @ROWNUM + 1 as rn, tt.* 
+		from (select ecmt.*, m.profile from event_comment ecmt inner join
+	  	 testmember m on ecmt.conickname = m.nickname, (select @ROWNUM := 0)TMP
+	  	 where seq_event = #{seq_event} order by cref desc, cstep asc)tt)PAGING
+	  	where rn >= #{startNum} and rn <= #{endNum}
+	  	]]>  
+	  	
+ 	</select>
  	
+ 	<!-- 작성한 댓글 확인 -->
+	<select id="geteventBoardtcommentView" parameterType="java.util.Map" resultType="eventC">
+		select * from event_comment where seq_event = #{seq_event} and seq_eventco = #{seq_eventco}
+	</select>
+	
+	<!-- 댓글수정 -->
+	<update id="eventBoardcommentModify" parameterType="java.util.Map">
+		UPDATE event_comment SET cocontent=#{cocontent}, clogtime = now() WHERE seq_eventco=#{seq_eventco}
+	</update>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="eventBoardcommentDelete" parameterType="int">
+			DELETE from event_comment WHERE seq_eventco=#{seq_eventco}
+	</delete>
 </mapper>

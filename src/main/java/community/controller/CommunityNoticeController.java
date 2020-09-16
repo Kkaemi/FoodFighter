@@ -39,7 +39,7 @@ public class CommunityNoticeController {
 		ModelAndView mav = new ModelAndView();
 		List<CommunityNoticeDTO> list = cNoticeService.getCNoticeList(pg);
 		CommunityNoticePaging cNPaging = cNoticeService.cNPaging(pg);
-		
+
 		//조회수
 		if(session.getAttribute("memberDTO") != null) {
 			MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberDTO");
@@ -85,19 +85,19 @@ public class CommunityNoticeController {
 	
 	//커뮤니티 공지사항 글 상세보기
 	@RequestMapping(value = "communityNoticeView", method = RequestMethod.GET)
-	public ModelAndView communityNoticeView(@RequestParam String seq, String pg, String nSrchOption, String nKeyword,
+	public ModelAndView communityNoticeView(@RequestParam String nseq, String pg, String nSrchOption, String nKeyword,
 											@CookieValue(value = "hit", required=false)Cookie cookie,
 											HttpServletResponse response, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 
 		//현재 글
-		CommunityNoticeDTO cNDTO = cNoticeService.viewNotice(seq);
+		CommunityNoticeDTO cNDTO = cNoticeService.viewNotice(nseq);
 		
 		if (nSrchOption != null && nKeyword != null) { //검색 키워드가 있을 때
 			Map<String, String> map = new HashMap<String, String>();
 			map.put("nSrchOption", nSrchOption);
 			map.put("nKeyword", nKeyword);
-			map.put("seq", seq);
+			map.put("nseq", nseq);
 			
 			CommunityNoticeDTO cNPrev = cNoticeService.viewSrchPrevNoitce(map); //이전 글
 			CommunityNoticeDTO cNNext = cNoticeService.viewSrchNextNotice(map); //다음 글
@@ -108,14 +108,14 @@ public class CommunityNoticeController {
 			mav.addObject("cNNext", cNNext);
 			
 		} else {
-			CommunityNoticeDTO cNPrev = cNoticeService.viewPrevNoitce(seq); //이전 글
-			CommunityNoticeDTO cNNext = cNoticeService.viewNextNoitce(seq); //다음 글
+			CommunityNoticeDTO cNPrev = cNoticeService.viewPrevNoitce(nseq); //이전 글
+			CommunityNoticeDTO cNNext = cNoticeService.viewNextNoitce(nseq); //다음 글
 			mav.addObject("cNPrev", cNPrev);
 			mav.addObject("cNNext", cNNext);
 		}
 		
 		if(cookie != null) {
-			cNoticeService.hitUpdate(seq); //조회수 증가
+			cNoticeService.hitUpdate(nseq); //조회수 증가
 			//쿠키삭제
 			cookie.setMaxAge(0);
 			cookie.setPath("/");
@@ -123,7 +123,7 @@ public class CommunityNoticeController {
 		}
 		
 		mav.addObject("cNDTO", cNDTO);
-		mav.addObject("seq", seq);
+		mav.addObject("nseq", nseq);
 		mav.addObject("pg", pg);
 		
 		mav.setViewName("/jsp/community/communityNotice/communityNoticeView");
@@ -132,7 +132,7 @@ public class CommunityNoticeController {
 	
 	//커뮤니티 공지사항 글쓰기폼
 	@RequestMapping(value = "communityNoticeWriteForm", method = RequestMethod.GET)
-	public ModelAndView communityNoticeWriteForm(@RequestParam(required=false, defaultValue="1") String pg, String seq,
+	public ModelAndView communityNoticeWriteForm(@RequestParam(required=false, defaultValue="1") String pg, String nseq,
 			 										String nSrchOption, String nKeyword) {
 		ModelAndView mav = new ModelAndView();
 		
@@ -141,7 +141,7 @@ public class CommunityNoticeController {
 			mav.addObject("nKeyword", nKeyword);
 		}
 		mav.addObject("pg", pg);
-		mav.addObject("seq", seq);
+		mav.addObject("nseq", nseq);
 		mav.setViewName("/jsp/community/communityNotice/communityNoticeWriteForm");
 		
 		return mav;
@@ -186,16 +186,16 @@ public class CommunityNoticeController {
 	
 	//커뮤니티 공지사항 글수정폼
 	@RequestMapping(value = "communityNoticeModifyForm", method = RequestMethod.GET)
-	public ModelAndView communityNoticeModifyForm(@RequestParam String seq, String nSrchOption, String nKeyword) {
+	public ModelAndView communityNoticeModifyForm(@RequestParam String nseq, String nSrchOption, String nKeyword) {
 		ModelAndView mav = new ModelAndView();
 		
-		CommunityNoticeDTO cNDTO = cNoticeService.viewNotice(seq);
+		CommunityNoticeDTO cNDTO = cNoticeService.viewNotice(nseq);
 		if (nSrchOption != null && nKeyword != null) {
 			mav.addObject("nSrchOption", nSrchOption);
 			mav.addObject("nKeyword", nKeyword);
 		}
 		mav.addObject("cNDTO", cNDTO);
-		mav.addObject("seq", seq);
+		mav.addObject("nseq", nseq);
 		mav.setViewName("/jsp/community/communityNotice/communityNoticeModifyForm");
 		
 		return mav;
@@ -204,8 +204,8 @@ public class CommunityNoticeController {
 	//커뮤니티 공지사항 글수정
 	@RequestMapping(value = "communityNoticeModify", method = RequestMethod.POST)
 	@ResponseBody
-	public void communityNoticeModify(@RequestParam Map<String,String> map, String seq) {
-		map.put("seq", seq);
+	public void communityNoticeModify(@RequestParam Map<String,String> map, String nseq) {
+		map.put("nseq", nseq);
 
 		cNoticeService.modifyNotice(map);
 	}
@@ -220,7 +220,7 @@ public class CommunityNoticeController {
 	//커뮤니티 공지사항 글 삭제
 	@RequestMapping(value = "communityNoticeDelete", method = RequestMethod.POST)
 	@ResponseBody
-	public void communityNoticeDelete(@RequestParam String seq) {
-		cNoticeService.deleteNotice(seq);
+	public void communityNoticeDelete(@RequestParam String nseq) {
+		cNoticeService.deleteNotice(nseq);
 	}
 }

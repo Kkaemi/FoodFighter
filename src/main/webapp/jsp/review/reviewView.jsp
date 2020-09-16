@@ -12,6 +12,8 @@ String resSeq = request.getParameter("resSeq");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta id="_csrf" name="_csrf" content="${_csrf.token}" />
+	<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
     <link rel= "stylesheet" type="text/css" href="/FoodFighter/resources/css/review/bootstrap.css">
     <link rel= "stylesheet" type="text/css" href="/FoodFighter/resources/css/review/reviewView.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -23,7 +25,6 @@ String resSeq = request.getParameter("resSeq");
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
   
     <title>리뷰보기</title>
 <!-- security -->
@@ -158,24 +159,10 @@ String resSeq = request.getParameter("resSeq");
                 </tbody>
             </table>
         </div>
-        <div class="map-container" >
-            <div id="map"></div> 
-            <!--지도 script-->
-            <script>
-                var mapOptions = {
-                    center: new naver.maps.LatLng(37.3595704, 127.105399),
-                    zoom: 10
-                };
-                                
-                var map = new naver.maps.Map('map', {
-                    center: new naver.maps.LatLng(37.3595704, 127.105399),
-                    zoom: 15
-                });
-                var marker = new naver.maps.Marker({
-                    position: new naver.maps.LatLng(37.3595704, 127.105399),
-                    map: map
-                });
-            </script>
+        <div class="map-container">
+            <div id="map" style="width:400px;height:350px;"></div>
+            
+         
         </div>
     </div>  
 
@@ -262,14 +249,77 @@ String resSeq = request.getParameter("resSeq");
 <!--모달 script-->
 <script src="/FoodFighter/resources/js/review/keyword.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=x4xnbzhxl0&submodules=geocoder"></script>
 <script type="text/javascript">
+
 $(document).ready(function(){
     var token = $("meta[name='_csrf']").attr("content");
     var header = $("meta[name='_csrf_header']").attr("content");
     $(document).ajaxSend(function(e, xhr, options) {
         xhr.setRequestHeader(header, token);
     });
+    
+    $.ajax({
+		type : 'post',
+		url : '/FoodFighter/review/getReviewView',
+		data : 'resSeq=${resSeq}',
+		dataType : 'json',
+		success : function(data){
+			//alert(JSON.stringify(data));
+			/* $('#restaurant-image').attr('src', '/FoodFighter/src/webapp/storage/restaurant/'+data.restaurantDTO.resImage1); */
+			
+			let resAddress = data.restaurantDTO.resAddress;
+			
+			$('#title').text(data.restaurantDTO.resName);
+			$('#resAddress').text(data.restaurantDTO.resAddress);
+			$('#resTel').text(data.restaurantDTO.resTel);
+			$('#resTheme').text(data.restaurantDTO.resTheme);
+			$('#resPrice').text(data.restaurantDTO.resPrice);
+			$('#resHours').text(data.restaurantDTO.resHours);
+			$('#resClosing').text(data.restaurantDTO.resClosing);
+			$('#menu-text').text(data.restaurantDTO.resMenu);
+			
+		    naver.maps.Service.geocode({
+		        query: resAddress
+		    }, function(status, response) {
+		        if (status !== naver.maps.Service.Status.OK) {
+		            return alert('Something wrong!');
+		        }
+		
+		        var result = response.v2, // 검색 결과의 컨테이너
+		            items = result.addresses; // 검색 결과의 배열
+				/* alert(items[0].x+', '+items[0].y+', '+typeof items[0].x+', '+typeof items[0].y); */
+		            
+		        // do Something
+		        
+		    	//지도에 마커찍기 
+		    	let x = parseFloat(items[0].x);
+		    	let y = parseFloat(items[0].y);
+		    	
+		    	
+		    	
+		    	var map = new naver.maps.Map('map', {
+		    	    center: new naver.maps.LatLng(y, x),
+		    	    zoom: 19
+		    	});
+		
+		    	var marker = new naver.maps.Marker({
+		    	    position: new naver.maps.LatLng(y, x),
+		    	    map: map
+		    	});
+		
+		    });
+		
+		    
+			
+		}, error : function(err){
+			console.log(err);
+		}
+	});
+    
 });
+
 
 //리뷰페이지 이동
 $('#reviewWriteBtn').click(function(){
@@ -298,54 +348,6 @@ function bookmarkChange() {
     document.getElementById("bookmark").style.cssText ="color :#ffa64d; font-size : 40px; margin-left:543px;";
     document.getElementById("bookmark-name").style.cssText ="color :#ffa64d;";
 }
-</script>
-
-<!-- db데이터가져오기 -->
-<script type="text/javascript">
-$(document).ready(function(){
-	$.ajax({
-		type : 'post',
-		url : '/FoodFighter/review/getReviewView',
-		data : 'resSeq=${resSeq}',
-		dataType : 'json',
-		success : function(data){
-			//alert(JSON.stringify(data));
-			$('#restaurant-image').attr('src', '/FoodFighter/src/webapp/storage/restaurant/'+data.restaurantDTO.resImage1);
-			$('#title').text(data.restaurantDTO.resName);
-			$('#resAddress').text(data.restaurantDTO.resAddress);
-			$('#resTel').text(data.restaurantDTO.resTel);
-			$('#resTheme').text(data.restaurantDTO.resTheme);
-			$('#resPrice').text(data.restaurantDTO.resPrice);
-			$('#resHours').text(data.restaurantDTO.resHours);
-			$('#resClosing').text(data.restaurantDTO.resClosing);
-			$('#menu-text').text(data.restaurantDTO.resMenu);
-			
-		}, error : function(err){
-			console.log(err);
-		}
-	});
-});
-</script>
-<!-- 지도 api -->    
-<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=x4xnbzhxl0"></script>
-<script type="text/javascript">
-naver.maps.onJSContentLoaded = initGeocoder;
-naver.maps.Event.once(map, 'init_stylemap', initGeocoder);
-
-
-naver.maps.Service.geocode({
-    address: '${resAddress}'
-}, function(status, response) {
-    if (status !== naver.maps.Service.Status.OK) {
-        return alert('Something wrong!');
-    }
-
-    var result = response.result, // 검색 결과의 컨테이너
-        items = result.items; // 검색 결과의 배열
-	
-        console.log(result.items);
-    // do Something
-});
 </script>
 
 </html>

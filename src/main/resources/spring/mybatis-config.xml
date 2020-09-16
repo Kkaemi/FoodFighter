@@ -10,8 +10,11 @@
 		<typeAlias type="community.bean.CommunityBoardDTO" alias="cBoard"/>
 		<typeAlias type="community.bean.CommunityBoardCmntDTO" alias="cBCmnt"/>
 		<typeAlias type="community.bean.CommunityNoticeDTO" alias="cNotice"/>
+		<typeAlias type="community.bean.CommunityRankResDTO" alias="cRankRes"/>
 
 		<typeAlias type="event.bean.EventDTO" alias="event"/>
+		<typeAlias type="event.bean.EventCoDTO" alias="eventC"/>
+		
 		<typeAlias type="admin.bean.RestaurantDTO" alias="restaurant"/>
 		
 		<typeAlias type="community.bean.QnaBoardDTO" alias="qnaBoard"/>

@@ -49,14 +49,14 @@ String resSeq = request.getParameter("resSeq");
 	           <a class="nav-link js-scroll active" href="/FoodFighter">Home</a>
 	       </li>
 	       <li class="nav-item">
-	        	  <a class="nav-link js-scroll" href="/FoodFighter/review/reviewNonSearchList">리뷰 리스트</a>
-	          </li>
-	       <li class="nav-item">
 	         <a class="nav-link js-scroll" href="/FoodFighter/community/communityMain">커뮤니티</a>
 	       </li>
 	       <li class="nav-item">
 	         <a class="nav-link js-scroll" href="/FoodFighter/event/eventList">이벤트</a>
 	       </li>
+	       <li class="nav-item">
+	         	  <a class="nav-link js-scroll" href="/FoodFighter/community/communityNotice">공지사항</a>
+	          </li>
 	       <li class="nav-item">
 	         <a class="nav-link js-scroll">
 	         <img src="/FoodFighter/resources/img/member.png" id="headerUser" class="header_searchIcon" width="30" height="30" align="center">
@@ -77,7 +77,7 @@ String resSeq = request.getParameter("resSeq");
      <c:if test="${sessionScope.memId == 'admin@admin.com'}">
         <p>관리자로<br> 로그인 하셨습니다. </p>
         <hr>
-        <button type="button" id="adminBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/admin/adminMain'" >관리자페이지</button>
+        <button type="button" id="adminBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/admin/adminDashboard'" >관리자페이지</button>
         <button type="button" id="logoutBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/login/logout'">로그아웃</button>
      </c:if>
      <c:if test="${sessionScope.memId != null && sessionScope.memId != 'admin@admin.com'}">

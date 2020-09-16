@@ -3,6 +3,7 @@ package event.dao;
 import java.util.List;
 import java.util.Map;
 
+import event.bean.EventCoDTO;
 import event.bean.EventDTO;
 
 public interface EventDAO {
@@ -26,5 +27,15 @@ public interface EventDAO {
 	public int geteventSearchTotalA(Map<String, String> map);
 
 	public void eventBoardListDelete(List<String> list);
+
+	public void eventboardcommentwirte(Map<String, String> map);
+
+	public List<EventCoDTO> eventboardcommentList(Map<String, Object> map);
+
+	public EventCoDTO geteventBoardtcommentView(Map<String, String> map);
+
+	public void eventBoardcommentModify(Map<String, String> map);
+
+	public void eventBoardcommentDelete(String seq_eventco);
 
 }

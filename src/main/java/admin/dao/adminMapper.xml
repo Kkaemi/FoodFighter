@@ -17,12 +17,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete  from testmember where member_seq= #{member_seq}
 	</delete>
 	
-<!-- 검색한 결과의 총 글 개수  -->
+<!-- 멤버 검색한 결과의 총 글 개수  -->
 	 <select id="getSearchTotalA" parameterType="java.util.Map" resultType="int" >
 	 	select count(*) from testmember where CONCAT(email,name,nickname) like CONCAT('%',#{memSearchKeyword},'%')
 	 </select>
 	
-<!-- 검색한  글 목록 가져오기 -->
+<!-- 멤버 검색한  글 목록 가져오기 -->
  	<select id="getMemberSearch" parameterType="java.util.Map" resultType="member">
  	<![CDATA[select * from (select @ROWNUM := @ROWNUM + 1 as rn,tt.* from 
  					(select * from testmember,(SELECT @ROWNUM :=0) R 
@@ -34,15 +34,112 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	<select id="getShopTotalA" resultType="int">
 		select count(*) from restaurant
 	</select>
-	
+<!-- 가게 리스트 -->	
 	<select id="getResList" parameterType="java.util.Map"  resultType="restaurant">
 		<![CDATA[select * from (select @ROWNUM := @ROWNUM + 1 as rn,tt.* 
  						from (select * from restaurant,(SELECT @ROWNUM :=0) R order by resSeq)tt)list 
  								where rn>=#{startNum} and rn<=#{endNum}]]> 
 	</select> 
-	
-<!-- 	<delete id="adminShopDelete" parameterType="int">
+<!--가게 삭제  -->	
+	<delete id="adminShopDelete" parameterType="int">
 		delete  from restaurant where resSeq= #{resSeq}
-	</delete> -->
+	</delete> 
+<!-- 가게 검색한 결과의 총 글 개수  -->
+	 <select id="shopSearchTotalA" parameterType="java.util.Map" resultType="int" >
+	 	select count(*) from restaurant where CONCAT(resName,resAddress,resTel) like CONCAT('%',#{shopSearchKeyword},'%')
+	 </select>
 	
+<!-- 가게 검색한  글 목록 가져오기 -->
+ 	<select id="getShopSearch" parameterType="java.util.Map" resultType="restaurant">
+ 	<![CDATA[select * from (select @ROWNUM := @ROWNUM + 1 as rn,tt.* from 
+ 					(select * from restaurant,(SELECT @ROWNUM :=0) R 
+ 							where CONCAT(resName,resAddress,resTel) like CONCAT('%',#{shopSearchKeyword},'%') order by resSeq)tt)list
+ 									where rn>=#{startNum} and rn<=#{endNum} ]]>
+ 	</select>	
+ 	
+ 	
+ <!-- 대시보드 데이터  -->
+ 	
+ 	<select id="getTodayReview" resultType="int">
+ 		select count(*) from review where reviewDate like CONCAT(CURDATE(),'%')
+ 	</select>
+ 	
+ 	<select id="getTotalReview" resultType="int">
+ 		select count(*) from review
+ 	</select>
+ 	
+ 	<select id="getTodayPost" resultType="int">
+ 		select count(*) from cboard where logtime like CONCAT(CURDATE(),'%')
+ 	</select>
+ 	
+ 	<select id="getTotalPost" resultType="int">
+ 		select count(*) from cboard
+ 	</select>
+ 	
+ 	<select id="getTodayQna" resultType="int">
+ 		select count(*) from qna_board where reply=0
+ 	</select>
+ 	
+ 	<select id="getTotalQna" resultType="int">
+ 		select count(*) from qna_board
+ 	</select>
+ 	
+ 	<select id="getTodayJoin" resultType="int">
+ 		select count(*) from testmember where signupDate like CONCAT(CURDATE(),'%')
+ 	</select>
+ 	
+ 	<select id="getTotalJoin" resultType="int">
+ 		select count(*) from testmember
+ 	</select>
+ 	
+ 	<select id="getKFood" resultType="int">
+ 		select count(*) from  restaurant res Right OUTER JOIN review rev USING(resName) WHERE res.resTheme='한식'
+ 	</select>
+ 	
+ 	<select id="getWFood" resultType="int">
+ 		select count(*) from  restaurant res Right OUTER JOIN review rev USING(resName) WHERE res.resTheme='양식'
+ 	</select>
+ 	
+ 	<select id="getCFood" resultType="int">
+ 		select count(*) from  restaurant res Right OUTER JOIN review rev USING(resName) WHERE res.resTheme='중식'
+ 	</select>
+ 	
+ 	<select id="getJFood" resultType="int">
+ 		select count(*) from  restaurant res Right OUTER JOIN review rev USING(resName) WHERE res.resTheme='일식'
+ 	</select>
+ 	
+ 	<select id="getDessert" resultType="int">
+ 		select count(*) from  restaurant res Right OUTER JOIN review rev USING(resName) WHERE res.resTheme='카페/디저트'
+ 	</select>
+ 	
+ 	<select id="getUnder1" resultType="int">
+ 		SELECT COUNT(*) FROM  restaurant res Right OUTER JOIN review rev USING(resName) WHERE res.resPrice='1만원미만';
+ 	</select>
+ 	
+ 	<select id="getManwon1" resultType="int">
+ 		SELECT COUNT(*) FROM  restaurant res Right OUTER JOIN review rev USING(resName) WHERE res.resPrice='1만원대';
+ 	</select>
+ 	
+ 	<select id="getManwon2" resultType="int">
+ 		SELECT COUNT(*) FROM  restaurant res Right OUTER JOIN review rev USING(resName) WHERE res.resPrice='2만원대';
+ 	</select>
+ 	
+ 	<select id="getManwon3" resultType="int">
+ 		SELECT COUNT(*) FROM  restaurant res Right OUTER JOIN review rev USING(resName) WHERE res.resPrice='3만원대';
+ 	</select>
+ 	
+ 	<select id="getManwon4" resultType="int">
+ 		SELECT COUNT(*) FROM  restaurant res Right OUTER JOIN review rev USING(resName) WHERE res.resPrice='4만원대';
+ 	</select>
+ 	
+ 	<select id="getJoinKakao" resultType="int">
+ 		select count(*) from testmember where socialLogin = 1
+ 	</select>
+ 	
+ 	<select id="getJoin" resultType="int">
+ 		select count(*) from testmember where socialLogin = 0
+ 	</select>
+ 	
+ 	
+ 	
 </mapper>
