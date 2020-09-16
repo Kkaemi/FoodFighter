@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,7 +36,7 @@ body, html {
 <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
 	<div id="header-container">
 	  <a class="header-logo" href="/FoodFighter"><img src="../resources/img/logo.png" width="250px;" height="55px;" align="left" style="margin-top: 10px; margin-left: 200px;"></a>
-	      <ul id="header-menu">
+	     <ul id="header-menu">
 		      <li class="header-items">
 		  		<img src="../resources/img/search.png" class="header_searchIcon" width="30" height="30" align="center"> 
 		   		<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword" autocomplete="on" maxlength="50" >
@@ -60,6 +61,29 @@ body, html {
      	     </li>
 	   	</ul>
 	</div>
+<!-- usermenu -->
+    <div class="modal headUser-menu" id="headUser-menu" role="dialog">
+  	  <div class="tri"></div>
+  	  <c:if test="${memId == null}">
+  	  	  <p>로그인 또는 회원가입을 하시면 <br> 더 많은 서비스를 <br>이용하실 수 있습니다.</p>
+  		  <hr>
+	  	  <button type="button" id="loginBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/login/loginForm'" >로그인</button>
+	  	  <button type="button" id="signupBtn" class="headUserMenu-Btn" onclick="location.href='/FoodFighter/member/signupChoice'" >회원가입</button>
+  	  </c:if>
+  	  <c:if test="${memId == 'admin@admin.com'}">
+  		  <p>관리자로<br> 로그인 하셨습니다. </p>
+  		  <hr>
+	  	  <button type="button" id="adminBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/admin/adminMain'" >관리자페이지</button>
+	  	  <button type="button" id="logoutBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/login/logout'">로그아웃</button>
+  	  </c:if>
+  	  <c:if test="${memId != null && sessionScope.memId != 'admin@admin.com'}">
+  		  <p>맛집을 찾아보고 <br> 후기를 남겨보세요.</p>
+  		  <hr>
+	  	  <button type="button" id="mypageBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/mypage/mypageMain'" >마이페이지</button>
+	  	  <button type="button" id="logoutBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/login/logout'">로그아웃</button>
+  	  </c:if>
+    </div>
+
 </form>
    
     <!-- 제목부분 -->
@@ -97,7 +121,7 @@ body, html {
                 <button class="btn btn-primary" type="button" id="modify">수정</button>
                 
                 <!-- 취소버튼 -->
-                <button class="btn btn-default" type="button" onclick="location.href='eventView?seq_event='+seq_event+'&pg='+pg">취소</button>
+                <button class="btn btn-default" type="button" onclick="location.href='eventView?seq_event=${seq_event}&pg=${pg}'">취소</button>
             </div>
         </form>
     </div>
@@ -122,6 +146,11 @@ $(document).ready(function(){
         xhr.setRequestHeader(header, token);
     });
 });
+
+$('#headerUser').click(function(){
+	$('#headUser-menu').modal();
+});
+
 /* 썸머노트 */
 $(document).ready(function(){
 	$('#summernote').summernote({

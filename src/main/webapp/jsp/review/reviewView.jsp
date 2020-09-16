@@ -325,7 +325,6 @@ $(document).ready(function(){
 $('#reviewWriteBtn').click(function(){
 	location.href="/FoodFighter/review/review_writeForm?resSeq=<%=resSeq%>&resName=<%=resName%>";
 });
-
 var modal = document.getElementById('myModal');
 var img = document.getElementById('restaurant-image');
 var modalImg = document.getElementById("img01");
