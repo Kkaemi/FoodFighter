@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 가게 등록 -->
 	<insert id="resWrite" parameterType="restaurant">
 		insert into restaurant values(nextval(resSeq), #{resName}
-										,#{resScore}
+										,0.0
 										,#{resAddress}
 										,#{resTel}
 										,#{resTheme}

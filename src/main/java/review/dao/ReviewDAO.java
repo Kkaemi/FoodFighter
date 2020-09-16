@@ -15,4 +15,5 @@ public interface ReviewDAO {
 
 	public List<RestaurantDTO> modalSearchList(Map<String, String> map);
 	
+	
 }
