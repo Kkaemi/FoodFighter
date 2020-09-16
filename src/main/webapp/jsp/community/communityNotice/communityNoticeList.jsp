@@ -93,7 +93,7 @@ body, html {
 	<a href="communityNotice"><span class="glyphicon glyphicon-exclamation-sign"></span>&emsp;공지사항</a>
     <a href="communityBoard"><span class="glyphicon glyphicon-list"></span>&emsp;게시판</a>
     <a href="communityRank"><span class="glyphicon glyphicon-star"></span>&emsp;랭킹</a>
-    <a href=""><span class="glyphicon glyphicon-question-sign"></span>&emsp;고객센터</a>
+    <a href="/FoodFighter/community/csCenter"><span class="glyphicon glyphicon-question-sign"></span>&emsp;고객센터</a>
 </div>
 <!-- 본문 -->
 <input type="hidden" id="pg" value="${pg}">

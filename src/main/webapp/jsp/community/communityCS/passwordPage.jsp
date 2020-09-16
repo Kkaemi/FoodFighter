@@ -131,8 +131,7 @@ String keyword = request.getParameter("keyword");
 		    <!-- 버튼 목록 -->
 		    <div class="btn-group">
 		        <a href="#" class="myButton" id="passwordCheckBtn">확인</a>
-		        <a href="#" class="myButton">취소</a>
-		        <a href="#" class="myButton">목록</a>
+		        <a href="#" class="myButton" id="cancelBtn">취소</a>
 		    </div>
 	    </form>
     </div>
@@ -148,9 +147,13 @@ String keyword = request.getParameter("keyword");
 	        xhr.setRequestHeader(header, token);
 	    });
 	    
-	    if ($.isEmptyObject(${memberDTO})) {	    	
-	    	location.href='qna';
+	    if ('${nickname}' == '') {	    	
+	    	location.href='/FoodFighter/login/loginForm';
 	    	alert('먼저 로그인해 주세요');
+	    }
+	    
+	    if ('${nickname}' === '관리자') {
+	    	location.href='qnaView?seq='+$('#seq').val()+'&pg='+$('#pg').val();
 	    }
 	    
 	});
@@ -166,12 +169,10 @@ String keyword = request.getParameter("keyword");
 			success : function(data) {
 				
 				if ($.isEmptyObject(data)) {
-					alert('올바른 비밀번호를 입력해 주세요!!!');
-					location.reload();
-					return;
+					location.href='/FoodFighter/community/qnaPasswordWrong?seq='+$('#seq').val()+'&pg='+$('#pg').val();;
+				} else {					
+					location.href='/FoodFighter/community/qnaView?seq='+data.seq+'&pg='+data.pg;					
 				}
-				
-				location.href='/FoodFighter/community/qnaView?seq='+data.seq+'&pg='+data.pg;
 				
 			},
 			error : function(err) {
@@ -179,6 +180,12 @@ String keyword = request.getParameter("keyword");
 			}
 			
 		});
+		
+	});
+	
+	$('#cancelBtn').click(function() {
+		
+		location.href='qna?pg='+$('#pg').val();
 		
 	});
 </script>

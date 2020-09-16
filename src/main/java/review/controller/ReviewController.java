@@ -72,8 +72,9 @@ public class ReviewController {
 							  HttpServletRequest request,
 							  HttpServletResponse response){
 		
-		String filePath = "D:\\reallysong\\FoodFighter\\src\\main\\webapp\\storage\\review";
-
+		//String filePath = "D:\\reallysong\\FoodFighter\\src\\main\\webapp\\storage\\review";
+//		String filePath = "/Users/aria.k/Downloads/bit/fighter/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/FoodFighter/storage/community";
+		String filePath = "/Users/jiyelin/Documents/GitHub/FoodFighter/src/main/webapp/storage/review";
 		
 		int i=1;
 		for(MultipartFile img : list) {
@@ -130,7 +131,6 @@ public class ReviewController {
 		mav.addObject("resSeq", resSeq);
 
 		mav.addObject("keyword", map.get("keyword"));
-
 		mav.setViewName("/jsp/review/review_searchList");
 		
 		return mav;

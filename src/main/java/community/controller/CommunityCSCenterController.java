@@ -45,7 +45,7 @@ public class CommunityCSCenterController {
 	// qna 게시글 db에서 불러오기
 	@RequestMapping(value = "getQnaList", method = RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView getQnaList(@RequestParam String pg, HttpSession session, HttpServletResponse response) {
+	public ModelAndView getQnaList(@RequestParam String pg, HttpServletResponse response) {
 
 		// 1페이지 당 5개씩
 		List<QnaBoardDTO> list = communityCSService.getQnaBoardList(pg);
@@ -88,7 +88,13 @@ public class CommunityCSCenterController {
 	
 	// qna write
 	@RequestMapping(value = "qnaWriteForm", method = RequestMethod.GET)
-	public String qnaWriteForm() {
+	public String qnaWriteForm(HttpSession session,
+							   Model model) {
+		
+		String memId = (String) session.getAttribute("memId");
+		
+		model.addAttribute("memId", memId);
+		
 		return "/jsp/community/communityCS/qnaWrite";
 	}
 	
@@ -106,7 +112,15 @@ public class CommunityCSCenterController {
 		
 		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberDTO");
 		
-		model.addAttribute("memberDTO", memberDTO);
+		if (memberDTO == null) {
+			
+			model.addAttribute("seq", seq);
+			model.addAttribute("pg", pg);
+			
+			return "/jsp/community/communityCS/passwordPage";
+		}
+		
+		model.addAttribute("nickname", memberDTO.getNickname());
 		model.addAttribute("seq", seq);
 		model.addAttribute("pg", pg);
 		
@@ -138,6 +152,18 @@ public class CommunityCSCenterController {
 		return mav;
 	}
 	
+	// 잘못된 패스워드 입력시
+	@RequestMapping(value = "qnaPasswordWrong", method = RequestMethod.GET)
+	public String qnaPasswordWrong(@RequestParam String seq,
+									@RequestParam String pg,
+									Model model) {
+		
+		model.addAttribute("seq", seq);
+		model.addAttribute("pg", pg);
+		
+		return "/jsp/community/communityCS/qnaPasswordWrong";
+	}
+	
 	// qna View
 	@RequestMapping(value = "qnaView", method = RequestMethod.GET)
 	public String boardView(@RequestParam String seq,
@@ -156,15 +182,21 @@ public class CommunityCSCenterController {
 									 HttpServletResponse res,
 									 HttpSession session) {
 		
-		
-		
 		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberDTO");
 		
 		QnaBoardDTO qnaBoardDTO = communityCSService.getBoard(seq);
 		
 		ModelAndView mav = new ModelAndView();
 		
-		if (memberDTO == null || !(memberDTO.getEmail().equals(qnaBoardDTO.getEmail()))) {
+		if (memberDTO == null) {
+			
+			mav.setViewName("jsonView");
+			return mav;
+			
+		}
+		
+		if (!(memberDTO.getEmail().equals(qnaBoardDTO.getEmail())) && !(memberDTO.getNickname().equals("관리자")) && !(memberDTO.getNickname().equals(qnaBoardDTO.getId()))) {
+			
 			mav.setViewName("jsonView");
 			return mav;
 		}
@@ -187,16 +219,23 @@ public class CommunityCSCenterController {
 	
 	        // 쿠키 생성(이름, 값)
 	        Cookie newCookie = new Cookie("cookie"+seq, seq);
+	        newCookie.setMaxAge(30 * 60);
 	                        
 	        // 쿠키 추가
 	        res.addCookie(newCookie);
 	
 	        // 쿠키를 추가 시키고 조회수 증가시킴
 	        communityCSService.qnaHit(seq);
+	        
+	        // 조회수가 증가된 qnaBoardDTO를 다시 불러옴
+	        qnaBoardDTO = communityCSService.getBoard(seq);
 	    }
+	    
+	    List<QnaBoardDTO> list = communityCSService.getQnaViewList(seq);
 		
 		mav.addObject("qnaboardDTO", qnaBoardDTO);
 		mav.addObject("memberDTO", memberDTO);
+		mav.addObject("list", list);
 		mav.addObject("seq", seq);
 		
 		mav.setViewName("jsonView");

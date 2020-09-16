@@ -80,8 +80,13 @@ public class LoginController {
 		
 		//카카오로그인
 		@RequestMapping(value="kakaologin", method=RequestMethod.POST)
+<<<<<<< HEAD
 		@ResponseBody
 		public String kakaologin(@RequestParam String email, HttpSession session) {
+=======
+		public @ResponseBody String kakaologin(@RequestParam String email,
+										  HttpSession session) {
+>>>>>>> upstream/master
 			
 			MemberDTO memberDTO = memberService.kakaologin(email);
 			

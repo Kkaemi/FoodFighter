@@ -169,7 +169,11 @@ $('#kakao-login-btn').click(function(){
 					$.ajax({
 						type : 'post',
 						url : '/FoodFighter/login/kakaologin',
+<<<<<<< HEAD
 						data : {'email' : email },
+=======
+						data : {'email' : email},
+>>>>>>> upstream/master
 			    		dataType : 'text',
 			    		success : function(data){
 		    			if(data == 'success'){
