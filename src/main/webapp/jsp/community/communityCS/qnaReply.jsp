@@ -10,6 +10,9 @@ String keyword = request.getParameter("keyword");
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta id="_csrf" name="_csrf" content="${_csrf.token}" />
+	<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
     <title>QnA게시판 답글달기</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
@@ -99,7 +102,6 @@ String keyword = request.getParameter("keyword");
                 <button class="btn btn-default" type="button">CANCEL</button>
                 <!-- 글쓰기 버튼 -->
                 <button class="btn btn-primary" type="button" id="qna_writeBtn">WRITE</button>
-                <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
             </div>
         </form>
     </div>
@@ -108,6 +110,13 @@ String keyword = request.getParameter("keyword");
 <script src="/FoodFighter/resources/js/review/keyword.js"></script>
 <script>
     $(document).ready(function () {
+    	
+    	var token = $("meta[name='_csrf']").attr("content");
+	    var header = $("meta[name='_csrf_header']").attr("content");
+	    $(document).ajaxSend(function(e, xhr, options) {
+	        xhr.setRequestHeader(header, token);
+	    });
+	    
         $('#summernote').summernote({
             height: 300,                 // 에디터 높이
             minHeight: null,             // 최소 높이
@@ -116,6 +125,7 @@ String keyword = request.getParameter("keyword");
             lang: "ko-KR",					// 한글 설정
             placeholder: '최대 2048자까지 쓸 수 있습니다' //placeholder 설정
         });
+        
     });
     
     $('#qna_writeBtn').click(function() {

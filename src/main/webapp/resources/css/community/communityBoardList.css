@@ -70,6 +70,7 @@ thead #admin {
     line-height: 26px;
     color: black;
     margin: 0px 3px;
+    cursor: pointer;
 }
 .pagingBox a.now, .pagingBox a:hover{
     border: 1px solid #343434;

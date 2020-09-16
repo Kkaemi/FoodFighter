@@ -1,3 +1,7 @@
+$('#headerUser').click(function(){
+	$('#headUser-menu').modal();
+});
+
 /* 자유게시판 글쓰기 + 글수정 썸머노트*/
 $(document).ready(function(){
 	var token = $("meta[name='_csrf']").attr("content");

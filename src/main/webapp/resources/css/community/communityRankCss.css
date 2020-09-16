@@ -92,7 +92,7 @@ div {
 .rankerInfo .infoText {
     display: table-cell;
     width: 300px;
-    padding: 12px 20px 0 20px;
+    padding: 17px 20px 0 20px;
     text-align: center;
 }
 
@@ -102,23 +102,16 @@ div {
     margin-bottom: 25px;
 }
 
-.infoName .nickName {
+.infoName span {
 	display: block;
     max-width: 270px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-size: 24px;
+    font-size: 36px;
     line-height: 32px;
     letter-spacing: -.2px;
     font-weight: 700;
-}
-
-.grade {
-    font-size: 16px;
-    line-height: 26px;
-    color: #000;
-    text-align: center;
 }
 
 .rankerBoardWrap {
@@ -199,24 +192,21 @@ div {
     position: relative;
     padding: 36px 0;
 }
+
 /* 랭킹 */
-.starR1{
-    background: url('../../community/rankImg/star.png') no-repeat -52px 0;
-    background-size: auto 100%;
-    width: 15px;
-    height: 30px;
-    float:left;
-    text-indent: -9999px;
-    cursor: pointer;
+.grade {
+    font-size: 16px;
+    line-height: 45px;
+    color: #000;
+    text-align: center;
 }
-.starR2{
-    background: url('../../community/rankImg/star.png') no-repeat right 0;
-    background-size: auto 100%;
-    width: 15px;
-    height: 30px;
-    float:left;
-    text-indent: -9999px;
-    cursor: pointer;
+.score {
+	color : #ffc34d;
+    margin-right: 10px;
+    vertical-align: text-bottom
 }
-.starR1.on{background-position:0 0;}
-.starR2.on{background-position:-15px 0;}
+
+.resScore{
+	font-size:39px;
+	color:#ffc34d;
+}

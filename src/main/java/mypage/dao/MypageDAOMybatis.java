@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import community.bean.CommunityBoardDTO;
+import community.bean.QnaBoardDTO;
 import member.bean.MemberDTO;
 import review.bean.ReviewDTO;
 
@@ -56,5 +58,53 @@ public class MypageDAOMybatis implements MypageDAO {
 	public ReviewDTO getModalView(String seq_review) {
 
 		return sqlSession.selectOne("mypageSQL.getModalView",Integer.parseInt(seq_review));
+	}
+
+	@Override
+	public int getReviewNum(String nickname) {
+
+		return sqlSession.selectOne("mypageSQL.getReviewNum", nickname);
+	}
+
+	@Override
+	public int getPostNum(String nickname) {
+
+		return sqlSession.selectOne("mypageSQL.getPostNum", nickname);
+	}
+
+	@Override
+	public int getReplyNum(String nickname) {
+
+		return sqlSession.selectOne("mypageSQL.getReplyNum", nickname);
+	}
+
+	@Override
+	public List<CommunityBoardDTO> getMyPost(Map<String, Object> listMap) {
+
+		return sqlSession.selectList("mypageSQL.getMyPost", listMap);
+	}
+
+	@Override
+	public List<QnaBoardDTO> getMyAsk(Map<String, Object> listMap) {
+
+		return sqlSession.selectList("mypageSQL.getMyAsk", listMap);
+	}
+
+	@Override
+	public void socialModify(Map<String,Object> map) {
+		sqlSession.update("mypageSQL.socialModify", map);
+		
+	}
+
+	@Override
+	public int getPostTotalA(Map<String, Object> map) {
+
+		return sqlSession.selectOne("mypageSQL.getPostTotalA", map);
+	}
+
+	@Override
+	public int getAskTotalA(Map<String, Object> map) {
+
+		return sqlSession.selectOne("mypageSQL.getAskTotalA", map);
 	}
 }

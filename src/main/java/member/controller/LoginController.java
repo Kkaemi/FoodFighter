@@ -85,7 +85,7 @@ public class LoginController {
 		@RequestMapping(value="kakaologin", method=RequestMethod.POST)
 		public @ResponseBody String kakaologin(@RequestParam String email,
 										  HttpSession session) {
-				
+			
 			MemberDTO memberDTO = memberService.kakaologin(email);
 			//System.out.println(memberDTO);
 			

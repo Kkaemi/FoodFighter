@@ -25,18 +25,20 @@ String keyword = request.getParameter("keyword");
 <meta id="_csrf" name="_csrf" content="${_csrf.token}" />
 <meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
 <title>리뷰리스트</title>
+
 </head>
 <body>
 
 
 <!--================ Header ================-->
-<form id="headerForm" name="headerForm" method="get" action="../review/getSearchList">
+<form id="headerForm" name="headerForm" method="post" action="../review/getSearchList">
+<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
 	<div id="header-container">
 	  <a class="header-logo" href="/FoodFighter"><img src="../resources/img/logo.png" width="250px;" height="55px;" align="left" style="margin-top: 10px; margin-left: 200px;"></a>
 	      <ul id="header-menu">
 		      <li class="header-items">
 		  		<img src="../resources/img/search.png" class="header_searchIcon" width="30" height="30" align="center"> 
-		   		<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword" autocomplete="on" maxlength="50" >
+		   		<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword" value="<%=keyword%>" autocomplete="on" maxlength="50" >
 		   		<button size="10" id="header_searchBtn">검색</button>
 		      </li>
 		       <li class="nav-item">

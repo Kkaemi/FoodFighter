@@ -26,7 +26,7 @@ public class CommunityBoardCmntDTO {
 	private int rpseq; //원댓글 번호
 	private int rreply; //댓글의 답글 수
 	
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy.MM.dd")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yy.MM.dd HH:mm")
 	private Date rlogtime; //댓글 작성시간
 	private String rshow; //댓글 삭제 여부 -> y는 게시 / n는 삭제
 }

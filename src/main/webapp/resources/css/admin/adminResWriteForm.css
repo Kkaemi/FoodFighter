@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+.sidebar-brand-img img{
+	width: 14rem;
+	height: 5rem;
+}
+#sidebar-logo {
+	vertical-align: baseline;
+}
+#sidebar-logo-part {
+	width: 14rem;
+	background-color: #fff;
+	margin-top: 0;
+}
+.FFlogo.toggled{
+	width: 6.5rem;
+}
+#resWriteForm {
+	margin: 8rem 0 0 30rem;
+}
+
+#resWriteForm tr td,#resWriteForm input {
+	height: 3rem;
+}

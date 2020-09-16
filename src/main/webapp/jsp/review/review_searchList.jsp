@@ -44,14 +44,14 @@ String keyword = request.getParameter("keyword");
 		       <li class="nav-item">
 		           <a class="nav-link js-scroll active" href="/FoodFighter">Home</a>
 		       </li>
-		       <li class="nav-item">
-	         	  <a class="nav-link js-scroll" href="/FoodFighter/review/reviewNonSearchList">리뷰 리스트</a>
-	          </li>
 	          <li class="nav-item">
 	           <a class="nav-link js-scroll" href="/FoodFighter/community/communityMain">커뮤니티</a>
 	          </li>
 	          <li class="nav-item">
 	            <a class="nav-link js-scroll" href="/FoodFighter/event/eventList">이벤트</a>
+	          </li>
+	          <li class="nav-item">
+	         	  <a class="nav-link js-scroll" href="/FoodFighter/community/communityNotice">공지사항</a>
 	          </li>
 	          <li class="nav-item">
 	            <a class="nav-link js-scroll">
@@ -73,7 +73,7 @@ String keyword = request.getParameter("keyword");
      <c:if test="${sessionScope.memId == 'admin@admin.com'}">
         <p>관리자로<br> 로그인 하셨습니다. </p>
         <hr>
-        <button type="button" id="adminBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/admin/adminMain'" >관리자페이지</button>
+        <button type="button" id="adminBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/admin/adminDashboard'" >관리자페이지</button>
         <button type="button" id="logoutBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/login/logout'">로그아웃</button>
      </c:if>
      <c:if test="${sessionScope.memId != null && sessionScope.memId != 'admin@admin.com'}">
@@ -96,9 +96,9 @@ String keyword = request.getParameter("keyword");
       <div class="keywordZone">
 		<div id="keyword_name" name="keyword_name" align="center" style="width: 100%; font-size:60px; text-align:center; font-weight:bold;"><%=keyword%></div><br>
 			<ul class="keword_issue" align="center">
-  				<li><a href="" style="color:#FF6A4D;"># 신논현 맛집 Top5</a></li>
-  				<li><a href="" style="color:#FF6A4D;"># 강남 맛집 Top5</a></li>
-  				<li><a href="" style="color:#FF6A4D;"># 디저트 맛집</a></li>
+  				<li># 신논현 맛집 Top5</a></li>
+  				<li># 강남 맛집 Top5</a></li>
+  				<li># 디저트 맛집</a></li>
   				<li><div class="modalZone" id="modalZone" align="right">
   				 	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style="background: rgba(0,0,0,0); border: rgba(0,0,0,0); outline:none; ">
   				 	<img src="../resources/img/filter.png" class="keyword_FilterIcon">
@@ -111,8 +111,7 @@ String keyword = request.getParameter("keyword");
 					      <div class="modal-content">
 					        <div class="modal-body" align="center"><br>
 					          <p  align="left">검색순 </p>
-					           <button type="button" class="orderbyAvg" >평점순</button>
-			                   <button type="button" class="orderbyHit">조회순</button>
+					           <button type="button" class="orderbyAvg check" >평점순</button>
 					          <hr>
 					        </div>
 					         <div class="modal-body" align="center">

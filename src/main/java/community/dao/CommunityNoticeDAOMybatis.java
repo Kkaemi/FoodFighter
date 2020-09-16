@@ -42,8 +42,8 @@ public class CommunityNoticeDAOMybatis implements CommunityNoticeDAO {
 	}
 	
 	@Override
-	public void hitUpdate(String seq) {
-		sqlSession.update("cNoticeSQL.hitUpdate", Integer.parseInt(seq));
+	public void hitUpdate(String nseq) {
+		sqlSession.update("cNoticeSQL.hitUpdate", Integer.parseInt(nseq));
 	}
 	
 	@Override
@@ -55,18 +55,18 @@ public class CommunityNoticeDAOMybatis implements CommunityNoticeDAO {
 	}
 
 	@Override
-	public CommunityNoticeDTO viewNotice(String seq) {
-		return sqlSession.selectOne("cNoticeSQL.viewNotice", Integer.parseInt(seq));
+	public CommunityNoticeDTO viewNotice(String nseq) {
+		return sqlSession.selectOne("cNoticeSQL.viewNotice", Integer.parseInt(nseq));
 	}
 
 	@Override
-	public CommunityNoticeDTO viewPrevNoitce(String seq) {
-		return sqlSession.selectOne("cNoticeSQL.viewPrevNoitce", Integer.parseInt(seq));
+	public CommunityNoticeDTO viewPrevNoitce(String nseq) {
+		return sqlSession.selectOne("cNoticeSQL.viewPrevNoitce", Integer.parseInt(nseq));
 	}
 
 	@Override
-	public CommunityNoticeDTO viewNextNoitce(String seq) {
-		return sqlSession.selectOne("cNoticeSQL.viewNextNotice", Integer.parseInt(seq));
+	public CommunityNoticeDTO viewNextNoitce(String nseq) {
+		return sqlSession.selectOne("cNoticeSQL.viewNextNotice", Integer.parseInt(nseq));
 	}
 	
 	@Override
@@ -85,8 +85,8 @@ public class CommunityNoticeDAOMybatis implements CommunityNoticeDAO {
 	}
 
 	@Override
-	public void deleteNotice(String seq) {
-		sqlSession.update("cNoticeSQL.deleteNotice", Integer.parseInt(seq));
+	public void deleteNotice(String nseq) {
+		sqlSession.update("cNoticeSQL.deleteNotice", Integer.parseInt(nseq));
 	}
 
 }

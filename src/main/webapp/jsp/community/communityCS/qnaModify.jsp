@@ -10,6 +10,9 @@ String keyword = request.getParameter("keyword");
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta id="_csrf" name="_csrf" content="${_csrf.token}" />
+	<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
     <title>QnA게시판 글수정</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
@@ -77,8 +80,8 @@ String keyword = request.getParameter("keyword");
           </div>
     </div>
 
-    <!-- SUMMERNOTE FORM-->
     <div class="page-body">
+	    <!-- SUMMERNOTE FORM-->
         <form method="post" class="form-horizontal" id="qnaModifyForm">
 	        <input type="hidden" name="seq" id="seq" value="${seq }">
 			<input type="hidden" name="pg" id="pg" value="${pg }">
@@ -107,15 +110,37 @@ String keyword = request.getParameter("keyword");
                 <button class="btn btn-default" type="button">CANCEL</button>
                 <!-- 글쓰기 버튼 -->
                 <button class="btn btn-primary" type="button" id="qna_writeBtn">WRITE</button>
-                <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
             </div>
         </form>
     </div>
+    
+    <!-- 모달 -->
+    <div class="modal fade" id="myModal" tabindex="-1"role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title">오류</h4>
+	      </div>
+	      <div class="modal-body">
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
 </body>
 <script type="text/javascript" src="/FoodFighter/resources/js/community/sidenav.js"></script>
 <script src="/FoodFighter/resources/js/review/keyword.js"></script>
 <script>
     $(document).ready(function () {
+    	
+    	var token = $("meta[name='_csrf']").attr("content");
+	    var header = $("meta[name='_csrf_header']").attr("content");
+	    $(document).ajaxSend(function(e, xhr, options) {
+	        xhr.setRequestHeader(header, token);
+	    });
     	
         $('#summernote').summernote({
             height: 300,                 // 에디터 높이
@@ -148,20 +173,53 @@ String keyword = request.getParameter("keyword");
     
     $('#qna_writeBtn').click(function() {
     	
-    	$.ajax({
-			
-			type : 'post',
-			url : '/FoodFighter/community/qnaModify',
-			data : $('#qnaModifyForm').serialize(),
-			success : function(data) {
-				alert("글수정 완료");
-				location.href='/FoodFighter/community/qna?pg='+$('#pg').val();
-			},
-			error : function(err) {
-				console.log(err);
-			}
-			
-		});
+    	let qna_subject = $('#qna_subject').val();
+    	let qna_content = $('#summernote').summernote('code');
+    	let qna_password = $('#qna_password').val();
+    	
+    	if (qna_subject == '') {
+    		
+    		$('.modal-body').text('제목을 입력해 주세요');
+    		$('#myModal').modal('show');
+    		$('#myModal').on('hide.bs.modal', function (e) {
+    			  $('#qna_subject').focus();
+    		});
+    		
+    	} else if ($('#summernote').val() == '') {
+    		
+    		$('.modal-body').text('내용을 입력해 주세요');
+    		$('#myModal').modal('show');
+    		$('#myModal').on('hide.bs.modal', function (e) {
+    			  $('#summernote').summernote({focus: true});
+    		});
+    		
+    	} else if (qna_password == '') {
+    		
+    		$('.modal-body').text('비밀번호를 입력해 주세요');
+    		$('#myModal').modal('show');
+    		$('#myModal').on('hide.bs.modal', function (e) {
+    			  $('#qna_password').focus();
+    		});
+    		
+    	} else {
+    		
+    		$.ajax({
+    			
+    			type : 'post',
+    			url : '/FoodFighter/community/qnaModify',
+    			data : $('#qnaModifyForm').serialize(),
+    			success : function(data) {
+    				alert("글수정 완료");
+    				location.href='/FoodFighter/community/qna?pg='+$('#pg').val();
+    			},
+    			error : function(err) {
+    				console.log(err);
+    				alert('에러발생!!!');
+    			}
+    			
+    		});
+    	
+    	}
     	
     });
 </script>
