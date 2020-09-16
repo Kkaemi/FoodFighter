@@ -1,5 +1,9 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: ssong
+=======
+Built-By: YangChoi
+>>>>>>> 7a77fb3b48bcb303629de545cbd677b5c0c6757a
 Build-Jdk: 1.8.0_251
 Created-By: Maven Integration for Eclipse
 
