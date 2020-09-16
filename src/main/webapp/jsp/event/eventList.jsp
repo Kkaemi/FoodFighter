@@ -233,10 +233,12 @@ function eventPaging(pg) {
 					}).append($('<input type = "checkbox"  id = "all"/>',{
 					}))).append($('<td/>',{
 						align: 'center',
-						colspan : 4
+						colspan : 3
 					})).append($('<td/>',{
 						align: 'center'
-					}).append($('<input type = "button" value ="삭제" class = "plain-btn" id = "deleteBtn" />'),{
+						}).append($('<input type = "button" value ="삭제" class = "plain-btn" id = "deleteBtn" />'),{
+					})).append($('<td/>',{align: 'center'
+						}).append($('<input type = "button" value ="글쓰기" class = "plain-btn" id = "writeBtn" />'),{
 					})).prependTo($('thead')); 
 					
 				} 

@@ -99,12 +99,11 @@ $('.header_searchInput').click(function(){
 });
 
 
-
  $('#loginbtn').click(function(){ 
 	 $('#idDiv').empty();
 	 $('#pwdDiv').empty(); 
 	 
-	 if($('#email').val() == ''){ 
+	 if($('#email').val() == '' ){ 
 		 	$('#idDiv').text('아이디를 입력하세요.')
 			$('#idDiv').css('color','red')
 			$('#idDiv').css('font-size','8pt')
@@ -130,12 +129,13 @@ $('.header_searchInput').click(function(){
                   
             dataType : 'text',
             success : function(data){
-          	 // alert(JSON.stringify(data));     	  
+          	  //alert(JSON.stringify(data));     	  
                if(data == 'success'){
             
               	 location.href = '/FoodFighter/';
               	 
                }else if(data == 'admin')	{
+            	   
               	 location.href = '/FoodFighter/admin/adminDashboard';
                      
             }else if(data == 'fail'){      
@@ -168,32 +168,18 @@ $('#kakao-login-btn').click(function(){
 					email = res.kakao_account.email;
 					$.ajax({
 						type : 'post',
-<<<<<<< HEAD
 						url : '/FoodFighter/login/kakaologin',
-						data : 'email=' + email,
-						dataType : 'json',
-						success : function(data) {
-							alert(JSON.stringify(data));
-							
-							if (data.memberDTO != null) {
-								
-								location.href = '/FoodFighter/';
-							} else {
-								location.href = '/FoodFighter/login/loginForm';
-							}
-						},
-=======
-						url : '/FooFighter/login/kakaologin',
-						data : {'email' : $('#email').val()},
+						data : {'email' : email },
 			    		dataType : 'text',
 			    		success : function(data){
 		    			if(data == 'success'){
 		    				location.href = '/FoodFighter/';
-		    				}else if(data == 'fail'){		
+		    				
+		    				}else if(data == 'fail'){	
 		    					location.href = '/FoodFighter/login/loginForm';
 								}
 							},
->>>>>>> upstream/master
+							
 						error : function(err) {
 							console.log(err);
 						}

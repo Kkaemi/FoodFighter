@@ -56,13 +56,10 @@ public class LoginController {
 		@RequestMapping(value="login", method=RequestMethod.POST)
 		public @ResponseBody String login(@RequestParam Map<String,String> map,
 										  HttpSession session) {
-			//System.out.println(">>>>>>>>>>>>>>> " + map.toString());	
-			//String enCodePwd = passEncoder.encode(pwd);
-			//System.out.println(pwd+", "+enCodePwd);
 					
 			MemberDTO memberDTO = memberService.login(map);
-			
-			if(passEncoder.matches(map.get("pwd"), memberDTO.getPwd())) {
+
+				if(memberDTO != null && passEncoder.matches(map.get("pwd"), memberDTO.getPwd())) {
 				session.setAttribute("memId", memberDTO.getEmail());
 				session.setAttribute("memberDTO", memberDTO);
 				
@@ -84,21 +81,23 @@ public class LoginController {
 		//카카오로그인
 		@RequestMapping(value="kakaologin", method=RequestMethod.POST)
 		@ResponseBody
-		public ModelAndView kakaologin(@RequestParam String email, HttpSession session) {
-				
+		public String kakaologin(@RequestParam String email, HttpSession session) {
+			
 			MemberDTO memberDTO = memberService.kakaologin(email);
 			
 			if(memberDTO != null) {
-				session.setAttribute("memId", memberDTO.getEmail());
-				session.setAttribute("memberDTO", memberDTO);
-			}
+			session.setAttribute("memId", memberDTO.getEmail());
+			session.setAttribute("memberDTO", memberDTO);
 
-			ModelAndView mav = new ModelAndView();
-			mav.addObject("memberDTO", memberDTO);
-			mav.setViewName("jsonView");
-			return mav;
+				
+					return "success";
+
+				} else {
+					
+					return "fail";
+				}
+			}
 			
-		}
 		
 		//로그아웃
 	      @RequestMapping(value="/logout", method=RequestMethod.GET)
@@ -130,7 +129,7 @@ public class LoginController {
 		public @ResponseBody String getforgotpwd(@RequestParam Map<String, String> map){
 			//System.out.println(">>>>>>>>>>>>>>>>>> getforgotpwd");
 			MemberDTO memberDTO = memberService.userInfo(map); 
-			System.out.println("1111");
+			//System.out.println("1111");
 			if (memberDTO == null) {
 				return "fail";
 				

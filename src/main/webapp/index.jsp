@@ -86,7 +86,7 @@
         <button type="button" id="adminBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/admin/adminDashboard'" >관리자페이지</button>
         <button type="button" id="logoutBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/login/logout'">로그아웃</button>
      </c:if>
-     <c:if test="${sessionScope.memId != null && sessionScope.memId != 'admin@admin.com' && res.properties['nickname']+res.kakao_account.email}">
+     <c:if test="${sessionScope.memId != null && sessionScope.memId != 'admin@admin.com'}">
         <p>맛집을 찾아보고 <br> 후기를 남겨보세요.</p>
         <hr>
         <button type="button" id="mypageBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/mypage/mypageMain'" >마이페이지</button>
