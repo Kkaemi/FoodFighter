@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%
+request.setCharacterEncoding("utf-8");
+String keyword = request.getParameter("keyword");
+%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,22 +20,19 @@
 </head>
 <body>
 <!--================ Header ================-->
-<form id="headerForm" name="headerForm" method="post" action="../review/getSearchList">
-<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+<form id="headerForm" name="headerForm" method="post">
+<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"> 
 	<div id="header-container">
 	  <a class="header-logo" href="/FoodFighter"><img src="../resources/img/logo.png" width="250px;" height="55px;" align="left" style="margin-top: 10px; margin-left: 200px;"></a>
 	      <ul id="header-menu">
 		      <li class="header-items">
 		  		<img src="../resources/img/search.png" class="header_searchIcon" width="30" height="30" align="center"> 
 		   		<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword" value="" autocomplete="on" maxlength="50" >
-		   		<button size="10" id="header_searchBtn">검색</button>
+		   		<button size="10" id="header_searchBtn"></button>
 		      </li>
 		       <li class="nav-item">
 		           <a class="nav-link js-scroll active" href="/FoodFighter">Home</a>
 		       </li>
-		       <li class="nav-item">
-	         	  <a class="nav-link js-scroll" href="/FoodFighter/review/reviewNonSearchList">리뷰 리스트</a>
-	          </li>
 	          <li class="nav-item">
 	           <a class="nav-link js-scroll" href="/FoodFighter/community/communityMain">커뮤니티</a>
 	          </li>
@@ -38,12 +40,15 @@
 	            <a class="nav-link js-scroll" href="/FoodFighter/event/eventList">이벤트</a>
 	          </li>
 	          <li class="nav-item">
+	         	  <a class="nav-link js-scroll" href="/FoodFighter/community/communityNotice">공지사항</a>
+	          </li>
+	          <li class="nav-item">
 	            <a class="nav-link js-scroll">
 	            <img src="/FoodFighter/resources/img/member.png" id="headerUser" class="header_searchIcon" width="30" height="30" align="center">
 	            </a>
      	     </li>
 	   	</ul>
-	</div>
+	</div>	
  </form>
  <!-- ============main ============== -->
 <div class="signup-form">
@@ -132,47 +137,6 @@ $(document).ready(function() {
 });
 
 
-	
-//닉네임 중복확인
-$('#nickname').focusout(function(){
-	$('#nicknameDiv').empty();
-	let nickname = $('#nickname').val();
-	if(nickname == ""){
-		$('#nicknameDiv').text("먼저 닉네임을 입력하세요");
-		$('#nickname').focus();
-		$('#nicknameDiv').css('color','blue');
-		$('#nicknameDiv').css('font-weight','bold');
-		$('#nicknameDiv').css('font-size','8pt');
-	}else{
-		$.ajax({
-			type: 'post',
-	 		url: '/FoodFighter/member/checkNickname',
-	 		data: 'nickname='+nickname,
-	 		dataType: 'text',
-	 		success : function(data){
-	 			if(data == 'exist'){
-					$('#nicknameDiv').text('사용 불가능')
-					$('#nicknameDiv').css('color','magenta')
-					$('#nicknameDiv').css('font-size','8pt')
-					$('#nicknameDiv').css('font-weight','bold')
-					
-				}else if(data=='non_exist'){
-					$('#checkNickname').val($('#nickname').val());
-					
-					$('#nicknameDiv').text('사용 가능')
-					$('#nicknameDiv').css('color','blue')
-					$('#nicknameDiv').css('font-size','8pt')
-					$('#nicknameDiv').css('font-weight','bold')
-				}
-			},
-			error:function(e){
-				console.log(e);
-			}
-		});	
-	}
-		
-	
-});
 //이메일 발송 버튼을 눌렀을 때
 $('#sendEmailBtn').click(function() {
 $('#emailDiv').empty();
@@ -242,6 +206,7 @@ $('#emailCheckBtn').click(function(){
 			$('#emailDiv').css('color', 'red');
 		}else{
 			$('#emailCheckBtn').prop('disabled', true); //버튼 비활성화
+			$('#emailCode').prop('readonly', true);
 			$('#emailCheckSw').val('1'); //이메일 인증 여부
 		}
 		
@@ -249,6 +214,47 @@ $('#emailCheckBtn').click(function(){
 });
 
 
+
+//닉네임 중복확인
+$('#nickname').focusout(function(){
+	$('#nicknameDiv').empty();
+	let nickname = $('#nickname').val();
+	if(nickname == ""){
+		$('#nicknameDiv').text("먼저 닉네임을 입력하세요");
+		$('#nickname').focus();
+		$('#nicknameDiv').css('color','blue');
+		$('#nicknameDiv').css('font-weight','bold');
+		$('#nicknameDiv').css('font-size','8pt');
+	}else{
+		$.ajax({
+			type: 'post',
+	 		url: '/FoodFighter/member/checkNickname',
+	 		data: 'nickname='+nickname,
+	 		dataType: 'text',
+	 		success : function(data){
+	 			if(data == 'exist'){
+					$('#nicknameDiv').text('사용 불가능')
+					$('#nicknameDiv').css('color','magenta')
+					$('#nicknameDiv').css('font-size','8pt')
+					$('#nicknameDiv').css('font-weight','bold')
+					
+				}else if(data=='non_exist'){
+					$('#checkNickname').val($('#nickname').val());
+					
+					$('#nicknameDiv').text('사용 가능')
+					$('#nicknameDiv').css('color','blue')
+					$('#nicknameDiv').css('font-size','8pt')
+					$('#nicknameDiv').css('font-weight','bold')
+				}
+			},
+			error:function(e){
+				console.log(e);
+			}
+		});	
+	}
+		
+	
+});
 //회원가입 버튼을 눌렀을 때
 $('#signupBtn').click(function() {
 	$('#emailDiv').empty();
@@ -266,12 +272,7 @@ $('#signupBtn').click(function() {
 		$('#nameDiv').text('이름을 입력해주세요.');
 		$('#nameDiv').css('color', 'red');
 
-	}else if(/^[가-힣a-zA-Z]{3,16}$/.test($('#name').val())){
-
-		$('#nameDiv').text('이름은 2글자 이상 영문자와 한글만 입력해주세요');
-		$('#nameDiv').css('color', 'red');
-
-	}  else if ($('#nickname').val() == '') {
+	} else if ($('#nickname').val() == '') {
 		$('#nicknameDiv').text('닉네임을 입력해주세요.');
 		$('#nicknameDiv').css('color', 'red');
 

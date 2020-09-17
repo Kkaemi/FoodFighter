@@ -22,10 +22,9 @@
 	           </div>
 	         </div>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>	
-<!--슬라이드  -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
     var token = $("meta[name='_csrf']").attr("content");
@@ -33,6 +32,8 @@ $(document).ready(function(){
     $(document).ajaxSend(function(e, xhr, options) {
         xhr.setRequestHeader(header, token);
     });
+    
+    
 });
 
 /* 리뷰리스트 쪽  */
@@ -224,7 +225,7 @@ $('#addReviewList').click(function(){
 });
 
 
-$('#listDiv').on('click','.review',function(){
+$(document).on('click','#listDiv .review',function(){
 	 $('.modal-body').empty();
 	
 	let seq_review = $(this).children('#seq_review').val();
@@ -272,17 +273,15 @@ $('#listDiv').on('click','.review',function(){
 	   
 	   });  
 	 
-	 $('#reviewModal').modal(); 
-	 
+	 $('#reviewModal').modal();
 	 
 	 var swiper = new Swiper('.swiper-container', {
-	        pagination: '.swiper-pagination',
-	        paginationClickable: true,
-	        nextButton: '.swiper-button-next',
-	        prevButton: '.swiper-button-prev',
-	        spaceBetween: 30
+	       nextButton: '.swiper-button-next',
+	       prevButton: '.swiper-button-prev',
 	});
 	 
 });
+
+
 
 </script> 
