@@ -67,6 +67,12 @@ public class ReviewServiceImpl implements ReviewService {
 		return reviewDAO.getReviewView(resSeq);
 	}
 
+	@Override
+	public void avgUpdate(Map<String, Object> map) {
+		reviewDAO.writeReview(map);
+		
+	}
+
 
 
 

@@ -143,12 +143,6 @@ body, html {
 		<input type = "button" value = "검색" class = "plain-btn" id = "searchBtn">
 		
 		</div>
-		<div class = "listBtnBox">	
-		 <c:if test="${memberDTO.nickname == '관리자'}">
-			<a href ="/FoodFighter/event/eventWriteForm">
-				<span class = "plain-btn">글쓰기</span></a>
-		</c:if> 	
-		</div>
 		</fieldset>
 		</div>
 	</div>
@@ -233,10 +227,12 @@ function eventPaging(pg) {
 					}).append($('<input type = "checkbox"  id = "all"/>',{
 					}))).append($('<td/>',{
 						align: 'center',
-						colspan : 4
+						colspan : 3
 					})).append($('<td/>',{
 						align: 'center'
-					}).append($('<input type = "button" value ="삭제" class = "plain-btn" id = "deleteBtn" />'),{
+						}).append($('<input type = "button" value ="삭제" class = "plain-btn" id = "deleteBtn" />'),{
+					})).append($('<td/>',{align: 'center'
+						}).append($('<input type = "button" value ="글쓰기" class = "plain-btn" id = "writeBtn"/>'),{
 					})).prependTo($('thead')); 
 					
 				} 
@@ -373,6 +369,10 @@ $(document).on('click', '#deleteBtn', function(){
 			});
 		}
 	}
+});
+
+$(document).on('click', '#writeBtn', function(){
+	location.href="/FoodFighter/event/eventWriteForm";
 });
 
 </script>

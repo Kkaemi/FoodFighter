@@ -200,6 +200,14 @@ String keyword = request.getParameter("keyword");
   <div id="preloader"></div>
 
 <script type="text/javascript">
+$(document).ready(function(){
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+    $(document).ajaxSend(function(e, xhr, options) {
+        xhr.setRequestHeader(header, token);
+    });
+});
+
 $('#headerUser').click(function(){
    $('#headUser-menu').modal();
 });
