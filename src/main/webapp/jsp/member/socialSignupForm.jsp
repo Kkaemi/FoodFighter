@@ -20,15 +20,15 @@ String keyword = request.getParameter("keyword");
 </head>
 <body>
 <!--================ Header ================-->
-<form id="headerForm" name="headerForm" method="post" action="../review/getSearchList">
+<form id="headerForm" name="headerForm" method="post">
 <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"> 
 	<div id="header-container">
 	  <a class="header-logo" href="/FoodFighter"><img src="../resources/img/logo.png" width="250px;" height="55px;" align="left" style="margin-top: 10px; margin-left: 200px;"></a>
 	      <ul id="header-menu">
 		      <li class="header-items">
 		  		<img src="../resources/img/search.png" class="header_searchIcon" width="30" height="30" align="center"> 
-		   		<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword" value="<%=keyword%>" autocomplete="on" maxlength="50" >
-		   		<button size="10" id="header_searchBtn">검색</button>
+		   		<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword" value="" autocomplete="on" maxlength="50" >
+		   		<button size="10" id="header_searchBtn"></button>
 		      </li>
 		       <li class="nav-item">
 		           <a class="nav-link js-scroll active" href="/FoodFighter">Home</a>
@@ -48,30 +48,8 @@ String keyword = request.getParameter("keyword");
 	            </a>
      	     </li>
 	   	</ul>
-	</div>
+	</div>	
  </form>
-<!-- usermenu -->
-  <div class="modal headUser-menu" id="headUser-menu" role="dialog">
-     <div class="tri"></div>
-     <c:if test="${sessionScope.memId == null}">
-        <p>로그인 또는 회원가입을 하시면 <br> 더 많은 서비스를 <br>이용하실 수 있습니다.</p>
-        <hr>
-        <button type="button" id="loginBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/login/loginForm'" >로그인</button>
-        <button type="button" id="signupBtn" class="headUserMenu-Btn" onclick="location.href='/FoodFighter/member/signupChoice'" >회원가입</button>
-     </c:if>
-     <c:if test="${sessionScope.memId == 'admin@admin.com'}">
-        <p>관리자로<br> 로그인 하셨습니다. </p>
-        <hr>
-        <button type="button" id="adminBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/admin/adminDashboard'" >관리자페이지</button>
-        <button type="button" id="logoutBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/login/logout'">로그아웃</button>
-     </c:if>
-     <c:if test="${sessionScope.memId != null && sessionScope.memId != 'admin@admin.com'}">
-        <p>맛집을 찾아보고 <br> 후기를 남겨보세요.</p>
-        <hr>
-        <button type="button" id="mypageBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/mypage/mypageMain'" >마이페이지</button>
-        <button type="button" id="logoutBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/login/logout'">로그아웃</button>
-     </c:if>
-  </div>	
  <!-- ============main ============== -->
 <div class="signup-form">
     <form id="socialSignupForm" action="" method="post">
@@ -159,47 +137,6 @@ $(document).ready(function() {
 });
 
 
-	
-//닉네임 중복확인
-$('#nickname').focusout(function(){
-	$('#nicknameDiv').empty();
-	let nickname = $('#nickname').val();
-	if(nickname == ""){
-		$('#nicknameDiv').text("먼저 닉네임을 입력하세요");
-		$('#nickname').focus();
-		$('#nicknameDiv').css('color','blue');
-		$('#nicknameDiv').css('font-weight','bold');
-		$('#nicknameDiv').css('font-size','8pt');
-	}else{
-		$.ajax({
-			type: 'post',
-	 		url: '/FoodFighter/member/checkNickname',
-	 		data: 'nickname='+nickname,
-	 		dataType: 'text',
-	 		success : function(data){
-	 			if(data == 'exist'){
-					$('#nicknameDiv').text('사용 불가능')
-					$('#nicknameDiv').css('color','magenta')
-					$('#nicknameDiv').css('font-size','8pt')
-					$('#nicknameDiv').css('font-weight','bold')
-					
-				}else if(data=='non_exist'){
-					$('#checkNickname').val($('#nickname').val());
-					
-					$('#nicknameDiv').text('사용 가능')
-					$('#nicknameDiv').css('color','blue')
-					$('#nicknameDiv').css('font-size','8pt')
-					$('#nicknameDiv').css('font-weight','bold')
-				}
-			},
-			error:function(e){
-				console.log(e);
-			}
-		});	
-	}
-		
-	
-});
 //이메일 발송 버튼을 눌렀을 때
 $('#sendEmailBtn').click(function() {
 $('#emailDiv').empty();
@@ -269,6 +206,7 @@ $('#emailCheckBtn').click(function(){
 			$('#emailDiv').css('color', 'red');
 		}else{
 			$('#emailCheckBtn').prop('disabled', true); //버튼 비활성화
+			$('#emailCode').prop('readonly', true);
 			$('#emailCheckSw').val('1'); //이메일 인증 여부
 		}
 		
@@ -276,6 +214,47 @@ $('#emailCheckBtn').click(function(){
 });
 
 
+
+//닉네임 중복확인
+$('#nickname').focusout(function(){
+	$('#nicknameDiv').empty();
+	let nickname = $('#nickname').val();
+	if(nickname == ""){
+		$('#nicknameDiv').text("먼저 닉네임을 입력하세요");
+		$('#nickname').focus();
+		$('#nicknameDiv').css('color','blue');
+		$('#nicknameDiv').css('font-weight','bold');
+		$('#nicknameDiv').css('font-size','8pt');
+	}else{
+		$.ajax({
+			type: 'post',
+	 		url: '/FoodFighter/member/checkNickname',
+	 		data: 'nickname='+nickname,
+	 		dataType: 'text',
+	 		success : function(data){
+	 			if(data == 'exist'){
+					$('#nicknameDiv').text('사용 불가능')
+					$('#nicknameDiv').css('color','magenta')
+					$('#nicknameDiv').css('font-size','8pt')
+					$('#nicknameDiv').css('font-weight','bold')
+					
+				}else if(data=='non_exist'){
+					$('#checkNickname').val($('#nickname').val());
+					
+					$('#nicknameDiv').text('사용 가능')
+					$('#nicknameDiv').css('color','blue')
+					$('#nicknameDiv').css('font-size','8pt')
+					$('#nicknameDiv').css('font-weight','bold')
+				}
+			},
+			error:function(e){
+				console.log(e);
+			}
+		});	
+	}
+		
+	
+});
 //회원가입 버튼을 눌렀을 때
 $('#signupBtn').click(function() {
 	$('#emailDiv').empty();
@@ -293,12 +272,7 @@ $('#signupBtn').click(function() {
 		$('#nameDiv').text('이름을 입력해주세요.');
 		$('#nameDiv').css('color', 'red');
 
-	}else if(/^[가-힣a-zA-Z]{3,16}$/.test($('#name').val())){
-
-		$('#nameDiv').text('이름은 2글자 이상 영문자와 한글만 입력해주세요');
-		$('#nameDiv').css('color', 'red');
-
-	}  else if ($('#nickname').val() == '') {
+	} else if ($('#nickname').val() == '') {
 		$('#nicknameDiv').text('닉네임을 입력해주세요.');
 		$('#nicknameDiv').css('color', 'red');
 

@@ -4,7 +4,7 @@
 <%
 request.setCharacterEncoding("utf-8");
 String keyword = request.getParameter("keyword");
-%> 
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +27,7 @@ String keyword = request.getParameter("keyword");
 	      <ul id="header-menu">
 		      <li class="header-items">
 		  		<img src="../resources/img/search.png" class="header_searchIcon" width="30" height="30" align="center"> 
-		   		<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword" value="<%=keyword%>" autocomplete="on" maxlength="50" >
+		   		<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword" autocomplete="on" maxlength="50" >
 		   		<button size="10" id="header_searchBtn">검색</button>
 		      </li>
 		       <li class="nav-item">
@@ -50,28 +50,8 @@ String keyword = request.getParameter("keyword");
 	   	</ul>
 	</div>
  </form>
-<!-- usermenu -->
-  <div class="modal headUser-menu" id="headUser-menu" role="dialog">
-     <div class="tri"></div>
-     <c:if test="${sessionScope.memId == null}">
-        <p>로그인 또는 회원가입을 하시면 <br> 더 많은 서비스를 <br>이용하실 수 있습니다.</p>
-        <hr>
-        <button type="button" id="loginBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/login/loginForm'" >로그인</button>
-        <button type="button" id="signupBtn" class="headUserMenu-Btn" onclick="location.href='/FoodFighter/member/signupChoice'" >회원가입</button>
-     </c:if>
-     <c:if test="${sessionScope.memId == 'admin@admin.com'}">
-        <p>관리자로<br> 로그인 하셨습니다. </p>
-        <hr>
-        <button type="button" id="adminBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/admin/adminDashboard'" >관리자페이지</button>
-        <button type="button" id="logoutBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/login/logout'">로그아웃</button>
-     </c:if>
-     <c:if test="${sessionScope.memId != null && sessionScope.memId != 'admin@admin.com'}">
-        <p>맛집을 찾아보고 <br> 후기를 남겨보세요.</p>
-        <hr>
-        <button type="button" id="mypageBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/mypage/mypageMain'" >마이페이지</button>
-        <button type="button" id="logoutBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/login/logout'">로그아웃</button>
-     </c:if>
-  </div>	
+
+ 
  <!-- ============main ============== -->
 <div class="signup-form">
     <form id="signupForm" action="" method="post">
@@ -169,6 +149,8 @@ String keyword = request.getParameter("keyword");
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" ></script>
 
+<script src="/FoodFighter/resources/js/review/keyword.js"></script>
+
 <script type="text/javascript">
 $(document).ready(function(){
     var token = $("meta[name='_csrf']").attr("content");
@@ -187,8 +169,9 @@ $(document).ready(function(){
 $('#email').focusout(function(){
 		$('#emailDiv').empty();
 		let email = $('#email').val();
+		
 		if($('#email').val() == ''){
-			$('#emailDiv').text("먼저 아이디를 입력하세요");
+			$('#emailDiv').text("먼저 이메일을 입력하세요");
 			$('#email').focus();
 			$('#emailDiv').css('color','blue');
 			$('#emailDiv').css('font-weight','bold');
@@ -228,6 +211,7 @@ $('#email').focusout(function(){
 $('#nickname').focusout(function(){
 	$('#nicknameDiv').empty();
 	let nickname = $('#nickname').val();
+	
 	if($('#nickname').val() == ""){
 		$('#nicknameDiv').text("먼저 닉네임을 입력하세요");
 		$('#nickname').focus();
@@ -241,7 +225,6 @@ $('#nickname').focusout(function(){
 	 		data: 'nickname='+nickname,
 	 		dataType: 'text',
 	 		success : function(data){
-	 			alert(data);
 	 			if(data == 'exist'){
 					$('#nicknameDiv').text('사용 불가능')
 					$('#nicknameDiv').css('color','magenta')
@@ -342,7 +325,7 @@ $('#emailCheckBtn').click(function(){
 			$('#emailDiv').text('이메일을 입력해주세요.');
 			$('#emailDiv').css('color', 'red');
 
-		} else if ($('#emailCheckSw').val() == '0') {
+		} else if($('#emailCheckSw').val() == '0') {
 			$('#emailDiv').text('이메일인증을 해주세요.');
 			$('#emailDiv').css('color', 'red');
 
@@ -379,7 +362,8 @@ $('#emailCheckBtn').click(function(){
 	        $('#nicknameDiv').css('color', 'magenta')
 	        $('#nicknameDiv').css('font-size', '8pt')
 	        $('#nicknameDiv').css('font-weight', 'bold')
-	    }   else {
+	    } else {
+	    	alert("회원가입");
 			$.ajax({
 				type : 'post',
 				url : '/FoodFighter/member/signup',
