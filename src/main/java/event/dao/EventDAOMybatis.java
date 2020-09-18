@@ -47,7 +47,8 @@ public class EventDAOMybatis implements EventDAO {
 
 	@Override
 	public void eventBoardDelete(String seq_event) {
-		sqlSession.delete("eventSQL.eventBoardDelete",Integer.parseInt(seq_event));
+		sqlSession.delete("eventSQL.eventBoardDelete1",Integer.parseInt(seq_event));
+		sqlSession.delete("eventSQL.eventBoardDelete2",Integer.parseInt(seq_event));
 	}
 	@Override
 	public int geteventTotalA() {
@@ -69,7 +70,8 @@ public class EventDAOMybatis implements EventDAO {
 		for (int i = 0; i < list.size(); i++) {
 			String temp = list.get(i);
 			//System.out.println(temp);
-			sqlSession.update("eventSQL.eventBoardListDelete",temp);
+			sqlSession.update("eventSQL.eventBoardListDelete1",temp);
+			sqlSession.update("eventSQL.eventBoardListDelete2",temp);
 		}
 	}
 

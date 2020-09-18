@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import admin.bean.RestaurantDTO;
-
+import review.bean.ReviewDTO;
 import review.dao.ReviewDAO;
 
 @Service
@@ -60,20 +60,29 @@ public class ReviewServiceImpl implements ReviewService {
 		return reviewDAO.modalSearchList(map);
 	}
 	
-
 	@Override
 	public RestaurantDTO getReviewView(String resSeq) {
-		
 		return reviewDAO.getReviewView(resSeq);
 	}
 
 	@Override
+	public Map<String, Object> getRestaurantDTOAndReviewList(Map<String, String> map) {
+		
+		Map<String, Object> restaurantAndreviewMap = new HashMap<String, Object>();
+		
+		RestaurantDTO restaurantDTO = reviewDAO.getReviewView(map.get("resSeq"));
+		List<ReviewDTO> reviewList = reviewDAO.getReviewList(map.get("resName"));
+		
+		restaurantAndreviewMap.put("restaurantDTO", restaurantDTO);
+		restaurantAndreviewMap.put("reviewList", reviewList);
+		
+		return restaurantAndreviewMap;
+	}
+
 	public void avgUpdate(Map<String, Object> map) {
 		reviewDAO.writeReview(map);
 		
 	}
-
-
 
 
 }

@@ -77,8 +77,7 @@
 
 /*리뷰페이지*/
 .reviewView-container {
-    width: 90%;
-    margin-left: 3px;
+    width: 100%;
     position: relative;
   
 }
@@ -168,8 +167,9 @@
 .line {
     margin-left: 400px;
     width: 60%;
-    margin-top: 400px;
+    margin-top: 530px;
     border: 0.001px solid #e6e6e6;
+    margin-bottom: 10px;
 }
 
 
@@ -210,18 +210,10 @@ td {
     margin-left : 410px;
 }
 
-/*가게 정보 메뉴 사진*/
-.menu-image {
-    width: 50px;
-    height: 60px;
-    max-width: 600px;
-    cursor: pointer;
-    transition: 0.3s;
+.resImages {
+	padding : 10px;
 }
 
-.menu-image:hover{
-    opacity: 0.7;
-}
 
 /*가게 정보 - 지도*/
 .table-div {
@@ -241,6 +233,10 @@ td {
     padding: 50px;
     margin-left: 150px;
 }
+
+/*리뷰버튼*/
+
+
 
 /*가게 정보 메뉴 사진 - 모달*/
 .modal {
@@ -319,18 +315,63 @@ td {
       width: 100%;
     }
 }
-
+/*가게 데이터와 가게 이미지 간 간격*/
+.gap {
+	float : right;
+}
+.review-content {
+	width : 70%;
+}
 
 /*리뷰*/
+.review-container {
+	float : right;
+	margin-left : 500px;
+}
 
+.user-name {
+	color : #ffc34d;
+	font: bold;
+}
 /*리뷰 버튼*/
+.writeBtn {
+	float : right;
+	margin-left : 400px;
+	margin-right : 300px;
+	
+}
+#reviewWriteBtn {
+	margin-left : 700px;
+	padding : 3.4px;
+	padding-left : 30px;
+	padding-right : 30px;
+	float : right;
+	color : #ffc34d;
+	background-color : white;
+	font-size : 20px;
+	font-style : bold;
+	border:2px solid #ffc34d;
+	border-radius: 30px;
+}
+
+#reviewWriteBtn:hover {
+	color : white;
+	background:  #ffc34d;
+    text-decoration: none;
+    cursor: pointer;
+}
+
 .review-list {
     width: 54%;
     float: left;
     margin-top: 20px;
     margin-left: 410px;
 }
-
+.review-count{
+	margin-top : 30px;
+	margin-right : 800px;
+	
+}
 .review-count-text {
     margin-right: 300px;
 }
@@ -346,7 +387,6 @@ td {
 
 
 .review-count-btn {
-    
     padding-right: 6px;
     font-size: 16px;
     color: #b9b9bb; 
@@ -369,12 +409,6 @@ button {
 #direc-icon-left, #direc-icon-right {
     padding: 10px;
 }
-.restaurant-images {
-    margin-left: 0px;
-    margin-top: 40px;
-    margin-bottom: 20px;
-    
-}
 
 .restaurant-image {
     margin-right: 20px;
@@ -394,7 +428,7 @@ button {
     margin-top: 30px;
 
 }
-.review1 {
+.review {
     height: 250px;
 }
 
