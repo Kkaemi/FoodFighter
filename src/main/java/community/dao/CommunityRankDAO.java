@@ -9,8 +9,6 @@ public interface CommunityRankDAO {
 
 	public List<CommunityRankResDTO> getRankResList();
 
-	public List<CommunityRankResDTO> getRankResRevList(List<String> list);
-
 	public List<CommunityRankMemDTO> getRankMemList();
 
 }

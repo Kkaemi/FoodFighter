@@ -22,15 +22,6 @@ public class CommunityRankMybatis implements CommunityRankDAO {
 	}
 
 	@Override
-	public List<CommunityRankResDTO> getRankResRevList(List<String> list) {
-		String temp = "";
-		for(int i = 0; i < list.size(); i++) {
-			temp += list.get(i);
-		}
-		return sqlSession.selectList("cRankSQL.getRankResRevList", temp);
-	}
-
-	@Override
 	public List<CommunityRankMemDTO> getRankMemList() {
 		return sqlSession.selectList("cRankSQL.getRankMemList");
 	}

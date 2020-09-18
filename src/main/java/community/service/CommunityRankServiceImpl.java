@@ -20,11 +20,6 @@ public class CommunityRankServiceImpl implements CommunityRankService {
 	}
 
 	@Override
-	public List<CommunityRankResDTO> getRankResRevList(List<String> list) {
-		return cRankDAO.getRankResRevList(list);
-	}
-
-	@Override
 	public List<CommunityRankMemDTO> getRankMemList() {
 		return cRankDAO.getRankMemList();
 	}
