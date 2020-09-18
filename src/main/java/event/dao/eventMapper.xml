@@ -54,7 +54,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<!-- 글 삭제 -->
-	<delete id="eventBoardDelete" parameterType="int">
+	<delete id="eventBoardDelete1" parameterType="int">
+			DELETE from event_comment WHERE seq_event=#{seq_event}
+	</delete>
+	<delete id="eventBoardDelete2" parameterType="int">
 			DELETE from event_board WHERE seq_event=#{seq_event}
 	</delete>
 	
@@ -87,7 +90,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 선택삭제 -->
-	<delete id="eventBoardListDelete" parameterType="java.util.List">
+	<delete id="eventBoardListDelete1" parameterType="java.util.List">
+			DELETE from event_comment WHERE seq_event=#{seq_event}
+	</delete>
+	<delete id="eventBoardListDelete2" parameterType="java.util.List">
 		delete from event_board where seq_event = #{temp}
 	</delete>
 	
