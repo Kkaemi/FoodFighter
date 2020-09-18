@@ -11,6 +11,7 @@
 		<typeAlias type="community.bean.CommunityBoardCmntDTO" alias="cBCmnt"/>
 		<typeAlias type="community.bean.CommunityNoticeDTO" alias="cNotice"/>
 		<typeAlias type="community.bean.CommunityRankResDTO" alias="cRankRes"/>
+		<typeAlias type="community.bean.CommunityRankMemDTO" alias="cRankMem"/>
 
 		<typeAlias type="event.bean.EventDTO" alias="event"/>
 		<typeAlias type="event.bean.EventCoDTO" alias="eventC"/>
