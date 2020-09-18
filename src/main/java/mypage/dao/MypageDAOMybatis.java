@@ -79,20 +79,32 @@ public class MypageDAOMybatis implements MypageDAO {
 	}
 
 	@Override
-	public List<CommunityBoardDTO> getMyPost(String nickname) {
+	public List<CommunityBoardDTO> getMyPost(Map<String, Object> listMap) {
 
-		return sqlSession.selectList("mypageSQL.getMyPost", nickname);
+		return sqlSession.selectList("mypageSQL.getMyPost", listMap);
 	}
 
 	@Override
-	public List<QnaBoardDTO> getMyAsk(String nickname) {
-		
-		return sqlSession.selectList("mypageSQL.getMyAsk", nickname);
+	public List<QnaBoardDTO> getMyAsk(Map<String, Object> listMap) {
+
+		return sqlSession.selectList("mypageSQL.getMyAsk", listMap);
 	}
 
 	@Override
 	public void socialModify(Map<String,Object> map) {
 		sqlSession.update("mypageSQL.socialModify", map);
 		
+	}
+
+	@Override
+	public int getPostTotalA(Map<String, Object> map) {
+
+		return sqlSession.selectOne("mypageSQL.getPostTotalA", map);
+	}
+
+	@Override
+	public int getAskTotalA(Map<String, Object> map) {
+
+		return sqlSession.selectOne("mypageSQL.getAskTotalA", map);
 	}
 }

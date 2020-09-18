@@ -126,9 +126,14 @@ public class CommunityCSServiceImpl implements CommunityCSService {
 		// 원글
 		QnaBoardDTO pDTO = communityCSDAO.getBoard(pseq);
 		
-		map.put("id", pDTO.getId());
-		map.put("nickname", pDTO.getNickname());
-		map.put("email", pDTO.getEmail());
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("memberDTO");
+		
+		String nickname = memberDTO.getNickname();
+		String email = memberDTO.getEmail();
+		
+		map.put("id", pDTO.getNickname());
+		map.put("nickname", nickname);
+		map.put("email", email);
 		map.put("password", pDTO.getPassword());
 		
 		map.put("ref", pDTO.getRef()+""); // 원글의 그룹번호
@@ -152,6 +157,11 @@ public class CommunityCSServiceImpl implements CommunityCSService {
 	@Override
 	public void qnaHit(String seq) {
 		communityCSDAO.qnaHit(seq);
+	}
+
+	@Override
+	public List<QnaBoardDTO> getQnaViewList(String seq) {
+		return communityCSDAO.getQnaViewList(seq);
 	}
 
 }

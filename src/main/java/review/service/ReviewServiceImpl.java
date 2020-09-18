@@ -79,4 +79,10 @@ public class ReviewServiceImpl implements ReviewService {
 		return restaurantAndreviewMap;
 	}
 
+	public void avgUpdate(Map<String, Object> map) {
+		reviewDAO.writeReview(map);
+		
+	}
+
+
 }

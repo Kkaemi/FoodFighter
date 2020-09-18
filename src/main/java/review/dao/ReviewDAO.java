@@ -18,4 +18,5 @@ public interface ReviewDAO {
 
 	public List<ReviewDTO> getReviewList(String resName);
 	
+	
 }

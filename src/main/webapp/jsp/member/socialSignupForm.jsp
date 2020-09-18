@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%
+request.setCharacterEncoding("utf-8");
+String keyword = request.getParameter("keyword");
+%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,22 +20,19 @@
 </head>
 <body>
 <!--================ Header ================-->
-<form id="headerForm" name="headerForm" method="post" action="../review/getSearchList">
-<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+<form id="headerForm" name="headerForm" method="post">
+<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"> 
 	<div id="header-container">
 	  <a class="header-logo" href="/FoodFighter"><img src="../resources/img/logo.png" width="250px;" height="55px;" align="left" style="margin-top: 10px; margin-left: 200px;"></a>
 	      <ul id="header-menu">
 		      <li class="header-items">
 		  		<img src="../resources/img/search.png" class="header_searchIcon" width="30" height="30" align="center"> 
 		   		<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword" value="" autocomplete="on" maxlength="50" >
-		   		<button size="10" id="header_searchBtn">검색</button>
+		   		<button size="10" id="header_searchBtn"></button>
 		      </li>
 		       <li class="nav-item">
 		           <a class="nav-link js-scroll active" href="/FoodFighter">Home</a>
 		       </li>
-		       <li class="nav-item">
-	         	  <a class="nav-link js-scroll" href="/FoodFighter/review/reviewNonSearchList">리뷰 리스트</a>
-	          </li>
 	          <li class="nav-item">
 	           <a class="nav-link js-scroll" href="/FoodFighter/community/communityMain">커뮤니티</a>
 	          </li>
@@ -38,12 +40,15 @@
 	            <a class="nav-link js-scroll" href="/FoodFighter/event/eventList">이벤트</a>
 	          </li>
 	          <li class="nav-item">
+	         	  <a class="nav-link js-scroll" href="/FoodFighter/community/communityNotice">공지사항</a>
+	          </li>
+	          <li class="nav-item">
 	            <a class="nav-link js-scroll">
 	            <img src="/FoodFighter/resources/img/member.png" id="headerUser" class="header_searchIcon" width="30" height="30" align="center">
 	            </a>
      	     </li>
 	   	</ul>
-	</div>
+	</div>	
  </form>
  <!-- ============main ============== -->
 <div class="signup-form">
@@ -132,47 +137,84 @@ $(document).ready(function() {
 });
 
 
-//이메일 중복확인
-$('#email').focusout(function(){
-		$('#emailDiv').empty();
-		let email = $('#email').val();
-		if(email == ""){
-			$('#emailDiv').text("먼저 아이디를 입력하세요");
-			$('#email').focus();
-			$('#emailDiv').css('color','blue');
-			$('#emailDiv').css('font-weight','bold');
-			$('#emailDiv').css('font-size','8pt');
-		}else{
-			$.ajax({
-				type: 'post',
-		 		url: '/FoodFighter/member/checkEmail',
-		 		data: 'email='+email,
-		 		dataType: 'text',
-		 		success : function(data){
-		 			if(data == 'exist'){
-						$('#emailDiv').text('이미 가입된 이메일 입니다.')
-						$('#emailDiv').css('color','magenta')
-						$('#emailDiv').css('font-size','8pt')
-						$('#emailDiv').css('font-weight','bold')
-						
-					}else if(data=='non_exist'){
-						$('#checkEmail').val($('#email').val());
-						
-						$('#emailDiv').text('사용 가능')
-						$('#emailDiv').css('color','blue')
-						$('#emailDiv').css('font-size','8pt')
-						$('#emailDiv').css('font-weight','bold')
-					}
-				},
-				error:function(e){
-					console.log(e);
+//이메일 발송 버튼을 눌렀을 때
+$('#sendEmailBtn').click(function() {
+$('#emailDiv').empty();
+	if ($('#email').val() == 'undefined') {
+		$('#emailDiv').text('이메일은 반드시 동의를 해주셔야 가입이 가능합니다.');
+		$('#emailDiv').css('color', 'red');
+
+	} else {
+		$.ajax({
+			type: 'post',
+	 		url: '/FoodFighter/member/checkEmail',
+	 		data: 'email='+email,
+	 		dataType: 'text',
+	 		success : function(data){
+	 			if(data == 'exist'){
+					$('#emailDiv').text('이미 가입된 이메일 입니다.')
+					$('#emailDiv').css('color','magenta')
+					$('#emailDiv').css('font-size','8pt')
+					$('#emailDiv').css('font-weight','bold')
+					
+				}else if(data == 'non_exist'){
+					$('#checkEmail').val($('#email').val());
+					$('#sendEmailModal').modal();//발송 완료 모달
+					
+					//메일발송		
+					$.ajax({
+						type:'post',
+						url : '/FoodFighter/member/signupSendMail',
+						data : 'email='+$('#email').val(),
+						dataType:'text',
+						success : function(data) {
+							sessionStorage.setItem("authCode", data ); //히든으로 하면 보안때문에 session으로 변경
+							alert(sessionStorage.getItem("authCode")); //임시
+						},
+						error : function(e) {
+							console.log(e);
+						}
+					});
+					
+					$('#sendEmailBtn').text('재전송');
+					$('#sendEmailBtn').addClass('offset-5')
+					$('#emailCode').show('slide');
+					$('#emailCheckBtn').show('slide');
+
 				}
-			});	
-		}
-			
+			},
+			error:function(e){
+				console.log(e);
+			}
+		});	
 		
-	});
+	}//빈칸 체크 if
+});
+
+//인증 버튼을 눌렀을 때
+$('#emailCheckBtn').click(function(){
+	$('#emailDiv').empty();
 	
+	if ($('#emailCode').val() == '') {
+			$('#emailDiv').text('인증번호를 입력해주세요');
+			$('#emailDiv').css('color', 'red');
+	
+	}else{
+		
+		if(sessionStorage.getItem("authCode")!= $('#emailCode').val()){
+			$('#emailDiv').text('인증번호가 다릅니다.');
+			$('#emailDiv').css('color', 'red');
+		}else{
+			$('#emailCheckBtn').prop('disabled', true); //버튼 비활성화
+			$('#emailCode').prop('readonly', true);
+			$('#emailCheckSw').val('1'); //이메일 인증 여부
+		}
+		
+	}//입력여부 if
+});
+
+
+
 //닉네임 중복확인
 $('#nickname').focusout(function(){
 	$('#nicknameDiv').empty();
@@ -213,68 +255,6 @@ $('#nickname').focusout(function(){
 		
 	
 });
-//이메일 발송 버튼을 눌렀을 때
-$('#sendEmailBtn').click(function() {
-
-$('#emailDiv').empty();
-	if ($('#email').val() == 'undefined') {
-		$('#emailDiv').text('이메일은 반드시 동의를 해주셔야 가입이 가능합니다.');
-		$('#emailDiv').css('color', 'red');
-
-	} else {
-		if (!/^[a-z0-9_+.-]+@([a-z0-9-]+\.)+[a-z0-9]{2,4}$/.test($('#email').val())) {	//형식 체크
-			$('#emailDiv').text('올바른 형식으로 입력해주세요.');
-			$('#emailDiv').css('color', 'red');
-			
-		} else {
-			
-			$('#sendEmailModal').modal();//발송 완료 모달
-			
-			//메일발송		
-			$.ajax({
-				type:'post',
-				url : '/FoodFighter/member/signupSendMail',
-				data : 'email='+$('#email').val(),
-				dataType:'text',
-				success : function(data) {
-					sessionStorage.setItem("authCode", data ); //히든으로 하면 보안때문에 session으로 변경
-					alert(sessionStorage.getItem("authCode")); //임시
-				},
-				error : function(e) {
-					console.log(e);
-				}
-			});
-			
-			$('#sendEmailBtn').text('재전송');
-			$('#sendEmailBtn').addClass('offset-5')
-			$('#emailCode').show('slide');
-			$('#emailCheckBtn').show('slide');
-		}
-	}//빈칸 체크 if
-});
-
-//인증 버튼을 눌렀을 때
-$('#emailCheckBtn').click(function(){
-	$('#emailDiv').empty();
-	
-	if ($('#emailCode').val() == '') {
-			$('#emailDiv').text('인증번호를 입력해주세요');
-			$('#emailDiv').css('color', 'red');
-	
-	}else{
-		
-		if(sessionStorage.getItem("authCode")!= $('#emailCode').val()){
-			$('#emailDiv').text('인증번호가 다릅니다.');
-			$('#emailDiv').css('color', 'red');
-		}else{
-			$('#emailCheckBtn').prop('disabled', true); //버튼 비활성화
-			$('#emailCheckSw').val('1'); //이메일 인증 여부
-		}
-		
-	}//입력여부 if
-});
-
-
 //회원가입 버튼을 눌렀을 때
 $('#signupBtn').click(function() {
 	$('#emailDiv').empty();
@@ -292,12 +272,7 @@ $('#signupBtn').click(function() {
 		$('#nameDiv').text('이름을 입력해주세요.');
 		$('#nameDiv').css('color', 'red');
 
-	}else if(/^[가-힣a-zA-Z]{3,16}$/.test($('#name').val())){
-
-		$('#nameDiv').text('이름은 2글자 이상 영문자와 한글만 입력해주세요');
-		$('#nameDiv').css('color', 'red');
-
-	}  else if ($('#nickname').val() == '') {
+	} else if ($('#nickname').val() == '') {
 		$('#nicknameDiv').text('닉네임을 입력해주세요.');
 		$('#nicknameDiv').css('color', 'red');
 

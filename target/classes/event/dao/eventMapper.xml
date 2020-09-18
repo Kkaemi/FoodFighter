@@ -54,7 +54,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<!-- 글 삭제 -->
-	<delete id="eventBoardDelete" parameterType="int">
+	<delete id="eventBoardDelete1" parameterType="int">
+			DELETE from event_comment WHERE seq_event=#{seq_event}
+	</delete>
+	<delete id="eventBoardDelete2" parameterType="int">
 			DELETE from event_board WHERE seq_event=#{seq_event}
 	</delete>
 	
@@ -87,15 +90,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 선택삭제 -->
-	<delete id="eventBoardListDelete" parameterType="java.util.List">
+	<delete id="eventBoardListDelete1" parameterType="java.util.List">
+			DELETE from event_comment WHERE seq_event=#{seq_event}
+	</delete>
+	<delete id="eventBoardListDelete2" parameterType="java.util.List">
 		delete from event_board where seq_event = #{temp}
 	</delete>
 	
 	<!-- 댓글 글쓰기 -->
 	<insert id="eventboardcommentwirte" parameterType="java.util.Map">
-			 insert into event_comment(seq_eventco, seq_event, conickname, cocontent, cref, cshow, secret) 
+			 insert into event_comment(seq_eventco, seq_event, conickname, cocontent, cref, secret) 
 			 
-			 values (Nextval(seq_eventco),#{seq_event},#{conickname}, #{cocontent}, lastval(seq_eventco), 'y', #{secret})
+			 values (Nextval(seq_eventco),#{seq_event},#{conickname}, #{cocontent}, lastval(seq_eventco), #{secret})
 	</insert>
 	
 	<!-- 댓글 목록 -->

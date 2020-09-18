@@ -337,7 +337,32 @@ $(document).ready(function(){
 $('#reviewWriteBtn').click(function(){
 	location.href="/FoodFighter/review/review_writeForm?resSeq=<%=resSeq%>&resName=<%=resName%>";
 });
+<<<<<<< HEAD
 
+=======
+var modal = document.getElementById('myModal');
+var img = document.getElementById('restaurant-image');
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("caption");
+img.onclick = function(){
+  modal.style.display = "block";
+  modalImg.src = this.src;
+  captionText.innerHTML = this.alt;
+}
+var span = document.getElementsByClassName("close")[0];
+span.onclick = function() { 
+  modal.style.display = "none";
+}
+</script>
+
+<!-- 북마크 클릭 시 색깔 바꾸기 -->
+<script>
+function bookmarkChange() {
+    document.getElementById("bookmark").className="glyphicon glyphicon-bookmark";
+    document.getElementById("bookmark").style.cssText ="color :#ffa64d; font-size : 40px; margin-left:543px;";
+    document.getElementById("bookmark-name").style.cssText ="color :#ffa64d;";
+}
+>>>>>>> d75093ced47c2ef2579b98e7ad3df9c0f78b2d5a
 </script>
 
 </html>

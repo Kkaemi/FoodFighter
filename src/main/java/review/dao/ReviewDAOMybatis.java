@@ -20,6 +20,7 @@ public class ReviewDAOMybatis implements ReviewDAO {
 	@Override
 	public void writeReview(Map<String, Object> map) {
 		sqlSession.insert("reviewSQL.writeReview", map);
+		sqlSession.update("reviewSQL.avgUpdate", map);
 	}
 
 	@Override

@@ -18,4 +18,7 @@ public interface ReviewService {
 
 	public Map<String, Object> getRestaurantDTOAndReviewList(Map<String, String> map);
 
+	public void avgUpdate(Map<String, Object> map);
+
+
 }

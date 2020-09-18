@@ -83,7 +83,7 @@ public class MemberController {
 	@RequestMapping(value="checkEmail",method=RequestMethod.POST)
 	public @ResponseBody String checkEmail(@RequestParam String email) {
 	
-		System.out.println("넘어옴");
+		//System.out.println("넘어옴");
 		return memberService.checkEmail(email);
 	}
 	//닉네임 중복 여부

@@ -56,13 +56,10 @@ public class LoginController {
 		@RequestMapping(value="login", method=RequestMethod.POST)
 		public @ResponseBody String login(@RequestParam Map<String,String> map,
 										  HttpSession session) {
-			//System.out.println(">>>>>>>>>>>>>>> " + map.toString());	
-			//String enCodePwd = passEncoder.encode(pwd);
-			//System.out.println(pwd+", "+enCodePwd);
 					
 			MemberDTO memberDTO = memberService.login(map);
-			
-			if(passEncoder.matches(map.get("pwd"), memberDTO.getPwd())) {
+
+				if(memberDTO != null && passEncoder.matches(map.get("pwd"), memberDTO.getPwd())) {
 				session.setAttribute("memId", memberDTO.getEmail());
 				session.setAttribute("memberDTO", memberDTO);
 				
@@ -83,11 +80,10 @@ public class LoginController {
 		
 		//카카오로그인
 		@RequestMapping(value="kakaologin", method=RequestMethod.POST)
-		public @ResponseBody String kakaologin(@RequestParam String email,
-										  HttpSession session) {
-				
+		@ResponseBody
+		public String kakaologin(@RequestParam String email, HttpSession session) {
+		
 			MemberDTO memberDTO = memberService.kakaologin(email);
-			//System.out.println(memberDTO);
 			
 			if(memberDTO != null) {
 			session.setAttribute("memId", memberDTO.getEmail());
@@ -101,25 +97,7 @@ public class LoginController {
 					return "fail";
 				}
 			}
-		
-		//카카오로그인
-//		@RequestMapping(value="kakaologin", method=RequestMethod.POST)
-//		public @ResponseBody String kakaologin(@RequestParam String email,
-//										  HttpSession session) {
-//				
-//			MemberDTO memberDTO = memberService.kakaologin(email);
-//			//System.out.println(memberDTO);
-//			
-//			if(memberDTO != null) {
-//			session.setAttribute("memId", memberDTO.getEmail());
-//			session.setAttribute("memberDTO", memberDTO);
-//
-//				
-//					return "success";
-//				} else {
-//					return "fail";
-//				}
-//			}
+			
 		
 		//로그아웃
 	      @RequestMapping(value="/logout", method=RequestMethod.GET)
@@ -151,7 +129,7 @@ public class LoginController {
 		public @ResponseBody String getforgotpwd(@RequestParam Map<String, String> map){
 			//System.out.println(">>>>>>>>>>>>>>>>>> getforgotpwd");
 			MemberDTO memberDTO = memberService.userInfo(map); 
-			System.out.println("1111");
+			//System.out.println("1111");
 			if (memberDTO == null) {
 				return "fail";
 				

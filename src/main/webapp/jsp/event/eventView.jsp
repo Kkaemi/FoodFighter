@@ -33,7 +33,7 @@ body, html {
 <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
 	<div id="header-container">
 	  <a class="header-logo" href="/FoodFighter"><img src="../resources/img/logo.png" width="250px;" height="55px;" align="left" style="margin-top: 10px; margin-left: 200px;"></a>
-	      <ul id="header-menu">
+	     <ul id="header-menu">
 		      <li class="header-items">
 		  		<img src="../resources/img/search.png" class="header_searchIcon" width="30" height="30" align="center"> 
 		   		<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword" autocomplete="on" maxlength="50" >
@@ -42,14 +42,17 @@ body, html {
 		       <li class="nav-item">
 		           <a class="nav-link js-scroll active" href="/FoodFighter">Home</a>
 		       </li>
-		       <li class="nav-item">
+		       <!-- <li class="nav-item">
 	         	  <a class="nav-link js-scroll" href="/FoodFighter/review/reviewNonSearchList">리뷰 리스트</a>
-	          </li>
+	          </li> -->
 	          <li class="nav-item">
 	           <a class="nav-link js-scroll" href="/FoodFighter/community/communityMain">커뮤니티</a>
 	          </li>
 	          <li class="nav-item">
 	            <a class="nav-link js-scroll" href="/FoodFighter/event/eventList">이벤트</a>
+	          </li>
+	          <li class="nav-item">
+	         	  <a class="nav-link js-scroll" href="/FoodFighter/community/communityNotice">공지사항</a>
 	          </li>
 	          <li class="nav-item">
 	            <a class="nav-link js-scroll">
@@ -58,6 +61,28 @@ body, html {
      	     </li>
 	   	</ul>
 	</div>
+<!-- usermenu -->
+    <div class="modal headUser-menu" id="headUser-menu" role="dialog">
+  	  <div class="tri"></div>
+  	  <c:if test="${memId == null}">
+  	  	  <p>로그인 또는 회원가입을 하시면 <br> 더 많은 서비스를 <br>이용하실 수 있습니다.</p>
+  		  <hr>
+	  	  <button type="button" id="loginBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/login/loginForm'" >로그인</button>
+	  	  <button type="button" id="signupBtn" class="headUserMenu-Btn" onclick="location.href='/FoodFighter/member/signupChoice'" >회원가입</button>
+  	  </c:if>
+  	  <c:if test="${memId == 'admin@admin.com'}">
+  		  <p>관리자로<br> 로그인 하셨습니다. </p>
+  		  <hr>
+	  	  <button type="button" id="adminBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/admin/adminMain'" >관리자페이지</button>
+	  	  <button type="button" id="logoutBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/login/logout'">로그아웃</button>
+  	  </c:if>
+  	  <c:if test="${memId != null && sessionScope.memId != 'admin@admin.com'}">
+  		  <p>맛집을 찾아보고 <br> 후기를 남겨보세요.</p>
+  		  <hr>
+	  	  <button type="button" id="mypageBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/mypage/mypageMain'" >마이페이지</button>
+	  	  <button type="button" id="logoutBtn" class="headUserMenu-Btn"  onclick="location.href='/FoodFighter/login/logout'">로그아웃</button>
+  	  </c:if>
+    </div>
 </form>
 
 <!-- 본문 -->
@@ -181,6 +206,10 @@ $(document).ready(function(){
     });
 });
 
+$('#headerUser').click(function(){
+	$('#headUser-menu').modal();
+});
+
 function mode(num){
 	if(num==1){//글수정
 		document.eventViewForm.method = 'post';
@@ -245,7 +274,7 @@ $('#cwrite').click(function(){
 						'conickname' : conickname,
 						'secret' : secret},
 				success: function() {
-			    	alert("111111");
+			    	//alert("111111");
 			    	$('#cwrite_place').val("");
 			    	
 	       		},
@@ -272,6 +301,7 @@ $(document).ready(function(){
 		dataType : 'json',
 		success : function(data){
 			var cmnt_N = "";
+			$('.comment_list').empty();
 			if(data == null){
 			}else {
 			$.each(data, function(index, items){
@@ -289,12 +319,12 @@ $(document).ready(function(){
 												cmnt_N += '</div>';
 													cmnt_N += '</div>';
 														cmnt_N += '<div class ="option">';
-								if(conickname != items.conickname){
-									cmnt_N += '<div class ="dropdown" style ="visibility: hidden;">';
-									alert("1111111");
+								if(conickname == items.conickname && conickname == '관리자'){
+									cmnt_N += '<div class ="dropdown">';
+									//alert("1111111");
 								
 								}else{
-									cmnt_N += '<div class ="dropdown">';
+									cmnt_N += '<div class ="dropdown" style ="visibility: hidden;">';
 								}
 								cmnt_N += '<button type = "button" data-toggle = "dropdown" class ="dropdown-toggle">';
 									cmnt_N += '<span class ="ico_bbs ico_more"></span>';
@@ -309,8 +339,13 @@ $(document).ready(function(){
 															cmnt_N += '<a href ="javascript:" id ="cmnt_reply'+index+'" onclick = "cmnt_reply('+items.seq_eventco+')"></a>';
 															cmnt_N += '</div>';
 																cmnt_N += '</div>';
-																	cmnt_N += '</li>';
-				$('.comment_list').prepend(cmnt_N);
+					
+																cmnt_N += '</li>';
+																
+				$('.comment_list').html(cmnt_N);
+					//cmnt_N = "";
+					
+				
 				/* if(items.secret == 'y') {
 					let cmnt_Y = '<li class = "comment_section" id = "comt'+index+'" style = " padding: 15px 0 15px 68px !important;">'
 								+ '<div class = "secretIcon">'

@@ -105,13 +105,13 @@ $('#nSrchBtn').click(function(){
 
 /* 공지사항 글 보기 */
 $('#cNTable').on('click', '#subjectA', function(){
-	let seq = $(this).parent().parent().prev().text().trim();
+	let nseq = $(this).parent().parent().prev().text().trim();
 	let nSrchOption = $('#nSrchOption').val();
 	let nKeyword = $('#nKeyword').val();
 
 	if(nKeyword == ''){
-		$(location).attr("href", "communityNoticeView?seq="+seq+"&pg="+$('#pg').val());
+		$(location).attr("href", "communityNoticeView?nseq="+nseq+"&pg="+$('#pg').val());
 	}else {
-		$(location).attr("href", "communityNoticeView?seq="+seq+"&pg="+$('#pg').val()+"&nSrchOption="+nSrchOption+"&nKeyword="+nKeyword);
+		$(location).attr("href", "communityNoticeView?nseq="+nseq+"&pg="+$('#pg').val()+"&nSrchOption="+nSrchOption+"&nKeyword="+nKeyword);
 	}
 });

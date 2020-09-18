@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cRankSQL">
+
+	<!-- 레스토랑 랭킹 목록 -->
+	<select id = "getRankResList" resultType = "cRankRes">
+		select * from
+		(select @ROWNUM := @ROWNUM + 1 as rn, tt.*
+        from(select resSeq, resName, resScore, resImage1 from restaurant, (select @ROWNUM := 0)TMP
+        order by resScore desc)tt)PAGING
+        where rn between 1 and 10;
+	</select>
+	
+	<select id = "getRankResRevList" resultType = "cRankRes">
+		select resName, seq_review, content, image1 from review where resName = #{temp};
+	</select>
+	
+	<!-- 유저랭킹 리스트 불러오기 -->
+	<select id="getRankMemList" resultType="cRankMem">
+		select (@ROWNUM := @ROWNUM + 1) as rownum, tt.*
+		from (
+			select a.nickname, IFNULL(profile, 'member.png') as profile, c.resSeq, b.resName, b.resScore, content, image1
+			from testmember a
+			join (
+				select *, count(nickname) as rowcount
+				from (
+					select * from review order by review.reviewDate desc LIMIT 18446744073709551615
+				) x group by x.nickname
+				order by rowcount desc LIMIT 18446744073709551615
+			) b on a.nickname = b.nickname
+		    join restaurant c on b.resName = c.resName
+			order by rowcount desc LIMIT 18446744073709551615
+		) tt, (SELECT @ROWNUM := 0) TMP
+		limit 10;
+	</select>
+</mapper>

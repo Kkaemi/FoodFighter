@@ -26,15 +26,18 @@
 	       <li class="nav-item">
 	           <a class="nav-link js-scroll active" href="/FoodFighter">Home</a>
 	       </li>
-	       <li class="nav-item">
+	       <!-- <li class="nav-item">
 	        	  <a class="nav-link js-scroll" href="/FoodFighter/review/reviewNonSearchList">리뷰 리스트</a>
-	          </li>
+	          </li> -->
 	       <li class="nav-item">
 	         <a class="nav-link js-scroll" href="/FoodFighter/community/communityMain">커뮤니티</a>
 	       </li>
 	       <li class="nav-item">
 	         <a class="nav-link js-scroll" href="/FoodFighter/event/eventList">이벤트</a>
 	       </li>
+	       <li class="nav-item">
+	         	  <a class="nav-link js-scroll" href="/FoodFighter/community/communityNotice">공지사항</a>
+	          </li>
 	       <li class="nav-item">
 	         <a class="nav-link js-scroll">
 	         <img src="/FoodFighter/resources/img/member.png" class="header_searchIcon" width="30" height="30" align="center">
@@ -99,12 +102,11 @@ $('.header_searchInput').click(function(){
 });
 
 
-
  $('#loginbtn').click(function(){ 
 	 $('#idDiv').empty();
 	 $('#pwdDiv').empty(); 
 	 
-	 if($('#email').val() == ''){ 
+	 if($('#email').val() == '' ){ 
 		 	$('#idDiv').text('아이디를 입력하세요.')
 			$('#idDiv').css('color','red')
 			$('#idDiv').css('font-size','8pt')
@@ -130,12 +132,13 @@ $('.header_searchInput').click(function(){
                   
             dataType : 'text',
             success : function(data){
-          	 // alert(JSON.stringify(data));     	  
+          	  //alert(JSON.stringify(data));     	  
                if(data == 'success'){
             
               	 location.href = '/FoodFighter/';
               	 
                }else if(data == 'admin')	{
+            	   
               	 location.href = '/FoodFighter/admin/adminDashboard';
                      
             }else if(data == 'fail'){      
@@ -159,6 +162,7 @@ $('.header_searchInput').click(function(){
 <script type='text/javascript'>
 $('#kakao-login-btn').click(function(){
 	Kakao.init("42cbda65d990bd717a2a38923ec19349");
+	
 	Kakao.Auth.loginForm({
 		success : function(authObj) {
 			Kakao.API.request({
@@ -167,16 +171,18 @@ $('#kakao-login-btn').click(function(){
 					email = res.kakao_account.email;
 					$.ajax({
 						type : 'post',
-						url : '/FooFighter/login/kakaologin',
-						data : {'email' : $('#email').val()},
+						url : '/FoodFighter/login/kakaologin',
+						data : {'email' : email},
 			    		dataType : 'text',
 			    		success : function(data){
 		    			if(data == 'success'){
 		    				location.href = '/FoodFighter/';
-		    				}else if(data == 'fail'){		
-		    					location.href = '/FoodFighter//login/loginForm';
+		    				
+		    				}else if(data == 'fail'){	
+		    					location.href = '/FoodFighter/login/loginForm';
 								}
 							},
+							
 						error : function(err) {
 							console.log(err);
 						}
@@ -191,9 +197,7 @@ $('#kakao-login-btn').click(function(){
 			console.log(err);
 		}
 	});
-	
 });
-
 </script> 
 </body>
 </html>

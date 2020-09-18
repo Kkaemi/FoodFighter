@@ -143,6 +143,7 @@ public class AdminController {
 		@RequestMapping(value="AdminWithdraw",method=RequestMethod.POST)
 		@ResponseBody
 		public void AdminWithdraw(@RequestParam String member_seq) {
+
 			adminService.AdminWithdraw(member_seq);
 		}
 	//회원검색	

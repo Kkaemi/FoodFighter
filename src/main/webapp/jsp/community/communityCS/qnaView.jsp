@@ -94,7 +94,7 @@ String keyword = request.getParameter("keyword");
 	                <tr>
 	                    <td>
 	                        작성자 : <span id="nicknameSpan" style="font-weight: bold;"></span>&ensp;
-	                        조회수 : <span id="hitSpan" style="font-weight: bold;">3</span>
+	                        조회수 : <span id="hitSpan" style="font-weight: bold;"></span>
 	                    </td>
 	                </tr>
 	                <tr>
@@ -109,15 +109,14 @@ String keyword = request.getParameter("keyword");
 	        <!-- 버튼그룹 -->
 	        <div class="btn-group">
 	            <span class="pull-right">
-	                <a href="#" class="myButton">글쓰기</a>
 	                <a href="javascript:void(0);" class="myButton" onclick="location.href='qna?pg=${pg}'">목록보기</a>
 	            </span>
-
+	            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	        </div>
         </form>
 
         <!-- 내가 쓴 글과 관리자 답글을 보여줌 -->
-        <table style="margin-top: 5%;">
+        <table style="margin-top: 5%;" id="qnaViewListTable">
             <colgroup>
                 <col width="100">
                 <col width="*">
@@ -127,29 +126,14 @@ String keyword = request.getParameter("keyword");
             </colgroup>
             <thead>
                 <tr>
-                    <th>NO</th>
-                    <th>제목</th>
-                    <th>작성자</th>
-                    <th>작성일</th>
-                    <th>조회수</th>
+                    <th scope="col" class="text-center">NO</th>
+                    <th scope="col" class="text-center">제목</th>
+                    <th scope="col" class="text-center">작성자</th>
+                    <th scope="col" class="text-center">작성일</th>
+                    <th scope="col" class="text-center">조회수</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>질문드립니다</td>
-                    <td>김영희</td>
-                    <td>2020.08.09</td>
-                    <td>3</td>
-                </tr>
-                
-                <tr>
-                    <td>2</td>
-                    <td>답변입니다</td>
-                    <td>관리자</td>
-                    <td>2020.08.09</td>
-                    <td>1</td>
-                </tr>
             </tbody>
         </table>
 
@@ -176,15 +160,75 @@ String keyword = request.getParameter("keyword");
 			dataType : 'json',
 			success : function(data) {
 				
-				if (data.memberDTO == null || data.memberDTO.email != data.qnaboardDTO.email) {
+				if (data.memberDTO == null) {
+					
 					alert('올바른 접근이 아닙니다!!!');
 					location.href='qna';
+					return;
+					
 				}
 				
 				$('#subjectSpan').text(data.qnaboardDTO.subject);
 				$('#nicknameSpan').text(data.qnaboardDTO.nickname);
 				$('#hitSpan').text(data.qnaboardDTO.hit);
 				$('#contentSpan').html(data.qnaboardDTO.content);
+				
+				$.each(data.list, function(index, items) {
+					$('<tr/>').append($('<td/>',{
+					
+						align : 'center',
+						text : items.seq
+						
+					})).append($('<td/>',{
+					}).append($('<a/>',{
+					
+						id : 'subjectA',
+						href : '#',
+						align : 'center',
+						text : items.subject,
+						class : items.seq
+					
+					}))).append($('<td/>',{
+					
+						align : 'center',
+						text : items.nickname
+						
+					})).append($('<td/>',{
+					
+						align : 'center',
+						text : items.logtime
+						
+					})).append($('<td/>',{
+					
+						align : 'center',
+						text : items.hit
+						
+					})).appendTo($('#qnaViewListTable'));
+					
+					// 답글
+					for (i=0; i<=items.lev; i++) {
+						$('.' + items.seq).before('&emsp;');
+					}
+					
+					if (items.pseq != 0) {
+					
+						$('.' + items.seq).before($('<img/>',{
+							src : '/FoodFighter/resources/img/community/reply_icon.png',
+							width : 10,
+							height : 10
+						}));
+					
+					}
+					
+					$('#qnaViewListTable').on('click', '#subjectA', function() {
+						
+						let seq = $(this).attr('class');
+						let pg = $('#pg').val();
+						location.href = '/FoodFighter/community/passwordPage?seq='+seq+'&pg='+pg;
+					
+					});
+					
+				});
 				
 				if (data.memberDTO.nickname != '관리자' && data.memberDTO.email != data.qnaboardDTO.email) return;
 				
@@ -217,8 +261,7 @@ String keyword = request.getParameter("keyword");
 					
 				}));
 				
-				
-			},
+			},/* <- success end */
 			error : function(err) {
 				console.log(err);
 			}
@@ -226,8 +269,7 @@ String keyword = request.getParameter("keyword");
 		});
 		
 	});
-</script>
-<script type="text/javascript">
+	
 	function mode(num) {
 		
 		switch (num) {
@@ -252,5 +294,7 @@ String keyword = request.getParameter("keyword");
 		}
 		
 	}
+</script>
+<script type="text/javascript">
 </script>
 </html>

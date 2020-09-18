@@ -69,7 +69,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	</select>
  	
  	<select id="getTodayPost" resultType="int">
- 		select count(*) from cboard
+ 		select count(*) from cboard where logtime like CONCAT(CURDATE(),'%')
  	</select>
  	
  	<select id="getTotalPost" resultType="int">

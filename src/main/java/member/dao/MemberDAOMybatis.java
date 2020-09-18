@@ -1,5 +1,6 @@
 package member.dao;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -23,7 +24,6 @@ public class MemberDAOMybatis implements MemberDAO {
 
 	@Override
 	public MemberDTO checkEmail(String email) {
-		
 		return sqlSession.selectOne("memberSQL.checkEmail",email);
 	}
 
@@ -57,7 +57,7 @@ public class MemberDAOMybatis implements MemberDAO {
 
 	@Override
 	public MemberDTO kakaologin(String email) {
-		return sqlSession.selectOne("memberSQL.kakaologin", email);
+		return sqlSession.selectOne("memberSQL.kakaologin",email);
 	}
 
 	@Override

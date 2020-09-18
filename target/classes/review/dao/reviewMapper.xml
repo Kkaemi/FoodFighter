@@ -9,7 +9,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into review values(Nextval(seq_review),#{member_seq},#{nickname},#{resName},#{resScore},#{content},#{image1},#{image2},#{image3},#{image4},#{image5},now())
 		<!-- insert into view_test values(seq_review.nextval,#{member_seq},#{nickname},#{resName},#{resScore},#{content},#{image1},#{image2},#{image3},#{image4},#{image5}) -->
 	</insert>
-
+	
+	<!-- 평점 업데이트  -->
+	<update id="avgUpdate" parameterType="java.util.Map">
+		update restaurant set resScore = (select round(avg(resScore),1) from review where resName like #{resName}) where resname like #{resName}
+	</update> 
+	
 	<!-- 키워드 검색 -->
 	<select id="getSearchList" parameterType="java.util.Map" resultType="restaurant">
 	<!-- select * from searchList where resName like '%'||#{keyword}||'%' and rownum >= #{startNum} and rownum <= #{endNum} -->
