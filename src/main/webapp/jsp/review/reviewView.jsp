@@ -77,13 +77,8 @@ String resSeq = request.getParameter("resSeq");
 <div class="reviewView-container">
 	<!--타이틀 및 점수-->
     <div class="title">
-        <span id="title"><span>
+        <span id="title"></span>
         <span class="review-score"></span>   
-        <!--북마크-->
-        <span id="bookmark-group"  onclick="bookmarkChange()">
-            <span class="fa fa-bookmark-o" id="bookmark"></span>
-            <p id="bookmark-name">찜하기<p> 
-        </span>
     </div>
 
     <!--리뷰 정보- 조회수, 리뷰수, 북마크-->
@@ -109,7 +104,6 @@ String resSeq = request.getParameter("resSeq");
         <div class="table-div">
             <table class="table">
                 <tbody>
-              
                     <tr class="table">
                         <th>주소</th>
                         <td><span id="resAddress"></span></td>
@@ -154,81 +148,52 @@ String resSeq = request.getParameter("resSeq");
                                 <button class="tag-item"># 냉면맛집</button>
                             </div>
                         </td>
-
                     </tr>
+                    
                 </tbody>
             </table>
+            <span class="resImages">
+	       		<img id="resImage1">
+	       		<img id="resImage2">
+       		</span>
         </div>
+		
         <div class="map-container">
             <div id="map" style="width:400px;height:350px;"></div>
             
-         
         </div>
+      
+  
+       
     </div>  
-
+ 
     <div class="line"></div>
+      
+        <!-- 리뷰쓰기 버튼 -->
+		<span class="writeBtn">
+	      	<input type="button" id="reviewWriteBtn" name="reviewWriteBtn" value="리뷰쓰기">
+	      	<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+	      	<input type="hidden" name="resName" value="<%=resName%>">
+	    </span>	
+	    
 
-    <!--리뷰-->
-    <div class="review-list">
-    
-        <div class="review-count">
-            <button class="review-count-btn-selected">전체(72)</button>
-            |
-            <button class="review-count-btn">맛있다(65)</button>
-            |
-            <button class="review-count-btn">괜찮다(6)</button>
-            |
-            <button class="review-count-btn">별로(1)</button>
-        </div>
-		<!-- 리뷰쓰기 버튼 -->
-         <input type="button" id="reviewWriteBtn" name="reviewWriteBtn" value="리뷰쓰기">
-         <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
-        <input type="hidden" name="resName" value="<%=resName%>">
-        
-        <div class="restaurant-images">
-            <div id="direc-icon-left" class="glyphicon glyphicon-chevron-left"></div>
-                <img class="restaurant-image" id="restaurant-image">
-                <img class="restaurant-image">
-                <img class="restaurant-image">
-
-            
-            <div id="direc-icon-right" class="glyphicon glyphicon-chevron-right"></div>
-
-        </div>
-         <!--modal-->
-            <div id="myModal" class="modal">
-                <span class="close">&times;</span>
-                <img class="modal-content" id="img01">
-                <div id="caption"></div>
-            </div>
-
-        <div class="review-div">
-
-            <!--리뷰 1-->
-            <div class="review1">
-                <div class="user-info">
-                    <img class="user-image" src="/FoodFighter/resources/img/review/reviewView-img/cat.png">
-                    <p class="user-name">양아무개</p>
-                </div>
-                <div class="review-text">
-                    <span class="review-date">2020-08-05</span><br>
-                    <div class="review-content">
-                        나쁘지 않아요. 고등어 구이가 어쩌고저쩌고...
-                        또 가고 싶어요!!
-                    </div>
-                    <div class="review-images">
-                        <img class="review-image1" src="/FoodFighter/resources/img/review/list-img/냉면1.jpg">
-                        <img class="review-image2" src="/FoodFighter/resources/img/review/list-img/냉면2.jpg">
-                    </div>
-                </div>
-            </div>
-
-            <div class="line2"></div>
-            <!--리뷰 2-->
-
-        </div>
-    </div>
+<!-- 
+    <span class="review-count">
+        <button class="review-count-btn-selected">전체(72)</button>
+        |
+        <button class="review-count-btn">맛있다(65)</button>
+        |
+        <button class="review-count-btn">괜찮다(6)</button>
+        |
+        <button class="review-count-btn">별로(1)</button>
+	
+    </span>
+ -->
+ 	<!--리뷰-->
+ 	<div class="review-container"></div>	
+ 	
 </div>
+
 <!--footer-->
 <footer>
     <div class="footer-container" id="footer-container">
@@ -249,7 +214,7 @@ String resSeq = request.getParameter("resSeq");
 <!--모달 script-->
 <script src="/FoodFighter/resources/js/review/keyword.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
-
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=x4xnbzhxl0&submodules=geocoder"></script>
 <script type="text/javascript">
 
@@ -259,59 +224,106 @@ $(document).ready(function(){
     $(document).ajaxSend(function(e, xhr, options) {
         xhr.setRequestHeader(header, token);
     });
+
     
     $.ajax({
 		type : 'post',
-		url : '/FoodFighter/review/getReviewView',
-		data : 'resSeq=${resSeq}',
+		url : '/FoodFighter/review/getRestaurantDTOAndReviewList',
+		data : 'resSeq=${resSeq}&resName=${resName}',
 		dataType : 'json',
 		success : function(data){
-			//alert(JSON.stringify(data));
-			/* $('#restaurant-image').attr('src', '/FoodFighter/src/webapp/storage/restaurant/'+data.restaurantDTO.resImage1); */
 			
-			let resAddress = data.restaurantDTO.resAddress;
+			let resAddress = data.restaurantAndReviewMap.restaurantDTO.resAddress;
 			
-			$('#title').text(data.restaurantDTO.resName);
-			$('#resAddress').text(data.restaurantDTO.resAddress);
-			$('#resTel').text(data.restaurantDTO.resTel);
-			$('#resTheme').text(data.restaurantDTO.resTheme);
-			$('#resPrice').text(data.restaurantDTO.resPrice);
-			$('#resHours').text(data.restaurantDTO.resHours);
-			$('#resClosing').text(data.restaurantDTO.resClosing);
-			$('#menu-text').text(data.restaurantDTO.resMenu);
+			// 가게 데이터
+			$('#title').text(data.restaurantAndReviewMap.restaurantDTO.resName);
+			$('#resAddress').text(data.restaurantAndReviewMap.restaurantDTO.resAddress);
+			$('#resTel').text(data.restaurantAndReviewMap.restaurantDTO.resTel);
+			$('#resTheme').text(data.restaurantAndReviewMap.restaurantDTO.resTheme);
+			$('#resPrice').text(data.restaurantAndReviewMap.restaurantDTO.resPrice);
+			$('#resHours').text(data.restaurantAndReviewMap.restaurantDTO.resHours);
+			$('#resClosing').text(data.restaurantAndReviewMap.restaurantDTO.resClosing);
+			$('#menu-text').text(data.restaurantAndReviewMap.restaurantDTO.resMenu);
+			$('#resImage1').attr('src', '/FoodFighter/storage/restaurant/'+data.restaurantAndReviewMap.restaurantDTO.resImage1);
+			$('#resImage1').attr('width','80px');
+			$('#resImage1').attr('height', '90px');
+			$('#resImage2').attr('src', '/FoodFighter/storage/restaurant/'+data.restaurantAndReviewMap.restaurantDTO.resImage2);
+			$('#resImage2').attr('width','80px');
+			$('#resImage2').attr('height', '90px');
+			// 리뷰 데이터
+			$.each(data.restaurantAndReviewMap.reviewList, function(index, items) {
+				$('<div/>', {
+					class : 'review'
+				}).append($('<div/>', {
+					class : 'user-info'
+				}).append($('<p/>', {
+					
+					class : 'user-name',
+					text : items.nickname
+					
+				}))).append($('<div/>', {
+					class : 'review-text'
+				}).append($('<span/>', {
+					
+					class : 'review-date',
+					text : moment(items.reviewDate).format('YYYY MM DD HH:mm:ss')
+					
+				})).append($('<br/>')).append($('<div/>', {
+					
+					class : 'review-content',
+					text : items.content
+					
+				})).append($('<div/>', {
+					class : 'review-images'
+				}).append($('<img/>', {
+					
+					class : 'review-image1',
+					src : '/FoodFighter/storage/review/' + items.image1,
+					width : '100px',
+					height : '100px'
+					
+				})).append($('<img/>', {
+					
+					class : 'review-image2',
+					src : '/FoodFighter/storage/review/' + items.image2,
+					width : '100px',
+					height : '100px'
+					
+				}))).append($('<div/>', {
+					class : 'line2'
+				}))).appendTo('.review-container');
+			});
 			
 		    naver.maps.Service.geocode({
 		        query: resAddress
 		    }, function(status, response) {
-		        if (status !== naver.maps.Service.Status.OK) {
-		            return alert('Something wrong!');
-		        }
-		
-		        var result = response.v2, // 검색 결과의 컨테이너
-		            items = result.addresses; // 검색 결과의 배열
-				/* alert(items[0].x+', '+items[0].y+', '+typeof items[0].x+', '+typeof items[0].y); */
-		            
-		        // do Something
-		        
-		    	//지도에 마커찍기 
-		    	let x = parseFloat(items[0].x);
-		    	let y = parseFloat(items[0].y);
-		    	
-		    	
-		    	
-		    	var map = new naver.maps.Map('map', {
-		    	    center: new naver.maps.LatLng(y, x),
-		    	    zoom: 19
-		    	});
-		
-		    	var marker = new naver.maps.Marker({
-		    	    position: new naver.maps.LatLng(y, x),
-		    	    map: map
-		    	});
+			        if (status !== naver.maps.Service.Status.OK) {
+			            return alert('Something wrong!');
+			        }
+			
+			        var result = response.v2, // 검색 결과의 컨테이너
+			            items = result.addresses; // 검색 결과의 배열
+					/* alert(items[0].x+', '+items[0].y+', '+typeof items[0].x+', '+typeof items[0].y); */
+			            
+			        // do Something
+			        
+			    	//지도에 마커찍기 
+			    	let x = parseFloat(items[0].x);
+			    	let y = parseFloat(items[0].y);
+			    	
+			    	
+			    	
+			    	var map = new naver.maps.Map('map', {
+			    	    center: new naver.maps.LatLng(y, x),
+			    	    zoom: 19
+			    	});
+			
+			    	var marker = new naver.maps.Marker({
+			    	    position: new naver.maps.LatLng(y, x),
+			    	    map: map
+			    	});
 		
 		    });
-		
-		    
 			
 		}, error : function(err){
 			console.log(err);
@@ -326,28 +338,6 @@ $('#reviewWriteBtn').click(function(){
 	location.href="/FoodFighter/review/review_writeForm?resSeq=<%=resSeq%>&resName=<%=resName%>";
 });
 
-var modal = document.getElementById('myModal');
-var img = document.getElementById('restaurant-image');
-var modalImg = document.getElementById("img01");
-var captionText = document.getElementById("caption");
-img.onclick = function(){
-  modal.style.display = "block";
-  modalImg.src = this.src;
-  captionText.innerHTML = this.alt;
-}
-var span = document.getElementsByClassName("close")[0];
-span.onclick = function() { 
-  modal.style.display = "none";
-}
-</script>
-
-<!-- 북마크 클릭 시 색깔 바꾸기 -->
-<script>
-function bookmarkChange() {
-    document.getElementById("bookmark").className="glyphicon glyphicon-bookmark";
-    document.getElementById("bookmark").style.cssText ="color :#ffa64d; font-size : 40px; margin-left:543px;";
-    document.getElementById("bookmark-name").style.cssText ="color :#ffa64d;";
-}
 </script>
 
 </html>

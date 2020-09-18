@@ -181,16 +181,24 @@ public class ReviewController {
 	// 가게데이터 끌어오기 
 	//리뷰(reviewView)
 	@ResponseBody
-	@RequestMapping(value="getReviewView", method=RequestMethod.POST)
-	public ModelAndView getReviewView(@RequestParam String resSeq) {
-	
-	RestaurantDTO restaurantDTO = reviewService.getReviewView(resSeq);
-	
-	ModelAndView mav = new ModelAndView();
-	mav.addObject("restaurantDTO", restaurantDTO);
-	mav.setViewName("jsonView");
-	
-	return mav;
+	@RequestMapping(value="getRestaurantDTOAndReviewList", method=RequestMethod.POST)
+	public ModelAndView getRestaurantDTOAndReviewList(@RequestParam String resSeq,
+									@RequestParam String resName) {
+		
+		Map<String, String> map = new HashMap<String, String>();
+		
+		map.put("resSeq", resSeq);
+		map.put("resName", resName);
+		
+		Map<String, Object> restaurantAndReviewMap = reviewService.getRestaurantDTOAndReviewList(map);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("restaurantAndReviewMap", restaurantAndReviewMap);
+		mav.setViewName("jsonView");
+		
+		return mav;
 	}
-
+	
+	
 }

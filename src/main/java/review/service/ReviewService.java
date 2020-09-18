@@ -16,5 +16,6 @@ public interface ReviewService {
 
 	public List<RestaurantDTO> modalSearchList(String pg, String orderby,String Price ,String Food ,String keyword,String resSeq);
 
+	public Map<String, Object> getRestaurantDTOAndReviewList(Map<String, String> map);
 
 }
