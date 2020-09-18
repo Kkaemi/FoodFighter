@@ -25,5 +25,4 @@ public class EventCoDTO {
 	
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy.MM.dd")
 	private Date clogtime; //댓글 작성시간
-	private String cshow; //댓글 삭제 여부 -> y는 게시 / n는 삭제
 }
