@@ -205,7 +205,7 @@ String keyword = request.getParameter("keyword");
 					
 					}
 					
-				});
+				}); // <- each end
 				
 				// 페이징 처리
 				$('.paging').html(data.boardPaging.pagingHTML);

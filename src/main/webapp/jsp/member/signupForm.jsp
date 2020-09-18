@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%
+request.setCharacterEncoding("utf-8");
+String keyword = request.getParameter("keyword");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,26 +21,26 @@
 <body>
 <!--================ Header ================-->
 <form id="headerForm" name="headerForm" method="post" action="../review/getSearchList">
-<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"> 
 	<div id="header-container">
 	  <a class="header-logo" href="/FoodFighter"><img src="../resources/img/logo.png" width="250px;" height="55px;" align="left" style="margin-top: 10px; margin-left: 200px;"></a>
 	      <ul id="header-menu">
 		      <li class="header-items">
 		  		<img src="../resources/img/search.png" class="header_searchIcon" width="30" height="30" align="center"> 
-		   		<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword" value="" autocomplete="on" maxlength="50" >
+		   		<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword" autocomplete="on" maxlength="50" >
 		   		<button size="10" id="header_searchBtn">검색</button>
 		      </li>
 		       <li class="nav-item">
 		           <a class="nav-link js-scroll active" href="/FoodFighter">Home</a>
 		       </li>
-		       <li class="nav-item">
-	         	  <a class="nav-link js-scroll" href="/FoodFighter/review/reviewNonSearchList">리뷰 리스트</a>
-	          </li>
 	          <li class="nav-item">
 	           <a class="nav-link js-scroll" href="/FoodFighter/community/communityMain">커뮤니티</a>
 	          </li>
 	          <li class="nav-item">
 	            <a class="nav-link js-scroll" href="/FoodFighter/event/eventList">이벤트</a>
+	          </li>
+	          <li class="nav-item">
+	         	  <a class="nav-link js-scroll" href="/FoodFighter/community/communityNotice">공지사항</a>
 	          </li>
 	          <li class="nav-item">
 	            <a class="nav-link js-scroll">
@@ -45,6 +50,8 @@
 	   	</ul>
 	</div>
  </form>
+
+ 
  <!-- ============main ============== -->
 <div class="signup-form">
     <form id="signupForm" action="" method="post">
@@ -142,6 +149,8 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" ></script>
 
+<script src="/FoodFighter/resources/js/review/keyword.js"></script>
+
 <script type="text/javascript">
 $(document).ready(function(){
     var token = $("meta[name='_csrf']").attr("content");
@@ -160,8 +169,9 @@ $(document).ready(function(){
 $('#email').focusout(function(){
 		$('#emailDiv').empty();
 		let email = $('#email').val();
+		
 		if($('#email').val() == ''){
-			$('#emailDiv').text("먼저 아이디를 입력하세요");
+			$('#emailDiv').text("먼저 이메일을 입력하세요");
 			$('#email').focus();
 			$('#emailDiv').css('color','blue');
 			$('#emailDiv').css('font-weight','bold');
@@ -201,6 +211,7 @@ $('#email').focusout(function(){
 $('#nickname').focusout(function(){
 	$('#nicknameDiv').empty();
 	let nickname = $('#nickname').val();
+	
 	if($('#nickname').val() == ""){
 		$('#nicknameDiv').text("먼저 닉네임을 입력하세요");
 		$('#nickname').focus();
@@ -214,7 +225,6 @@ $('#nickname').focusout(function(){
 	 		data: 'nickname='+nickname,
 	 		dataType: 'text',
 	 		success : function(data){
-	 			alert(data);
 	 			if(data == 'exist'){
 					$('#nicknameDiv').text('사용 불가능')
 					$('#nicknameDiv').css('color','magenta')
@@ -315,7 +325,7 @@ $('#emailCheckBtn').click(function(){
 			$('#emailDiv').text('이메일을 입력해주세요.');
 			$('#emailDiv').css('color', 'red');
 
-		} else if ($('#emailCheckSw').val() == '0') {
+		} else if($('#emailCheckSw').val() == '0') {
 			$('#emailDiv').text('이메일인증을 해주세요.');
 			$('#emailDiv').css('color', 'red');
 
@@ -352,7 +362,8 @@ $('#emailCheckBtn').click(function(){
 	        $('#nicknameDiv').css('color', 'magenta')
 	        $('#nicknameDiv').css('font-size', '8pt')
 	        $('#nicknameDiv').css('font-weight', 'bold')
-	    }   else {
+	    } else {
+	    	alert("회원가입");
 			$.ajax({
 				type : 'post',
 				url : '/FoodFighter/member/signup',

@@ -18,14 +18,13 @@
 						<th>작성일<i id="dateSort" class="fa fa-sort"></i></th>
 						<th>조회수<i id="dateSort" class="fa fa-sort"></i></th>
 						<th>답변여부<i id="dateSort" class="fa fa-sort"></i></th>
-						<th>관리</th>
 					</tr>
 				</thead>
 				<tbody>
 				<c:forEach var="qnaBoardDTO" items="${list}">
 					<tr>
 						<td class="seq">${qnaBoardDTO.seq}</td>
-						<td><a id = "subjectA" href="/FoodFighter/community/communityCS/qnaView?seq=${qnaBoardDTO.seq}">${qnaBoardDTO.subject}</a></td>
+						<td><a id = "subjectA" href="/FoodFighter/community/qnaView?seq=${qnaBoardDTO.seq}&pg=1">${qnaBoardDTO.subject}</a></td>
 						<td>${qnaBoardDTO.logtime}</td>
 						<td>${qnaBoardDTO.hit}</td>
 						<c:if test="${qnaBoardDTO.reply == 0}">
@@ -34,9 +33,6 @@
 						<c:if test="${qnaBoardDTO.reply != 0}">
 							<td>답변 완료</td>
 						</c:if>
-						<td>
-							<a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-						</td>
 					</tr>
 				  </c:forEach>     
 				</tbody>

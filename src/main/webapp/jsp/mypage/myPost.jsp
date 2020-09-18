@@ -17,19 +17,15 @@
 	                    <th>글 제목<i id="dateSort" class="fa fa-sort"></i></th>
 	                    <th>작성일<i id="dateSort" class="fa fa-sort"></i></th>
 	                    <th>조회수<i id="dateSort" class="fa fa-sort"></i></th>
-	                    <th>관리</th>
 	                </tr>
 	            </thead>
 	            <tbody>
 				<c:forEach var="cBoardDTO" items="${list}">
 	                <tr>
 	                    <td class="bseq">${cBoardDTO.bseq}</td>
-	                    <td><a id = "subjectA" href="/FoodFighter/community/communityBoard/communityBoardView?bseq=${cBoardDTO.bseq}">${cBoardDTO.subject}</a></td>
+	                    <td><a id = "subjectA" href="/FoodFighter/community/communityBoardView?bseq=${cBoardDTO.bseq}&pg=1">${cBoardDTO.subject}</a></td>
 	                    <td>${cBoardDTO.logtime}</td>
 	                    <td>${cBoardDTO.hit}</td>
-	                    <td>
-	                        <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-	                    </td>
 	                </tr>
 	              </c:forEach>     
 	            </tbody>

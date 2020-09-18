@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import community.bean.CommunityRankMemDTO;
 import community.bean.CommunityRankResDTO;
 import community.service.CommunityRankService;
 
@@ -44,6 +45,20 @@ public class CommunityRankController {
 		ModelAndView mav = new ModelAndView();
 		List<CommunityRankResDTO> revList = cRankService.getRankResRevList(list);
 		System.out.println(revList);
+		
+		return mav;
+	}
+	
+	// 유저랭킹 리스트 가져오기
+	@RequestMapping(value = "getRankMemList", method = RequestMethod.POST)
+	public ModelAndView getRankMemList() {
+		
+		List<CommunityRankMemDTO> list = cRankService.getRankMemList();
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("list", list);
+		mav.setViewName("jsonView");
 		
 		return mav;
 	}
