@@ -93,9 +93,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 댓글 글쓰기 -->
 	<insert id="eventboardcommentwirte" parameterType="java.util.Map">
-			 insert into event_comment(seq_eventco, seq_event, conickname, cocontent, cref, cshow, secret) 
+			 insert into event_comment(seq_eventco, seq_event, conickname, cocontent, cref, secret) 
 			 
-			 values (Nextval(seq_eventco),#{seq_event},#{conickname}, #{cocontent}, lastval(seq_eventco), 'y', #{secret})
+			 values (Nextval(seq_eventco),#{seq_event},#{conickname}, #{cocontent}, lastval(seq_eventco), #{secret})
 	</insert>
 	
 	<!-- 댓글 목록 -->
