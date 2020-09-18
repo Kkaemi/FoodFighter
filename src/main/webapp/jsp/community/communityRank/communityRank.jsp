@@ -13,6 +13,30 @@
 body, html {
     height: 100%;
 }
+
+.txt_line {
+	width:270px;
+	font-family: sans-serif;
+	font-size: 16px;
+	line-height: 1.6;
+	max-height: 4.8em;
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+
+.review:hover {
+	text-decoration: underline;
+}
+
+.txt_line:hover {
+	text-decoration: underline;
+}
+
+.resScore:hover {
+	text-decoration: none;
+}
 </style>
 
 <!-- CSS 파일 -->
@@ -93,7 +117,7 @@ body, html {
 	<a href="communityNotice"><span class="glyphicon glyphicon-exclamation-sign"></span>&emsp;공지사항</a>
     <a href="communityBoard"><span class="glyphicon glyphicon-list"></span>&emsp;게시판</a>
     <a href="communityRank"><span class="glyphicon glyphicon-star"></span>&emsp;랭킹</a>
-    <a href=""><span class="glyphicon glyphicon-question-sign"></span>&emsp;고객센터</a>
+    <a href="/FoodFighter/community/csCenter"><span class="glyphicon glyphicon-question-sign"></span>&emsp;고객센터</a>
 </div>
 <!-- 본문 -->
 <div class="container" style="margin-top : 95px;">
