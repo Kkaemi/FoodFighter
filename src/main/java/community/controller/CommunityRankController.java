@@ -38,17 +38,6 @@ public class CommunityRankController {
 		return mav;
 	}
 	
-	//맛집 리스트 순위 가져오기
-	@RequestMapping(value = "communityRankTopResRev", method = RequestMethod.GET)
-	@ResponseBody
-	public ModelAndView communityRankTopResRev(@RequestParam(value="resNameList[]")List<String> list) {
-		ModelAndView mav = new ModelAndView();
-		List<CommunityRankResDTO> revList = cRankService.getRankResRevList(list);
-		System.out.println(revList);
-		
-		return mav;
-	}
-	
 	// 유저랭킹 리스트 가져오기
 	@RequestMapping(value = "getRankMemList", method = RequestMethod.POST)
 	public ModelAndView getRankMemList() {

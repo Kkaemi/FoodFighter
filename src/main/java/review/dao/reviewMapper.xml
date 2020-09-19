@@ -49,4 +49,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getReviewView" parameterType="String" resultType="restaurant">
 		select * from restaurant where resSeq=#{resSeq}
 	</select>
+	
+	<!-- 가게리뷰 리스트로 불러오기 -->
+	<select id="getReviewList" parameterType="String" resultType="review">
+		select * from review where resName = #{resName}
+	</select>
+	
 </mapper>

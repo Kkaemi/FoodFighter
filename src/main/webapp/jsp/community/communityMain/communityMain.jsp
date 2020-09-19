@@ -46,22 +46,22 @@ body, html {
 		   		<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword" autocomplete="on" maxlength="50" >
 		   		<button size="10" id="header_searchBtn">검색</button>
 		      </li>
-		      <li class="nav-item">
-		        <a class="nav-link js-scroll active" href="/FoodFighter">Home</a>
-		      </li>
-		      <li class="nav-item">
-	         	<a class="nav-link js-scroll" href="/FoodFighter/review/reviewNonSearchList">리뷰 리스트</a>
-	          </li>
+		       <li class="nav-item">
+		           <a class="nav-link js-scroll active" href="/FoodFighter">Home</a>
+		       </li>
 	          <li class="nav-item">
-	            <a class="nav-link js-scroll" href="/FoodFighter/community/communityMain">커뮤니티</a>
+	           <a class="nav-link js-scroll" href="/FoodFighter/community/communityMain">커뮤니티</a>
 	          </li>
 	          <li class="nav-item">
 	            <a class="nav-link js-scroll" href="/FoodFighter/event/eventList">이벤트</a>
 	          </li>
 	          <li class="nav-item">
+	         	  <a class="nav-link js-scroll" href="/FoodFighter/community/communityNotice">공지사항</a>
+	          </li>
+	          <li class="nav-item">
 	            <a class="nav-link js-scroll">
-		           <img src="/FoodFighter/resources/img/member.png" id="headerUser" class="header_searchIcon" width="30" height="30" align="center">
-		        </a>
+	            <img src="/FoodFighter/resources/img/member.png" id="headerUser" class="header_searchIcon" width="30" height="30" align="center">
+	            </a>
      	     </li>
 	   	</ul>
 	</div>
@@ -112,7 +112,7 @@ body, html {
     	 <div class="col-sm-11 col-md-11 col-lg-9">
             <div class="boxWrap" style="height: 380px;">
                 <div class="box-header">
-                    <p text-align = "left" id = "cboard"><a href = "communityBoard?pg=1">최신 글</a></p>
+                    <p class="text-left" id = "cboard"><a href = "communityBoard?pg=1">최신 글</a></p>
                 </div>
                 <div id=boardList">
 	              <table class="table table-hover">
@@ -141,7 +141,7 @@ body, html {
         <div class="col-sm-6 col-lg-3">
             <div class="boxWrap" style="height: 380px;">
                 <div class="box-header">
-                 	<p class="text-center" id = "rank"><a href = "communityRank">랭킹</a></p>
+                 	<p class="text-center" id = "rank"><a href = "communityRank">유저 랭킹</a></p>
                 </div>
                 <div id= "rankList">
 		            <table class="table table-hover">
@@ -155,75 +155,67 @@ body, html {
 		              <th scope="col" class="text-center">유저</th>
 		            </tr>
 			        </thead>
-			          <tbody>
-			            <tr>
-			              <td>
-			                  <div class="text-center">
-			                      <div class="tb-center" style="font-size: 20pt; font-weight: bold;">1</div>
-			                  </div>
-			              </td>
-			              <td>
-			                 <div class="ranker"><a>곽아무개</a></div>
-			              </td>
-			            </tr>
-			  
-			            <tr>
-			                <td>
-			                    <div class="text-center">
-			                        <div class="tb-center" style="font-size: 20pt; font-weight: bold;">2</div>
-			                    </div>
-			                </td>
-			                <td>
-			                    <div class="ranker">이아무개</div>
-			                </td>
-			            </tr>
-			  
-			            <tr>
-			                <td>
-			                    <div class="text-center">
-			                        <div class="text-center" style="font-size: 20pt; font-weight: bold;">3</div>
-			                    </div>
-			                </td>
-			                <td>
-			                    <div class="ranker">송아무개</div>
-			                </td>
-			            </tr>
-			
-			            <tr>
-			                <td>
-			                    <div class="text-center" style="font-size: 20pt; font-weight: bold;">4</div>
-			                </td>
-			                <td>
-			                    <div class="ranker">양아무개</div>
-			                </td>
-			            </tr>
-			
-			            <tr>
-			                <td>
-			                    <div class="text-center" style="font-size: 20pt; font-weight: bold;">5</div>
-			                </td>
-			                <td>
-			                    <div class="ranker">지아무개</div>
-			                </td>
-			            </tr>
+			          <tbody id = "userRank">
 			          </tbody>
 			        </table>
 			    </div>
             </div>
         </div>
-    </div>
-   <!--  <div class="row">
-        <div class="col-sm-12 col-md-12 col-lg-12">
-            <div class="boxWrap" style="height: 260px;">
+    </div> <!-- 랭킹 -->
+    <div class="row">
+	   	<div class="col-sm-6 col-lg-3">
+	           <div class="boxWrap" style="height: 380px;">
+	               <div class="box-header">
+	                	<p class="text-center" id = "rank"><a href = "communityRank">맛집 랭킹</a></p>
+	               </div>
+	               <div id= "rankList">
+		            <table class="table table-hover">
+		            <colgroup>
+		                <col width="35">
+		                <col width="120">
+		            </colgroup>
+		          	<thead>
+		            <tr>
+		              <th scope="col" class="text-center">순위</th>
+		              <th scope="col" class="text-center">맛집</th>
+		            </tr>
+			        </thead>
+			          <tbody id = "resRank">
+			          </tbody>
+			        </table>
+			    </div>
+	           </div>
+	   	</div> <!-- 랭킹 -->
+    	 <div class="col-sm-11 col-md-11 col-lg-9">
+            <div class="boxWrap" style="height: 380px;">
                 <div class="box-header">
-                    <h4>오늘 뭐 먹지?</h4>
+                    <p class="text-center" id = "event"><a href = "/FoodFighter/event/eventList?pg=1">이벤트</a></p>
                 </div>
-                <div class="whats_eat">
-                	<span>메뉴 고르기 시작</span>
+                <div id=eventList">
+	              <table class="table table-hover">
+					<colgroup>
+						<col width = "60">
+						<col width = "*">
+						<col width = "110">
+						<col width = "75">
+						<col width = "60">
+					</colgroup>
+				  <thead>
+				    <tr>
+				    	<th scope = "col" class="text-center">NO</th>
+						<th scope = "col" class="text-center">제목</th>
+						<th scope = "col" class="text-center">작성자</th>
+						<th scope = "col" class="text-center">작성일</th>
+						<th scope = "col" class="text-center">조회수</th>
+				    </tr>
+				  </thead>
+				  <tbody id = "eventList">
+				  </tbody>
+				</table>
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12">
             <div class="boxWrap" style="height: 400px;">

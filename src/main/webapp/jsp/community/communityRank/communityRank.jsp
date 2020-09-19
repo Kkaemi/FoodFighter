@@ -70,22 +70,22 @@ body, html {
 		   		<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword" autocomplete="on" maxlength="50" >
 		   		<button size="10" id="header_searchBtn">검색</button>
 		      </li>
-		      <li class="nav-item">
-		        <a class="nav-link js-scroll active" href="/FoodFighter">Home</a>
-		      </li>
-		      <li class="nav-item">
-	         	<a class="nav-link js-scroll" href="/FoodFighter/review/reviewNonSearchList">리뷰 리스트</a>
-	          </li>
+		       <li class="nav-item">
+		           <a class="nav-link js-scroll active" href="/FoodFighter">Home</a>
+		       </li>
 	          <li class="nav-item">
-	            <a class="nav-link js-scroll" href="/FoodFighter/community/communityMain">커뮤니티</a>
+	           <a class="nav-link js-scroll" href="/FoodFighter/community/communityMain">커뮤니티</a>
 	          </li>
 	          <li class="nav-item">
 	            <a class="nav-link js-scroll" href="/FoodFighter/event/eventList">이벤트</a>
 	          </li>
 	          <li class="nav-item">
+	         	  <a class="nav-link js-scroll" href="/FoodFighter/community/communityNotice">공지사항</a>
+	          </li>
+	          <li class="nav-item">
 	            <a class="nav-link js-scroll">
-		           <img src="/FoodFighter/resources/img/member.png" id="headerUser" class="header_searchIcon" width="30" height="30" align="center">
-		        </a>
+	            <img src="/FoodFighter/resources/img/member.png" id="headerUser" class="header_searchIcon" width="30" height="30" align="center">
+	            </a>
      	     </li>
 	   	</ul>
 	</div>

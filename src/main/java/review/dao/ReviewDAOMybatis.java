@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import admin.bean.RestaurantDTO;
+import review.bean.ReviewDTO;
 
 @Repository
 @Transactional
@@ -35,6 +36,11 @@ public class ReviewDAOMybatis implements ReviewDAO {
 	@Override
 	public List<RestaurantDTO> modalSearchList(Map<String, String> map) {
 		return sqlSession.selectList("reviewSQL.modalSearchList", map);
+	}
+
+	@Override
+	public List<ReviewDTO> getReviewList(String resName) {
+		return sqlSession.selectList("reviewSQL.getReviewList", resName);
 	}
 
 	
