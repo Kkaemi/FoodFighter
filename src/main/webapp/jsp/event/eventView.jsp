@@ -319,12 +319,12 @@ $(document).ready(function(){
 												cmnt_N += '</div>';
 													cmnt_N += '</div>';
 														cmnt_N += '<div class ="option">';
-								if(conickname == items.conickname && conickname == '관리자'){
-									cmnt_N += '<div class ="dropdown">';
+								if(conickname != items.conickname){
+									cmnt_N += '<div class ="dropdown" style ="visibility: hidden;">';
 									//alert("1111111");
 								
 								}else{
-									cmnt_N += '<div class ="dropdown" style ="visibility: hidden;">';
+									cmnt_N += '<div class ="dropdown">';
 								}
 								cmnt_N += '<button type = "button" data-toggle = "dropdown" class ="dropdown-toggle">';
 									cmnt_N += '<span class ="ico_bbs ico_more"></span>';
