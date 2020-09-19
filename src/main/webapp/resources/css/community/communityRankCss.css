@@ -64,6 +64,7 @@ div {
 }
 .rankInner .rankerInfo {
     float: left;
+    display: inherit;
 }
 
 .rankerInfo .infoPic {
@@ -108,12 +109,41 @@ div {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-size: 36px;
+    font-size: 30px;
     line-height: 32px;
     letter-spacing: -.2px;
     font-weight: 700;
 }
+.infoName span a{
+	color: black;
+	text-decoration: none;
+}
+.infoName span a:hover{
+	color: #FFC34D !important;
+}
 
+.infoName span a:active{
+	color: #FF6A4D !important;
+    text-decoration: none;
+}
+
+.rankerInfo .infoRes {
+    display: table-cell;
+    width: 300px;
+    padding: 17px 20px 0 20px;
+    text-align: left;
+    margin-right: 20px;
+}
+.infoRes div {
+	margin-bottom: 15px;
+}
+.lis{
+	font-size : 17px;
+	font-weight: bold;	
+}
+.res {
+	font-size : 15px;	
+}
 .rankerBoardWrap {
     float: right;
     margin: -9px -12px 0 0;

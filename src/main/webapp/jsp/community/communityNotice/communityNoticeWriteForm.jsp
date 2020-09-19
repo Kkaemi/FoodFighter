@@ -51,9 +51,6 @@ body, html {
 		       <li class="nav-item">
 		           <a class="nav-link js-scroll active" href="/FoodFighter">Home</a>
 		       </li>
-		       <li class="nav-item">
-	         	  <a class="nav-link js-scroll" href="/FoodFighter/review/reviewNonSearchList">리뷰 리스트</a>
-	          </li>
 	          <li class="nav-item">
 	           <a class="nav-link js-scroll" href="/FoodFighter/community/communityMain">커뮤니티</a>
 	          </li>
@@ -61,9 +58,12 @@ body, html {
 	            <a class="nav-link js-scroll" href="/FoodFighter/event/eventList">이벤트</a>
 	          </li>
 	          <li class="nav-item">
+	         	  <a class="nav-link js-scroll" href="/FoodFighter/community/communityNotice">공지사항</a>
+	          </li>
+	          <li class="nav-item">
 	            <a class="nav-link js-scroll">
-		           <img src="/FoodFighter/resources/img/member.png" id="headerUser" class="header_searchIcon" width="30" height="30" align="center">
-		        </a>
+	            <img src="/FoodFighter/resources/img/member.png" id="headerUser" class="header_searchIcon" width="30" height="30" align="center">
+	            </a>
      	     </li>
 	   	</ul>
 	</div>

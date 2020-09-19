@@ -31,8 +31,8 @@ function getRankRes(){
 		url : 'communityRankTopRes',
 		dataType: 'json',
 		success : function(data){
-			let resName = "";
 			var resRnk = "";
+			var resRev = "";
 			$('.rankList').empty();
 			$.each(data.list, function(index, items){
 				resRnk += '<li class = "rankItem" id = "rankItem'+index+'">';
@@ -46,19 +46,39 @@ function getRankRes(){
 							resRnk += '</div>'
 							resRnk += '<div class = "infoText">';
 								resRnk +=  '<div class = "infoName">';
-									resRnk += '<span class = "ninkName" id = "resName'+index+'">'+items.resName+'</span>';
+									resRnk += '<span class = "ninkName" id = "resName'+index+'"><a href = "/FoodFighter/review/reviewView?resSeq='+items.resSeq+'&resName='+items.resName+'">'+items.resName+'</a></span>';
 								resRnk += '</div>';
 								resRnk +=  '<div class = "grade">';
 									resRnk += '<span class="fa fa-star fa-2x score"></span>';
 									resRnk += '<span class="resScore">'+items.resScore+'</span>';
 								resRnk += '</div>';
+							resRnk += '</div>'; //infoText
+							resRnk +=  '<div class = "infoRes">';
+								resRnk += '<div><span class = "lis">음식 종류 : </span><span class="res">'+items.resTheme+'</span></div>';
+								resRnk += '<div><span class = "lis">대표 메뉴 : </span><span class="res">'+items.resMenu+'</span></div>';
+								resRnk += '<div><span class = "lis">주소 : </span><span class="res">'+items.resAddress+'</span></div>';
 							resRnk += '</div>';
-						resRnk += '</div>';
-					resRnk += '</li>';
+						resRnk += '</div>'; //rankerInfo
+						
+						resRev += '<div class = "rankerBoardWrap" id = "rankerBoardWrap'+index+'">';
+							resRev += '<div class = "postList" id = "'+items.resName+'">';
+								resRev = '<div class = "postItem" id = "postItem'+index+'">';
+									resRev += '<div class ="review" id = "review'+index+'">';
+										resRev += '<a href = "/FoodFighter/review/reviewView?resSeq='+items.resSeq+'&resName='+items.resName+'" class = "reviewLink">';
+											resRev += '<img class = "reviewThumb" src = "/FoodFighter/storage/restaurant/'+items.resImage1+'">';
+											resRev += '<div class ="reviewText">';
+												resRev += '<strong class = "reviewTextSum"><p>'+items.content+'</p></strong>';
+											resRev += '</div>';
+										resRev += '</a>';
+									resRev += '</div>';
+								resRev += '</div>';
+							resRev += '</div>';
+						resRev += '</div>'; //rankBoardWrap
+						resRnk += resRev;
+						resRnk += '</div>'; //rankInner
+				resRnk += '</li>';
+						resRev = "";
 				$('.rankList').append(resRnk);
-				
-				getRankResRev(items.resName);
-				
 				resRnk = "";
 			});
 		},
@@ -66,26 +86,6 @@ function getRankRes(){
 			alert("실패"+JSON.stringify(err));
 		}
     });
-}
-
-function getRankResRev(resName){
-	let resNameList = [];
-	resNameList.push(resName);
-	
-	let list = {"resNameList" : resNameList};
-	
-	$.ajax({
-		type : "GET",
-		url : 'communityRankTopResRev',
-		data : list,
-		//dataType: 'json',
-		success : function(){
-		 alert("dd");
-		},
-        error : function(err){
-	       alert("실패"+JSON.stringify(err));
-        }
-	});
 }
 
 function getRankMemList() {
