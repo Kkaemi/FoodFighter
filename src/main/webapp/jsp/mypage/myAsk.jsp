@@ -13,11 +13,11 @@
 			<table id="qnaBoardTable" class="table table-striped table-hover table-bordered tablesorter">	
 				<thead>
 					<tr>
-						<th>NO<i id="dateSort" class="fa fa-sort"></i></th>
-						<th>글 제목<i id="dateSort" class="fa fa-sort"></i></th>
-						<th>작성일<i id="dateSort" class="fa fa-sort"></i></th>
-						<th>조회수<i id="dateSort" class="fa fa-sort"></i></th>
-						<th>답변여부<i id="dateSort" class="fa fa-sort"></i></th>
+						<th>NO<i id="dateSort"></i></th>
+						<th>글 제목<i id="dateSort" ></i></th>
+						<th>작성일<i id="dateSort"></i></th>
+						<th>조회수<i id="dateSort" ></i></th>
+						<th>답변여부<i id="dateSort"></i></th>
 					</tr>
 				</thead>
 				<tbody>
