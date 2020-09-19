@@ -42,14 +42,17 @@ body, html {
 		       <li class="nav-item">
 		           <a class="nav-link js-scroll active" href="/FoodFighter">Home</a>
 		       </li>
-		       <li class="nav-item">
+		       <!-- <li class="nav-item">
 	         	  <a class="nav-link js-scroll" href="/FoodFighter/review/reviewNonSearchList">리뷰 리스트</a>
-	          </li>
+	          </li> -->
 	          <li class="nav-item">
 	           <a class="nav-link js-scroll" href="/FoodFighter/community/communityMain">커뮤니티</a>
 	          </li>
 	          <li class="nav-item">
 	            <a class="nav-link js-scroll" href="/FoodFighter/event/eventList">이벤트</a>
+	          </li>
+	          <li class="nav-item">
+	         	  <a class="nav-link js-scroll" href="/FoodFighter/community/communityNotice">공지사항</a>
 	          </li>
 	          <li class="nav-item">
 	            <a class="nav-link js-scroll">
@@ -316,12 +319,12 @@ $(document).ready(function(){
 												cmnt_N += '</div>';
 													cmnt_N += '</div>';
 														cmnt_N += '<div class ="option">';
-								if(conickname != items.conickname){
-									cmnt_N += '<div class ="dropdown" style ="visibility: hidden;">';
+								if(conickname == items.conickname && conickname == '관리자'){
+									cmnt_N += '<div class ="dropdown">';
 									//alert("1111111");
 								
 								}else{
-									cmnt_N += '<div class ="dropdown">';
+									cmnt_N += '<div class ="dropdown" style ="visibility: hidden;">';
 								}
 								cmnt_N += '<button type = "button" data-toggle = "dropdown" class ="dropdown-toggle">';
 									cmnt_N += '<span class ="ico_bbs ico_more"></span>';

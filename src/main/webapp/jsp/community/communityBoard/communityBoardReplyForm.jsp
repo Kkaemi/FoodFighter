@@ -42,7 +42,7 @@ body, html {
         <div class="bar3"></div>
     </div>
 	   <a class="header-logo" href="/FoodFighter"><img src="../resources/img/logo.png" width="250px;" height="55px;" align="left" style="margin-top: 10px; margin-left: 200px;"></a>
-	      <ul id="header-menu">
+	     <ul id="header-menu">
 		      <li class="header-items">
 		  		<img src="../resources/img/search.png" class="header_searchIcon" width="30" height="30" align="center"> 
 		   		<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword" autocomplete="on" maxlength="50" >
@@ -51,9 +51,6 @@ body, html {
 		       <li class="nav-item">
 		           <a class="nav-link js-scroll active" href="/FoodFighter">Home</a>
 		       </li>
-		       <li class="nav-item">
-	         	  <a class="nav-link js-scroll" href="/FoodFighter/review/reviewNonSearchList">리뷰 리스트</a>
-	          </li>
 	          <li class="nav-item">
 	           <a class="nav-link js-scroll" href="/FoodFighter/community/communityMain">커뮤니티</a>
 	          </li>
@@ -61,9 +58,12 @@ body, html {
 	            <a class="nav-link js-scroll" href="/FoodFighter/event/eventList">이벤트</a>
 	          </li>
 	          <li class="nav-item">
+	         	  <a class="nav-link js-scroll" href="/FoodFighter/community/communityNotice">공지사항</a>
+	          </li>
+	          <li class="nav-item">
 	            <a class="nav-link js-scroll">
-		           <img src="/FoodFighter/resources/img/member.png" id="headerUser" class="header_searchIcon" width="30" height="30" align="center">
-		        </a>
+	            <img src="/FoodFighter/resources/img/member.png" id="headerUser" class="header_searchIcon" width="30" height="30" align="center">
+	            </a>
      	     </li>
 	   	</ul>
 	</div>

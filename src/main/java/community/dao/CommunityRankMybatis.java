@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import community.bean.CommunityRankMemDTO;
 import community.bean.CommunityRankResDTO;
 
 @Repository
@@ -21,11 +22,7 @@ public class CommunityRankMybatis implements CommunityRankDAO {
 	}
 
 	@Override
-	public List<CommunityRankResDTO> getRankResRevList(List<String> list) {
-		String temp = "";
-		for(int i = 0; i < list.size(); i++) {
-			temp += list.get(i);
-		}
-		return sqlSession.selectList("cRankSQL.getRankResRevList", temp);
+	public List<CommunityRankMemDTO> getRankMemList() {
+		return sqlSession.selectList("cRankSQL.getRankMemList");
 	}
 }

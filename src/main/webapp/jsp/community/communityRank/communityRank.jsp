@@ -13,6 +13,30 @@
 body, html {
     height: 100%;
 }
+
+.txt_line {
+	width:270px;
+	font-family: sans-serif;
+	font-size: 16px;
+	line-height: 1.6;
+	max-height: 4.8em;
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+
+.review:hover {
+	text-decoration: underline;
+}
+
+.txt_line:hover {
+	text-decoration: underline;
+}
+
+.resScore:hover {
+	text-decoration: none;
+}
 </style>
 
 <!-- CSS 파일 -->
@@ -46,22 +70,22 @@ body, html {
 		   		<input type="search" class="header_searchInput" placeholder="&emsp;&emsp;식당 또는 음식 검색" id ="keyword" name="keyword" autocomplete="on" maxlength="50" >
 		   		<button size="10" id="header_searchBtn">검색</button>
 		      </li>
-		      <li class="nav-item">
-		        <a class="nav-link js-scroll active" href="/FoodFighter">Home</a>
-		      </li>
-		      <li class="nav-item">
-	         	<a class="nav-link js-scroll" href="/FoodFighter/review/reviewNonSearchList">리뷰 리스트</a>
-	          </li>
+		       <li class="nav-item">
+		           <a class="nav-link js-scroll active" href="/FoodFighter">Home</a>
+		       </li>
 	          <li class="nav-item">
-	            <a class="nav-link js-scroll" href="/FoodFighter/community/communityMain">커뮤니티</a>
+	           <a class="nav-link js-scroll" href="/FoodFighter/community/communityMain">커뮤니티</a>
 	          </li>
 	          <li class="nav-item">
 	            <a class="nav-link js-scroll" href="/FoodFighter/event/eventList">이벤트</a>
 	          </li>
 	          <li class="nav-item">
+	         	  <a class="nav-link js-scroll" href="/FoodFighter/community/communityNotice">공지사항</a>
+	          </li>
+	          <li class="nav-item">
 	            <a class="nav-link js-scroll">
-		           <img src="/FoodFighter/resources/img/member.png" id="headerUser" class="header_searchIcon" width="30" height="30" align="center">
-		        </a>
+	            <img src="/FoodFighter/resources/img/member.png" id="headerUser" class="header_searchIcon" width="30" height="30" align="center">
+	            </a>
      	     </li>
 	   	</ul>
 	</div>
@@ -93,7 +117,7 @@ body, html {
 	<a href="communityNotice"><span class="glyphicon glyphicon-exclamation-sign"></span>&emsp;공지사항</a>
     <a href="communityBoard"><span class="glyphicon glyphicon-list"></span>&emsp;게시판</a>
     <a href="communityRank"><span class="glyphicon glyphicon-star"></span>&emsp;랭킹</a>
-    <a href=""><span class="glyphicon glyphicon-question-sign"></span>&emsp;고객센터</a>
+    <a href="/FoodFighter/community/csCenter"><span class="glyphicon glyphicon-question-sign"></span>&emsp;고객센터</a>
 </div>
 <!-- 본문 -->
 <div class="container" style="margin-top : 95px;">

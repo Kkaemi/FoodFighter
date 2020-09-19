@@ -184,11 +184,7 @@ String keyword = request.getParameter("keyword");
 			  	  <span>내가 쓴 글</span>
 			  	</a>
 
-			
-			  	<a id="myShop" class="menu-part" href="/FoodFighter/mypage/myShop">
-			  	  <span class="glyphicon glyphicon-bookmark"></span>
-			  	  <span>북마크</span>
-			  	</a>
+		
 			  
 			  	<a id="myAsk" class="menu-part" href="/FoodFighter/mypage/myAsk">
 			  	  <span class="glyphicon glyphicon-question-sign"></span>

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import community.bean.CommunityRankMemDTO;
 import community.bean.CommunityRankResDTO;
 import community.dao.CommunityRankDAO;
 
@@ -19,7 +20,7 @@ public class CommunityRankServiceImpl implements CommunityRankService {
 	}
 
 	@Override
-	public List<CommunityRankResDTO> getRankResRevList(List<String> list) {
-		return cRankDAO.getRankResRevList(list);
+	public List<CommunityRankMemDTO> getRankMemList() {
+		return cRankDAO.getRankMemList();
 	}
 }
