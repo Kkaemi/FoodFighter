@@ -14,22 +14,15 @@ String resSeq = request.getParameter("resSeq");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta id="_csrf" name="_csrf" content="${_csrf.token}" />
 	<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
-    <link rel= "stylesheet" type="text/css" href="/FoodFighter/resources/css/review/bootstrap.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel= "stylesheet" type="text/css" href="/FoodFighter/resources/css/review/reviewView.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  
+
     <title>리뷰보기</title>
 <!-- security -->
  <meta id="_csrf" name="_csrf" content="${_csrf.token}" />
  <meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
+
 </head>
 <style>
 #reviewWriteBtn {
@@ -38,11 +31,9 @@ String resSeq = request.getParameter("resSeq");
 
 </style>
 <body> 
-
-
 <!--================ Header ================-->
 <form id="headerForm" name="headerForm" method="post" action="../review/getSearchList">
-<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"> 
 	<div id="header-container">
 	  <a class="header-logo" href="/FoodFighter"><img src="../resources/img/logo.png" width="250px;" height="55px;" align="left" style="margin-top: 10px; margin-left: 200px;"></a>
 	      <ul id="header-menu">
@@ -54,9 +45,6 @@ String resSeq = request.getParameter("resSeq");
 		       <li class="nav-item">
 		           <a class="nav-link js-scroll active" href="/FoodFighter">Home</a>
 		       </li>
-		       <li class="nav-item">
-	         	  <a class="nav-link js-scroll" href="/FoodFighter/review/reviewNonSearchList">리뷰 리스트</a>
-	          </li>
 	          <li class="nav-item">
 	           <a class="nav-link js-scroll" href="/FoodFighter/community/communityMain">커뮤니티</a>
 	          </li>
@@ -64,8 +52,11 @@ String resSeq = request.getParameter("resSeq");
 	            <a class="nav-link js-scroll" href="/FoodFighter/event/eventList">이벤트</a>
 	          </li>
 	          <li class="nav-item">
+	         	  <a class="nav-link js-scroll" href="/FoodFighter/community/communityNotice">공지사항</a>
+	          </li>
+	          <li class="nav-item">
 	            <a class="nav-link js-scroll">
-	            <img src="/FoodFighter/resources/img/member.png" class="header_searchIcon" width="30" height="30" align="center">
+	            <img src="/FoodFighter/resources/img/member.png" id="headerUser" class="header_searchIcon" width="30" height="30" align="center">
 	            </a>
      	     </li>
 	   	</ul>
@@ -168,17 +159,8 @@ String resSeq = request.getParameter("resSeq");
     </div>  
  
     <div class="line"></div>
-      
-        <!-- 리뷰쓰기 버튼 -->
-		<span class="writeBtn">
-	      	<input type="button" id="reviewWriteBtn" name="reviewWriteBtn" value="리뷰쓰기">
-	      	<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
-	      	<input type="hidden" name="resName" value="<%=resName%>">
-	    </span>	
-	    
-
-<!-- 
-    <span class="review-count">
+    
+      <span class="review-count">
         <button class="review-count-btn-selected">전체(72)</button>
         |
         <button class="review-count-btn">맛있다(65)</button>
@@ -186,9 +168,21 @@ String resSeq = request.getParameter("resSeq");
         <button class="review-count-btn">괜찮다(6)</button>
         |
         <button class="review-count-btn">별로(1)</button>
-	
-    </span>
- -->
+		
+
+		
+     </span>
+      	
+    <!-- 리뷰쓰기 버튼 -->
+	<span class="writeBtn">
+      	<input type="button" id="reviewWriteBtn" name="reviewWriteBtn" value="리뷰쓰기">
+      	<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+      	<input type="hidden" name="resName" value="<%=resName%>">
+    </span> 
+      	
+
+  
+
  	<!--리뷰-->
  	<div class="review-container"></div>	
  	
