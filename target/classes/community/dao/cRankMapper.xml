@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 레스토랑 랭킹 목록 -->
 	<select id = "getRankResList" resultType = "cRankRes">
-		select rs.resSeq, rs.resAddress, rs.resTheme, rs.resMenu, rv.resName, rs.resScore, rv.content, rv.image1 
+		select rs.resSeq, rs.resAddress, rs.resTheme, rs.resMenu, rs.resImage1, rv.resName, rs.resScore, rv.content, rv.image1 
 		from (select resName, content, image1 from review group by 1,2)as rv
 		join restaurant rs on rs.resName = rv.resName group by 1,2 order by resScore desc limit 10;
 	

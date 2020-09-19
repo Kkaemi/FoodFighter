@@ -160,7 +160,7 @@ body, html {
 				<span class = "subject">${cBDTO.subject }</span>
 			</h1>
 			<p>
-				<span class = "nickname" style="color: black">${cBDTO.nickname }</span>
+				<span class = "nickname" id = "nickname" style="color: black">${cBDTO.nickname }</span>
 				<fmt:formatDate var = "date" value="${cBDTO.logtime }" pattern="yyyy.MM.dd HH:mm"/>
 					<span class = "date">${date }</span>
 				<span class = "hit">조회 ${cBDTO.hit }</span>
@@ -246,6 +246,7 @@ body, html {
 <script type="text/javascript" src= "/FoodFighter/resources/js/review/keyword.js"></script> <!-- 헤더 JS -->
 <script type="text/javascript">
 let id = '${memberDTO.nickname}';
+let author = $('#nickname').text();
 let bseq = '${bseq}';
 let bSrchOption = '${bSrchOption}';
 let bKeyword = '${bKeyword}';
