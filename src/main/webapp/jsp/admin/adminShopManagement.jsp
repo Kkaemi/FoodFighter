@@ -100,11 +100,11 @@
 		            <table id="shopTable" class="table table-striped table-hover table-bordered tablesorter">
 		                <thead>
 		                    <tr>
-		                        <th>가게 관리 번호<i id="memberNumSort" class="fa fa-sort"></i></th>
-		                        <th>가게 이름<i id="dateSort" class="fa fa-sort"></i></th>
-		                        <th>가게 주소<i id="dateSort" class="fa fa-sort"></i></th>
-		                        <th>가게 전화<i id="dateSort" class="fa fa-sort"></i></th>
-		                        <th>가게 별점<i id="dateSort" class="fa fa-sort"></i></th>
+		                        <th>가게 관리 번호<i id="ShopNumSort" class="fa fa-sort"></i></th>
+		                        <th>가게 이름<i id="dataSort" class="fa fa-sort"></i></th>
+		                        <th>가게 주소<i id="dataSort" class="fa fa-sort"></i></th>
+		                        <th>가게 전화<i id="dataSort" class="fa fa-sort"></i></th>
+		                        <th>가게 별점<i id="dataSort" class="fa fa-sort"></i></th>
 		                        <th>관리</th>
 		                    </tr>
 		                </thead>
