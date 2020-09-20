@@ -275,7 +275,7 @@ $('#sendEmailBtn').click(function() {
 				dataType:'text',
 				success : function(data) {
 					sessionStorage.setItem("authCode", data );
-					alert(sessionStorage.getItem("authCode"));
+					/* alert(sessionStorage.getItem("authCode")); */
 				},
 				error : function(e) {
 					console.log(e);

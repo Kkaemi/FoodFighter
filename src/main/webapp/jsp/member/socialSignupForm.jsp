@@ -169,7 +169,7 @@ $('#emailDiv').empty();
 						dataType:'text',
 						success : function(data) {
 							sessionStorage.setItem("authCode", data ); //히든으로 하면 보안때문에 session으로 변경
-							alert(sessionStorage.getItem("authCode")); //임시
+							/* alert(sessionStorage.getItem("authCode")); //임시 */
 						},
 						error : function(e) {
 							console.log(e);
