@@ -110,8 +110,22 @@ $(document).ready(function(){
     });
 });
 
+$(document).ready(function(){
+	//연결 끊기
+		Kakao.API.request({
+			  url: '/v1/user/unlink',
+			  success: function(response) {
+			    console.log(response);
+			  },
+			  fail: function(error) {
+			    console.log(error);
+			  },
+			});
+});
+
+Kakao.init('2b37811e9fe31f7968899e4c31119899');
 $('#kakaoBtn').click(function(){
-	Kakao.init('2b37811e9fe31f7968899e4c31119899');
+
 	Kakao.Auth.loginForm({
 	    success: function(authObj) {
 

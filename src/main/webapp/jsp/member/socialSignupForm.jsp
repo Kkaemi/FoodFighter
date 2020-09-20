@@ -130,6 +130,7 @@ $(document).ready(function(){
     });
 });
 
+
 //인증 부분 숨김처리
 $(document).ready(function() {
 	$('#emailCode').hide();
@@ -141,8 +142,8 @@ $(document).ready(function() {
 $('#sendEmailBtn').click(function() {
 $('#emailDiv').empty();
 	if ($('#email').val() == 'undefined') {
-		$('#emailDiv').text('이메일은 반드시 동의를 해주셔야 가입이 가능합니다.');
-		$('#emailDiv').css('color', 'red');
+		alert('이메일은 반드시 동의를 해주셔야 가입이 가능합니다.');
+		location.href="http://localhost:8080/FoodFighter/member/signupChoice";
 
 	} else {
 		$.ajax({
