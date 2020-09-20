@@ -34,7 +34,7 @@ public class CommunityRankController {
 		List<CommunityRankResDTO> list = cRankService.getRankResList();
 		mav.addObject("list", list);
 		mav.setViewName("jsonView");
-		
+
 		return mav;
 	}
 	
