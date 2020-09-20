@@ -65,7 +65,11 @@ function getRankRes(){
 								resRev = '<div class = "postItem" id = "postItem'+index+'">';
 									resRev += '<div class ="review" id = "review'+index+'">';
 										resRev += '<a href = "/FoodFighter/review/reviewView?resSeq='+items.resSeq+'&resName='+items.resName+'" class = "reviewLink">';
-											resRev += '<img class = "reviewThumb" src = "/FoodFighter/storage/restaurant/'+items.resImage1+'">';
+										if(items.image1 == ''){
+											resRev += '<img class = "reviewThumb" src = "/FoodFighter/resources/img/logo.png">';
+										}else {
+											resRev += '<img class = "reviewThumb" src = "/FoodFighter/storage/review/'+items.image1+'">';
+										}
 											resRev += '<div class ="reviewText">';
 												resRev += '<strong class = "reviewTextSum"><p>'+items.content+'</p></strong>';
 											resRev += '</div>';

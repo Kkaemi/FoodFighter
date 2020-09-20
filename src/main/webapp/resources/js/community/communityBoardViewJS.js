@@ -5,21 +5,19 @@ if(id != ''){
 	$('#write').show();
 	$('.reply').show();
 	$('#cmnt_write').removeAttr('disabled');
-}else {
+	$('.modify').css('display', 'none');
+	$('.delete').css('display', 'none');
+} else {
 	$('#write').css('display', 'none');
 	$('.reply').css('display', 'none');
 	$('.modify').css('display', 'none');
 	$('.delete').css('display', 'none');
 	$('#cmnt_write').attr({disabled : true, style : 'cursor : default; outline : none;'});
 }
-
-/* 작성자일 때만 수정,삭제 보이기 */
-let author = $('.nickname').text();
-if(id == author){
+if (id == author){ /* 작성자일 때만 수정,삭제 보이기 */
 	$('.modify').show();
 	$('.delete').show();
 }
-
 $(document).ready(function(){
 	var token = $("meta[name='_csrf']").attr("content");
     var header = $("meta[name='_csrf_header']").attr("content");
@@ -189,7 +187,11 @@ function cmntList(num){
 						}
 
 						cmnt_N	+= '<div class = "pic">';
-							cmnt_N	+= '<img src = "/FoodFighter/storage/profile/'+items.profile+'"/>';
+							if(items.profile != null){
+								cmnt_N	+= '<img src = "/FoodFighter/storage/profile/'+items.profile+'"/>';
+							} else {
+							
+							}
 						cmnt_N	+= '</div>';
 						cmnt_N	+= '<div class ="info">';
 							cmnt_N	+= '<div class ="comment_post">';
