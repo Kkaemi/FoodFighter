@@ -68,7 +68,7 @@ String keyword = request.getParameter("keyword");
 	</form>
     
     <!-- 왼쪽 메뉴바 -->
-    <div id="mySidenav" class="sidenav">
+    <div id="mySidenav" class="sidenav" style="margin-top: 50px;">
 	  	<a href="/FoodFighter/community/communityNotice"><span class="glyphicon glyphicon-exclamation-sign"></span>&emsp;공지사항</a>
 	    <a href="/FoodFighter/community/communityBoardList"><span class="glyphicon glyphicon-list"></span>&emsp;게시판</a>
 	    <a href="/FoodFighter/community/communityRank"><span class="glyphicon glyphicon-star"></span>&emsp;랭킹</a>
@@ -83,13 +83,8 @@ String keyword = request.getParameter("keyword");
         </div>
     </div>
     <!-- FAQ 본문 -->
-    <div class="page-body" style = "margin-bottom: 53px;">
-        <form id="search_form" method="get" action="/app/cs/faq">
-            <h3 class="title_cs font-mss">FAQ</h3>
-            <input class="faq_search_txt" name="q" type="text">
-            &nbsp;
-            <input type="submit" value="검색">
-        </form>
+    <div class="page-body" style = "margin-bottom: 300px;">
+        
         <!-- 탭버튼 -->
         <ul class="mypage_type">
             <li><a href="/FoodFighter/community/memberFAQ">회원 관련</a></li>
@@ -113,112 +108,46 @@ String keyword = request.getParameter("keyword");
                 <tr>
                     <td>1</td>
                     <td class="txt_contents"><a href="#"
-                            onclick="viewContent('faq_69', '', '');">자주 묻는 질문</a>
+                            onclick="viewContent('faq_69', '', '');">랭킹은 어떻게 매겨지는건가요?</a>
                     </td>
                 </tr>
                 <tr id="faq_69" style="display: none;">
                     <td class="faq_q">답변</td>
                     <td class="faq_a">
-                        <p>답변</p>
+                        <p>
+                        	저희 푸드파이터의 랭킹은 신뢰성있는 자체 알고리즘으로 랭킹을 산정해서 서비스하고있습니다.<br>
+                        	많은 리뷰 작성해 주시고 많은 이용부탁드립니다~
+                        </p>
                     </td>
                 </tr>
                 <tr>
                     <td>2</td>
                     <td class="txt_contents"><a href="javascript:void(0)"
-                            onclick="viewContent('faq_70', '', ''); return false;">자주 묻는 질문</a></td>
+                            onclick="viewContent('faq_70', '', ''); return false;">서울 지역만 서비스되는 건가요?</a></td>
                 </tr>
                 <tr id="faq_70" style="display: none;">
                     <td class="faq_q">답변</td>
                     <td class="faq_a">
-                        <p>답변</p>
+                        <p>
+                        	네 아직 서비스를 시작한지 얼마 되지 않았기 때문에 현재 서울지역 한정으로만 서비를 제공하고있습니다<br>
+                        	앞으로 서비스 지역을 넓혀나갈 계획이 현재 진행되고있습니다<br>
+                        	조금만 더 기다려주시고 많은 이용부탁드립니다<br>
+                        	감사합니다
+                        </p>
                     </td>
                 </tr>
                 <tr>
                     <td>3</td>
                     <td class="txt_contents"><a href="javascript:void(0)"
-                            onclick="viewContent('faq_71', '', ''); return false;">자주 묻는 질문</a></td>
+                            onclick="viewContent('faq_71', '', ''); return false;">추가됐으면 하는 서비스가 있어요</a></td>
                 </tr>
                 <tr id="faq_71" style="display: none;">
                     <td class="faq_q">답변</td>
                     <td class="faq_a">
-                        <p>답변</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td class="txt_contents"><a href="javascript:void(0)"
-                            onclick="viewContent('faq_72', '', ''); return false;">자주 묻는 질문</a></td>
-                </tr>
-                <tr id="faq_72" style="display: none;">
-                    <td class="faq_q">답변</td>
-                    <td class="faq_a">
-                        <p>답변</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td class="txt_contents"><a href="javascript:void(0)"
-                            onclick="viewContent('faq_74', '', ''); return false;">자주 묻는 질문</a></td>
-                </tr>
-                <tr id="faq_74" style="display: none;">
-                    <td class="faq_q">답변</td>
-                    <td class="faq_a">
-                        <p>답변</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td class="txt_contents"><a href="javascript:void(0)"
-                            onclick="viewContent('faq_136', '', ''); return false;">자주 묻는 질문</a></td>
-                </tr>
-                <tr id="faq_136" style="display: none;">
-                    <td class="faq_q">답변</td>
-                    <td class="faq_a">
-                        <p>답변</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>7</td>
-                    <td class="txt_contents"><a href="javascript:void(0)"
-                            onclick="viewContent('faq_181', '', ''); return false;">자주 묻는 질문</a></td>
-                </tr>
-                <tr id="faq_181" style="display: none;">
-                    <td class="faq_q">답변</td>
-                    <td class="faq_a">
-                        <p>답변</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>8</td>
-                    <td class="txt_contents"><a href="javascript:void(0)"
-                            onclick="viewContent('faq_182', '', ''); return false;">자주 묻는 질문</a></td>
-                </tr>
-                <tr id="faq_182" style="display: none;">
-                    <td class="faq_q">답변</td>
-                    <td class="faq_a">
-                        <p>답변</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>9</td>
-                    <td class="txt_contents"><a href="javascript:void(0)"
-                            onclick="viewContent('faq_207', '', ''); return false;">자주 묻는 질문</a></td>
-                </tr>
-                <tr id="faq_207" style="display: none;">
-                    <td class="faq_q">답변</td>
-                    <td class="faq_a">
-                        <p>답변</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>10</td>
-                    <td class="txt_contents"><a href="javascript:void(0)"
-                            onclick="viewContent('faq_209', '', ''); return false;">자주 묻는 질문</a></td>
-                </tr>
-                <tr id="faq_209" style="display: none;">
-                    <td class="faq_q">답변</td>
-                    <td class="faq_a">
-                        <p>답변</p>
+                        <p>
+                        	저희 푸드파이터를 이용하는데 있어서 불편한 점이 있으시면 QnA게시판에 남겨주세요<br>
+                        	관리자와 소통해서 고객님들이 원하는 서비스를 추가 하실 수 있습니다!
+                        </p>
                     </td>
                 </tr>
             </tbody>

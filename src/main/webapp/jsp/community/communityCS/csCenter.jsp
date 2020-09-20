@@ -89,8 +89,8 @@
     </div>
 
     <!-- 중앙 QnA와 FAQ -->
-    <div style="text-align: center; margin-top: 300px;">
-        <figure class="item">
+    <div style="text-align: center; margin-top: 300px; margin-bottom: 300px;">
+        <figure class="item" style="margin-right: 50px;">
             <img src="/FoodFighter/resources/img/community/qna.png" class="imagebtn" onclick="location.href='/FoodFighter/community/qna'" />
             <figcaption class="caption">QnA</figcaption>
         </figure>
