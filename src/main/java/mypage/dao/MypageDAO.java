@@ -38,4 +38,6 @@ public interface MypageDAO {
 
 	public int getAskTotalA(Map<String, Object> map);
 
+	public void deleteReview(String seq_review);
+
 }

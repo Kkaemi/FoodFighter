@@ -158,6 +158,10 @@ a.now,a.now:visited {
  	display: inline-block;
  	
 }
+.modalView-btn button{
+	margin: 15px 3px 10px;
+	color: #fff;
+}
   .swiper-button-prev {
 	background-image: url(../../img/leftBtn.png);
 } 

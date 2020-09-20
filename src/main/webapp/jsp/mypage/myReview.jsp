@@ -16,7 +16,7 @@
 	           <div class="modal-dialog">
 	             <div class="modal-content">    
 	               <!-- body -->
-	               <div class="modal-body">
+	               <div id="reviewModal-body" class="modal-body">
 	               </div>
 	             </div>
 	           </div>
@@ -236,8 +236,9 @@ $(document).on('click','#listDiv .review',function(){
 	        type: "post",
 	        dataType: "json",
 	        success: function(data){
-	        	let modalView='<div class="swiper-container">'
-   	            +'<div class="swiper-wrapper">' 
+	        	let modalView='<input type="hidden" id="seq_review" value='+seq_review+'>'
+	        		+'<div class="swiper-container">'
+   	            	+'<div class="swiper-wrapper">' 
    	        		+'<div id="modalViewImg-Div" class="swiper-slide modalView-part">'
               	    +'<img src="/FoodFighter/storage/review/'+data.image1+'" class="modalViewImg img-responsive">'
               	    +'</div>'
@@ -265,6 +266,9 @@ $(document).on('click','#listDiv .review',function(){
 		       	    +'<div id="modalView-content" class="modalView-part">'
 		       	    +'<span>'+data.content+'</span>'
 		       	    +'</div>'
+		       	 	+'<div id="modalView-btn" class="modalView-part modalView-btn">'
+		       	 	+'<button type="button" id="reviewDeleteBtn" class="btn">삭제</button>'
+		       	    +'</div>'
               	    
    				$('.modal-body').append(modalView);
 	        	
@@ -280,6 +284,25 @@ $(document).on('click','#listDiv .review',function(){
 	       prevButton: '.swiper-button-prev',
 	});
 	 
+});
+
+$(document).on('click','#reviewDeleteBtn',function(){
+	let check = confirm("해당 리뷰를 삭제하시겠습니까?");
+	let seq_review = $(this).parent().prevAll("#seq_review").val();
+	if(check){
+	 $.ajax({
+		 	type: 'post',
+	 		url: '/FoodFighter/mypage/deleteReview',
+	 		data: 'seq_review='+seq_review,
+	 		success : function(){
+	 			alert("삭제되었습니다.");
+	 			location.href="/FoodFighter/mypage/mypageMain"
+	 		},
+	 		error : function(e){
+				console.log(e);
+			}
+	    });
+	}
 });
 
 

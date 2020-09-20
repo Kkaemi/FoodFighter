@@ -198,6 +198,15 @@ public class MyPageController {
 		return reviewDTO;
 		
 	}
+	//리뷰모달에서 리뷰 삭제
+	@RequestMapping(value = "deleteReview", method = RequestMethod.POST)
+	@ResponseBody
+	public void deleteReview(@RequestParam String seq_review) {
+
+		mypageService.deleteReview(seq_review);
+
+		
+	}
 	
 	//정보수정 전 비밀번호 입력
 		@RequestMapping(value = "modifyCheckPwd")
