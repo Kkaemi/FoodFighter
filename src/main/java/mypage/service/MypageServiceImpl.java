@@ -121,4 +121,10 @@ public class MypageServiceImpl implements MypageService {
 		return mypagePaging;
 	}
 
+	@Override
+	public void deleteReview(String seq_review) {
+		mypageDAO.deleteReview(seq_review);
+		
+	}
+
 }

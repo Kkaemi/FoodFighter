@@ -39,5 +39,7 @@ public interface MypageService {
 
 	public MypagePaging myAskPaging(Map<String, Object> map);
 
+	public void deleteReview(String seq_review);
+
 
 }

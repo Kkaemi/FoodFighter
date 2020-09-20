@@ -107,4 +107,10 @@ public class MypageDAOMybatis implements MypageDAO {
 
 		return sqlSession.selectOne("mypageSQL.getAskTotalA", map);
 	}
+
+	@Override
+	public void deleteReview(String seq_review) {
+		sqlSession.delete("mypageSQL.deleteReview", seq_review);
+		
+	}
 }

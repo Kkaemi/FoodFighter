@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import admin.bean.RestaurantDTO;
 import member.bean.MemberDTO;
+import review.bean.ReviewDTO;
 import review.service.ReviewService;
 
 @Controller
@@ -109,6 +110,7 @@ public class ReviewController {
 		
 		return "/jsp/review/reviewView";
 	}
+	
 	
 	
 	//검색어를 통한 리스트
