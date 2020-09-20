@@ -136,7 +136,7 @@ function getRankMemList() {
 				}).append($('<img/>', {
 				
 					// infoPic안의 img
-					src : '/FoodFighter/resources/img/' + items.profile
+					src : '/FoodFighter/storage/profile/' + items.profile
 				
 				}))).append($('<div/>', {
 				

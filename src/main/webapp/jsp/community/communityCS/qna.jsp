@@ -64,9 +64,9 @@ String keyword = request.getParameter("keyword");
 	</form>
     
     <!-- 왼쪽 메뉴바 -->
-    <div id="mySidenav" class="sidenav">
+    <div id="mySidenav" class="sidenav" style="margin-top: 50px;">
 	  	<a href="/FoodFighter/community/communityNotice"><span class="glyphicon glyphicon-exclamation-sign"></span>&emsp;공지사항</a>
-	    <a href="/FoodFighter/community/communityBoardList"><span class="glyphicon glyphicon-list"></span>&emsp;게시판</a>
+	    <a href="/FoodFighter/community/communityBoard"><span class="glyphicon glyphicon-list"></span>&emsp;게시판</a>
 	    <a href="/FoodFighter/community/communityRank"><span class="glyphicon glyphicon-star"></span>&emsp;랭킹</a>
 	    <a href="/FoodFighter/community/csCenter"><span class="glyphicon glyphicon-question-sign"></span>&emsp;고객센터</a>
     </div>
@@ -125,17 +125,6 @@ String keyword = request.getParameter("keyword");
                 <input type="button" value="검색" class="plain-btn" id="searchBtn">
             </fieldset>
         </div>
-    </div>
-    
-    <!--================  Footer ================-->
-    <div id="footer-container">
-        <p class="copyright" style="text-align:left;">
-            ㈜ 푸드파이터<br>서울 서초구 강남대로 459(백암빌딩) 202호<br>대표이사: FOODFIGHTER<br>사업자 등록번호: 2020-020-22222
-            <br>고객센터: 0507-1414-9601<br><br>
-            <strong>HOME | 리뷰리스트 | 커뮤니티 | 이벤트</strong><br><br>
-            &copy; Copyright <strong>foodFighter</strong>. All Rights Reserved
-            Designed by foodFighter
-        </p>
     </div>
 </body>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>

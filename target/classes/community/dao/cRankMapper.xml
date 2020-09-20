@@ -16,7 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getRankMemList" resultType="cRankMem">
 		select (@ROWNUM := @ROWNUM + 1) as rownum, tt.*
 		from (
-			select a.nickname, IFNULL(profile, 'member.png') as profile, c.resSeq, b.resName, b.resScore, content, image1
+			select a.nickname, IFNULL(profile, 'admin.png') as profile, c.resSeq, b.resName, b.resScore, content, IFNULL(image1, 'NO IMAGE.jpg') as image1
 			from testmember a
 			join (
 				select *, count(nickname) as rowcount
