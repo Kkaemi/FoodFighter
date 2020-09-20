@@ -100,11 +100,11 @@
 		                <thead>
 		                    <tr>
 		                        <th>회원 번호<i id="memberNumSort" class="fa fa-sort"></i></th>
-		                        <th>이메일<i id="dateSort" class="fa fa-sort"></i></th>
-		                        <th>이름<i id="dateSort" class="fa fa-sort"></i></th>
-		                        <th>닉네임<i id="dateSort" class="fa fa-sort"></i></th>
-		                        <th>가입 구분<i id="dateSort" class="fa fa-sort"></i></th>
-		                        <th>가입날짜<i id="dateSort" class="fa fa-sort"></i></th>
+		                        <th>이메일<i id="dataSort" class="fa fa-sort"></i></th>
+		                        <th>이름<i id="dataSort" class="fa fa-sort"></i></th>
+		                        <th>닉네임<i id="dataSort" class="fa fa-sort"></i></th>
+		                        <th>가입 구분<i id="dataSort" class="fa fa-sort"></i></th>
+		                        <th>가입날짜<i id="dataSort" class="fa fa-sort"></i></th>
 		                        <th>관리</th>
 		                    </tr>
 		                </thead>

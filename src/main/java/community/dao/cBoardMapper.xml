@@ -64,7 +64,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where bseq=(select pseq from cboard where bseq=#{temp})
 	</update>
 	<update id="deleteBoardAdmin2" parameterType="String">
-		update cboard set subject='[원글이 삭제된 답글] ' ||subject where pseq=#{temp}
+		update cboard set subject= CONCAT('원글이 삭제된 답글 ', subject) where pseq=#{temp}
 	</update>
 	<update id="deleteBoardAdmin3" parameterType="String">
 		update cboard set bshow = 'n' where bseq=#{temp}
@@ -148,7 +148,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  	from (select bseq from cboard, (select @ROWNUM := 0)TMP
 	  	where bshow = 'y' and
 	  	${bSrchOption} like CONCAT('%',#{bKeyword},'%') and
-	  	bseq &lt; #{bseq} order by ref desc, step asc)tt) 
+	  	bseq &lt; #{bseq} order by ref desc, step asc)tt)PAGING
 	  	where rn = 1
 	</select>
 	
@@ -165,7 +165,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  	from (select bseq from cboard, (select @ROWNUM := 0)TMP
 	  	where bshow = 'y' and
 	  	${bSrchOption} like CONCAT('%',#{bKeyword},'%')
-	  	and bseq &gt; #{bseq} order by ref, step desc)tt) 
+	  	and bseq &gt; #{bseq} order by ref, step desc)tt)PAGING
 	  	where rn = 1
 	</select>
 	

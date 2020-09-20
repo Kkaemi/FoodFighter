@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <div id="postListDiv" class="menuDefualtDiv">
 	<input type="hidden" id="pg" name="pg" value="1">
 	<div id="postEmptyDiv" class="row emptyDiv">
@@ -13,10 +15,10 @@
 			<table id="cBoardTable" class="table table-striped table-hover table-bordered tablesorter">	
 	            <thead>
 	                <tr>
-	                    <th>NO<i id="dataSort" class="fa fa-sort"></i></th>
-	                    <th>글 제목<i id="dateSort" class="fa fa-sort"></i></th>
-	                    <th>작성일<i id="dateSort" class="fa fa-sort"></i></th>
-	                    <th>조회수<i id="dateSort" class="fa fa-sort"></i></th>
+	                    <th>NO<i id="dataSort"></i></th>
+	                    <th>글 제목<i id="dateSort" ></i></th>
+	                    <th>작성일<i id="dateSort" ></i></th>
+	                    <th>조회수<i id="dateSort"></i></th>
 	                </tr>
 	            </thead>
 	            <tbody>
@@ -24,7 +26,16 @@
 	                <tr>
 	                    <td class="bseq">${cBoardDTO.bseq}</td>
 	                    <td><a id = "subjectA" href="/FoodFighter/community/communityBoardView?bseq=${cBoardDTO.bseq}&pg=1">${cBoardDTO.subject}</a></td>
-	                    <td>${cBoardDTO.logtime}</td>
+	                    <td>
+					      	<c:if test="${today == todayBoard}">
+							<fmt:formatDate var = "date" value="${cBoardDTO.logtime }" pattern="HH:mm"/>
+								<div class ="tb-center">${date }</div>
+							</c:if>
+							<c:if test="${today != todayBoard}">
+							<fmt:formatDate var = "date" value="${cBoardDTO.logtime }" pattern="yyyy-MM-dd"/>
+								<div class ="tb-center">${date }</div>
+							</c:if>
+				      	</td>
 	                    <td>${cBoardDTO.hit}</td>
 	                </tr>
 	              </c:forEach>     

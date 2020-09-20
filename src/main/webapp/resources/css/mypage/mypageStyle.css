@@ -139,6 +139,7 @@ a.now,a.now:visited {
 .review {
 	margin: 0 15px;
 	border: 1px solid #EBEBEB;
+	padding-top: 15px;
 }
 .review-part{
 	margin-bottom: 10px;
@@ -157,6 +158,10 @@ a.now,a.now:visited {
  	display: inline-block;
  	
 }
+.modalView-btn button{
+	margin: 15px 3px 10px;
+	color: #fff;
+}
   .swiper-button-prev {
 	background-image: url(../../img/leftBtn.png);
 } 
@@ -169,6 +174,17 @@ a.now,a.now:visited {
 
 #reviewImg-Div{
 	display: block;
+	
+}
+
+#reviewImg-Div, #reviewImg-Div img {
+	height: 15rem;
+	width:; 20rem;
+}
+
+#reviewImg-Div img{
+	margin: auto auto;
+	
 }
 
 #review-score {
@@ -198,7 +214,12 @@ a.now,a.now:visited {
 
 #review-resName {
 	text-align: center;
+	margin: 15px 0px;
 }
+#review-resName span {
+	font-weight: bold;
+}
+
 /* socialModify */
 #socialModifyBtn{
 	margin-left: 10px;

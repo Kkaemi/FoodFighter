@@ -169,14 +169,13 @@
     width: 60%;
     margin-top: 530px;
     border: 0.001px solid #e6e6e6;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 
 .line2 {
-    margin-left: 400px;
-    width: 50%;
-    margin-top: 90%;
+	width : 70%;
+   	margin-top : 160px;
     border: 0.001px solid #e6e6e6;
 }
 
@@ -320,7 +319,9 @@ td {
 	float : right;
 }
 .review-content {
+	margin-top : 30px;
 	width : 70%;
+	padding : 5px;
 }
 
 /*리뷰*/
@@ -330,18 +331,18 @@ td {
 }
 
 .user-name {
+	padding-right : 5px;
+	font-size : 23px;
 	color : #ffc34d;
-	font: bold;
+	font-weight: bold;
 }
 /*리뷰 버튼*/
 .writeBtn {
 	float : right;
-	margin-left : 400px;
-	margin-right : 300px;
-	
+	margin-right : 240px;
 }
 #reviewWriteBtn {
-	margin-left : 700px;
+	float : right;
 	padding : 3.4px;
 	padding-left : 30px;
 	padding-right : 30px;
@@ -368,8 +369,9 @@ td {
     margin-left: 410px;
 }
 .review-count{
-	margin-top : 30px;
-	margin-right : 800px;
+	float : center;
+	padding-top : 70px;
+	margin-left : 430px;
 	
 }
 .review-count-text {
