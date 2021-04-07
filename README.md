@@ -19,24 +19,24 @@
 <br>
 
 **Bean**<br>
-FoodFighter/src/main/java/community/bean/QnaBoardDTO.java<br>
-FoodFighter/src/main/java/community/bean/QnaBoardPaging.java<br>
+[QnaBoardDTO](https://github.com/Kkaemi/FoodFighter/blob/master/src/main/java/community/bean/QnaBoardDTO.java)<br>
+[QnaBoardPaging](https://github.com/Kkaemi/FoodFighter/blob/master/src/main/java/community/bean/QnaBoardPaging.java)<br>
 <br>
 **Controller**<br>
-FoodFighter/src/main/java/community/controller/CommunityCSCenterController.java<br>
+[CommunityCSCenterController](https://github.com/Kkaemi/FoodFighter/blob/master/src/main/java/community/controller/CommunityCSCenterController.java)<br>
 <br>
 **Service**<br>
-FoodFighter/src/main/java/community/service/CommunityCSService.java<br>
-FoodFighter/src/main/java/community/service/CommunityCSServiceImpl.java<br>
+[CommunityCSService](https://github.com/Kkaemi/FoodFighter/blob/master/src/main/java/community/service/CommunityCSService.java)<br>
+[CommunityCSServiceImpl](https://github.com/Kkaemi/FoodFighter/blob/master/src/main/java/community/service/CommunityCSServiceImpl.java)<br>
 <br>
 **DAO**<br>
-FoodFighter/src/main/java/community/dao/CommunityCSDAO.java<br>
-FoodFighter/src/main/java/community/dao/CommunityCSDAOMybatis.java<br>
-FoodFighter/src/main/java/community/dao/CommunityCSMapper.xml<br>
-FoodFighter/src/main/java/community/dao/cRankMapper.xml<br>
+[CommunityCSDAO](https://github.com/Kkaemi/FoodFighter/blob/master/src/main/java/community/dao/CommunityCSDAO.java)<br>
+[CommunityCSDAOMybatis](https://github.com/Kkaemi/FoodFighter/blob/master/src/main/java/community/dao/CommunityCSDAOMybatis.java)<br>
+[CommunityCSMapper](https://github.com/Kkaemi/FoodFighter/blob/master/src/main/java/community/dao/CommunityCSMapper.xml)<br>
+[cRankMapper](https://github.com/Kkaemi/FoodFighter/blob/master/src/main/java/community/dao/cRankMapper.xml#L15-L32)<br>
 <br>
 **jsp**<br>
-FoodFighter/src/main/webapp/jsp/community/communityCS/<br>
+[communityCS](https://github.com/Kkaemi/FoodFighter/tree/master/src/main/webapp/jsp/community/communityCS)<br>
 
 <br><br><br><br>
 
@@ -47,7 +47,7 @@ FoodFighter/src/main/webapp/jsp/community/communityCS/<br>
 <br>
 
 **jsp**<br>
-FoodFighter/src/main/webapp/jsp/community/communityRank/userRank.jsp<br>
+[communityRank.jsp](https://github.com/Kkaemi/FoodFighter/blob/master/src/main/webapp/jsp/community/communityRank/communityRank.jsp)<br>
 <br>
 **JavaScript**<br>
-FoodFighter/src/main/webapp/resources/js/community/communityRankJS.js<br>
+[communityRankJS.js](https://github.com/Kkaemi/FoodFighter/blob/master/src/main/webapp/resources/js/community/communityRankJS.js#L95-L223)<br>
